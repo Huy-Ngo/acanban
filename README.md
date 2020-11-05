@@ -6,15 +6,19 @@
 
 ### Python packages
 
-These packages are 
+These packages should be installed in a Python virtual environment.
 
-- Flask
-- Gunicorn
+- Quart-Trio
+- HyperCorn
 
 ### Server requirements
 
-- IPFS
+I haven't decided on whether to deploy JSON DB as merely JSON files with IPFS
+or using a JSON DBMS like RethinkDB
+
 - NGINX
+- IPFS
+- RethinkDB
 
 ## Steps
 
@@ -47,7 +51,7 @@ User=root
 Group=www-data
 WorkingDirectory=/var/www/gpms
 Environment="PATH=/var/www/gpms/venv/bin"
-ExecStart=/var/www/gpms/venv/bin/gunicorn --workers <number of workers> --bind unix:gpms.sock wsgi:app
+ExecStart=/var/www/gpms/venv/bin/hypercorn -w 5 -k wsgi:app
 
 [Install]
 WantedBy=multi-user.target
