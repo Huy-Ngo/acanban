@@ -41,7 +41,7 @@ Make a symlink to `/etc/nginx/sites-enabled/`
 
 ### Configure systemd service
 
-```toml
+```ini
 [Unit]
 Description=Instance to serve GPMS
 After=network.target
