@@ -1,12 +1,12 @@
 @startuml
 node Client {
-	node Browser <<device>>
+	node Browser
 }
 node Server {
 	node NGINX as nginx <<load balancer>>
 	database "JSON-based\nDatabase" as db
-	file "/etc/systemd/system/gpms.service" as systemd_conf
-	file "/etc/nginx/sites-available/gpms" as nginx_conf
+	artifact "/etc/systemd/system/gpms.service" as systemd_conf
+	artifact "/etc/nginx/sites-available/gpms" as nginx_conf
 	component GPMS as gpms
 	component hypercorn
 	node systemd <<daemon>>
@@ -18,5 +18,5 @@ nginx <- nginx_conf: configure
 hypercorn - systemd: run instance
 systemd <- systemd_conf: configure
 hypercorn -- gpms
-gpms -- db
+gpms - db
 @enduml
