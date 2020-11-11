@@ -49,7 +49,7 @@ After=network.target
 [Service]
 User=username
 WorkingDirectory=/home/username/gpms
-ExecStart=/home/username/gpms/venv/bin/hypercorn -w 5 -k asgi:app
+ExecStart=/home/username/gpms/venv/bin/python -m hypercorn -w 5 -k asgi:app
 
 [Install]
 WantedBy=multi-user.target
