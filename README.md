@@ -47,11 +47,9 @@ Description=Instance to serve GPMS
 After=network.target
 
 [Service]
-User=root
-Group=www-data
-WorkingDirectory=/var/www/gpms
-Environment="PATH=/var/www/gpms/venv/bin"
-ExecStart=/var/www/gpms/venv/bin/hypercorn -w 5 -k wsgi:app
+User=username
+WorkingDirectory=/home/username/gpms
+ExecStart=/home/username/gpms/venv/bin/hypercorn -w 5 -k asgi:app
 
 [Install]
 WantedBy=multi-user.target
