@@ -19,7 +19,11 @@ Use-Case Model
    usecase "Send message" as Msg
 
    usecase Search
+   usecase "Search student" as SearchS
+   usecase "Search lecturer" as SearchL
+   usecase "Search project" as SearchP
 
+   usecase Authentication
    usecase Register
    usecase Login
    usecase Logout
@@ -32,9 +36,7 @@ Use-Case Model
    Staff --> Search
    Staff --> Export
    Staff --> Report
-   Staff --> Login
-   Staff --> Register
-   Staff --> Logout
+   Staff --> Authentication
 
    Student --> Search
    Student --> CreateP
@@ -43,20 +45,28 @@ Use-Case Model
    Student --> JoinT
    Student --> Complete
    Student --> Msg
-   Student --> Login
-   Student --> Register
-   Student --> Logout
+   Student --> Authentication
+
+   Search <-- Lecturer
+   CreateP <-- Lecturer
+   JoinP <-- Lecturer
+   Msg <-- Lecturer
+   Authentication <-- Lecturer
 
    Lecturer --> View
    Lecturer --> Evaluate
 
    Admin --> Maintain
 
-   Lecturer <|-- Student
-
-   Admin <|-- Lecturer
    Admin <|-- Staff
 
+   Search <.. SearchS: <<extends>>
+   Search <.. SearchL: <<extends>>
+   Search <.. SearchP: <<extends>>
+
+   Register ..> Authentication : <<extends>>
+   Login ..> Authentication : <<extends>>
+   Logout ..> Authentication : <<extends>>
 
 Create Project
 --------------
