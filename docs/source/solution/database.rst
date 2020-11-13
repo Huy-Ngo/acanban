@@ -87,17 +87,14 @@ The pattern for thread objects is described below:
       "title": "Thread Title",
       "content": "The description of the issue addressed in the thread.",
       "comments": [
-         "list",
-         "of",
-         "comment",
-         "id"
+         // list of comment objects
       ]
    }
 
 Comment
 -------
 
-The pattern for thread objects is described below:
+The pattern for comment objects is described below:
 
 .. code-block:: json
 
@@ -105,12 +102,6 @@ The pattern for thread objects is described below:
       "comment-id": "uuid",
       "content": "The content of the comment.",
       "comments": [
-         "list",
-         "of",
-         "ids",
-         "of the",
-         "comments",
-         "replying",
-         "to this comment"
+         // list of comment objects
       ]
    }
