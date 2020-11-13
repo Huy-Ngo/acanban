@@ -29,12 +29,12 @@ Use-Case Model
 
    usecase "Maintain system" as Maintain
 
-	Staff --> Search
-	Staff --> Export
-	Staff --> Report
-	Staff --> Login
-	Staff --> Register
-	Staff --> Logout
+   Staff --> Search
+   Staff --> Export
+   Staff --> Report
+   Staff --> Login
+   Staff --> Register
+   Staff --> Logout
 
    Student --> Search
    Student --> CreateP
@@ -109,6 +109,7 @@ Extension Points
 
 None.
 
+
 Join Project
 ------------
 
@@ -158,6 +159,7 @@ Extension Points
 ^^^^^^^^^^^^^^^^
 
 None.
+
 
 Create Tasks
 ------------
@@ -211,6 +213,7 @@ Extension Points
 
 None.
 
+
 Join Tasks
 ----------
 
@@ -253,6 +256,7 @@ Extension Points
 ^^^^^^^^^^^^^^^^
 
 None.
+
 
 Complete Tasks
 --------------
@@ -305,6 +309,7 @@ Extension Points
 
 None.
 
+
 View result
 -----------
 
@@ -347,6 +352,7 @@ Extension Points
 ^^^^^^^^^^^^^^^^
 
 None.
+
 
 Evaluate
 --------
