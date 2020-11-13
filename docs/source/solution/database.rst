@@ -50,12 +50,12 @@ The pattern for project objects is described below:
          "task",
          "ids"
       ],
-      "discussion-threads": {
+      "discussion-threads": [
          "list",
          "of",
          "thread"
          "ids"
-      }
+      ]
       "created-on": "(date time in ISO 8601 format)"
       "evaluation": 17,
    }
@@ -85,7 +85,7 @@ The pattern for thread objects is described below:
    {
       "thread-id": "uuid"
       "title": "Thread Title",
-      "content": "The description of the issue addressed in the thread."
+      "content": "The description of the issue addressed in the thread.",
       "comments": [
          "list",
          "of",
@@ -102,8 +102,8 @@ The pattern for thread objects is described below:
 .. code-block:: json
 
    {
-      "comment-id": "uuid"
-      "content": "The content of the comment."
+      "comment-id": "uuid",
+      "content": "The content of the comment.",
       "comments": [
          "list",
          "of",
