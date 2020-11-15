@@ -20,8 +20,8 @@ The pattern for user objects is described below:
 .. code-block:: json
 
    {
-      "user-id": "uuid",
-      "username": "Foo Bar",
+      "id": "uuid",
+      "name": "Foo Bar",
       "email": "foo.bar@example.com",
       "password-hash": "(hash generated for password)",
       "role": "student"
@@ -35,8 +35,8 @@ The pattern for project objects is described below:
 .. code-block:: json
 
    {
-      "project-id": "uuid",
-      "project-name": "Project Name",
+      "id": "uuid",
+      "name": "Project Name",
       "creator": "(creator id)",
       "participants": [
          "list",
@@ -50,13 +50,7 @@ The pattern for project objects is described below:
          "task",
          "ids"
       ],
-      "discussion-threads": [
-         "list",
-         "of",
-         "thread"
-         "ids"
-      ]
-      "created-on": "(date time in ISO 8601 format)"
+      "created-on": "(date time in ISO 8601 format)",
       "evaluation": 17,
    }
 
@@ -68,11 +62,17 @@ The pattern for project objects is described below:
 .. code-block:: json
 
    {
-      "task-id": "uuid",
-      "task-name": "task name",
+      "id": "uuid",
+      "name": "task name",
       "is-done": true,
       "evaluated": 18,
       "assigned-to": "(user id)"
+      "discussion": [
+         "list",
+         "of",
+         "thread",
+         "ids"
+      ]
    }
 
 Discussion Thread
@@ -83,7 +83,7 @@ The pattern for thread objects is described below:
 .. code-block:: json
 
    {
-      "thread-id": "uuid"
+      "id": "uuid",
       "title": "Thread Title",
       "content": "The description of the issue addressed in the thread.",
       "comments": [
@@ -99,7 +99,7 @@ The pattern for comment objects is described below:
 .. code-block:: json
 
    {
-      "comment-id": "uuid",
+      "id": "uuid",
       "content": "The content of the comment.",
       "comments": [
          // list of comment objects
