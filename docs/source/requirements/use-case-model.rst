@@ -58,8 +58,6 @@ Use-Case Model
 
    Admin --> Maintain
 
-   Admin <|-- Staff
-
    Search <.. SearchS: <<extends>>
    Search <.. SearchL: <<extends>>
    Search <.. SearchP: <<extends>>
@@ -67,6 +65,7 @@ Use-Case Model
    Register ..> Authentication : <<extends>>
    Login ..> Authentication : <<extends>>
    Logout ..> Authentication : <<extends>>
+
 
 Create Project
 --------------
@@ -141,7 +140,7 @@ Alternative Flow
 """"""""""""""""
 
 Project is full
-   In step 2, if the user is Student and the project already has 5 Student,
+   In step 2, if the user is Student and the project already has 6 Student,
    the system display an error message and cancel the operation.
 
    In step 2, if the user is Lecturer and the project already has 1 Lecturer,
@@ -285,7 +284,7 @@ Basic Flow
 1. Student request to complete task(s) in the task list.
 2. System receive the request and request Student to hand in evidences.
 3. Student submit files or image as evidences.
-4. System receive evidences and mark task(s) as completed
+4. System receive evidences and mark task(s) as completed.
 
 Alternative Flow
 """"""""""""""""
@@ -407,6 +406,160 @@ Post-Conditions
 ^^^^^^^^^^^^^^^
 
 After this use case ends, other project-related use case could not be executed.
+
+Extension Points
+^^^^^^^^^^^^^^^^
+
+None.
+
+
+Send Message
+------------
+
+Brief Description
+^^^^^^^^^^^^^^^^^
+
+This use case allows Student and Lecturer to communicate with each other.
+
+Flow of Events
+^^^^^^^^^^^^^^
+
+Basic Flow
+""""""""""
+
+1. User 1 request to create a new thread.
+2. System receive the request and reponse with a thread form.
+3. User 1 fill in the thread form.
+4. System receive the form and create a new thread.
+5. User 2 comments on the thread for discussion.
+
+Alternative Flow
+""""""""""""""""
+
+Thread existed
+   If in step 5, User 2 recognizes that another thread has the solution,
+   User 2 could mark the thread as existed. The system require User 2
+   to provide clear instruction leading to the existed thread.
+
+Special Requirements
+^^^^^^^^^^^^^^^^^^^^
+
+None.
+
+Pre-Conditions
+^^^^^^^^^^^^^^
+
+User must be Student or Lecturer and be logged into the system
+before this use case begins.
+
+Post-Conditions
+^^^^^^^^^^^^^^^
+
+The system state is unchanged.
+
+Extension Points
+^^^^^^^^^^^^^^^^
+
+None.
+
+
+Make Report
+-----------
+
+Brief Description
+^^^^^^^^^^^^^^^^^
+
+This use case allows Staff make report base on the result of the project.
+
+Flow of Events
+^^^^^^^^^^^^^^
+
+Basic Flow
+""""""""""
+
+1. Staff request to make a report.
+2. System receive the request and the result of the project.
+3. Staff request to make a hard copy.
+4. System response by a document file format of the report.
+5. Staff download the file for printing purpose later.
+
+Alternative Flow
+""""""""""""""""
+
+Project has not done
+   If in step 2, Student has not provided the result, the system will display
+   a message that the report is not ready yet and terminate the operation.
+   The system will then notify Student by sending an email or via
+   notification bar.
+
+Special Requirements
+^^^^^^^^^^^^^^^^^^^^
+
+None.
+
+Pre-Conditions
+^^^^^^^^^^^^^^
+
+User must be Staff and be logged into the system before this use case begins.
+
+Staff must search and select the project(s) before the use case begins.
+
+Post-Conditions
+^^^^^^^^^^^^^^^
+
+The system state is unchanged.
+
+Extension Points
+^^^^^^^^^^^^^^^^
+
+None.
+
+
+Export Transcript
+-----------------
+
+Brief Description
+^^^^^^^^^^^^^^^^^
+
+This use case allows Staff to export transcript based on the evaluation of Lecturer.
+
+Flow of Events
+^^^^^^^^^^^^^^
+
+Basic Flow
+""""""""""
+
+1. Staff request to export the transcript.
+2. System receive the request and display the evaluation of Lecturer.
+3. Staff request to make a hard copy.
+4. System response by a document file format of the transcript.
+5. Staff download the file for printing purpose later.
+
+Alternative Flow
+""""""""""""""""
+
+Not yet evaluated
+   If in step 2, Lecturer has not given the evaluation, the system will display
+   a message that the transcript is not ready yet and terminate the operation.
+   The system will then notify Lecturer by sending an email or via
+   notification bar.
+
+Special Requirements
+^^^^^^^^^^^^^^^^^^^^
+
+None.
+
+Pre-Conditions
+^^^^^^^^^^^^^^
+
+User must be Staff and be logged into the system before this use case begins.
+
+Staff must search and select the project(s) before the use case begins.
+
+Post-Conditions
+^^^^^^^^^^^^^^^
+
+The system state is unchanged.
 
 Extension Points
 ^^^^^^^^^^^^^^^^
