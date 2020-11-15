@@ -66,7 +66,7 @@ The pattern for project objects is described below:
       "name": "task name",
       "is-done": true,
       "evaluated": 18,
-      "assigned-to": "(user id)"
+      "assigned-to": "(user id)",
       "discussion": [
          "list",
          "of",
