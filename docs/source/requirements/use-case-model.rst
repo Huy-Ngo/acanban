@@ -16,7 +16,8 @@ Use-Case Model
    usecase "Complete tasks" as Complete
    usecase "View results" as View
    usecase Evaluate
-   usecase "Send message" as Msg
+   usecase "Create discussion thread" as Thread
+   usecase "Add comment" as Comment
 
    usecase Search
    usecase "Search student" as SearchS
@@ -44,13 +45,15 @@ Use-Case Model
    Student --> JoinP
    Student --> JoinT
    Student --> Complete
-   Student --> Msg
+   Student --> Thread
+   Student --> Comment
    Student --> Authentication
 
    Search <-- Lecturer
    CreateP <-- Lecturer
    JoinP <-- Lecturer
-   Msg <-- Lecturer
+   Thread <-- Lecturer
+   Comment <-- Lecturer
    Authentication <-- Lecturer
 
    Lecturer --> View
@@ -81,21 +84,22 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. Student/Lecturer request to create a project.
-2. System receive the request and request user to fill in a form.
-3. The user turn in the form.
-4. System process the form and create a new project.
+1. Student/Lecturer requests to create a project.
+2. System receives the request and requests user to enter **name** and **description**.
+3. The user provides necessary data.
+4. System processes the data and create a new project.
 
 Alternative Flow
 """"""""""""""""
 
 Missing information
-   In step 4, if the user missed some information, the system display an error message.
-   The user can either select to cancel operation or fill in missing fields.
+   In step 4, if the user missed some information, the system will display
+   an alert message. The user can either select to cancel operation
+   or fill in missing fields.
 
 Existing project
    In step 4, if the user is Lecturer and the project is existed,
-   the system display an alert message and cancel the operation.
+   the system display an error message and terminate the operation.
 
 Special Requirements
 ^^^^^^^^^^^^^^^^^^^^
@@ -105,13 +109,13 @@ None.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Lecturer and be logged into the system
+User must be Student or Lecturer and be logged in the system
 before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-The system state is unchanged.
+A new project is created.
 
 Extension Points
 ^^^^^^^^^^^^^^^^
@@ -133,18 +137,18 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. Student/Lecturer request to join the project.
-2. System process the request and allow user to join the project.
+1. Student/Lecturer requests to join the project.
+2. System processes the request and allows user to join the project.
 
 Alternative Flow
 """"""""""""""""
 
 Project is full
    In step 2, if the user is Student and the project already has 6 Student,
-   the system display an error message and cancel the operation.
+   the system will display an error message and cancel the operation.
 
    In step 2, if the user is Lecturer and the project already has 1 Lecturer,
-   the system display an error message and cancel the operation.
+   the system will display an error message and cancel the operation.
 
 Special Requirements
 ^^^^^^^^^^^^^^^^^^^^
@@ -154,7 +158,7 @@ None.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Lecturer and be logged into the system
+User must be Student or Lecturer and be logged in the system
 before this use case begins.
 
 There must be existing project so that user could join.
@@ -162,7 +166,7 @@ There must be existing project so that user could join.
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-The system state is unchanged.
+The user is now joined a project.
 
 Extension Points
 ^^^^^^^^^^^^^^^^
@@ -184,22 +188,22 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. Student/Lecturer request to generate tasks the project.
-2. System receive the request and request user to provide meta data.
+1. Student/Lecturer requests to generate tasks the project.
+2. System receives the request and requests user to provide **name**, **assignees** and **deadline**.
 3. User provides necessary data.
-4. System receive the data and update tasks list.
+4. System processes the data and updates tasks list.
 
 Alternative Flow
 """"""""""""""""
 
 Task is existed
    In step 4, if the user entered a task that is already existed in task list,
-   the system display an error message and terminate the operation.
+   the system will display an error message and terminate the operation.
 
 Missing meta data
    In step 4, if user missed to enter some data, (e.g: deadline for the task),
-   the system display an alert message. User can either fill in missing fields
-   or cancel the operation.
+   the system will display an alert message. User can either fill in
+   missing fields or cancel the operation.
 
 Special Requirements
 ^^^^^^^^^^^^^^^^^^^^
@@ -209,13 +213,13 @@ None.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Lecturer and be logged into the system
+User must be Student or Lecturer and be logged in the system
 before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-The system state is unchanged.
+A new tasks is created in task list.
 
 Extension Points
 ^^^^^^^^^^^^^^^^
@@ -237,8 +241,8 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. Student request to join task(s) in the task list.
-2. System receive the request and allow Student to join the task(s).
+1. Student requests to join task(s) in the task list.
+2. System receives the request and allows Student to join the task(s).
 
 Alternative Flow
 """"""""""""""""
@@ -253,13 +257,12 @@ None.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student and be logged into the system
-before this use case begins.
+User must be Student and be logged in the system before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-The system state is unchanged.
+Student is assigned to a task.
 
 Extension Points
 ^^^^^^^^^^^^^^^^
@@ -281,21 +284,21 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. Student request to complete task(s) in the task list.
-2. System receive the request and request Student to hand in evidences.
-3. Student submit files or image as evidences.
-4. System receive evidences and mark task(s) as completed.
+1. Student requests to complete task(s) in the task list.
+2. System receives the request and requests Student to hand in evidences.
+3. Student submits files or image as evidences.
+4. System receives evidences and marks task(s) as completed.
 
 Alternative Flow
 """"""""""""""""
 
 No evidences provided
-   In step 3, if student did not submit files,
-   the system display an alert message and terminate the operation.
+   In step 3, if Student do not submit files,
+   the system will display an alert message and terminate the operation.
 
 Empty files provided
-   In step 4, if student submit empty files,
-   the system display an alert message and terminate the operation.
+   In step 4, if Student submits empty files,
+   the system will display an alert message and terminate the operation.
 
 Special Requirements
 ^^^^^^^^^^^^^^^^^^^^
@@ -305,13 +308,12 @@ None.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student and be logged into the system
-before this use case begins.
+User must be Student and be logged in the system before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-The system state is unchanged.
+The task state is changed to *completed*.
 
 Extension Points
 ^^^^^^^^^^^^^^^^
@@ -349,8 +351,7 @@ None.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Lecturer and be logged into the system
-before this use case begins.
+User must be Lecturer and be logged in the system before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -378,8 +379,8 @@ Basic Flow
 """"""""""
 
 1. Lecturer request to evaluate the project.
-2. System receive the request provide an evaluation form.
-3. Lecturer fill in the form and submit.
+2. System receive the request provide an **evaluation** and **comment**.
+3. Lecturer provide evaluation with comments.
 4. System receive the data and terminate the project.
 
 Alternative Flow
@@ -399,7 +400,7 @@ None.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Lecturer and be logged into the system
+User must be Lecturer and be logged in the system
 before this use case begins.
 
 Post-Conditions
@@ -413,13 +414,13 @@ Extension Points
 None.
 
 
-Send Message
-------------
+Create Discussion Thread
+------------------------
 
 Brief Description
 ^^^^^^^^^^^^^^^^^
 
-This use case allows Student and Lecturer to communicate with each other.
+This use case allows Student or Lecturer to create a discussion thread.
 
 Flow of Events
 ^^^^^^^^^^^^^^
@@ -427,18 +428,18 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. User 1 request to create a new thread.
-2. System receive the request and reponse with a thread form.
-3. User 1 fill in the thread form.
-4. System receive the form and create a new thread.
-5. User 2 comments on the thread for discussion.
+1. User requests to create a new discussion thread.
+2. System receives the request and requests user to enter
+   **title** and **content**.
+3. User provides necessary data.
+4. System processes the data and create a new thread.
 
 Alternative Flow
 """"""""""""""""
 
 Thread existed
-   If in step 5, User 2 recognizes that another thread has the solution,
-   User 2 could mark the thread as existed. The system require User 2
+   If in step 5, an user recognizes that another thread has the solution,
+   he/she could mark the thread as existed. The system require that user
    to provide clear instruction leading to the existed thread.
 
 Special Requirements
@@ -449,13 +450,59 @@ None.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Lecturer and be logged into the system
+User must be Student or Lecturer and be logged in the system
 before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-The system state is unchanged.
+A new discussion thread is created.
+
+Extension Points
+^^^^^^^^^^^^^^^^
+
+None.
+
+
+Create Comment
+--------------
+
+Brief Description
+^^^^^^^^^^^^^^^^^
+
+This use case allows Student or Lecturer to create a discussion thread.
+
+Flow of Events
+^^^^^^^^^^^^^^
+
+Basic Flow
+""""""""""
+
+1. User requests to add a new comment to the discussion thread.
+2. System receives the request and requests user to enter **comment**.
+3. User enters a comment.
+4. System processes the data and create a new comment in the threa.
+
+Alternative Flow
+""""""""""""""""
+
+None.
+
+Special Requirements
+^^^^^^^^^^^^^^^^^^^^
+
+None.
+
+Pre-Conditions
+^^^^^^^^^^^^^^
+
+User must be Student or Lecturer and be logged in the system
+before this use case begins.
+
+Post-Conditions
+^^^^^^^^^^^^^^^
+
+A new comment thread is added into the discussion thread.
 
 Extension Points
 ^^^^^^^^^^^^^^^^
@@ -477,18 +524,18 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. Staff request to make a report.
-2. System receive the request and the result of the project.
-3. Staff request to make a hard copy.
-4. System response by a document file format of the report.
-5. Staff download the file for printing purpose later.
+1. Staff requests to make a report.
+2. System receives the request and displays the result of the project.
+3. Staff requests to make a hard copy.
+4. System responses by a document file format of the report.
+5. Staff downloads the file for printing purpose later.
 
 Alternative Flow
 """"""""""""""""
 
 Project has not done
    If in step 2, Student has not provided the result, the system will display
-   a message that the report is not ready yet and terminate the operation.
+   a message that the report is not yet ready and terminate the operation.
    The system will then notify Student by sending an email or via
    notification bar.
 
@@ -500,7 +547,7 @@ None.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Staff and be logged into the system before this use case begins.
+User must be Staff and be logged in the system before this use case begins.
 
 Staff must search and select the project(s) before the use case begins.
 
@@ -529,11 +576,11 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. Staff request to export the transcript.
-2. System receive the request and display the evaluation of Lecturer.
-3. Staff request to make a hard copy.
-4. System response by a document file format of the transcript.
-5. Staff download the file for printing purpose later.
+1. Staff requests to export the transcript.
+2. System receives the request and displays the evaluation of Lecturer.
+3. Staff requests to make a hard copy.
+4. System responses by a document file format of the transcript.
+5. Staff downloads the file for printing purpose later.
 
 Alternative Flow
 """"""""""""""""
@@ -552,7 +599,7 @@ None.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Staff and be logged into the system before this use case begins.
+User must be Staff and be logged in the system before this use case begins.
 
 Staff must search and select the project(s) before the use case begins.
 
@@ -581,20 +628,20 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. User request sign up for the system.
-2. System receive the request and request user to enter
+1. User requests sign up for the system.
+2. System receives the request and requests user to enter
    **username**, **password**, **name**, **role**, **and email**
 3. User provides necessary information.
-4. System request user to verify by his/her provided email.
-5. User verify by his/her provided email.
-6. System allow user to log in the system with newly created account.
+4. System requests user to verify by his/her provided email.
+5. User verifies by his/her provided email.
+6. System allows user to log in the system with newly created account.
 
 Alternative Flow
 """"""""""""""""
 
 Invalid username
    If in step 2, user uses an username with invalid characters, the system
-   will display an alert message. User could either change his/her username or
+   will display an alert message. User could either re-enter his/her username or
    cancel the operation.
 
 Existed username
@@ -642,8 +689,8 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. User request to log in the system.
-2. System receives the request and request user enter **username** and **password**.
+1. User requests to log in the system.
+2. System receives the request and requests user enter **username** and **password**.
 3. User provides username and password.
 4. System validates the entered username and password and allows user to log in
    the system.
@@ -694,7 +741,7 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. User request to log in the system.
+1. User requests to log in the system.
 2. System receives the request and allows user to logout the system.
 
 Alternative Flow
@@ -737,8 +784,8 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. User select "Student" on search bar.
-2. Sytem request user to select which type of search, including:
+1. User selects "Student" on search bar.
+2. Sytem requests user to select which type of search, including:
 
   - **Search by name**: this allows user to search for specific student name.
   - **Search by year**: this allows user to get a list of students in a specific year.
@@ -749,14 +796,14 @@ Sub Flow
 **Search by name**
 
 1. User enters name of student that his/her wants to search.
-2. System receive the search request including the name, and response with
+2. System receives the search request including the name, and responses with
    a list of students matched with the provided name.
 
 **Search by year**
 
-1. System display a list of years.
+1. System displays a list of years.
 2. User selects a specific year that his/her wants to search.
-3. System receive the search request including the selected year, and response
+3. System receives the search request including the selected year, and responses
    with a list of students studing in that year.
 
 Alternative Flow
@@ -764,13 +811,13 @@ Alternative Flow
 
 Invalid name
    If, in **Search by name** sub flow, user enters a name with invalid characters,
-   the system will display an alert message. User could either re-enters the name
+   the system will display an alert message. User could either re-enter the name
    or cancel the operation.
 
 Special Requirements
 ^^^^^^^^^^^^^^^^^^^^
 
-If, in **Search by name** sub flow, user has successfuly receive the list of
+If, in **Search by name** sub flow, user has successfully received the list of
 student name and want to sort it, he/she could select to sort it by *year* or *major*.
 
 If, in **Search by name** sub flow, user enters a name which is not matched
@@ -807,7 +854,7 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. User select "Lecturer" on search bar.
+1. User selects "Lecturer" on search bar.
 2. User enters name of lecturer that his/her wants to search.
 3. System receive the search request including the name, and response with
    a list of lecturer matched with the provided name.
@@ -855,8 +902,8 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. User select "Project" on search bar.
-2. Sytem request user to select which type of search, including:
+1. User selects "Project" on search bar.
+2. Sytem requests user to select which type of search, including:
 
   - **Search by name**: this allows user to search for specific project name.
   - **Search by year**: this allows user to get a list of projects in a specific year.
@@ -867,28 +914,28 @@ Sub Flow
 **Search by name**
 
 1. User enters name of project that his/her wants to search.
-2. System receive the search request including the name, and response with
+2. System receives the search request including the name, and responses with
    a list of projects matched with the provided name.
 
 **Search by year**
 
-1. System display a list of years.
+1. System displays a list of years.
 2. User selects a specific year that his/her wants to search.
-3. System receive the search request including the selected year, and response
-   with a list of students studing in that year.
+3. System receives the search request including the selected year, and responses
+   with a list of projects in that year.
 
 Alternative Flow
 """"""""""""""""
 
 Invalid name
    If, in **Search by name** sub flow, user enters a name with invalid characters,
-   the system will display an alert message. User could either re-enters the name
+   the system will display an alert message. User could either re-enter the name
    or cancel the operation.
 
 Special Requirements
 ^^^^^^^^^^^^^^^^^^^^
 
-In **Search by name** sub flow, user has successfuly receive the list of
+In **Search by name** sub flow, user has successfully received the list of
 student name and might want to sort it by *year*.
 
 
