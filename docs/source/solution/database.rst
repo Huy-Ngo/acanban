@@ -21,6 +21,7 @@ The pattern for user objects is described below:
 
    {
       "id": "uuid",
+      "username": "very_unique_username"
       "name": "Foo Bar",
       "email": "foo.bar@example.com",
       "password-hash": "(hash generated for password)",
