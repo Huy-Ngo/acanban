@@ -21,7 +21,7 @@ The pattern for user objects is described below:
 
    {
       "id": "uuid",
-      "username": "very_unique_username"
+      "username": "very_unique_username",
       "name": "Foo Bar",
       "email": "foo.bar@example.com",
       "password-hash": "(hash generated for password)",
@@ -73,7 +73,7 @@ The pattern for project objects is described below:
       "evaluated": 18,
       "assigned-to": "(user id)",
       "description": "A very long description",
-      "deadline": "(date time in ISO 8601 format)"
+      "deadline": "(date time in ISO 8601 format)",
       "discussion": [
          "list",
          "of",
