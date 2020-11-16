@@ -13,14 +13,11 @@ These packages should be installed in a Python virtual environment.
 
 ### Server requirements
 
-I haven't decided on whether to deploy JSON DB as merely JSON files with IPFS
-or using a JSON DBMS like RethinkDB
-
 - NGINX
 - IPFS
 - RethinkDB
 
-## Steps
+## Configuration
 
 ### Configure NGINX file
 
@@ -39,7 +36,18 @@ server {
 
 Make a symlink to `/etc/nginx/sites-enabled/`
 
+### Configure files for RethinkDB
+
+We use init.d to run RethinkDB on startup.
+Configuration file should be put at `/etc/rethinkdb/instances.d/`.
+A sample file can be found on [RethinkDB's GitHub repo][1].
+
+More configuration for security can be found on [RethinkDB's Doc][2].
+However, at this point the security decision haven't been made
+
 ### Configure systemd service
+
+We use systemd to run GPMS.
 
 ```ini
 [Unit]
@@ -60,3 +68,6 @@ Start the service:
 ```bash
 systemctl start gpms.service
 ```
+
+[1]: https://github.com/rethinkdb/rethinkdb/blob/next/packaging/assets/config/default.conf.sample
+[2]: https://rethinkdb.com/docs/security/
