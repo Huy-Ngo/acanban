@@ -26,6 +26,7 @@ The pattern for user objects is described below:
       "email": "foo.bar@example.com",
       "password-hash": "(hash generated for password)",
       "role": "student"
+      "major": "ICT"
    }
 
 Project
@@ -39,6 +40,7 @@ The pattern for project objects is described below:
       "id": "uuid",
       "name": "Project Name",
       "creator": "(creator id)",
+      "supervisor": "(supervisor id)"
       "participants": [
          "list",
          "of",
@@ -68,6 +70,8 @@ The pattern for project objects is described below:
       "is-done": true,
       "evaluated": 18,
       "assigned-to": "(user id)",
+      "description": "A very long description",
+      "deadline": "(date time in ISO 8601 format)"
       "discussion": [
          "list",
          "of",
