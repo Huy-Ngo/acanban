@@ -464,13 +464,14 @@ Extension Points
 None.
 
 
-Create Comment
---------------
+Add Comment
+-----------
 
 Brief Description
 ^^^^^^^^^^^^^^^^^
 
-This use case allows Student or Lecturer to create a discussion thread.
+This use case allows Student or Lecturer to add a comment to a
+discussion thread.
 
 Flow of Events
 ^^^^^^^^^^^^^^
