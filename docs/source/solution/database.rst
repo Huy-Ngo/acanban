@@ -25,8 +25,9 @@ The pattern for user objects is described below:
       "name": "Foo Bar",
       "email": "foo.bar@example.com",
       "password-hash": "(hash generated for password)",
-      "role": "student"
-      "major": "ICT"
+      "role": "student",
+      "major": "ICT", // optional
+      "bio": "A self description" // optional
    }
 
 Project
@@ -40,7 +41,8 @@ The pattern for project objects is described below:
       "id": "uuid",
       "name": "Project Name",
       "creator": "(creator id)",
-      "supervisor": "(supervisor id)"
+      "supervisor": "(supervisor id)",
+      "description": "A summary of a project",
       "participants": [
          "list",
          "of",
