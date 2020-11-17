@@ -1,73 +1,37 @@
-# Group Project Management System
+# Acanban
 
-# Deployment
+Acanban is an academic [Kanban board].  It aims to provide
+a collaboration platform for students and mentors, with first-class support
+for academic evaluation.
 
-## Requirements
+## Prerequisites
 
-### Python packages
+Acanban runs on Python 3.7+ and requires [RethinkDB] and [IPFS] 0.7 or above.
 
-These packages should be installed in a Python virtual environment.
+## Setup
 
-- Quart-Trio
-- HyperCorn
+The development version of Acanban can be installed from this git repository:
 
-### Server requirements
-
-- NGINX
-- IPFS
-- RethinkDB
-
-## Configuration
-
-### Configure NGINX file
-
-Add following file as `/etc/nginx/sites-available/gpms`
-
-```nginx
-server {
-	listen 80;
-	server_name <IP address or domain name>;
-	location / {
-		include proxy_params;
-		proxy_pass http://unix:/var/www/gpms/gpms.sock;
-	}
-}
+```bash
+python -m pip install git+https://github.com/Huy-Ngo/acanban
 ```
 
-Make a symlink to `/etc/nginx/sites-enabled/`
-
-### Configure files for RethinkDB
-
-We use init.d to run RethinkDB on startup.
-Configuration file should be put at `/etc/rethinkdb/instances.d/`.
-A sample file can be found on [RethinkDB's GitHub repo][1].
-
-More configuration for security can be found on [RethinkDB's Doc][2].
-However, at this point the security decision haven't been made
-
-### Configure systemd service
-
-We use systemd to run GPMS.
+Acanban can then be evoked via `python -m acanban`.  In production,
+it is typical to run it as a systemd service, configured like followed.
 
 ```ini
 [Unit]
-Description=Instance to serve GPMS
+Description=The Acanban Server
 After=network.target
 
 [Service]
-User=username
-WorkingDirectory=/home/username/gpms
-ExecStart=/home/username/gpms/venv/bin/python -m hypercorn -w 5 -k trio gpms:app
+ExecStart=/path/to/venv/bin/python -m acanban
+Restart=on-failure
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 ```
 
-Start the service:
-
-```bash
-systemctl start gpms.service
-```
-
-[1]: https://github.com/rethinkdb/rethinkdb/blob/next/packaging/assets/config/default.conf.sample
-[2]: https://rethinkdb.com/docs/security/
+[Kanban board]: https://en.wikipedia.org/wiki/Kanban_board
+[RethinkDB]: https://rethinkdb.com/docs/install/
+[IPFS]: https://ipfs.io

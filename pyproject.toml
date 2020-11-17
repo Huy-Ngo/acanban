@@ -1,0 +1,30 @@
+[build-system]
+requires = ['flit_core >=2,<4']
+build-backend = 'flit_core.buildapi'
+
+[tool.flit.metadata]
+module = 'acanban'
+author = 'Ngô Ngọc Đức Huy'
+author-email = 'duchuy29092000@gmail.com'
+home-page = 'https://Huy-Ngo.github.io/acanban'
+requires = ['hypercorn', 'quart-trio']
+description-file = 'README.md'
+classifiers = [
+    'Development Status :: 1 - Planning',
+    'Environment :: Web Environment',
+    'Framework :: Trio',
+    'Intended Audience :: Education',
+    'Intended Audience :: End Users/Desktop',
+    'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
+    'Natural Language :: English',
+    'Natural Language :: Vietnamese',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3 :: Only',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Topic :: Education',
+    'Typing :: Typed']
+requires-python = '>=3.7'
+keywords = 'academic,kanban'
+license = 'AGPLv3+'
