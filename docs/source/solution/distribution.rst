@@ -24,7 +24,7 @@ Deployment Model
    systemd <- systemd_conf: configure
    hypercorn -- gpms
    gpms - IPFS
-   IPFS - db
+   gpms - db
 
 Alternative deployment model with load-balancing and a separate data server:
 
