@@ -11,20 +11,22 @@ Deployment Model
    }
 
    node Server {
-      database "JSON-based\nDatabase" as db
+      database "RethinkDB" as db
       artifact "/etc/systemd/system/gpms.service" as systemd_conf
       component GPMS as gpms
       component hypercorn
       node systemd <<daemon>>
+      component IPFS
    }
 
    Browser --- hypercorn: HTTPS
    hypercorn - systemd: run instance
    systemd <- systemd_conf: configure
    hypercorn -- gpms
+   gpms - IPFS
    gpms - db
 
-Alternative deployment model with load-balancing:
+Alternative deployment model with load-balancing and a separate data server:
 
 .. uml::
 
@@ -45,7 +47,8 @@ Alternative deployment model with load-balancing:
    }
 
    node "Database Server" as db_server {
-      database "JSON-based\nDatabase" as db
+      database "RethinkDB" as db
+      component IPFS
    }
 
    Browser --- balancer: HTTPS

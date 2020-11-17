@@ -164,26 +164,28 @@
 <div class="section" id="deployment-model">
 <h2>Deployment Model<a class="headerlink" href="#deployment-model" title="Permalink to this headline">¶</a></h2>
 <p class="plantuml">
-<img src="../_images/plantuml-094a3cb71a2f5814644b024f6dcae3c8aa5fbbb0.svg" alt="node Client {
+<img src="../_images/plantuml-4785c94fcdee8e08acb928d31d54b0c00d6400bd.svg" alt="node Client {
    node Browser
 }
 
 node Server {
-   database &quot;JSON-based\nDatabase&quot; as db
+   database &quot;RethinkDB&quot; as db
    artifact &quot;/etc/systemd/system/gpms.service&quot; as systemd_conf
    component GPMS as gpms
    component hypercorn
    node systemd &lt;&lt;daemon&gt;&gt;
+   component IPFS
 }
 
 Browser --- hypercorn: HTTPS
 hypercorn - systemd: run instance
 systemd &lt;- systemd_conf: configure
 hypercorn -- gpms
+gpms - IPFS
 gpms - db"/></p>
-<p>Alternative deployment model with load-balancing:</p>
+<p>Alternative deployment model with load-balancing and a separate data server:</p>
 <p class="plantuml">
-<img src="../_images/plantuml-85210126f34646a6225e0343e93e747d719005e2.svg" alt="node Client {
+<img src="../_images/plantuml-da8917e20ecb68f5752fc8a2b9870650ab49c340.svg" alt="node Client {
    node Browser
 }
 
@@ -200,7 +202,8 @@ node Server {
 }
 
 node &quot;Database Server&quot; as db_server {
-   database &quot;JSON-based\nDatabase&quot; as db
+   database &quot;RethinkDB&quot; as db
+   component IPFS
 }
 
 Browser --- balancer: HTTPS
