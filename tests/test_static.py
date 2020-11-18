@@ -1,4 +1,4 @@
-# Server console script
+# Test static pages
 # Copyright (C) 2020  Nguyễn Gia Phong
 #
 # This file is part of Acanban.
@@ -16,13 +16,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from hypercorn.config import Config
-from hypercorn.trio import serve
-from trio import run
+from acanban import index
+from acanban.static import index_html
 
-from . import app
 
-if __name__ == '__main__':
-    config = Config()
-    config.bind = ['localhost:42069']
-    run(serve, app, config)
+async def test_index() -> None:
+    """Test if the index page is returned correctly."""
+    assert index_html == await index()
