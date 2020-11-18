@@ -1,0 +1,7 @@
+image: debian/stable
+packages:
+  - tox
+sources:
+  - https://github.com/Huy-Ngo/acanban
+tasks:
+  - lint: tox -c acanban -e style -e type

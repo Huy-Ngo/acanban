@@ -8,7 +8,7 @@ from acanban import __version__
 
 # Project information
 project = 'Acanban'
-copyright = '2020  Ngô Ngọc Đức Huy et al.'
+copyright = '2020  Ngô Ngọc Đức Huy et al.'  # noqa
 author = 'Ngô Ngọc Đức Huy et al.'
 release = __version__
 

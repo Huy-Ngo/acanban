@@ -32,6 +32,25 @@ Restart=on-failure
 WantedBy=default.target
 ```
 
+## Hacking
+
+First clone the repository and install Acanban as editable:
+
+```bash
+git clone https://github.com/Huy-Ngo/acanban
+cd acanban
+python -m pip install flit
+flit install --symlink
+```
+
+After playing around with the source code, one can use `tox`
+to test the modified version:
+
+```bash
+python -m pip install tox
+tox
+```
+
 [Kanban board]: https://en.wikipedia.org/wiki/Kanban_board
 [RethinkDB]: https://rethinkdb.com/docs/install/
 [IPFS]: https://ipfs.io
