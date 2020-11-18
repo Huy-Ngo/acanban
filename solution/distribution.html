@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Distribution &mdash; gpms 0.0.0 documentation</title>
+  <title>Distribution &mdash; Acanban 0.0.1 documentation</title>
   
 
   
@@ -50,7 +50,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gpms
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Acanban
           
 
           
@@ -107,7 +107,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">gpms</a>
+          <a href="../index.html">Acanban</a>
         
       </nav>
 
@@ -164,40 +164,40 @@
 <div class="section" id="deployment-model">
 <h2>Deployment Model<a class="headerlink" href="#deployment-model" title="Permalink to this headline">¶</a></h2>
 <p class="plantuml">
-<img src="../_images/plantuml-4785c94fcdee8e08acb928d31d54b0c00d6400bd.svg" alt="node Client {
+<img src="../_images/plantuml-3147e15d87c5186001702e243583bb9c380e1e2e.svg" alt="node Client {
    node Browser
 }
 
 node Server {
    database &quot;RethinkDB&quot; as db
-   artifact &quot;/etc/systemd/system/gpms.service&quot; as systemd_conf
-   component GPMS as gpms
-   component hypercorn
+   artifact &quot;acanban.service&quot; as systemd_conf
+   component Acanban
+   component Hypercorn
    node systemd &lt;&lt;daemon&gt;&gt;
    component IPFS
 }
 
-Browser --- hypercorn: HTTPS
-hypercorn - systemd: run instance
+Browser --- Hypercorn: HTTPS
+Hypercorn - systemd: run instance
 systemd &lt;- systemd_conf: configure
-hypercorn -- gpms
-gpms - IPFS
-gpms - db"/></p>
+Hypercorn -- Acanban
+Acanban - IPFS
+Acanban - db"/></p>
 <p>Alternative deployment model with load-balancing and a separate data server:</p>
 <p class="plantuml">
-<img src="../_images/plantuml-da8917e20ecb68f5752fc8a2b9870650ab49c340.svg" alt="node Client {
+<img src="../_images/plantuml-cbb67b405ac64ce76f4020878490ed36ca8256e2.svg" alt="node Client {
    node Browser
 }
 
 node &quot;Load Balancing Server&quot; as balancer {
    component NGINX as nginx &lt;&lt;load balancer&gt;&gt;
-   artifact &quot;/etc/nginx/sites-available/gpms&quot; as nginx_conf
+   artifact &quot;/etc/nginx/sites-available/acanban&quot; as nginx_conf
 }
 
 node Server {
-   artifact &quot;/etc/systemd/system/gpms.service&quot; as systemd_conf
-   component GPMS as gpms
-   component hypercorn
+   artifact &quot;acanban.service&quot; as systemd_conf
+   component Acanban
+   component Hypercorn
    node systemd &lt;&lt;daemon&gt;&gt;
 }
 
@@ -211,10 +211,10 @@ Browser --- balancer: HTTPS
 nginx &lt;. nginx_conf: configure
 nginx &quot;1&quot; --- &quot;1..*&quot; Server
 
-hypercorn - systemd: run instance
+Hypercorn - systemd: run instance
 systemd &lt;. systemd_conf: configure
-hypercorn -- gpms
-gpms &quot;1..*&quot; -- &quot;1&quot; db_server"/></p>
+Hypercorn -- Acanban
+Acanban &quot;1..*&quot; -- &quot;1&quot; db_server"/></p>
 </div>
 </div>
 
@@ -237,7 +237,7 @@ gpms &quot;1..*&quot; -- &quot;1&quot; db_server"/></p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020
+        &copy; Copyright 2020  Ngô Ngọc Đức Huy et al.
 
     </p>
   </div>
