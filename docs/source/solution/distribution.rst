@@ -12,19 +12,19 @@ Deployment Model
 
    node Server {
       database "RethinkDB" as db
-      artifact "/etc/systemd/system/gpms.service" as systemd_conf
-      component GPMS as gpms
-      component hypercorn
+      artifact "acanban.service" as systemd_conf
+      component Acanban
+      component Hypercorn
       node systemd <<daemon>>
       component IPFS
    }
 
-   Browser --- hypercorn: HTTPS
-   hypercorn - systemd: run instance
+   Browser --- Hypercorn: HTTPS
+   Hypercorn - systemd: run instance
    systemd <- systemd_conf: configure
-   hypercorn -- gpms
-   gpms - IPFS
-   gpms - db
+   Hypercorn -- Acanban
+   Acanban - IPFS
+   Acanban - db
 
 Alternative deployment model with load-balancing and a separate data server:
 
@@ -36,13 +36,13 @@ Alternative deployment model with load-balancing and a separate data server:
 
    node "Load Balancing Server" as balancer {
       component NGINX as nginx <<load balancer>>
-      artifact "/etc/nginx/sites-available/gpms" as nginx_conf
+      artifact "/etc/nginx/sites-available/acanban" as nginx_conf
    }
 
    node Server {
-      artifact "/etc/systemd/system/gpms.service" as systemd_conf
-      component GPMS as gpms
-      component hypercorn
+      artifact "acanban.service" as systemd_conf
+      component Acanban
+      component Hypercorn
       node systemd <<daemon>>
    }
 
@@ -56,7 +56,7 @@ Alternative deployment model with load-balancing and a separate data server:
    nginx <. nginx_conf: configure
    nginx "1" --- "1..*" Server
 
-   hypercorn - systemd: run instance
+   Hypercorn - systemd: run instance
    systemd <. systemd_conf: configure
-   hypercorn -- gpms
-   gpms "1..*" -- "1" db_server
+   Hypercorn -- Acanban
+   Acanban "1..*" -- "1" db_server

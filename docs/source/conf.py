@@ -4,11 +4,13 @@
 # For a full list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+from acanban import __version__
+
 # Project information
-project = 'gpms'
-copyright = '2020'
-author = ''
-release = '0.0.0'
+project = 'Acanban'
+copyright = '2020  Ngô Ngọc Đức Huy et al.'
+author = 'Ngô Ngọc Đức Huy et al.'
+release = __version__
 
 # Add any Sphinx extension module names here, as strings.
 # They can be extensions coming with Sphinx (named 'sphinx.ext.*')
