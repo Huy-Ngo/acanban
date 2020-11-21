@@ -15,6 +15,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
+from argparse import ArgumentParser
 
 from hypercorn.config import Config
 from hypercorn.trio import serve
@@ -23,6 +24,10 @@ from trio import run
 from . import app
 
 if __name__ == '__main__':
+    parser = ArgumentParser('Additional configuration for the server.')
+    parser.add_argument('--host', default='localhost')
+    parser.add_argument('--port', default=80, type=int)
+    parser.parse_args()
     config = Config()
-    config.bind = ['localhost:42069']
+    config.bind = [f'{parser.host}:{parser.port}']
     run(serve, app, config)
