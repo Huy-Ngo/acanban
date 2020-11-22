@@ -24,7 +24,7 @@ from trio import run
 from . import app
 
 if __name__ == '__main__':
-    parser = ArgumentParser('Additional configuration for the server.')
+    parser = ArgumentParser(prog='acanban')
     parser.add_argument('--bind', default='localhost:80')
     args = parser.parse_args()
     config = Config()
