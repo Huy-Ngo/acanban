@@ -28,5 +28,5 @@ if __name__ == '__main__':
     parser.add_argument('--bind', default='localhost:80')
     args = parser.parse_args()
     config = Config()
-    config.bind = [f'{args.bind}')
+    config.bind = [f'{args.bind}')]
     run(serve, app, config)
