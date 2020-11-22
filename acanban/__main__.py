@@ -27,7 +27,7 @@ if __name__ == '__main__':
     parser = ArgumentParser('Additional configuration for the server.')
     parser.add_argument('--host', default='localhost')
     parser.add_argument('--port', default=80, type=int)
-    parser.parse_args()
+    args = parser.parse_args()
     config = Config()
-    config.bind = [f'{parser.host}:{parser.port}']
+    config.bind = [f'{args.host}:{args.port}']
     run(serve, app, config)
