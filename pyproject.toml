@@ -7,7 +7,7 @@ module = 'acanban'
 author = 'Ngô Ngọc Đức Huy'
 author-email = 'duchuy29092000@gmail.com'
 home-page = 'https://Huy-Ngo.github.io/acanban'
-requires = ['hypercorn', 'quart-trio']
+requires = ['appdirs', 'hypercorn', 'quart-trio']
 description-file = 'README.md'
 classifiers = [
     'Development Status :: 1 - Planning',
