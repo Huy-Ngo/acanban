@@ -1,6 +1,5 @@
-# Server console script
+# Configuration parser
 # Copyright (C) 2020  Nguyễn Gia Phong
-# Copyright (C) 2020  Ngô Ngọc Đức Huy
 #
 # This file is part of Acanban.
 #
@@ -17,13 +16,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from appdirs import site_config_dir, user_config_dir
-from hypercorn.trio import serve
-from trio import run
+from os.path import isfile, join
 
-from . import app
-from .config import hypercorn_config
+from hypercorn.config import Config
 
-if __name__ == '__main__':
-    config = hypercorn_config(user_config_dir(), site_config_dir())
-    run(serve, app, config)
+
+def hypercorn_config(*directories: str) -> Config:
+    """Return Hypercorn configuration first found in given directories."""
+    for directory in directories:
+        file = join(directory, 'hypercorn.toml')
+        if isfile(file): return Config.from_toml(file)
+    return Config()
