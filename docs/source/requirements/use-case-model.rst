@@ -539,24 +539,30 @@ None.
 Special Requirements
 ^^^^^^^^^^^^^^^^^^^^
 
-Student could either receive notification from Lecturer or
-subscribed disscussion threads.
+None.
 
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student.
+Student could receive notification from theses activities:
+
+- A person ask to join his/her project.
+- His/her join request is approved.
+- The deadline for his/her tasks is near.
+- He/she is assigned to a task.
+- His/her task is approved/evaluated.
+- His/her project is evaluated
+- There is a new reply in his/her watching discussion thread.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-Student gets an unread notification.
+A new unread notification is received.
 
 Extension Points
 ^^^^^^^^^^^^^^^^
 
 None.
-
 
 
 Make Report
