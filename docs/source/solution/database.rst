@@ -26,8 +26,8 @@ The pattern for user objects is described below:
       "email": "foo.bar@example.com",
       "password-hash": "(hash generated for password)",
       "role": "student",
-      "major": "ICT (optional)",
-      "bio": "A self description (optional)"
+      "major": "ICT", // optional
+      "bio": "A self description" // optional
    }
 
 Project
@@ -94,10 +94,7 @@ The pattern for thread objects is described below:
       "title": "Thread Title",
       "content": "The description of the issue addressed in the thread.",
       "comments": [
-         "list",
-         "of",
-         "comment",
-         "objects"
+         // list of comment objects
       ]
    }
 
@@ -112,9 +109,6 @@ The pattern for comment objects is described below:
       "id": "uuid",
       "content": "The content of the comment.",
       "comments": [
-         "list",
-         "of",
-         "comment",
-         "objects"
+         // list of comment objects
       ]
    }
