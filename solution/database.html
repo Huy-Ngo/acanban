@@ -92,6 +92,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#task">Task</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#discussion-thread">Discussion Thread</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#comment">Comment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file">File</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="distribution.html">Distribution</a></li>
@@ -167,105 +168,125 @@
   <div class="section" id="database-design">
 <h1>Database Design<a class="headerlink" href="#database-design" title="Permalink to this headline">¶</a></h1>
 <p>The database used for the system is document-oriented.  That is, it is stored
-and queried in JSON-like format.  The database consists of following patterns:</p>
+and queried in JSON-like format.  The database consists of following objects:</p>
 <ul class="simple">
-<li><p>user</p></li>
-<li><p>project</p></li>
-<li><p>task</p></li>
-<li><p>discussion thread</p></li>
-<li><p>comment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">User</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Project</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Task</span></code></p></li>
+<li><p>Discussion <code class="docutils literal notranslate"><span class="pre">Thread</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Comment</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">File</span></code></p></li>
 </ul>
 <p>Each of them is described in following sections.</p>
 <div class="section" id="user">
 <h2>User<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h2>
-<p>The pattern for user objects is described below:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
-   &quot;id&quot;: &quot;uuid&quot;,
-   &quot;username&quot;: &quot;very_unique_username&quot;,
-   &quot;name&quot;: &quot;Foo Bar&quot;,
-   &quot;email&quot;: &quot;foo.bar@example.com&quot;,
-   &quot;password-hash&quot;: &quot;(hash generated for password)&quot;,
-   &quot;role&quot;: &quot;student&quot;,
-   &quot;major&quot;: &quot;ICT&quot;, // optional
-   &quot;bio&quot;: &quot;A self description&quot; // optional
-}
-</pre></div>
-</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">User</span></code> object has following attributes:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A UUID for the object</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">username</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A unique name with which the user can refer to one another.
+It also allows the user to sign in.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The legal name of the user</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">email</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The email that is used to contact with the user.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">password-hash</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The password for the user’s account, encrypted with a hash function</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">role</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The role of the user in this system.  It can be <code class="docutils literal notranslate"><span class="pre">student</span></code>,
+<code class="docutils literal notranslate"><span class="pre">supervisor</span></code>, <code class="docutils literal notranslate"><span class="pre">staff</span></code>, and <code class="docutils literal notranslate"><span class="pre">admin</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">major</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code> <em>optional</em></span></dt><dd><p>The major of a user with role <code class="docutils literal notranslate"><span class="pre">student</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">student-id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>Only applicable for users with role <code class="docutils literal notranslate"><span class="pre">student</span></code>:
+A unique identifier assigned to students to be used outside this system</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bio</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code> <em>optional</em></span></dt><dd><p>A self-description of the user</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="project">
 <h2>Project<a class="headerlink" href="#project" title="Permalink to this headline">¶</a></h2>
-<p>The pattern for project objects is described below:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-   <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project Name&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;creator&quot;</span><span class="p">:</span> <span class="s2">&quot;(creator id)&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;supervisor&quot;</span><span class="p">:</span> <span class="s2">&quot;(supervisor id)&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A summary of a project&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;participants&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;list&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;of&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;participants&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ids&quot;</span>
-   <span class="p">],</span>
-   <span class="nt">&quot;tasklist&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;list&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;of&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;task&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ids&quot;</span>
-   <span class="p">],</span>
-   <span class="nt">&quot;created-on&quot;</span><span class="p">:</span> <span class="s2">&quot;(date time in ISO 8601 format)&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;evaluation&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">Project</span></code> object has following attributes:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A UUID for the object</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The name of the project</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The creator of the project.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">supervisor</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The supervisor of the project, must be a <code class="docutils literal notranslate"><span class="pre">User</span></code> with role <code class="docutils literal notranslate"><span class="pre">supervisor</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">description</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The summary of a project</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">participants</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">User</span></code> s who participate in this project.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tasks</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Task</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Task</span></code> s created for this project.</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="task">
 <h2>Task<a class="headerlink" href="#task" title="Permalink to this headline">¶</a></h2>
-<p>The pattern for project objects is described below:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-   <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;task name&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;is-done&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-   <span class="nt">&quot;evaluated&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-   <span class="nt">&quot;assigned-to&quot;</span><span class="p">:</span> <span class="s2">&quot;(user id)&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A very long description&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;deadline&quot;</span><span class="p">:</span> <span class="s2">&quot;(date time in ISO 8601 format)&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;discussion&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;list&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;of&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;thread&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ids&quot;</span>
-   <span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">Task</span></code> object has following attributes:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A UUID for the object</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The name of the task</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The user who created the task</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">is-done</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">boolean</span></code></span></dt><dd><p>Whether the task is done</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">evaluation</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">number</span></code></span></dt><dd><p>The evaluation of the task</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">assigned-to</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The assignee of the task. Must have role <code class="docutils literal notranslate"><span class="pre">student</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">description</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The summary of a task</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">deadline</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>Deadline for the task, in ISO 8601 format</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">discussion</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Thread</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Thread</span></code> s created for this task</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="discussion-thread">
 <h2>Discussion Thread<a class="headerlink" href="#discussion-thread" title="Permalink to this headline">¶</a></h2>
-<p>The pattern for thread objects is described below:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
-   &quot;id&quot;: &quot;uuid&quot;,
-   &quot;title&quot;: &quot;Thread Title&quot;,
-   &quot;content&quot;: &quot;The description of the issue addressed in the thread.&quot;,
-   &quot;comments&quot;: [
-      // list of comment objects
-   ]
-}
-</pre></div>
-</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">Task</span></code> object has following attributes:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A UUID for the object</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The user who created the discussion thread</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">title</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The title of the discussion thread</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">content</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The description of the issue addressed in the thread</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">comments</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Comment</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Comment</span></code> s on this thread</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="comment">
 <h2>Comment<a class="headerlink" href="#comment" title="Permalink to this headline">¶</a></h2>
-<p>The pattern for comment objects is described below:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
-   &quot;id&quot;: &quot;uuid&quot;,
-   &quot;content&quot;: &quot;The content of the comment.&quot;,
-   &quot;comments&quot;: [
-      // list of comment objects
-   ]
-}
-</pre></div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">Comment</span></code> object has following attributes:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A UUID for the object</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The user who created the comment</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">content</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The content of the comment</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">comments</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Comment</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Comment</span></code> s replying to it</p>
+</dd>
+</dl>
 </div>
+<div class="section" id="file">
+<h2>File<a class="headerlink" href="#file" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">address</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The IPFS address for the file object, which is also used as primary key.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The file name</p>
+</dd>
+</dl>
 </div>
 </div>
 
