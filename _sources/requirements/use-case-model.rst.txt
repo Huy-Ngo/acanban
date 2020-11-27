@@ -18,6 +18,7 @@ Use-Case Model
    usecase Evaluate
    usecase "Create discussion thread" as Thread
    usecase "Add comment" as Comment
+   usecase "Receive notification" as Notification
 
    usecase Search
    usecase "Search student" as SearchS
@@ -47,6 +48,7 @@ Use-Case Model
    Student --> Complete
    Student --> Thread
    Student --> Comment
+   Student --> Notification
    Student --> Authentication
 
    Search <-- Lecturer
@@ -482,7 +484,7 @@ Basic Flow
 1. User requests to add a new comment to the discussion thread.
 2. System receives the request and requests user to enter **comment**.
 3. User enters a comment.
-4. System processes the data and create a new comment in the threa.
+4. System processes the data and create a new comment in the thread.
 
 Alternative Flow
 """"""""""""""""
@@ -504,6 +506,58 @@ Post-Conditions
 ^^^^^^^^^^^^^^^
 
 A new comment thread is added into the discussion thread.
+
+Extension Points
+^^^^^^^^^^^^^^^^
+
+None.
+
+
+Receive Notification
+--------------------
+
+Brief Description
+^^^^^^^^^^^^^^^^^
+
+This use case allows Student to receive notification from
+both in-app system and email.
+
+Flow of Events
+^^^^^^^^^^^^^^
+
+Basic Flow
+""""""""""
+
+1. System sends notification to Student.
+2. Student receives the notification, by mail or notification bar.
+
+Alternative Flow
+""""""""""""""""
+
+None.
+
+Special Requirements
+^^^^^^^^^^^^^^^^^^^^
+
+None.
+
+Pre-Conditions
+^^^^^^^^^^^^^^
+
+Student could receive notification from theses activities:
+
+- A person ask to join his/her project.
+- His/her join request is approved.
+- The deadline for his/her tasks is near.
+- He/she is assigned to a task.
+- His/her task is approved/evaluated.
+- His/her project is evaluated
+- There is a new reply in his/her watching discussion thread.
+
+Post-Conditions
+^^^^^^^^^^^^^^^
+
+A new unread notification is received.
 
 Extension Points
 ^^^^^^^^^^^^^^^^
