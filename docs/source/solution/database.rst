@@ -2,113 +2,156 @@ Database Design
 ===============
 
 The database used for the system is document-oriented.  That is, it is stored
-and queried in JSON-like format.  The database consists of following patterns:
+and queried in JSON-like format.  The database consists of following objects:
 
-- user
-- project
-- task
-- discussion thread
-- comment
+- ``User``
+- ``Project``
+- ``Task``
+- Discussion ``Thread``
+- ``Comment``
+- ``File``
 
 Each of them is described in following sections.
 
 User
 ----
 
-The pattern for user objects is described below:
+Each ``User`` object has following attributes:
 
-.. code-block:: json
+``id`` : ``string``
+   A UUID for the object
 
-   {
-      "id": "uuid",
-      "username": "very_unique_username",
-      "name": "Foo Bar",
-      "email": "foo.bar@example.com",
-      "password-hash": "(hash generated for password)",
-      "role": "student",
-      "major": "ICT", // optional
-      "bio": "A self description" // optional
-   }
+``username`` : ``string``
+   A unique name with which the user can refer to one another.
+   It also allows the user to sign in.
+
+``name`` : ``string``
+   The legal name of the user
+
+``email`` : ``string``
+   The email that is used to contact with the user.
+
+``password-hash`` : ``string``
+   The password for the user's account, encrypted with a hash function
+
+``role`` : ``string``
+   The role of the user in this system.  It can be ``student``,
+   ``supervisor``, ``staff``, and ``admin``
+
+``major`` : ``string`` *optional*
+   The major of a user with role ``student``.
+
+``student-id`` : ``string``
+   Only applicable for users with role ``student``:
+   A unique identifier assigned to students to be used outside this system
+
+``bio`` : ``string`` *optional*
+   A self-description of the user
 
 Project
 -------
 
-The pattern for project objects is described below:
+Each ``Project`` object has following attributes:
 
-.. code-block:: json
+``id`` : ``string``
+   A UUID for the object
 
-   {
-      "id": "uuid",
-      "name": "Project Name",
-      "creator": "(creator id)",
-      "supervisor": "(supervisor id)",
-      "description": "A summary of a project",
-      "participants": [
-         "list",
-         "of",
-         "participants",
-         "ids"
-      ],
-      "tasklist": [
-         "list",
-         "of",
-         "task",
-         "ids"
-      ],
-      "created-on": "(date time in ISO 8601 format)",
-      "evaluation": 17,
-   }
+``name`` : ``string``
+   The name of the project
+
+``creator`` : ``User``
+   The creator of the project.
+
+``supervisor`` : ``User``
+   The supervisor of the project, must be a ``User`` with role ``supervisor``.
+
+``description`` : ``string``
+   The summary of a project
+
+``participants`` : ``array`` of ``User``
+   List of ``User`` s who participate in this project.
+
+``tasks`` : ``array`` of ``Task``
+   List of ``Task`` s created for this project.
+
 
 Task
 ----
 
-The pattern for project objects is described below:
+Each ``Task`` object has following attributes:
 
-.. code-block:: json
+``id`` : ``string``
+   A UUID for the object
 
-   {
-      "id": "uuid",
-      "name": "task name",
-      "is-done": true,
-      "evaluated": 18,
-      "assigned-to": "(user id)",
-      "description": "A very long description",
-      "deadline": "(date time in ISO 8601 format)",
-      "discussion": [
-         "list",
-         "of",
-         "thread",
-         "ids"
-      ]
-   }
+``name`` : ``string``
+   The name of the task
+
+``creator`` : ``User``
+   The user who created the task
+
+``is-done`` : ``boolean``
+   Whether the task is done
+
+``evaluation`` : ``number``
+   The evaluation of the task
+
+``assigned-to`` : ``User``
+   The assignee of the task. Must have role ``student``.
+
+``description`` : ``string``
+   The summary of a task
+
+``deadline`` : ``string``
+   Deadline for the task, in ISO 8601 format
+
+``discussion`` : ``array`` of ``Thread``
+   List of ``Thread`` s created for this task
+
 
 Discussion Thread
 -----------------
 
-The pattern for thread objects is described below:
+Each ``Task`` object has following attributes:
 
-.. code-block:: json
 
-   {
-      "id": "uuid",
-      "title": "Thread Title",
-      "content": "The description of the issue addressed in the thread.",
-      "comments": [
-         // list of comment objects
-      ]
-   }
+``id`` : ``string``
+   A UUID for the object
+
+``creator`` : ``User``
+   The user who created the discussion thread
+
+``title`` : ``string``
+   The title of the discussion thread
+
+``content`` : ``string``
+   The description of the issue addressed in the thread
+
+``comments`` : ``array`` of ``Comment``
+   List of ``Comment`` s on this thread
+
 
 Comment
 -------
 
-The pattern for comment objects is described below:
+Each ``Comment`` object has following attributes:
 
-.. code-block:: json
+``id`` : ``string``
+   A UUID for the object
 
-   {
-      "id": "uuid",
-      "content": "The content of the comment.",
-      "comments": [
-         // list of comment objects
-      ]
-   }
+``creator`` : ``User``
+   The user who created the comment
+
+``content`` : ``string``
+   The content of the comment
+
+``comments`` : ``array`` of ``Comment``
+   List of ``Comment`` s replying to it
+
+File
+----
+
+``address`` : ``string``
+   The IPFS address for the file object, which is also used as primary key.
+
+``name`` : ``string``
+   The file name
