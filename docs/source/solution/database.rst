@@ -9,6 +9,7 @@ and queried in JSON-like format.  The database consists of following objects:
 - ``Task``
 - Discussion ``Thread``
 - ``Comment``
+- ``File``
 
 Each of them is described in following sections.
 
@@ -145,3 +146,17 @@ Each ``Comment`` object has following attributes:
 
 ``comments`` : ``array`` of ``Comment``
    List of ``Comment`` s replying to it
+
+File
+----
+
+Each ``File`` object has following attributes:
+
+``id`` : ``string``
+   A UUID for the object
+
+``address`` : ``string``
+   The IPFS address for the file object.
+
+``name`` : ``string``
+   The file name
