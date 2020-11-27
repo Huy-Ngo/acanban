@@ -38,14 +38,14 @@ Each ``User`` object has following attributes:
    The role of the user in this system.  It can be ``student``,
    ``supervisor``, ``staff``, and ``admin``
 
-``major`` : ``string``, optional
+``major`` : ``string`` *optional*
    The major of a user with role ``student``.
 
 ``student-id`` : ``string``
    Only applicable for users with role ``student``:
    A unique identifier assigned to students to be used outside this system
 
-``bio`` : ``string``, optional
+``bio`` : ``string`` *optional*
    A self-description of the user
 
 Project
