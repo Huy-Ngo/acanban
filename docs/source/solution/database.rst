@@ -150,13 +150,8 @@ Each ``Comment`` object has following attributes:
 File
 ----
 
-Each ``File`` object has following attributes:
-
-``id`` : ``string``
-   A UUID for the object
-
 ``address`` : ``string``
-   The IPFS address for the file object.
+   The IPFS address for the file object, which is also used as primary key.
 
 ``name`` : ``string``
    The file name
