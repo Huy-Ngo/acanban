@@ -16,10 +16,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
+from secrets import token_urlsafe
+from typing import Any
+
 from quart import render_template
 from quart_trio import QuartTrio
 from rethinkdb import r
 from rethinkdb.trio_net.net_trio import TrioConnectionPool
+
+from .auth import Authenticator
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
@@ -27,7 +32,13 @@ __version__ = '0.0.1'
 
 
 class Acanban(QuartTrio):
+    auth_manager: Authenticator
     db_pool: TrioConnectionPool
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self.secret_key = token_urlsafe(16)
+        Authenticator().init_app(self)
 
 
 app = Acanban(__name__)
