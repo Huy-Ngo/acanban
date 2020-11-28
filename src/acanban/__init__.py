@@ -16,9 +16,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
+from quart import render_template
 from quart_trio import QuartTrio
-
-from .static import index_html
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
@@ -30,4 +29,4 @@ app = QuartTrio(__name__)
 @app.route('/')
 async def index() -> str:
     """Return the index page."""
-    return index_html
+    return await render_template('index.html')

@@ -1,4 +1,4 @@
-# Static data
+# Test basic routing
 # Copyright (C) 2020  Nguyễn Gia Phong
 #
 # This file is part of Acanban.
@@ -16,14 +16,20 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from importlib.resources import open_text
+from pytest import fixture, mark
+from quart.testing import QuartClient
 
-__all__ = ['index_html']
-
-
-def read(resource: str) -> str:
-    """Return the content of the given static resource."""
-    with open_text('acanban.static', resource) as f: return f.read()
+from acanban import app
 
 
-index_html = read('index.html')
+@fixture
+def client() -> QuartClient:
+    """Return a Quart test client."""
+    return app.test_client()
+
+
+@mark.parametrize(('uri', 'status_code'), (('/', 200), ('/foobar', 404)))
+async def test_status(uri: str, status_code: int, client: QuartClient) -> None:
+    """Test the status of basic routes."""
+    response = await client.get(uri)
+    assert response.status_code == status_code
