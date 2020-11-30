@@ -4,6 +4,11 @@
 <title>Acanban</title>
 <body>
 <p>Welcome to Acanban!</p>
+{% if current_user.is_authenticated %}
+<p><a href=logout>logout</a></p>
+{% else %}
 <p><a href=register>register</a></p>
+<p><a href=login>login</a></p>
+{% endif %}
 </body>
 </html>
