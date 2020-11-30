@@ -18,12 +18,32 @@
 
 from quart import render_template
 from quart_trio import QuartTrio
+from rethinkdb import r
+from rethinkdb.trio_net.net_trio import TrioConnectionPool
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
 __version__ = '0.0.1'
 
-app = QuartTrio(__name__)
+
+class Acanban(QuartTrio):
+    db_pool: TrioConnectionPool
+
+
+app = Acanban(__name__)
+
+
+@app.before_serving
+async def create_db_pool() -> None:
+    """Create RethinkDB connection pool."""
+    r.set_loop_type('trio')
+    app.db_pool = r.ConnectionPool(db='test', nursery=app.nursery)
+
+
+@app.after_serving
+async def close_db_pool() -> None:
+    """Close RethinkDB connection pool."""
+    await app.db_pool.close()
 
 
 @app.route('/')
