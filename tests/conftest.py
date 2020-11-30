@@ -1,4 +1,4 @@
-# Test basic routing
+# Common test fixtures
 # Copyright (C) 2020  Nguyễn Gia Phong
 #
 # This file is part of Acanban.
@@ -16,12 +16,21 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from pytest import mark
+from typing import AsyncIterator
+
+from pytest import fixture
+from quart import Quart
 from quart.testing import QuartClient
 
+from acanban import app
 
-@mark.parametrize(('uri', 'status_code'), (('/', 200), ('/foobar', 404)))
-async def test_status(uri: str, status_code: int, client: QuartClient) -> None:
-    """Test the status of basic routes."""
-    response = await client.get(uri)
-    assert response.status_code == status_code
+
+@fixture(name='app')
+async def acanban() -> AsyncIterator[Quart]:
+    async with app.test_app() as test_app: yield test_app
+
+
+@fixture
+def client(app: Quart) -> QuartClient:
+    """Return a Quart test client."""
+    return app.test_client()

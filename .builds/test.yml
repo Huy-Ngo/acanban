@@ -1,6 +1,9 @@
-image: debian/stable
+image: debian/buster
 packages:
+  - rethinkdb
   - tox
+repositories:
+  rethinkdb: https://download.rethinkdb.com/repository/debian-buster buster main 539A3A8C6692E6E3F69B3FE81D85E93F801BB43F
 sources:
   - https://github.com/Huy-Ngo/acanban
 tasks:
