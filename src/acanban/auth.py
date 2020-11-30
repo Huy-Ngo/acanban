@@ -16,13 +16,18 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
+from crypt import crypt
 from enum import Enum, auto
-from typing import Optional, Type
+from hmac import compare_digest
+from typing import Dict, Optional, Tuple, Union
 
-from quart import current_app
+from quart import (Blueprint, Quart, Response, current_app,
+                   redirect, render_template, request)
 from quart_auth import AuthManager, AuthUser
 
-__all__ = ['Authenticator']
+__all__ = ['Authenticator', 'blueprint']
+
+blueprint = Blueprint('auth', __name__)
 
 
 class Role(Enum):
@@ -30,6 +35,9 @@ class Role(Enum):
     SUPERVISOR = auto()
     STAFF = auto()
     ADMIN = auto()
+
+
+UserData = Tuple[Optional[str], Optional[str], Optional[str], Optional[Role]]
 
 
 class User(AuthUser):
@@ -66,3 +74,32 @@ class User(AuthUser):
 
 class Authenticator(AuthManager):
     user_class = User
+
+    def init_app(self, app: Quart) -> None:
+        """Embed auth_manager attribute into app."""
+        super().init_app(app)
+        # TODO: wrap the database instead
+        self.users: Dict[Optional[str], UserData] = {
+            None: (None, None, None, None),
+            'foo': (crypt('bar'), 'Foo Bar', 'foo@bar.baz', Role.STUDENT)}
+
+    def add_user(self, username: str, password: str,
+                 name: str, email: str, role: Role) -> None:
+        """Try to add user to database."""
+        if username in self.users: raise ValueError('username taken')
+        self.users[username] = crypt(password), name, email, role
+
+
+@blueprint.route('/register', methods=['GET', 'POST'])
+async def register() -> Union[str, Response]:
+    """Handle the registration page."""
+    if request.method == 'GET': return await render_template('register.html')
+    info = await request.form
+    try:
+        current_app.auth_manager.add_user(
+            info['username'], info['password'],
+            info['name'], info['email'], info['role'])
+    except ValueError as e:
+        return await render_template('register.html', error=str(e))
+    else:
+        return redirect('/')

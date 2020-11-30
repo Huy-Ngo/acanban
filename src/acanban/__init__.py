@@ -24,12 +24,11 @@ from quart_trio import QuartTrio
 from rethinkdb import r
 from rethinkdb.trio_net.net_trio import TrioConnectionPool
 
-from .auth import Authenticator
+from .auth import Authenticator, blueprint as auth
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
 __version__ = '0.0.1'
-
 
 class Acanban(QuartTrio):
     auth_manager: Authenticator
@@ -42,6 +41,7 @@ class Acanban(QuartTrio):
 
 
 app = Acanban(__name__)
+app.register_blueprint(auth)
 
 
 @app.before_serving

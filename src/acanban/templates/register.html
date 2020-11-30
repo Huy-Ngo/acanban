@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<meta charset=utf-8>
+<title>Registration</title>
+<body>
+{% if error %}
+<p>error: {{ error }}</p>
+{% endif %}
+<form action=register method=POST>
+  <input type=text name=username id=username placeholder=username><br>
+  <input type=password name=password id=password placeholder=password><br>
+  <input type=text name=name id=name placeholder=name><br>
+  <input type=email name=email id=email placeholder=email><br>
+  <select name=role id=role>
+    <option value=student>student</option>
+    <option value=supervisor>supervisor</option>
+    <option value=staff>staff</option>
+    <option value=admin>admin</option>
+  </select><br>
+  <input type=submit name=submit value=register>
+</form>
+</body>
+</html>
