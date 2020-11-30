@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<meta charset=utf-8>
+<title>Login</title>
+<body>
+{% if error %}
+<p>error: {{ error }}</p>
+{% endif %}
+<form action=login method=POST>
+  <input type=text name=username id=username placeholder=username><br>
+  <input type=password name=password id=password placeholder=password><br>
+  <input type=checkbox name=remember id=remember>
+  <label for=remember>remember me</label><br>
+  <input type=submit name=submit value=login>
+</form>
+</body>
+</html>

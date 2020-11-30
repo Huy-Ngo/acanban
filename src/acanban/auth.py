@@ -19,11 +19,11 @@
 from crypt import crypt
 from enum import Enum, auto
 from hmac import compare_digest
-from typing import Dict, Optional, Tuple, Union
+from typing import Dict, Optional, Tuple
 
-from quart import (Blueprint, Quart, Response, current_app,
-                   redirect, render_template, request)
-from quart_auth import AuthManager, AuthUser
+from quart import (Blueprint, Quart, ResponseReturnValue,
+                   current_app, redirect, render_template, request)
+from quart_auth import AuthManager, AuthUser, login_user, logout_user
 
 __all__ = ['Authenticator', 'blueprint']
 
@@ -89,9 +89,17 @@ class Authenticator(AuthManager):
         if username in self.users: raise ValueError('username taken')
         self.users[username] = crypt(password), name, email, role
 
+    def log_user(self, username: str, password: str) -> User:
+        """Try to log the given user in."""
+        digest, *info = self.users[username]
+        assert digest is not None
+        if not compare_digest(digest, crypt(password, digest)):
+            raise ValueError('bad login')
+        return User(username)
+
 
 @blueprint.route('/register', methods=['GET', 'POST'])
-async def register() -> Union[str, Response]:
+async def register() -> ResponseReturnValue:
     """Handle the registration page."""
     if request.method == 'GET': return await render_template('register.html')
     info = await request.form
@@ -103,3 +111,26 @@ async def register() -> Union[str, Response]:
         return await render_template('register.html', error=str(e))
     else:
         return redirect('/')
+
+
+@blueprint.route('/login', methods=['GET', 'POST'])
+async def login() -> ResponseReturnValue:
+    """Handle the login page."""
+    if request.method == 'GET': return await render_template('login.html')
+    info = await request.form
+    username, password = info['username'], info['password']
+    try:
+        user = current_app.auth_manager.log_user(username, password)
+    except ValueError as e:
+        return await render_template('login.html', error=str(e))
+    else:
+        remember = info.get('remember') is not None
+        login_user(user, remember)
+        return redirect('/')
+
+
+@blueprint.route("/logout")
+async def logout() -> ResponseReturnValue:
+    """Handle logout."""
+    logout_user()
+    return redirect('/')
