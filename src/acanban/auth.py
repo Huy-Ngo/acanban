@@ -17,7 +17,6 @@
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
 from crypt import crypt
-from enum import Enum, auto
 from hmac import compare_digest
 from typing import Dict, Optional, Tuple
 
@@ -27,17 +26,8 @@ from quart_auth import AuthManager, AuthUser, login_user, logout_user
 
 __all__ = ['Authenticator', 'blueprint']
 
+ROLES = 'admin', 'assistant', 'student', 'supervisor'
 blueprint = Blueprint('auth', __name__)
-
-
-class Role(Enum):
-    STUDENT = auto()
-    SUPERVISOR = auto()
-    STAFF = auto()
-    ADMIN = auto()
-
-
-UserData = Tuple[Optional[str], Optional[str], Optional[str], Optional[Role]]
 
 
 class User(AuthUser):
@@ -58,7 +48,7 @@ class User(AuthUser):
         Real name of the user.
     email : Optional[str]
         Email of the user.
-    role : Optional[Role]
+    role : Optional[str]
         Role of the user.
     """
 
@@ -73,20 +63,22 @@ class User(AuthUser):
 
 
 class Authenticator(AuthManager):
+    users: Dict[Optional[str], Tuple[Optional[str], Optional[str],
+                                     Optional[str], Optional[str]]]
     user_class = User
 
     def init_app(self, app: Quart) -> None:
         """Embed auth_manager attribute into app."""
         super().init_app(app)
         # TODO: wrap the database instead
-        self.users: Dict[Optional[str], UserData] = {
-            None: (None, None, None, None),
-            'foo': (crypt('bar'), 'Foo Bar', 'foo@bar.baz', Role.STUDENT)}
+        self.users = {None: (None, None, None, None)}
 
     def add_user(self, username: str, password: str,
-                 name: str, email: str, role: Role) -> None:
+                 name: str, email: str, role: str) -> None:
         """Try to add user to database."""
         if username in self.users: raise ValueError('username taken')
+        # This never happens through browser, but via manual requests.
+        if role not in ROLES: raise ValueError('unknown role')
         self.users[username] = crypt(password), name, email, role
 
     def log_user(self, username: str, password: str) -> User:
@@ -110,6 +102,7 @@ async def register() -> ResponseReturnValue:
     except ValueError as e:
         return await render_template('register.html', error=str(e))
     else:
+        print(info['role'])
         return redirect('/')
 
 

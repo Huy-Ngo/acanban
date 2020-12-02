@@ -19,18 +19,17 @@
 from typing import AsyncIterator
 
 from pytest import fixture
-from quart import Quart
 from quart.testing import QuartClient
 
-from acanban import app
+from acanban import Acanban, app
 
 
 @fixture(name='app')
-async def acanban() -> AsyncIterator[Quart]:
+async def acanban() -> AsyncIterator[Acanban]:
     async with app.test_app() as test_app: yield test_app
 
 
 @fixture
-def client(app: Quart) -> QuartClient:
+def client(app: Acanban) -> QuartClient:
     """Return a Quart test client."""
     return app.test_client()
