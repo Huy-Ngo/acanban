@@ -20,7 +20,9 @@ from pytest import mark
 from quart.testing import QuartClient
 
 
-@mark.parametrize(('uri', 'status_code'), (('/', 200), ('/foobar', 404)))
+@mark.parametrize(('uri', 'status_code'),
+                  (('/', 200), ('/register', 200), ('/login', 200),
+                   ('/logout', 302), ('/foobar', 404)))
 async def test_status(uri: str, status_code: int, client: QuartClient) -> None:
     """Test the status of basic routes."""
     response = await client.get(uri)

@@ -16,13 +16,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import annotations
+
+from contextlib import asynccontextmanager
 from secrets import token_urlsafe
-from typing import Any
+from typing import Any, AsyncIterator
 
 from quart import render_template
 from quart_trio import QuartTrio
 from rethinkdb import r
 from rethinkdb.trio_net.net_trio import TrioConnectionPool
+from trio import open_nursery
 
 from .auth import Authenticator, blueprint as auth
 
@@ -30,7 +34,10 @@ __all__ = ['app']
 __doc__ = 'Academic Kanban'
 __version__ = '0.0.1'
 
+
 class Acanban(QuartTrio):
+    """Acanban web application."""
+
     auth_manager: Authenticator
     db_pool: TrioConnectionPool
 
@@ -38,6 +45,18 @@ class Acanban(QuartTrio):
         super().__init__(*args, **kwargs)
         self.secret_key = token_urlsafe(16)
         Authenticator().init_app(self)
+
+    @asynccontextmanager
+    async def test_app(self) -> AsyncIterator[Acanban]:
+        """Return a context manager startup and shutdown the app."""
+        async with open_nursery() as nursery:
+            self.nursery = nursery
+            await self.startup()
+            try:
+                yield self
+            finally:
+                await self.shutdown()
+        self.nursery = None
 
 
 app = Acanban(__name__)
