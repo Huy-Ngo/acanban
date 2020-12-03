@@ -18,12 +18,9 @@ User
 
 Each ``User`` object has following attributes:
 
-``id`` : ``string``
-   A UUID for the object
-
 ``username`` : ``string``
    A unique name with which the user can refer to one another.
-   It also allows the user to sign in.
+   It is also the primary key and allows the user to sign in.
 
 ``name`` : ``string``
    The legal name of the user
@@ -35,26 +32,32 @@ Each ``User`` object has following attributes:
    The password for the user's account, encrypted with a hash function
 
 ``role`` : ``string``
-   The role of the user in this system.  It can be ``student``,
-   ``supervisor``, ``staff``, and ``admin``
+   The role of the user in this system.  It can be:
 
-``major`` : ``string`` *optional*
-   The major of a user with role ``student``.
+   - ``student``: Students who are participating a group project or internship
+   - ``supervisor``: The supervisor of project(s)
+   - ``assistant``: The academic assistant of a department
+   - ``admin``: The system admin
+
+``department`` : ``string`` *optional*
+   The department of the user, such as ``ICT``, ``SA``, or ``LS``.
+   Required for students and assistants.
 
 ``student-id`` : ``string``
    Only applicable for users with role ``student``:
    A unique identifier assigned to students to be used outside this system
 
-``bio`` : ``string`` *optional*
-   A self-description of the user
+``bio`` : ``object`` *optional*
+   A self-description of the user. It can have following fields:
+
+   - ``description``: A markdown text describing the user
+   - ``institution``: The institution the user is working at, mainly for supervisors
+   - ``interest``: Research interests of a supervisor or student
 
 Project
 -------
 
 Each ``Project`` object has following attributes:
-
-``id`` : ``string``
-   A UUID for the object
 
 ``name`` : ``string``
    The name of the project
@@ -79,9 +82,6 @@ Task
 ----
 
 Each ``Task`` object has following attributes:
-
-``id`` : ``string``
-   A UUID for the object
 
 ``name`` : ``string``
    The name of the task
@@ -114,9 +114,6 @@ Discussion Thread
 Each ``Task`` object has following attributes:
 
 
-``id`` : ``string``
-   A UUID for the object
-
 ``creator`` : ``User``
    The user who created the discussion thread
 
@@ -134,9 +131,6 @@ Comment
 -------
 
 Each ``Comment`` object has following attributes:
-
-``id`` : ``string``
-   A UUID for the object
 
 ``creator`` : ``User``
    The user who created the comment
