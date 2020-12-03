@@ -1,8 +1,5 @@
-Distribution
-============
-
-Deployment Model
-----------------
+Deployment
+==========
 
 .. uml::
 
