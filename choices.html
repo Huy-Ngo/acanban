@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview &mdash; Acanban 0.0.1 documentation</title>
+  <title>Technical Choices &mdash; Acanban 0.0.1 documentation</title>
   
 
   
@@ -36,7 +36,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction" href="intro.html" /> 
+    <link rel="next" title="System Design" href="design/index.html" />
+    <link rel="prev" title="Supplementary Specification" href="req/suppl-spec.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -50,7 +51,7 @@
           
 
           
-            <a href="#" class="icon icon-home" alt="Documentation Home"> Acanban
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Acanban
           
 
           
@@ -81,11 +82,16 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="obj.html">Objective</a></li>
 <li class="toctree-l1"><a class="reference internal" href="req/index.html">Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="choices.html">Technical Choices</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Technical Choices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#concurrency">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#web-server-and-framework">Web Server and Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#persistency">Persistency</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="design/index.html">System Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
 </ul>
@@ -103,7 +109,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">Acanban</a>
+          <a href="index.html">Acanban</a>
         
       </nav>
 
@@ -132,15 +138,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Overview</li>
+      <li>Technical Choices</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/choices.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -153,29 +159,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="obj.html">Objective</a></li>
-<li class="toctree-l1"><a class="reference internal" href="req/index.html">Requirements</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="req/use-case.html">Use-Case Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="req/suppl-spec.html">Supplementary Specification</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="choices.html">Technical Choices</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="choices.html#concurrency">Concurrency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="choices.html#web-server-and-framework">Web Server and Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="choices.html#persistency">Persistency</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="design/index.html">System Design</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="design/database.html">Database Design</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
-</ul>
+  <div class="section" id="technical-choices">
+<h1>Technical Choices<a class="headerlink" href="#technical-choices" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="concurrency">
+<h2>Concurrency<a class="headerlink" href="#concurrency" title="Permalink to this headline">¶</a></h2>
+<p>Since most, if not all, of the system’s use cases are I/O intensive,
+it is natural to employ an asynchronous input/output framework to solve
+concurrency issues.  <a class="reference external" href="https://trio.readthedocs.io">Trio</a> was picked for the ease of flow control offered
+by <a class="reference external" href="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/">structured concurrency</a>.</p>
+</div>
+<div class="section" id="web-server-and-framework">
+<h2>Web Server and Framework<a class="headerlink" href="#web-server-and-framework" title="Permalink to this headline">¶</a></h2>
+<p>As asynchronous input/output was chosen, <a class="reference external" href="https://asgi.readthedocs.io">Asynchronous Server Gateway Interface
+(ASGI)</a> was needed to cooperate the asynchronous routines in the application
+and the server.  For server, <a class="reference external" href="https://pgjones.gitlab.io/hypercorn">Hypercorn</a> was picked for its first-class support
+for Trio.  The application was built on top of <a class="reference external" href="https://pgjones.gitlab.io/quart-trio">Quart</a>, a microframework
+similar to <a class="reference external" href="https://flask.palletsprojects.com">Flask</a> but for ASGI, for its flexibility.</p>
+</div>
+<div class="section" id="persistency">
+<h2>Persistency<a class="headerlink" href="#persistency" title="Permalink to this headline">¶</a></h2>
+<p>For persistency, there are two separate concerns: storing the system’s metadata,
+which is a collection of small chunks of plain text, and storing the files
+uploaded by the users.  In the former case, <a class="reference external" href="https://rethinkdb.com">RethinkDB</a>, a <a class="reference external" href="https://en.wikipedia.org/wiki/Document-oriented_database">document-oriented
+database</a>, was chosen for recursive and less-structured data support.
+Such database, however, is performance-wise unsuitable for larger files,
+so <a class="reference external" href="https://ipfs.io">IPFS</a>, which is a distributed file system that provides similar abstraction,
+is used instead in the latter case.</p>
 </div>
 </div>
 
@@ -187,8 +196,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="intro.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="design/index.html" class="btn btn-neutral float-right" title="System Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
+      
+        <a href="req/suppl-spec.html" class="btn btn-neutral float-left" title="Supplementary Specification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

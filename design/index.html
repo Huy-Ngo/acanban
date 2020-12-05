@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Problem Statement &mdash; Acanban 0.0.1 documentation</title>
+  <title>System Design &mdash; Acanban 0.0.1 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Glossary" href="glossary.html" />
-    <link rel="prev" title="Requirements Document" href="index.html" /> 
+    <link rel="next" title="Database Design" href="database.html" />
+    <link rel="prev" title="Technical Choices" href="../choices.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,15 +83,15 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requirements Document</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Problem Statement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="supplementary-specification.html">Supplementary Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case-model.html">Use-Case Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obj.html">Objective</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../req/index.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../choices.html">Technical Choices</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">System Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html">Database Design</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture Handbook</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../solution/index.html">System Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deploy.html">Deployment</a></li>
 </ul>
 
             
@@ -138,15 +138,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index.html">Requirements Document</a> &raquo;</li>
-        
-      <li>Problem Statement</li>
+      <li>System Design</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/requirements/problem-statement.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/design/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -159,8 +157,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="problem-statement">
-<h1>Problem Statement<a class="headerlink" href="#problem-statement" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="system-design">
+<h1>System Design<a class="headerlink" href="#system-design" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#user">User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#project">Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#task">Task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#discussion-thread">Discussion Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#comment">Comment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#file">File</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 
 
@@ -171,10 +182,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="database.html" class="btn btn-neutral float-right" title="Database Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="Requirements Document" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../choices.html" class="btn btn-neutral float-left" title="Technical Choices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
