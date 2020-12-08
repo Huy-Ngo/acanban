@@ -1,5 +1,6 @@
 image: debian/buster
 packages:
+  - python3-pip
   - rethinkdb
   - tox
 repositories:
@@ -7,4 +8,10 @@ repositories:
 sources:
   - https://github.com/Huy-Ngo/acanban
 tasks:
+  - rethinkdb: |
+      sudo cp /etc/rethinkdb/default.conf.sample /etc/rethinkdb/instances.d/instance1.conf
+      sudo /etc/init.d/rethinkdb start
+      tar -czvf rethinkdump.tar.gz -C acanban/tests/assets rethinkdump
+      python3 -m pip install rethinkdb
+      python3 -m rethinkdb restore rethinkdump.tar.gz
   - test: tox -c acanban -e py
