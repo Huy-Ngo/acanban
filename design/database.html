@@ -184,10 +184,8 @@ and queried in JSON-like format.  The database consists of following objects:</p
 <h2>User<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h2>
 <p>Each <code class="docutils literal notranslate"><span class="pre">User</span></code> object has following attributes:</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A UUID for the object</p>
-</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">username</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A unique name with which the user can refer to one another.
-It also allows the user to sign in.</p>
+It is also the primary key and allows the user to sign in.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The legal name of the user</p>
 </dd>
@@ -195,15 +193,26 @@ It also allows the user to sign in.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">password-hash</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The password for the user’s account, encrypted with a hash function</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">role</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The role of the user in this system.  It can be <code class="docutils literal notranslate"><span class="pre">student</span></code>,
-<code class="docutils literal notranslate"><span class="pre">supervisor</span></code>, <code class="docutils literal notranslate"><span class="pre">staff</span></code>, and <code class="docutils literal notranslate"><span class="pre">admin</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">role</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The role of the user in this system.  It can be:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">student</span></code>: Students who are participating a group project or internship</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">supervisor</span></code>: The supervisor of project(s)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">assistant</span></code>: The academic assistant of a department</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">admin</span></code>: The system admin</p></li>
+</ul>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">major</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code> <em>optional</em></span></dt><dd><p>The major of a user with role <code class="docutils literal notranslate"><span class="pre">student</span></code>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">department</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code> <em>optional</em></span></dt><dd><p>The department of the user, such as <code class="docutils literal notranslate"><span class="pre">ICT</span></code>, <code class="docutils literal notranslate"><span class="pre">SA</span></code>, or <code class="docutils literal notranslate"><span class="pre">LS</span></code>.
+Required for students and assistants.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">student-id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>Only applicable for users with role <code class="docutils literal notranslate"><span class="pre">student</span></code>:
 A unique identifier assigned to students to be used outside this system</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">bio</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code> <em>optional</em></span></dt><dd><p>A self-description of the user</p>
+<dt><code class="docutils literal notranslate"><span class="pre">bio</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">object</span></code> <em>optional</em></span></dt><dd><p>A self-description of the user. It can have following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: A markdown text describing the user</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">institution</span></code>: The institution the user is working at, mainly for supervisors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interest</span></code>: Research interests of a supervisor or student</p></li>
+</ul>
 </dd>
 </dl>
 </div>
@@ -211,8 +220,6 @@ A unique identifier assigned to students to be used outside this system</p>
 <h2>Project<a class="headerlink" href="#project" title="Permalink to this headline">¶</a></h2>
 <p>Each <code class="docutils literal notranslate"><span class="pre">Project</span></code> object has following attributes:</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A UUID for the object</p>
-</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The name of the project</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The creator of the project.</p>
@@ -231,8 +238,6 @@ A unique identifier assigned to students to be used outside this system</p>
 <h2>Task<a class="headerlink" href="#task" title="Permalink to this headline">¶</a></h2>
 <p>Each <code class="docutils literal notranslate"><span class="pre">Task</span></code> object has following attributes:</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A UUID for the object</p>
-</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The name of the task</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The user who created the task</p>
@@ -255,8 +260,6 @@ A unique identifier assigned to students to be used outside this system</p>
 <h2>Discussion Thread<a class="headerlink" href="#discussion-thread" title="Permalink to this headline">¶</a></h2>
 <p>Each <code class="docutils literal notranslate"><span class="pre">Task</span></code> object has following attributes:</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A UUID for the object</p>
-</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The user who created the discussion thread</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">title</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The title of the discussion thread</p>
@@ -271,8 +274,6 @@ A unique identifier assigned to students to be used outside this system</p>
 <h2>Comment<a class="headerlink" href="#comment" title="Permalink to this headline">¶</a></h2>
 <p>Each <code class="docutils literal notranslate"><span class="pre">Comment</span></code> object has following attributes:</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A UUID for the object</p>
-</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The user who created the comment</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">content</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The content of the comment</p>
