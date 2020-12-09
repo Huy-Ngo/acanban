@@ -1,0 +1,1 @@
+{"db": {"id": "af166242-27ff-4a95-a390-af884d436ffd", "name": "test", "type": "DB"}, "doc_count_estimates": [25], "id": "8313b7bd-fa6f-4b73-813b-9b33af130e9c", "indexes": [], "name": "users", "primary_key": "username", "type": "TABLE", "write_hook": null}

@@ -28,7 +28,7 @@ Each ``User`` object has following attributes:
 ``email`` : ``string``
    The email that is used to contact with the user.
 
-``password-hash`` : ``string``
+``password`` : ``string``
    The password for the user's account, encrypted with a hash function
 
 ``role`` : ``string``
