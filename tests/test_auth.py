@@ -1,5 +1,6 @@
 # Test authentication handling
 # Copyright (C) 2020  Nguyễn Gia Phong
+# Copyright (C) 2020  Ngô Ngọc Đức Huy
 #
 # This file is part of Acanban.
 #
@@ -17,42 +18,46 @@
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
 from crypt import crypt
+from hmac import compare_digest
 
-# XXX: from pytest 6.2, use pytest.MonkeyPatch
-from _pytest.monkeypatch import MonkeyPatch
-from pytest import fixture, mark
+from pytest import mark
 from quart.testing import QuartClient
 
 from acanban import Acanban
+from acanban.auth import User
 
 
-@fixture
-def user_foo(app: Acanban, monkeypatch: MonkeyPatch) -> None:
-    """Provide user foo."""
-    monkeypatch.setitem(
-        app.auth_manager.users,
-        'foo', (crypt('bar'), 'Foo Bar', 'foo@bar.baz', 'assistant'))
-
-
-@mark.parametrize(('username', 'role', 'success'),
-                  (('foo', 'student', False), ('bar', 'pupil', False),
-                   ('bar', 'student', True)))
-async def test_register(username: str, role: str, success: bool,
-                        client: QuartClient, user_foo: None) -> None:
+@mark.parametrize(('username', 'role', 'code'),
+                  (('huyngo', 'student', 302), ('kiddo', 'pupil', 200),
+                   ('silasl', 'supervisor', 200)))
+async def test_register(username: str, role: str, code: int,
+                        client: QuartClient) -> None:
     """Test successful and failed registration."""
     response = await client.post('/register', form=dict(
         username=username, password='baz',
         name='Fô Bả', email='f@o.o', role=role))
     # Successful registration redirects.
-    assert (response.status_code == 302) is success
+    assert response.status_code == code
 
 
-@mark.parametrize(('username', 'password', 'success'),
-                  (('foo', 'bar', True), ('foo', 'baz', False)))
-async def test_login(username: str, password: str, success: bool,
-                     client: QuartClient, user_foo: None) -> None:
+@mark.parametrize(('username', 'password', 'code'),
+                  (('huyngo', 'baz', 302), ('silasl', 'lsalis', 302),
+                   ('opheliad', 'wrong', 200), ('ne-existe', 'pas', 200)))
+async def test_login(username: str, password: str, code: int,
+                     client: QuartClient) -> None:
     """Test successful and failed login."""
     response = await client.post(
         '/login', form=dict(username=username, password=password))
     # Successful login redirects.
-    assert (response.status_code == 302) is success
+    assert response.status_code == code
+
+
+async def test_user(app: Acanban) -> None:
+    """Test if properties for User object is correct."""
+    async with app.app_context():
+        user = User('silasl')
+        digest = await user.password
+        assert compare_digest(digest, crypt('lsalis', digest))
+        assert await user.email == 'silasl@example.edu'
+        assert await user.name == 'Silas Lehtonen'
+        assert await user.role == 'assistant'
