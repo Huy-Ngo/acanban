@@ -1,0 +1,63 @@
+<!-- Base HTML template
+
+Copyright (C) 2020  Đào Dương Hoàng Long
+
+This file is part of Acanban.
+
+Acanban is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Acanban is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with Acanban.  If not, see <https://www.gnu.org/licenses/>. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>{{title}}</title>
+  </head>
+  <body>
+    {% if error %}
+    <p>error: {{ error }}</p>
+    {% endif %}
+    <header>
+      <div class="navbar">
+        <div class="navbar__logo">
+          <a href="/"><h3 class="logo">acanban.</h3></a>
+        </div>
+        <div class="navbar__btn">
+          <div class="navbar__links"></div>
+          <div class="navbar__sign">
+            {% if current_user.is_authenticated %}
+            <a href="" class="navbar__username">Username</a>
+            <a href="/logout" class="btn transparent">Log out</a>
+            {% else %}
+            <a href="/login" class="btn transparent">Log in</a>
+            <a href="/register" class="btn solid">Sign up</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+    <div class="footer">
+      <img src="https://img.shields.io/github/stars/Huy-Ngo/acanban?style=social">
+      <img src="https://img.shields.io/github/license/Huy-Ngo/acanban?style=social">
+    </div>
+  </body>
+</html>

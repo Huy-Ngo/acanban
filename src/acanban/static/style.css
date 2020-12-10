@@ -1,0 +1,154 @@
+input, button {
+    text-align: center;
+    color: #93BBB9;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+    color: #93BBB9;
+}
+
+:-moz-placeholder {
+    text-align: center;
+    color: #93BBB9;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #DEF2F1;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Public Sans', sans-serif;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0 0 0 0;
+}
+
+/* Styling base.html */
+
+body {
+    overflow: hidden;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+main {
+    height: 82vh;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+header .navbar {
+    max-width: 90vw;
+    padding: 0 4rem;
+    height: 10vh;
+    margin: 0 auto;
+    display: flex;
+}
+
+header .navbar .navbar__logo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+header .navbar .navbar__btn {
+    flex: 3;
+    display: flex;
+}
+
+header .navbar .navbar__btn .navbar__links {
+    flex: 2;
+}
+
+header .navbar .navbar__btn .navbar__sign {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .navbar .navbar__logo .logo {
+    font-family: 'Abhaya Libre';
+    font-size: 3rem;
+    font-weight: 800;
+    cursor: pointer;
+    color: #17242A;
+    letter-spacing: 1px;
+}
+
+header .navbar .navbar__btn .navbar__sign .btn {
+    display: inline-block;
+    padding: .5rem 1.3rem;
+    font-size: 1rem;
+    border: 2px solid #3AAFA9;
+    border-radius: 2rem;
+    line-height: 1;
+    margin: 0 .2rem;
+    transition: 0.3s;
+}
+
+.btn.solid, .btn.transparent:hover {
+    background-color: #3AAFA9;
+    color: #fff;
+}
+
+.btn.transparent, .btn.solid:hover {
+    background-color: transparent;
+    color: #3AAFA9;
+}
+
+.navbar__username {
+    padding: .5rem 1.3rem;
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 1;
+    margin: 0 .2rem;
+}
+
+.footer {
+    width: 100%;
+    height: 8vh;
+    background-color: #17242A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer img {
+    padding: 2px;
+}
