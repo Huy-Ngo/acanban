@@ -351,3 +351,156 @@ section .loginBx .loginBx__formBx .loginBx__remember a {
         width: 70%;
     }
 }
+
+/* styling registration.html */
+section .signupBx .signupBx__formBx h3 {
+    width: 60%;
+    color: #DEF2F1;
+    font-weight: 600;
+    font-size: 2.5vw;
+    margin-bottom: 40px;
+    border: 3px solid #DEF2F1 ;
+    border-radius: 10px;
+    display: inline-block;
+    letter-spacing: 1px;
+    padding: 10px 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+section .signupBx {
+    background-color: #2B7A77;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+}
+
+section .signupBx .signupBx__formBx {
+    width: 50%;
+    text-align: center;
+    position: relative;
+}
+
+section .signupBx .signupBx__formBx .signupBx__inputBx input {
+    width: 100%;
+    padding: 20px 20px;
+    outline: none;
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    background: transparent;
+    border-radius: 20px;
+    border: none;
+    background-color: white;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+section .signupBx .signupBx__formBx .signupBx__inputBx input[name="signup"] {
+    background-color: #3AAFA9;
+    position: absolute;
+    color: #FFFFFF;
+    width: 150px;
+    right: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+section .signupBx .signupBx__formBx .signupBx__inputBx .signupBx__backBtn {
+    background-color: #DEF2F1;
+    position: absolute;
+    color: #17242A;
+    width: 150px;
+    left: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 20px 20px;
+    outline: none;
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    border: none;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-decoration: none;
+}
+
+section .signupBx .signupBx__formBx .signupBx__inputBx input[name="signup"]:hover {
+    background-color: #2da8a2;
+}
+
+section .signupBx .signupBx__formBx .signupBx__inputBx .signupBx__backBtn:hover {
+    background-color: #d3e8e7;
+}
+
+section .signupBx .signupBx__formBx .signupBx__terms {
+    margin-bottom: 10px;
+    color: #DEF2F1;
+    display: flex;
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding-top: 2px;
+}
+
+section .signupBx .signupBx__formBx .std-spv {
+    width: 100%;
+    padding: 20px 20px;
+    outline: none;
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    background: transparent;
+    border-radius: 20px;
+    border: none;
+    background-color: white;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+section .signupBx .signupBx__formBx .signupBx__dropdownBx {
+    width: 100%;
+    position: relative;
+    color: #FFFFFF;
+    display: inline-block;
+}
+
+section .signupBx .signupBx__formBx .std-spv-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+section .signupBx .signupBx__formBx .std-spv-content a {
+    color: black;
+    padding: 12px 16px;
+    font-family: 'Public Sans', sans-serif;
+    font-size: 2rem;
+    text-decoration: none;
+    display: block;
+}
+
+section .signupBx .signupBx__formBx .std-spv-content a:hover {
+    background-color:#d3e8e7;
+}
+
+section .signupBx .signupBx__formBx .signupBx__dropdownBx:hover .std-spv-content {
+    display: block;
+}
+
+section .signupBx .signupBx__formBx .signupBx__dropdownBx:hover .std-spv {
+    background-color: #3AAFA9;
+}
+
+section .signupBx .signupBx__formBx .signupBx__terms a {
+    margin-bottom: 10px;
+    color: #DEF2F1;
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding-top: 2px;
+    margin-left: auto;
+    text-decoration: none;
+}
