@@ -186,3 +186,168 @@ header .navbar .navbar__btn .navbar__sign .btn {
     padding-top: 20px;
     word-spacing: 1px;
 }
+
+/* styling login.html */
+
+section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+section .leftBx:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+section .leftBx {
+    position: relative;
+    background-color: #17242A;
+    width: 40%;
+    height: 100%;
+}
+
+section .leftBx a {
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    padding: 1rem;
+    color: #DEF2F1;
+    padding-left: 1rem;
+    font-family: 'Abhaya Libre';
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+section .loginBx {
+    background-color: #2B7A77;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+}
+
+section .loginBx .loginBx__formBx {
+    width: 50%;
+    text-align: center;
+    position: relative;
+}
+
+section .loginBx .loginBx__formBx h2 {
+    width: 40%;
+    color: #DEF2F1;
+    font-weight: 600;
+    font-size: 40px;
+    margin-bottom: 40px;
+    border: 3px solid #DEF2F1 ;
+    border-radius: 10px;
+    display: inline-block;
+    letter-spacing: 1px;
+    padding: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+section .loginBx .loginBx__formBx .loginBx__inputBx input {
+    width: 100%;
+    padding: 20px 20px;
+    outline: none;
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    background: transparent;
+    border-radius: 20px;
+    border: none;
+    background-color: white;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+section .loginBx .loginBx__formBx .loginBx__inputBx input[name="login"] {
+    background-color: #3AAFA9;
+    position: absolute;
+    color: #FFFFFF;
+    width: 150px;
+    right: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+section .loginBx .loginBx__formBx .loginBx__inputBx .loginBx__backBtn {
+    background-color: #DEF2F1;
+    position: absolute;
+    color: #17242A;
+    width: 150px;
+    left: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 20px 20px;
+    outline: none;
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    border: none;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-decoration: none;
+}
+
+section .loginBx .loginBx__formBx .loginBx__inputBx input[name="login"]:hover {
+    background-color: #2da8a2;
+}
+
+section .loginBx .loginBx__formBx .loginBx__inputBx .loginBx__backBtn:hover {
+    background-color: #d3e8e7;
+}
+
+section .loginBx .loginBx__formBx .loginBx__remember {
+    margin-bottom: 10px;
+    color: #DEF2F1;
+    display: flex;
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding-top: 2px;
+}
+
+section .loginBx .loginBx__formBx .loginBx__remember a {
+    margin-bottom: 10px;
+    color: #DEF2F1;
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding-top: 2px;
+    margin-left: auto;
+    text-decoration: none;
+}
+
+@media (max-width: 1050px) {
+    section {
+        flex-direction: column;
+    }
+    section .leftBx {
+        width: 100%;
+        height: 10vh;
+    }
+    section .loginBx {
+        width: 100%;
+        height: 90vh;
+    }
+}
+
+@media (max-width: 690px) {
+    section .loginBx .loginBx__formBx h2 {
+        font-size: 2rem;
+    }
+    section .loginBx .loginBx__formBx .loginBx__inputBx input[name="login"] {
+        text-align: center;
+        font-size: 2rem;
+    }
+    section .loginBx .loginBx__formBx {
+        width: 70%;
+    }
+}

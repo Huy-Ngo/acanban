@@ -1,17 +1,60 @@
+<!-- Login page
+Copyright (C) 2020  Đào Dương Hoàng Long
+
+This file is part of Acanban.
+
+Acanban is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Acanban is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with Acanban.  If not, see <https://www.gnu.org/licenses/>. -->
+
 <!DOCTYPE html>
-<html>
-<meta charset=utf-8>
-<title>Login</title>
-<body>
-{% if error %}
-<p>error: {{ error }}</p>
-{% endif %}
-<form action=login method=POST>
-  <input type=text name=username id=username placeholder=username><br>
-  <input type=password name=password id=password placeholder=password><br>
-  <input type=checkbox name=remember id=remember>
-  <label for=remember>remember me</label><br>
-  <input type=submit name=submit value=login>
-</form>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-wid	th, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <title>{{title}}</title>
+  </head>
+  <body>
+    {% if error %}
+    <p>error: {{ error }}</p>
+    {% endif %}
+    <section>
+      <div class="leftBx">
+        <a href="/" class="navbar__logo">acanban.</a>
+      </div>
+      <div class="loginBx">
+        <div class="loginBx__formBx">
+          <h2>Login</h2>
+          <form action=login method=POST>
+            <div class="loginBx__inputBx">
+              <input type="text" name="username" id="username" placeholder="Username">
+            </div>
+            <div class="loginBx__inputBx">
+              <input type="password" name="password" id="password" placeholder="Password">
+            </div>
+            <div class="loginBx__remember">
+              <label><input type="checkbox" name="remember" id="remember">Remember me</label>
+              <a href="#">Forgot your password?</a>
+            </div>
+            <div class="loginBx__inputBx">
+              <input type="submit" name="login" value="Login">
+            </div>
+            <div class="loginBx__inputBx">
+              <a class="loginBx__backBtn" href="/">Back</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
