@@ -26,7 +26,7 @@ from quart_auth import AuthManager, AuthUser, login_user, logout_user
 
 __all__ = ['Authenticator', 'blueprint']
 
-ROLES = 'admin', 'assistant', 'student', 'supervisor'
+ROLES = 'assistant', 'student', 'supervisor'
 blueprint = Blueprint('auth', __name__)
 
 
