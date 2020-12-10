@@ -152,3 +152,37 @@ header .navbar .navbar__btn .navbar__sign .btn {
 .footer img {
     padding: 2px;
 }
+
+/* styling index.html */
+
+.container {
+    position: relative;
+    top: 20px;
+    min-height: 90vh;
+    /* background-image: url('img/image.png') left ; */
+    background: linear-gradient(to right, rgba(0,0,0,0.75) 30%, #3AAFA9 80%) left no-repeat,
+    url('img/image.jpg') center;
+    background-size: cover ;
+}
+
+.container__text-block {
+    position: absolute;
+    top: 16rem;
+    right: 20px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.container .container__text-block h1 {
+    font-family: Abhaya Libre;
+    font-size: 5rem;
+    word-spacing: 1px;
+}
+
+.container .container__text-block p {
+    font-family: Abhaya Libre;
+    font-size: 3rem;
+    padding-top: 20px;
+    word-spacing: 1px;
+}

@@ -1,14 +1,37 @@
-<!DOCTYPE html>
-<html>
-<meta charset=utf-8>
-<title>Acanban</title>
-<body>
-<p>Welcome to Acanban!</p>
-{% if current_user.is_authenticated %}
-<p><a href=logout>logout</a></p>
-{% else %}
-<p><a href=register>register</a></p>
-<p><a href=login>login</a></p>
-{% endif %}
-</body>
-</html>
+<!-- Index page
+Copyright (C) 2020  Đào Dương Hoàng Long
+
+This file is part of Acanban.
+
+Acanban is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Acanban is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with Acanban.  If not, see <https://www.gnu.org/licenses/>. -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="container__text-block">
+    <h1>acanban. is an academic Kanban board.</h1>
+    <p>\ah•kahn•bahn\</p>
+    <p>
+    Aim to provide a collaboration platform for students and
+    mentors, with first-class support for academic evaluation.
+    </p>
+    <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Vivamus ac pretium nulla. Etiam quis ultricies magna
+    Sed non mi nec orci hendrerit hendrerit eu eget libero.
+    </p>
+  </div>
+</div>
+{% endblock %}
