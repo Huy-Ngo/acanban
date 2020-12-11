@@ -32,7 +32,7 @@ from .auth import Authenticator, blueprint as auth
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
 
 class Acanban(QuartTrio):
