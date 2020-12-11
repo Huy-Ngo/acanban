@@ -37,9 +37,6 @@ input, button {
     font-family: 'Public Sans', sans-serif;
 }
 
-html {
-    height: 100%;
-}
 
 body {
     width: 100%;
@@ -158,7 +155,7 @@ header .navbar .navbar__btn .navbar__sign .btn {
 .container {
     position: relative;
     top: 20px;
-    min-height: 90vh;
+    min-height: 82vh;
     /* background-image: url('img/image.png') left ; */
     background: linear-gradient(to right, rgba(0,0,0,0.75) 30%, #3AAFA9 80%) left no-repeat,
     url('img/image.jpg') center;
@@ -167,24 +164,31 @@ header .navbar .navbar__btn .navbar__sign .btn {
 
 .container__text-block {
     position: absolute;
-    top: 16rem;
+    top: 10rem;
     right: 20px;
     color: white;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 60px;
 }
 
 .container .container__text-block h1 {
     font-family: Abhaya Libre;
-    font-size: 5rem;
     word-spacing: 1px;
 }
 
 .container .container__text-block p {
     font-family: Abhaya Libre;
-    font-size: 3rem;
     padding-top: 20px;
     word-spacing: 1px;
+}
+
+@media screen and (min-width: 320px) {
+  .container .container__text-block p {
+    font-size: calc(20px + 6 * ((100vw - 320px) / 680));
+  }
+  .container .container__text-block h1{
+    font-size: calc(25px + 6 * ((100vw - 320px) / 680)); 
+  }
 }
 
 /* styling login.html */
