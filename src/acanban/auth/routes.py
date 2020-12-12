@@ -17,8 +17,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from quart import (Blueprint, ResponseReturnValue,
-                   current_app, redirect, render_template, request)
+from quart import (Blueprint, ResponseReturnValue, current_app,
+                   redirect, render_template, request)
 from quart_auth import login_user, logout_user
 
 blueprint = Blueprint('auth', __name__)

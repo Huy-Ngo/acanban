@@ -1,5 +1,5 @@
-from .user import User  # noqa
 from .authenticate import Authenticator
 from .routes import blueprint
+from .user import User
 
-__all__ = ['Authenticator', 'blueprint']
+__all__ = ['Authenticator', 'User', 'blueprint']

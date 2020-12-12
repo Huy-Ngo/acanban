@@ -20,7 +20,7 @@
 from crypt import crypt
 from hmac import compare_digest
 
-from quart import current_app, Quart
+from quart import Quart, current_app
 from quart_auth import AuthManager
 from rethinkdb import r
 from rethinkdb.errors import ReqlNonExistenceError
