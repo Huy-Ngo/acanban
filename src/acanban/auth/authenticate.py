@@ -25,7 +25,7 @@ from quart_auth import AuthManager
 from rethinkdb import r
 from rethinkdb.errors import ReqlNonExistenceError
 
-from . import User
+from .user import User
 
 ROLES = 'assistant', 'student', 'supervisor'
 
