@@ -17,14 +17,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from crypt import crypt
-from hmac import compare_digest
-
 from pytest import mark
 from quart.testing import QuartClient
-
-from acanban import Acanban
-from acanban.auth import User
 
 
 @mark.parametrize(('username', 'role', 'code'),
@@ -50,14 +44,3 @@ async def test_login(username: str, password: str, code: int,
         '/login', form=dict(username=username, password=password))
     # Successful login redirects.
     assert response.status_code == code
-
-
-async def test_user(app: Acanban) -> None:
-    """Test if properties for User object is correct."""
-    async with app.app_context():
-        user = User('silasl')
-        digest = await user.password
-        assert compare_digest(digest, crypt('lsalis', digest))
-        assert await user.email == 'silasl@example.edu'
-        assert await user.name == 'Silas Lehtonen'
-        assert await user.role == 'assistant'
