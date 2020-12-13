@@ -27,13 +27,15 @@ from quart_auth import AuthManager, AuthUser, login_user, logout_user
 from rethinkdb import r
 from rethinkdb.errors import ReqlNonExistenceError
 
+from .db import RethinkObject
+
 __all__ = ['Authenticator', 'blueprint']
 
 ROLES = 'assistant', 'student', 'supervisor'
 blueprint = Blueprint('auth', __name__)
 
 
-class User(AuthUser):
+class User(AuthUser, RethinkObject):
     """Acanban user.
 
     Properties needs to be awaited and ReqlNonExistenceError
@@ -46,42 +48,24 @@ class User(AuthUser):
 
     Attributes
     ----------
-    username : Optional[str]
+    username : str
         Pseudonym to refer to the user.
-    password : Optional[str]
+    password : str
         Hash of the user's password.
-    name : Optional[str]
+    name : str
         Real name of the user.
-    email : Optional[str]
+    email : str
         Email of the user.
-    role : Optional[str]
+    role : str
         Role of the user.
     """
 
+    slots = 'username', 'password', 'name', 'email', 'role'
+    table = 'users'
+
     def __init__(self, username: Optional[str]) -> None:
         super().__init__(username)
-        self.username = username
-        self.r = r.table('users').get(self.username)
-
-    @property
-    async def password(self) -> str:
-        async with current_app.db_pool.connection() as connection:
-            return await self.r['password'].run(connection)
-
-    @property
-    async def name(self) -> str:
-        async with current_app.db_pool.connection() as connection:
-            return await self.r['name'].run(connection)
-
-    @property
-    async def email(self) -> str:
-        async with current_app.db_pool.connection() as connection:
-            return await self.r['email'].run(connection)
-
-    @property
-    async def role(self) -> str:
-        async with current_app.db_pool.connection() as connection:
-            return await self.r['role'].run(connection)
+        self.key = '' if username is None else username
 
 
 class Authenticator(AuthManager):
@@ -100,7 +84,7 @@ class Authenticator(AuthManager):
         async with current_app.db_pool.connection() as connection:
             user = await self.r.get(username).run(connection)
             user = {'username': username, 'password': crypt(password),
-                    'name': name, 'role': role}
+                    'name': name, 'email': email, 'role': role}
             if (await self.r.insert(user).run(connection))['errors']:
                 raise ValueError('username taken')
 
