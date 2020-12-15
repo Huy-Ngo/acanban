@@ -18,46 +18,56 @@ You should have received a copy of the GNU Affero General Public License
 along with Acanban.  If not, see <https://www.gnu.org/licenses/>. -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Acanban</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   </head>
   <body>
     {% if error %}
     <p>error: {{ error }}</p>
     {% endif %}
-    <header>
-      <div class="navbar">
-        <div class="navbar__logo">
-          <a href="/"><h3 class="logo">acanban.</h3></a>
-        </div>
-        <div class="navbar__btn">
-          <div class="navbar__links"></div>
-          <div class="navbar__sign">
-            {% if current_user.is_authenticated %}
-            <a href="" class="navbar__username">Username</a>
-            <a href="/logout" class="btn transparent">Log out</a>
-            {% else %}
-            <a href="/login" class="btn transparent">Log in</a>
-            <a href="/register" class="btn solid">Sign up</a>
-            {% endif %}
+    <nav>
+      <div class="menu-icon">
+          <span class="fas fa-bars"></span></div>
+          <div class="logo">acanban.</div>
+          <div class="search-icon">
+              <span class="fas fa-search"></span>
           </div>
-        </div>
+          <div class="cancel-icon">
+              <span class="fas fa-times"></span>
+          </div>
+          {% if current_user.is_authenticated %}
+          <div></div>
+          {% else %}
+          <form action="#">
+              <input type="search" class="search-data" placeholder="Search" required>
+              <button type="submit" class="fas fa-search"></button>
+          </form>
+          {% endif %}
+          <div class="nav-items">
+              <li><a href="#">Project</a></li>
+              <li><a href="#">Tasks</a></li>
+              {% if current_user.is_authenticated %}
+              <li class="push"><a href="#">Username</a></li>
+              <li><a href="/logout">Log out</a></li>
+              {% else %}
+              <li class="push"><a href="/login">Log in</a></li>
+              <li><a href="/register">Sign up</a></li>
+              {% endif %}
+          </div>
+      </nav>
+      <main>
+        {% block content %}
+        {% endblock %}
+      </main>
+      <div class="footer">
+        <a href="https://github.com/Huy-Ngo/acanban" target="_blank"><img src="https://img.shields.io/github/stars/Huy-Ngo/acanban?style=social"></a>
+        <a href="#"><img src="https://img.shields.io/github/license/Huy-Ngo/acanban?style=social"></a>
       </div>
-    </header>
-    <main>
-      {% block content %}
-      {% endblock %}
-    </main>
-    <div class="footer">
-      <a href="https://github.com/Huy-Ngo/acanban" target="_blank"><img src="https://img.shields.io/github/stars/Huy-Ngo/acanban?style=social"></a>
-      <a href="#"><img src="https://img.shields.io/github/license/Huy-Ngo/acanban?style=social"></a>
-    </div>
+      <script type="text/javascript" src="/static/script.js"></script>
   </body>
 </html>
