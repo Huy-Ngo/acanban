@@ -32,6 +32,31 @@ Restart=on-failure
 WantedBy=default.target
 ```
 
+## Configuration
+
+Acanban's configuration files are looked for
+in [user and site config dir][appdirs] (in that order),
+with `acanban` namespace.
+
+### Hypercorn
+
+[Hypercorn configuration][hypercorn.toml] is loaded from `hypercorn.toml`.
+Acanban does not override any of the server's defaults.
+
+### RethinkDB
+
+Values defined in `rethinkdb.toml` will be passed to the RethinkDB client.
+Below are some of the fields that commonly need to be configured
+and their default values:
+
+```toml
+host = 'localhost'
+port = 28015
+user = 'admin'
+timeout = 20
+db = 'test'
+```
+
 ## Hacking
 
 First clone the repository and install Acanban as editable:
@@ -54,3 +79,5 @@ tox
 [Kanban board]: https://en.wikipedia.org/wiki/Kanban_board
 [RethinkDB]: https://rethinkdb.com/docs/install/
 [IPFS]: https://ipfs.io
+[appdirs]: https://pypi.org/project/appdirs/
+[hypercorn.toml]: https://pgjones.gitlab.io/hypercorn/how_to_guides/configuring.html
