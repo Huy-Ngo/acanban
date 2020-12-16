@@ -22,21 +22,33 @@ from typing import Any, Mapping, Sequence
 import toml
 from pytest import mark, param
 
-from acanban.config import hypercorn_config
+from acanban.config import (RETHINKDB_DEFAULT,
+                            hypercorn_config, rethinkdb_config)
 
 CONFIG_DIR = abspath(join(dirname(__file__), 'assets'))
 EMPTY_DIR = 'this directory does not exist'
 
 HYPERCORN_MOCK = toml.load(join(CONFIG_DIR, 'hypercorn.toml'))
 HYPERCORN_DEFAULT = {'bind': ['127.0.0.1:8000']}
+RETHINKDB_MOCK = toml.load(join(CONFIG_DIR, 'rethinkdb.toml'))
 
 
 @mark.parametrize(('dirs', 'mapping'), (
     param([CONFIG_DIR], HYPERCORN_MOCK, id='load'),
-    param([EMPTY_DIR, CONFIG_DIR], HYPERCORN_MOCK, id='load'),
+    param([EMPTY_DIR, CONFIG_DIR], HYPERCORN_MOCK, id='find'),
     param([EMPTY_DIR], HYPERCORN_DEFAULT, id='fallback')))
 def test_hypercorn_config(dirs: Sequence[str],
                           mapping: Mapping[str, Any]) -> None:
     """Test loading Hypercorn configuration."""
-    config = hypercorn_config(*dirs)
+    config = hypercorn_config(dirs)
     for key, value in mapping.items(): assert getattr(config, key) == value
+
+
+@mark.parametrize(('dirs', 'mapping'), (
+    param([CONFIG_DIR], RETHINKDB_MOCK, id='load'),
+    param([EMPTY_DIR, CONFIG_DIR], RETHINKDB_MOCK, id='find'),
+    param([EMPTY_DIR], RETHINKDB_DEFAULT, id='fallback')))
+def test_rethinkdb_config(dirs: Sequence[str],
+                          mapping: Mapping[str, Any]) -> None:
+    """Test loading RethinkDB configuration."""
+    assert rethinkdb_config(dirs) == mapping
