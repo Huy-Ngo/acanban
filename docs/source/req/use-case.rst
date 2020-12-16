@@ -12,7 +12,7 @@ Use-Case Model
    usecase "Create project" as CreateP
    usecase "Join project" as JoinP
    usecase "Create tasks" as CreateT
-   usecase "Join tasks" as JoinT
+   usecase "Assign tasks" as AssignT
    usecase "Complete tasks" as Complete
    usecase "View results" as View
    usecase Evaluate
@@ -44,7 +44,7 @@ Use-Case Model
    Student --> CreateP
    Student --> CreateT
    Student --> JoinP
-   Student --> JoinT
+   Student --> AssignT
    Student --> Complete
    Student --> Thread
    Student --> Comment
@@ -229,13 +229,13 @@ Extension Points
 None.
 
 
-Join Tasks
+Assign Tasks
 ----------
 
 Brief Description
 ^^^^^^^^^^^^^^^^^
 
-This use case allows Student to join task(s) in the project.
+This use case allows a participant to assign a task to someone.
 
 Flow of Events
 ^^^^^^^^^^^^^^
@@ -243,8 +243,10 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. Student requests to join task(s) in the task list.
-2. System receives the request and allows Student to join the task(s).
+1. Student selects the task and and choose "Assign".
+2. Student choose the participant to assign to.
+3. System receives the request and register the participant
+   as assigned for that task.
 
 Alternative Flow
 """"""""""""""""
