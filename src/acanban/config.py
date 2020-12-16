@@ -17,13 +17,29 @@
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
 from os.path import isfile, join
+from typing import Any, MutableMapping, Sequence
 
-from hypercorn.config import Config
+import toml
+from appdirs import site_config_dir, user_config_dir
+from hypercorn.config import Config as HyperConf
+
+TomMapping = MutableMapping[str, Any]
+
+CONFIG_DIRS = user_config_dir('acanban'), site_config_dir('acanban')
+RETHINKDB_DEFAULT: TomMapping = {'db': 'test'}
 
 
-def hypercorn_config(*directories: str) -> Config:
+def hypercorn_config(dirs: Sequence[str] = CONFIG_DIRS) -> HyperConf:
     """Return Hypercorn configuration first found in given directories."""
-    for directory in directories:
+    for directory in dirs:
         file = join(directory, 'hypercorn.toml')
-        if isfile(file): return Config.from_toml(file)
-    return Config()
+        if isfile(file): return HyperConf.from_toml(file)
+    return HyperConf()
+
+
+def rethinkdb_config(dirs: Sequence[str] = CONFIG_DIRS) -> TomMapping:
+    """Return Hypercorn configuration first found in given directories."""
+    for directory in dirs:
+        file = join(directory, 'rethinkdb.toml')
+        if isfile(file): return toml.load(file)
+    return RETHINKDB_DEFAULT

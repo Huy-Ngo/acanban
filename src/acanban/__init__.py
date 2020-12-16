@@ -29,6 +29,7 @@ from rethinkdb.trio_net.net_trio import TrioConnectionPool
 from trio import open_nursery
 
 from .auth import Authenticator, blueprint as auth
+from .config import RETHINKDB_DEFAULT
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
@@ -40,6 +41,7 @@ class Acanban(QuartTrio):
 
     auth_manager: Authenticator
     db_pool: TrioConnectionPool
+    rethinkdb_config = RETHINKDB_DEFAULT
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
@@ -67,7 +69,8 @@ app.register_blueprint(auth)
 async def create_db_pool() -> None:
     """Create RethinkDB connection pool."""
     r.set_loop_type('trio')
-    app.db_pool = r.ConnectionPool(db='test', nursery=app.nursery)
+    app.db_pool = r.ConnectionPool(
+        nursery=app.nursery, **app.rethinkdb_config)
 
 
 @app.after_serving

@@ -2,7 +2,6 @@ image: debian/buster
 packages:
   - python3-pip
   - rethinkdb
-  - tox
 repositories:
   rethinkdb: https://download.rethinkdb.com/repository/debian-buster buster main 539A3A8C6692E6E3F69B3FE81D85E93F801BB43F
 sources:
@@ -11,7 +10,8 @@ tasks:
   - rethinkdb: |
       sudo cp /etc/rethinkdb/default.conf.sample /etc/rethinkdb/instances.d/instance1.conf
       sudo /etc/init.d/rethinkdb start
-      tar -czvf rethinkdump.tar.gz -C acanban/tests/assets rethinkdump
-      python3 -m pip install rethinkdb
-      python3 -m rethinkdb restore rethinkdump.tar.gz
-  - test: tox -c acanban -e py
+  - test: |
+      python3 -m pip install tox
+      python3 -m tox -c acanban -e py
+environment:
+  PIP_PROGRESS_BAR: 'off'

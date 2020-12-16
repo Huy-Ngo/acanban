@@ -17,13 +17,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from appdirs import site_config_dir, user_config_dir
 from hypercorn.trio import serve
 from trio import run
 
 from . import app
-from .config import hypercorn_config
+from .config import hypercorn_config, rethinkdb_config
 
 if __name__ == '__main__':
-    config = hypercorn_config(user_config_dir(), site_config_dir())
-    run(serve, app, config)
+    app.rethinkdb_config = rethinkdb_config()
+    run(serve, app, hypercorn_config())
