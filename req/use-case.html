@@ -114,7 +114,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#id16">Extension Points</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#join-tasks">Join Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#assign-tasks">Assign Tasks</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id17">Brief Description</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id18">Flow of Events</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id21">Special Requirements</a></li>
@@ -327,7 +327,7 @@
   <div class="section" id="use-case-model">
 <h1>Use-Case Model<a class="headerlink" href="#use-case-model" title="Permalink to this headline">¶</a></h1>
 <p class="plantuml">
-<img src="../_images/plantuml-cda1f72caa05f677023fccf32e315b05071d4f44.svg" alt="left to right direction
+<img src="../_images/plantuml-8dc41d4247b1a609d79abee9161bec0d6f4626d6.svg" alt="left to right direction
 actor Student
 actor Staff
 actor Admin
@@ -336,7 +336,7 @@ actor Lecturer
 usecase &quot;Create project&quot; as CreateP
 usecase &quot;Join project&quot; as JoinP
 usecase &quot;Create tasks&quot; as CreateT
-usecase &quot;Join tasks&quot; as JoinT
+usecase &quot;Assign tasks&quot; as AssignT
 usecase &quot;Complete tasks&quot; as Complete
 usecase &quot;View results&quot; as View
 usecase Evaluate
@@ -368,7 +368,7 @@ Student --&gt; Search
 Student --&gt; CreateP
 Student --&gt; CreateT
 Student --&gt; JoinP
-Student --&gt; JoinT
+Student --&gt; AssignT
 Student --&gt; Complete
 Student --&gt; Thread
 Student --&gt; Comment
@@ -535,19 +535,21 @@ before this use case begins.</p>
 <p>None.</p>
 </div>
 </div>
-<div class="section" id="join-tasks">
-<h2>Join Tasks<a class="headerlink" href="#join-tasks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="assign-tasks">
+<h2>Assign Tasks<a class="headerlink" href="#assign-tasks" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id17">
 <h3>Brief Description<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
-<p>This use case allows Student to join task(s) in the project.</p>
+<p>This use case allows a participant to assign a task to someone.</p>
 </div>
 <div class="section" id="id18">
 <h3>Flow of Events<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id19">
 <h4>Basic Flow<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
-<li><p>Student requests to join task(s) in the task list.</p></li>
-<li><p>System receives the request and allows Student to join the task(s).</p></li>
+<li><p>Student selects the task and and choose “Assign”.</p></li>
+<li><p>Student choose the participant to assign to.</p></li>
+<li><p>System receives the request and register the participant
+as assigned for that task.</p></li>
 </ol>
 </div>
 <div class="section" id="id20">
