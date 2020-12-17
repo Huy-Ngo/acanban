@@ -1,418 +1,177 @@
-input, button {
-    text-align: center;
-    color: #93BBB9;
+/*
+ * Global stylesheet
+ * Copyright (C) 2020  Đào Dương Hoàng Long
+ * Copyright (C) 2020  Nguyễn Gia Phong
+
+ * This file is part of Acanban.
+
+ * Acanban is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ * Acanban is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+:root {
+    --color-bg: #ffffff;
+    --color-fg: #171c24;
+    --color-primary-dark: #0088ff;
+    --color-primary-medium: #40a6ff;
+    --color-primary-bright: #80c3ff;
+
+    --color-error-bg: #FFD2D2;
+    --color-error-fg: #D8000C;
+    --color-info-bg: #BDE5F8;
+    --color-info-fg: #00529B;
+    --color-success-bg: #DFF2BF;
+    --color-success-fg: #4F8A10;
+    --color-warning-bg: #FEEFB3;
+    --color-warning-fg: #9F6000;
 }
 
-::-webkit-input-placeholder {
-    text-align: center;
-    color: #93BBB9;
-}
-
-:-moz-placeholder {
-    text-align: center;
-    color: #93BBB9;
-}
-
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 10px;
-    background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar {
-    width: 12px;
-    background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #DEF2F1;
-}
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Public Sans', sans-serif;
-}
-
-
+/* body spacing */
 body {
-    width: 100%;
-    height: 100%;
-    margin: 0 0 0 0;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
-
-/* Styling base.html */
-
-ul {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
-
 main {
-    height: 82vh;
-}
-
-header {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-header .navbar {
-    max-width: 90vw;
-    padding: 0 4rem;
-    height: 10vh;
-    margin: 0 auto;
-    display: flex;
-}
-
-header .navbar .navbar__logo {
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
-header .navbar .navbar__btn {
-    flex: 3;
-    display: flex;
-}
-
-header .navbar .navbar__btn .navbar__links {
-    flex: 2;
-}
-
-header .navbar .navbar__btn .navbar__sign {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-header .navbar .navbar__logo .logo {
-    font-family: 'Abhaya Libre';
-    font-size: 3rem;
-    font-weight: 800;
-    cursor: pointer;
-    color: #17242A;
-    letter-spacing: 1px;
-}
-
-header .navbar .navbar__btn .navbar__sign .btn {
-    display: inline-block;
-    padding: .5rem 1.3rem;
-    font-size: 1rem;
-    border: 2px solid #3AAFA9;
-    border-radius: 2rem;
-    line-height: 1;
-    margin: 0 .2rem;
-    transition: 0.3s;
-}
-
-.btn.solid, .btn.transparent:hover {
-    background-color: #3AAFA9;
-    color: #fff;
-}
-
-.btn.transparent, .btn.solid:hover {
-    background-color: transparent;
-    color: #3AAFA9;
-}
-
-.navbar__username {
-    padding: .5rem 1.3rem;
-    display: inline-block;
-    font-size: 1rem;
-    line-height: 1;
-    margin: 0 .2rem;
-}
-
-.footer {
-    width: 100%;
-    height: 8vh;
-    background-color: #17242A;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.footer img {
-    padding: 2px;
-}
-
-/* styling index.html */
-
-.container {
-    position: relative;
-    top: 20px;
-    min-height: 80vh;
-    /* background-image: url('img/image.png') left ; */
-    /*background: linear-gradient(to right, rgba(0,0,0,0.75) 30%, #3AAFA9 80%) left no-repeat,
-    url('img/image.jpg') center;*/
-    background-size: cover ;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #b1c7b7;
-}
-
-.container__text-block {
-    width: 60%;
-    text-align: center;
-}
-
-.container .container__text-block h1 {
-    font-family: Abhaya Libre;
-    word-spacing: 1px;
-}
-
-.container .container__text-block p {
-    font-family: Abhaya Libre;
-    padding-top: 20px;
-    word-spacing: 1px;
-}
-@media (max-width: 1080px){
-    header .navbar .navbar__btn .navbar__links{
-        flex: 1;
-    }
-    header .navbar .navbar__btn .navbar__sign{
-        flex: none;
-    }
-}
-@media (max-width: 720px){
-    header .navbar{
-        padding: 0;
-    }
-    header .navbar .navbar__btn .navbar__sign{
-        flex: none;
-    }
-    header .navbar .navbar__btn .navbar__sign .btn {
-        font-size: 1rem;
-        border: none;
-    }
-    .btn.solid, .btn.transparent:hover{
-        background-color: none;
-    }
-    
-    header .navbar .navbar__logo .logo{
-        font-size: 1.5rem;
-    }
-}
-
-@media screen and (min-width: 320px) {
-  .container .container__text-block p {
-    font-size: calc(20px + 6 * ((100vw - 320px) / 680));
-  }
-  .container .container__text-block h1{
-    font-size: calc(25px + 6 * ((100vw - 320px) / 680)); 
-  }
-}
-
-/* styling login.html */
-
-section {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-}
-
-section .leftBx:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-section .leftBx {
-    position: relative;
-    background-color: #17242A;
-    width: 40%;
-    height: 100%;
-}
-
-section .leftBx a {
-    text-decoration: none;
-    font-weight: 500;
-    margin-top: 1rem;
-    margin-right: 1rem;
+    margin: auto;
+    max-width: 36rem;
     padding: 1rem;
-    color: #DEF2F1;
-    padding-left: 1rem;
-    font-family: 'Abhaya Libre';
-    font-size: 4rem;
+}
+h1 { text-align: center }
+p {
+    hyphens: auto;
+    text-align: justify;
+}
+
+/* form */
+form {
+    margin: auto;
+    max-width: 27rem;
+}
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+}
+input[type=text], input[type=password], input[type=email], input[type=submit],
+select {
+    background-color: var(--color-bg);
+    border: 0.1rem solid var(--color-fg);
+    box-sizing: border-box;
+    color: var(--color-fg);
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    width: 100%;
+}
+select {
+    appearance: none;
+    background: url(/static/dropdown-icon.svg) right center no-repeat;
+}
+input:focus, select:focus {
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 0 0.5rem var(--color-primary-bright);
+}
+input[type=submit] {
+    background-color: var(--color-primary-dark);
+    color: var(--color-bg);
+    cursor: pointer;
+}
+input[type=submit]:hover { background-color: var(--color-primary-medium) }
+
+/* messages */
+.error, .info, .success, .warning {
+    margin: 1rem 0;
+    padding: 0.8rem;
+}
+.error {
+    background-color: var(--color-error-bg);
+    color: var(--color-error-fg);
+}
+.info {
+    background-color: var(--color-info-bg);
+    color: var(--color-info-fg);
+}
+.success {
+    background-color: var(--color-success-bg);
+    color: var(--color-success-fg);
+}
+.warning {
+    background-color: var(--color-warning-bg);
+    color: var(--color-warning-fg);
+}
+
+/* header */
+nav { background-color: var(--color-fg) }
+#nav-icons {
+    float: left;
+    padding: 0.2rem 0;
+}
+#hambutton, #hamburger { display: none }
+#logo, #nav-entries > a {
+    color: var(--color-bg);
+    margin-bottom: auto;
+    margin-top: auto;
+    padding: 1rem;
+    text-decoration: none;
+}
+#logo::selection, #hambutton::selection, #nav-entries > a::selection {
+    background-color: var(--color-fg);
+}
+#logo:hover, #nav-entries > a:hover, #hambutton:hover {
+    color: var(--color-primary-bright);
+}
+#logo {
+    font-size: 1.8rem;
     font-weight: bold;
 }
-
-section .loginBx {
-    background-color: #2B7A77;
+#nav-entries {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60%;
-    height: 100%;
+    padding: 0 0.5rem;
 }
+.expand { margin-left: auto }
 
-section .loginBx .loginBx__formBx {
-    width: 60%;
-    text-align: center;
-    position: relative;
-}
-
-section .loginBx .loginBx__formBx h2 {
-    color: #DEF2F1;
-    font-weight: 600;
-    font-size: 40px;
-    margin-bottom: 40px;
-    border: 3px solid #DEF2F1 ;
-    border-radius: 10px;
-    display: inline-block;
-    letter-spacing: 1px;
-    padding: 4px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-section .loginBx .loginBx__formBx .loginBx__inputBx input {
-    width: 100%;
-    padding: 20px 20px;
-    outline: none;
-    font-weight: 400;
-    font-size: 2rem;
-    letter-spacing: 1px;
-    background: transparent;
-    border-radius: 20px;
-    border: none;
-    background-color: white;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-}
-
-section .loginBx .loginBx__formBx .loginBx__inputBx input[name="login"] {
-    background-color: #3AAFA9;
-    position: absolute;
-    color: #FFFFFF;
-    width: 150px;
-    right: 0;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-section .loginBx .loginBx__formBx .loginBx__inputBx .loginBx__backBtn {
-    background-color: #DEF2F1;
-    position: absolute;
-    color: #17242A;
-    width: 150px;
-    left: 0;
-    border-radius: 10px;
-    cursor: pointer;
-    padding: 20px 20px;
-    outline: none;
-    font-weight: 400;
-    font-size: 2rem;
-    letter-spacing: 1px;
-    border: none;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-decoration: none;
-}
-
-section .loginBx .loginBx__formBx .loginBx__inputBx input[name="login"]:hover {
-    background-color: #2da8a2;
-}
-
-section .loginBx .loginBx__formBx .loginBx__inputBx .loginBx__backBtn:hover {
-    background-color: #d3e8e7;
-}
-
-section .loginBx .loginBx__formBx .loginBx__remember {
-    margin-bottom: 10px;
-    color: #DEF2F1;
-    display: flex;
-    font-weight: 400;
-    font-size: 1.5rem;
-    padding-top: 2px;
-}
-
-section .loginBx .loginBx__formBx .loginBx__remember a {
-    margin-bottom: 10px;
-    color: #DEF2F1;
-    font-weight: 400;
-    font-size: 1.5rem;
-    padding-top: 2px;
-    margin-left: auto;
-    text-decoration: none;
-}
-
-@media (max-width: 1080px) {
-    section {
-        flex-direction: column;
-    }
-    section .leftBx {
+/* hamburger menu */
+@media screen and (max-width: 38rem) {
+    nav {
+        position: sticky;
+        top: 0;
         width: 100%;
-        height: 10vh;
     }
-    section .loginBx {
+    #nav-icons {
+        display: flex;
+        float: none;
+        padding: 0;
+    }
+    #logo, #hambutton {
+        color: var(--color-bg);
+        display: inline-block;
+        padding: 0.5rem 1rem;
+    }
+    #logo { font-size: 1rem }
+    #hambutton {
+        margin-left: auto;
+        font-size: 1.4rem;
+    }
+    #nav-entries { display: none }
+    #hamburger:checked ~ #nav-entries {
+        display: block;
+        padding: 0;
+    }
+    #nav-entries > a {
+        border-top: 0.1rem solid #2e3436;
+        padding: 0.5rem 1rem;
+        display: block;
         width: 100%;
-        height: 90vh;
-    }
-
-    section .loginBx .loginBx__formBx{
-        width: 70%;
-    }
-}
-
-@media (max-width: 690px) {
-    section .loginBx .loginBx__formBx{
-        width: 70%;
-    }
-    section .loginBx .loginBx__formBx h2 {
-        font-size: 2rem;
-    }
-    section .loginBx .loginBx__formBx .loginBx__inputBx input[name="login"] {
-        text-align: center;
-        font-size: 2rem;
-    }
-    section .loginBx .loginBx__formBx {
-        width: 70%;
-    }
-}
-
-@media (max-width: 485px){
-    section .leftBx{
-        height: 6vh;
-    }
-    section .leftBx a{
-        font-size: 2rem;
-    }
-    section .loginBx .loginBx__formBx{
-        width: 90%;
-    }
-    section .loginBx .loginBx__formBx .loginBx__remember{
-        font-size: 0.8rem;
-    }
-
-    section .loginBx .loginBx__formBx .loginBx__remember a{
-        font-size:0.8rem;
-    }
-
-    section .loginBx .loginBx__formBx .loginBx__inputBx .loginBx__backBtn{
-        width: 100px;
-        font-size: 1rem;
-    }
-
-    section .loginBx .loginBx__formBx .loginBx__inputBx input[name="login"]{
-        font-size: 1rem;
-        width: 100px;
-    }
-    section .loginBx .loginBx__formBx .loginBx__inputBx input{
-        font-size: 1rem;
     }
 }

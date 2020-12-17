@@ -1,32 +1,47 @@
 <!-- Index page
-Copyright (C) 2020  Đào Dương Hoàng Long
+  Copyright (C) 2020  Đào Dương Hoàng Long
+  Copyright (C) 2020  Nguyễn Gia Phong
 
-This file is part of Acanban.
+  This file is part of Acanban.
 
-Acanban is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  Acanban is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-Acanban is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+  Acanban is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License
-along with Acanban.  If not, see <https://www.gnu.org/licenses/>. -->
+  You should have received a copy of the GNU Affero General Public License
+  along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
+-->
 
 {% extends "base.html" %}
-
+{% block title %}Acanban{% endblock %}
 {% block content %}
-<div class="container">
-  <div class="container__text-block">
-    <h1>acanban. is an academic Kanban board.</h1>
-    <p>\ah•kahn•bahn\</p>
-    <p>
-    Aim to provide a collaboration platform for students and
-    mentors, with first-class support for academic evaluation.
-    </p>
-  </div>
-</div>
+<h1>Header 1</h1>
+<h2>Header 2</h2>
+<h3>Header 3</h3>
+<div class=error>Some ERROR text.</div>
+<div class=info>Some INFO text.</div>
+<div class=success>Some SUCCESS text.</div>
+<div class=warning>Some WARNING text.</div>
+<p>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+<form>
+  <input type=text placeholder=text required>
+  <input type=email placeholder=email required>
+  <input type=password placeholder=password required>
+  <input type=checkbox name=checkbox>
+  <label for=remember>Checkbox</label>
+  <input type=submit value=Submit>
+</form>
 {% endblock %}

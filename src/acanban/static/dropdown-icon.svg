@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor">
+<path d="M11.707 12.586L10.293 14 16 19.707 21.707 14l-1.414-1.414L16 16.879z"/>
+<path d="M21 13.293v-1h1v1zm-11 0v-1h1v1z"/>
+<path d="M10 13.293a1 1 0 1 1 2 0 1 1 0 1 1-2 0zm10 0a1 1 0 1 1 2 0 1 1 0 1 1-2 0z"/>
+</svg>
