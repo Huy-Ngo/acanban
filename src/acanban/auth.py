@@ -82,7 +82,6 @@ class Authenticator(AuthManager):
         # This never happens through browser, but via manual requests.
         if role not in ROLES: raise ValueError('unknown role')
         async with current_app.db_pool.connection() as connection:
-            user = await self.r.get(username).run(connection)
             user = {'username': username, 'password': crypt(password),
                     'name': name, 'email': email, 'role': role}
             if (await self.r.insert(user).run(connection))['errors']:
@@ -112,7 +111,6 @@ async def register() -> ResponseReturnValue:
     except ValueError as e:
         return await render_template('register.html', error=str(e))
     else:
-        print(info['role'])
         return redirect('/')
 
 
