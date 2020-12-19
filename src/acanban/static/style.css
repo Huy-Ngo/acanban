@@ -22,9 +22,11 @@
 :root {
     --color-bg: #ffffff;
     --color-fg: #171c24;
+    --color-fg-alt: #2e3436;
     --color-primary-dark: #0088ff;
     --color-primary-medium: #40a6ff;
     --color-primary-bright: #80c3ff;
+    --color-header-search: #eb4034;
 
     --color-error-bg: #FFD2D2;
     --color-error-fg: #D8000C;
@@ -112,7 +114,10 @@ input[type=submit]:hover { background-color: var(--color-primary-medium) }
 }
 
 /* header */
-nav { background-color: var(--color-fg) }
+nav {
+    background-color: var(--color-fg);
+    padding: 0.5rem 1rem;
+}
 #nav-icons {
     float: left;
     padding: 0.2rem 0;
@@ -129,7 +134,7 @@ nav { background-color: var(--color-fg) }
     background-color: var(--color-fg);
 }
 #logo:hover, #nav-entries > a:hover, #hambutton:hover {
-    color: var(--color-primary-bright);
+    color: var(--color-primary-dark);
 }
 #logo {
     font-size: 1.8rem;
@@ -140,10 +145,37 @@ nav { background-color: var(--color-fg) }
     padding: 0 0.5rem;
 }
 .expand { margin-left: auto }
+#search {
+    margin: auto 0.5rem auto;
+    display: flex;
+}
+#search > input {
+    color: var(--color-bg);
+    height: 2.5rem;
+    margin: auto 0 auto 0;
+    padding: 0.5rem;
+}
+#search > input[type=search] {
+    border: 0.1rem solid var(--color-fg-alt);
+    background: var(--color-fg-alt);
+    border-radius: 0.3rem 0 0 0.3rem;
+}
+#search > input[type=submit] {
+    border: 0.1rem solid var(--color-header-search);
+    background: var(--color-header-search);
+    border-radius: 0 0.3rem 0.3rem 0;
+    width: 2.5rem;
+}
+#search > input:focus {
+    border: 0.1rem solid var(--color-header-search);
+    box-shadow: none;
+    outline: none;
+}
 
 /* hamburger menu */
-@media screen and (max-width: 38rem) {
+@media screen and (max-width: 54rem) {
     nav {
+        padding: 0;
         position: sticky;
         top: 0;
         width: 100%;
@@ -169,9 +201,11 @@ nav { background-color: var(--color-fg) }
         padding: 0;
     }
     #nav-entries > a {
-        border-top: 0.1rem solid #2e3436;
+        border-top: 0.1rem solid var(--color-fg-alt);
         padding: 0.5rem 1rem;
         display: block;
         width: 100%;
     }
+    #search { padding: 0 0 1rem 0.5rem }
+    #search > input[type=search] { width: 80% }
 }
