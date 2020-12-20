@@ -26,7 +26,16 @@ from hypercorn.config import Config as HyperConf
 TomMapping = MutableMapping[str, Any]
 
 CONFIG_DIRS = user_config_dir('acanban'), site_config_dir('acanban')
+ACANBAN_DEFAULT: TomMapping = {}
 RETHINKDB_DEFAULT: TomMapping = {'db': 'test'}
+
+
+def acanban_config(dirs: Sequence[str] = CONFIG_DIRS) -> TomMapping:
+    """Return Acanban configuration first found in given directories."""
+    for directory in dirs:
+        file = join(directory, 'acanban.toml')
+        if isfile(file): return toml.load(file)
+    return ACANBAN_DEFAULT
 
 
 def hypercorn_config(dirs: Sequence[str] = CONFIG_DIRS) -> HyperConf:
@@ -38,7 +47,7 @@ def hypercorn_config(dirs: Sequence[str] = CONFIG_DIRS) -> HyperConf:
 
 
 def rethinkdb_config(dirs: Sequence[str] = CONFIG_DIRS) -> TomMapping:
-    """Return Hypercorn configuration first found in given directories."""
+    """Return RethinkDB configuration first found in given directories."""
     for directory in dirs:
         file = join(directory, 'rethinkdb.toml')
         if isfile(file): return toml.load(file)

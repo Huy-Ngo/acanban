@@ -22,15 +22,26 @@ from typing import Any, Mapping, Sequence
 import toml
 from pytest import mark, param
 
-from acanban.config import (RETHINKDB_DEFAULT,
+from acanban.config import (ACANBAN_DEFAULT, RETHINKDB_DEFAULT, acanban_config,
                             hypercorn_config, rethinkdb_config)
 
 CONFIG_DIR = abspath(join(dirname(__file__), 'assets'))
 EMPTY_DIR = 'this directory does not exist'
 
+ACANBAN_MOCK = toml.load(join(CONFIG_DIR, 'acanban.toml'))
 HYPERCORN_MOCK = toml.load(join(CONFIG_DIR, 'hypercorn.toml'))
 HYPERCORN_DEFAULT = {'bind': ['127.0.0.1:8000']}
 RETHINKDB_MOCK = toml.load(join(CONFIG_DIR, 'rethinkdb.toml'))
+
+
+@mark.parametrize(('dirs', 'mapping'), (
+    param([CONFIG_DIR], ACANBAN_MOCK, id='load'),
+    param([EMPTY_DIR, CONFIG_DIR], ACANBAN_MOCK, id='find'),
+    param([EMPTY_DIR], ACANBAN_DEFAULT, id='fallback')))
+def test_acanban_config(dirs: Sequence[str],
+                        mapping: Mapping[str, Any]) -> None:
+    """Test loading Acanban configuration."""
+    assert acanban_config(dirs) == mapping
 
 
 @mark.parametrize(('dirs', 'mapping'), (
