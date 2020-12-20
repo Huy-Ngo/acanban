@@ -17,12 +17,19 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
+from hypercorn.middleware import HTTPToHTTPSRedirectMiddleware
 from hypercorn.trio import serve
+from hypercorn.typing import ASGIFramework
 from trio import run
 
-from . import app
-from .config import hypercorn_config, rethinkdb_config
+from . import app as acanban
+from .config import acanban_config, hypercorn_config, rethinkdb_config
 
 if __name__ == '__main__':
-    app.rethinkdb_config = rethinkdb_config()
+    domain = acanban_config().get('domain')
+    acanban.rethinkdb_config = rethinkdb_config()
+    if domain is None:
+        app: ASGIFramework = acanban
+    else:
+        app = HTTPToHTTPSRedirectMiddleware(acanban, domain)
     run(serve, app, hypercorn_config())
