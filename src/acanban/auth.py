@@ -21,8 +21,8 @@ from crypt import crypt
 from hmac import compare_digest
 from typing import Optional
 
-from quart import (Blueprint, Quart, ResponseReturnValue,
-                   current_app, redirect, render_template, request)
+from quart import (Blueprint, ResponseReturnValue, current_app,
+                   redirect, render_template, request)
 from quart_auth import AuthManager, AuthUser, login_user, logout_user
 from rethinkdb import r
 from rethinkdb.errors import ReqlNonExistenceError
@@ -71,32 +71,17 @@ class User(AuthUser, RethinkObject):
 class Authenticator(AuthManager):
     user_class = User
 
-    def init_app(self, app: Quart) -> None:
-        """Embed auth_manager attribute into app."""
-        super().init_app(app)
-        self.r = r.table('users')
 
-    async def add_user(self, username: str, password: str,
-                       name: str, email: str, role: str) -> None:
-        """Try to add user to database."""
-        # This never happens through browser, but via manual requests.
-        if role not in ROLES: raise ValueError('unknown role')
-        async with current_app.db_pool.connection() as connection:
-            user = {'username': username, 'password': crypt(password),
-                    'name': name, 'email': email, 'role': role}
-            if (await self.r.insert(user).run(connection))['errors']:
-                raise ValueError('username taken')
-
-    async def log_user(self, username: str, password: str) -> User:
-        """Try to log the given user in."""
-        user = User(username)
-        try:
-            digest = await user.password
-        except ReqlNonExistenceError:
-            raise ValueError('user does not exist')
-        if not compare_digest(digest, crypt(password, digest)):
-            raise ValueError('bad login')
-        return user
+async def add_user(username: str, password: str,
+                   name: str, email: str, role: str) -> None:
+    """Try to add user to database."""
+    # This never happens through browser, but via manual requests.
+    if role not in ROLES: raise ValueError('unknown role')
+    user = {'username': username, 'password': crypt(password),
+            'name': name, 'email': email, 'role': role}
+    async with current_app.db_pool.connection() as connection:
+        if (await r.table('users').insert(user).run(connection))['errors']:
+            raise ValueError('username taken')
 
 
 @blueprint.route('/register', methods=['GET', 'POST'])
@@ -105,13 +90,24 @@ async def register() -> ResponseReturnValue:
     if request.method == 'GET': return await render_template('register.html')
     info = await request.form
     try:
-        await current_app.auth_manager.add_user(
-            info['username'], info['password'],
-            info['name'], info['email'], info['role'])
+        await add_user(info['username'], info['password'],
+                       info['name'], info['email'], info['role'])
     except ValueError as e:
         return await render_template('register.html', error=str(e))
     else:
         return redirect('/')
+
+
+async def log_user(username: str, password: str) -> User:
+    """Try to log the given user in."""
+    user = User(username)
+    try:
+        digest = await user.password
+    except ReqlNonExistenceError:
+        raise ValueError('user does not exist')
+    if not compare_digest(digest, crypt(password, digest)):
+        raise ValueError('bad login')
+    return user
 
 
 @blueprint.route('/login', methods=['GET', 'POST'])
@@ -121,7 +117,7 @@ async def login() -> ResponseReturnValue:
     info = await request.form
     username, password = info['username'], info['password']
     try:
-        user = await current_app.auth_manager.log_user(username, password)
+        user = await log_user(username, password)
     except ValueError as e:
         return await render_template('login.html', error=str(e))
     else:
