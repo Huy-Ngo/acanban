@@ -33,3 +33,27 @@ async def acanban() -> AsyncIterator[Acanban]:
 def client(app: Acanban) -> QuartClient:
     """Return a Quart test client."""
     return app.test_client()
+
+
+@fixture
+async def assistant(client: QuartClient) -> QuartClient:
+    """Return a test client that is signed in as an academic assistant."""
+    await client.post(
+        '/login', form=dict(username='silasl', password='lsalis'))
+    return client
+
+
+@fixture
+async def student(client: QuartClient) -> QuartClient:
+    """Return a test client that is signed in as a student."""
+    await client.post(
+        '/login', form=dict(username='adaml', password='lmada'))
+    return client
+
+
+@fixture
+async def supervisor(client: QuartClient) -> QuartClient:
+    """Return a test client that is signed in as a supervisor."""
+    await client.post(
+        '/login', form=dict(username='elir', password='rile'))
+    return client
