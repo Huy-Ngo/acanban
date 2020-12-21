@@ -30,6 +30,7 @@ from trio import open_nursery
 
 from .auth import Authenticator, blueprint as auth
 from .config import RETHINKDB_DEFAULT
+from .user import blueprint as user
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
@@ -63,6 +64,7 @@ class Acanban(QuartTrio):
 
 app = Acanban(__name__)
 app.register_blueprint(auth)
+app.register_blueprint(user)
 
 
 @app.before_serving
