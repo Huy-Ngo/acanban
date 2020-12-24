@@ -33,7 +33,7 @@ from .config import RETHINKDB_DEFAULT
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 
 class Acanban(QuartTrio):
