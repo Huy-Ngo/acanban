@@ -1,4 +1,4 @@
-# Test basic routing
+# Project pages
 # Copyright (C) 2020  Nguyễn Gia Phong
 #
 # This file is part of Acanban.
@@ -16,14 +16,19 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from pytest import mark
-from quart.testing import QuartClient
+from quart import Blueprint, ResponseReturnValue, current_app, render_template
+from rethinkdb import r
+
+__all__ = ['blueprint']
+BASIC_FIELDS = 'name', 'supervisor', 'participants', 'description'
+
+blueprint = Blueprint('project', __name__, url_prefix='/p')
 
 
-@mark.parametrize(('uri', 'status_code'),
-                  (('/', 200), ('/register', 200), ('/login', 200),
-                   ('/logout', 302), ('/p/', 200), ('/foobar', 404)))
-async def test_status(uri: str, status_code: int, client: QuartClient) -> None:
-    """Test the status of basic routes."""
-    response = await client.get(uri)
-    assert response.status_code == status_code
+@blueprint.route('/')
+async def list_projects() -> ResponseReturnValue:
+    """Return a page listing all projects."""
+    project_list = r.table('projects').pluck(*BASIC_FIELDS)
+    async with current_app.db_pool.connection() as connection:
+        projects = await project_list.run(connection)
+    return await render_template('projects.html', projects=projects)

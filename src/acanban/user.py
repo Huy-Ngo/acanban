@@ -31,6 +31,12 @@ __all__ = ['blueprint']
 blueprint = Blueprint('user', __name__, url_prefix='/u')
 
 
+@blueprint.app_template_filter()
+def userlink(username: str) -> str:
+    """Generate the link to the given user."""
+    return f'<a href=/u/{username}>{username}</a>'
+
+
 @blueprint.route('/<username>', methods=['GET'])
 async def view_user_profile(username: str) -> ResponseReturnValue:
     """Handle the user profile page."""
