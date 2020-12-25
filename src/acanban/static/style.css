@@ -19,6 +19,31 @@
  * along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+ select {
+   text-align-last: center;
+   text-align: center;
+   -ms-text-align-last: center;
+   -moz-text-align-last: center;
+}
+
+/*placeholder center*/
+ ::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
+}
+
+
 :root {
     --color-bg: #ffffff;
     --color-fg: #171c24;
@@ -27,6 +52,7 @@
     --color-primary-medium: #40a6ff;
     --color-primary-bright: #80c3ff;
     --color-header-search: #eb4034;
+    --color-main: #e2f3f5;
 
     --color-error-bg: #FFD2D2;
     --color-error-fg: #D8000C;
@@ -45,16 +71,23 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    background-color: var(--color-main);
 }
 main {
     margin: auto;
-    max-width: 36rem;
+    max-width: 45rem;
     padding: 1rem;
+    min-height: 80vh;
 }
-h1 { text-align: center }
+h1 { 
+    text-align: center;
+    font-size: 4rem;
+}
+
 p {
     hyphens: auto;
-    text-align: justify;
+    text-align: center;
+    font-size: 2rem;
 }
 
 /* form */
@@ -75,6 +108,7 @@ select {
     margin: 0.5rem 0;
     padding: 0.5rem;
     width: 100%;
+    border-radius: 20px;
 }
 select {
     appearance: none;
@@ -174,6 +208,9 @@ nav {
 
 /* hamburger menu */
 @media screen and (max-width: 54rem) {
+    h1{
+        font-size: 2rem;
+    }
     nav {
         padding: 0;
         position: sticky;
