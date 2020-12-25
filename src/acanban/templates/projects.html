@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+<h1>Projects</h1>
+{% for project in projects %}
+<div class=block>
+  <h2><a href=/p/{{ project.id }}>{{ project.name }}</a></h2>
+  <p><b>Supervisors:</b> {{ project.supervisor | userlink | safe }}</p>
+  <p><b>Students:</b> {{ project.participants | map('userlink')
+                         | join(', ') | safe }}</p>
+  <p>{{ project.description }}</p>
+</div>
+{% endfor %}
+{% endblock %}

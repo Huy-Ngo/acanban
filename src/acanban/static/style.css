@@ -28,6 +28,10 @@
     --color-primary-bright: #80c3ff;
     --color-header-search: #eb4034;
 
+    --color-link: #0645AD;
+    --color-visited: #663366;
+    --color-hover: #3366BB;
+
     --color-error-bg: #FFD2D2;
     --color-error-fg: #D8000C;
     --color-info-bg: #BDE5F8;
@@ -55,6 +59,13 @@ h1 { text-align: center }
 p {
     hyphens: auto;
     text-align: justify;
+}
+a { text-decoration: none }
+a:link { color: var(--color-link) }
+a:visited { color: var(--color-visited) }
+a:hover {
+    color: var(--color-hover);
+    cursor: pointer;
 }
 
 /* form */
@@ -113,6 +124,9 @@ button, input[type=submit]:hover { background-color: var(--color-primary-medium)
     color: var(--color-warning-fg);
 }
 
+/* specialized containers */
+.block { padding-bottom: 1.5em }
+
 /* header */
 nav {
     background-color: var(--color-fg);
@@ -128,13 +142,12 @@ nav {
     margin-bottom: auto;
     margin-top: auto;
     padding: 1rem;
-    text-decoration: none;
 }
 #logo::selection, #hambutton::selection, #nav-entries > a::selection {
     background-color: var(--color-fg);
 }
 #logo:hover, #nav-entries > a:hover, #hambutton:hover {
-    color: var(--color-primary-dark);
+    color: var(--color-primary-bright);
 }
 #logo {
     font-size: 1.8rem;
