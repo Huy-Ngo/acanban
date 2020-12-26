@@ -37,7 +37,7 @@
     --color-fg-alt: #2e3436;
     --color-primary-dark: #0088ff;
     --color-primary-medium: #40a6ff;
-    --color-primary-bright: #80c3ff;
+    --color-primary-bright: #22d1ee;
     --color-header-search: #eb4034;
     --color-main: #e2f3f5;
 
@@ -66,6 +66,7 @@ main {
     padding: 1rem;
     min-height: 80vh;
 }
+
 h1 { 
     text-align: center;
     font-size: 4rem;
@@ -81,8 +82,6 @@ p {
 form {
     margin: auto;
     max-width: 27rem;
-    display: flex;
-    flex-direction: column;
 }
 button, input, select, textarea {
     font-family: inherit;
@@ -160,8 +159,8 @@ nav {
 #logo::selection, #hambutton::selection, #nav-entries > a::selection {
     background-color: var(--color-fg);
 }
-#logo:hover, #nav-entries > a:hover, #hambutton:hover {
-    color: var(--color-primary-dark);
+#nav-entries > a:hover, #hambutton:hover {
+    color: var(--color-primary-bright);
 }
 #logo {
     font-size: 1.8rem;
