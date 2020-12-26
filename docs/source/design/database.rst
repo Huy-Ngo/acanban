@@ -39,15 +39,19 @@ Each ``User`` object has following attributes:
    - ``assistant``: The academic assistant of a department
    - ``admin``: The system admin
 
-``department`` : ``string`` *optional*
+``projects`` : ``array`` of ``string``, *optional*
+   UUIDs of projects the user participates in,
+   if perse is a student or a supervisor.
+
+``department`` : ``string``, *optional*
    The department of the user, such as ``ICT``, ``SA``, or ``LS``.
    Required for students and assistants.
 
-``student-id`` : ``string``
+``student-id`` : ``string``, *optional*
    Only applicable for users with role ``student``:
    A unique identifier assigned to students to be used outside this system
 
-``bio`` : ``object`` *optional*
+``bio`` : ``object``, *optional*
    A self-description of the user. It can have following fields:
 
    - ``description``: A markdown text describing the user
@@ -62,20 +66,17 @@ Each ``Project`` object has following attributes:
 ``name`` : ``string``
    The name of the project
 
-``creator`` : ``User``
-   The creator of the project.
-
-``supervisor`` : ``User``
-   The supervisor of the project, must be a ``User`` with role ``supervisor``.
-
 ``description`` : ``string``
    The summary of a project
 
-``participants`` : ``array`` of ``User``
-   List of ``User`` s who participate in this project.
+``supervisors`` : ``array`` of ``string``
+   Usernames of supervisors of the project.
+
+``students`` : ``array`` of ``string``
+   Usernames of students participating in the project.
 
 ``tasks`` : ``array`` of ``Task``
-   List of ``Task`` s created for this project.
+   List of ``Task``\s created for this project.
 
 
 Task

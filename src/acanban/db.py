@@ -24,7 +24,7 @@ from rethinkdb import r
 __all__ = ['RethinkObject']
 
 
-async def get(table: str, key: str, field: str) -> str:
+async def get(table: str, key: str, field: str) -> Any:
     """Return DB[table][key][field]."""
     async with current_app.db_pool.connection() as conn:
         return await r.table(table).get(key)[field].run(conn)
@@ -40,7 +40,7 @@ class RethinkObject:
     table: str
     key: str
 
-    def __getattr__(self, name: str) -> Awaitable[str]:
+    def __getattr__(self, name: str) -> Awaitable:
         if name not in self.slots:
             cls = self.__class__.__name__
             raise AttributeError(f'{cls!r} object has no attribute {name!r}')
@@ -53,7 +53,7 @@ class RethinkObject:
                 f'{cls}.update must be used for dynamic attribute {name!r}')
         super().__setattr__(name, value)
 
-    async def update(self, **kwargs: str) -> None:
+    async def update(self, **kwargs: Any) -> None:
         """Update the RethinkDB object from given keys and values.
 
         This is defined instead of `__setattr__` because
