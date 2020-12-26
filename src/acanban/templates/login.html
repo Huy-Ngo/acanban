@@ -22,7 +22,7 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 <h1>Log in</h1>
-<form action=login method=POST>
+<form action=login method=POST id=login>
   {% if error %}
   <div class=error>{{ error }}</div>
   {% endif %}

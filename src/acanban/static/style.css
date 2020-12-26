@@ -27,22 +27,9 @@
 }
 
 /*placeholder center*/
- ::-webkit-input-placeholder {
-   text-align: center;
+::placeholder{
+    text-align: center;
 }
-
-:-moz-placeholder { /* Firefox 18- */
-   text-align: center;  
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   text-align: center;  
-}
-
-:-ms-input-placeholder {  
-   text-align: center; 
-}
-
 
 :root {
     --color-bg: #ffffff;
@@ -94,13 +81,15 @@ p {
 form {
     margin: auto;
     max-width: 27rem;
+    display: flex;
+    flex-direction: column;
 }
 button, input, select, textarea {
     font-family: inherit;
     font-size: 100%;
 }
 input[type=text], input[type=password], input[type=email], input[type=submit],
-select {
+input[type=textarea],select, textarea {
     background-color: var(--color-bg);
     border: 0.1rem solid var(--color-fg);
     box-sizing: border-box;
@@ -108,7 +97,11 @@ select {
     margin: 0.5rem 0;
     padding: 0.5rem;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 10px;
+}
+textarea {
+    resize: none;
+    height: 10vh;
 }
 select {
     appearance: none;

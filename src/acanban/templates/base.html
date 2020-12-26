@@ -45,8 +45,6 @@
         <a href=/p>Projects</a>
         <a href=/t>Tasks</a>
         {% endif %}
-
-
         {% if current_user.is_authenticated %}
         <a href='/u/{{ current_user.key }}' class=expand>My Profile</a>
         <a href=/logout>Logout</a>
