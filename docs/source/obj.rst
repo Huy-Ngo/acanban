@@ -15,7 +15,7 @@ organized into logical tasks.  The tasks would be categorized by stages
 such as *to-do*, *doing* and *done*.  These stages would then be visualized
 as columns in a `Kanban board`_ to aid managing and prioritizing tasks.
 
-The Academic Itergration
+The Academic Integration
 ------------------------
 
 In addition to discussion and job scheduling, the system-to-be would
