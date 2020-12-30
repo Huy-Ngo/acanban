@@ -125,6 +125,27 @@ textarea {
     color: var(--color-warning-fg);
 }
 
+/* tabs */
+#tabs {
+    border-bottom: 0.2rem solid var(--color-bg-alt);
+    text-align: center;
+}
+.tab {
+    display: inline-block;
+    color: var(--color-fg-alt);
+    padding: 0 1rem;
+}
+.tab:hover, #tab-active {
+    background-color: var(--color-bg-alt);
+    color: var(--color-fg);
+}
+@media screen and (max-width: 36rem) {
+    .tab {
+        display: block;
+        text-align: left;
+    }
+}
+
 /* header */
 nav {
     background-color: var(--color-fg);

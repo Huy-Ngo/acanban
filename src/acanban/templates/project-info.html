@@ -1,0 +1,22 @@
+{% macro tab(name, endpoint=none, active=false) -%}
+{% if endpoint is none %}{% set endpoint = name|lower %}{% endif %}
+<a href="/p/{{ project.id }}/{{ endpoint }}"><div
+  class=tab {% if active %}id=tab-active{% endif %}>{{ name }}</div></a>
+{%- endmacro %}
+{% extends "base.html" %}
+{% block title %}{{ project.name }}{% endblock %}
+{% block content %}
+<div id=tabs>
+  {{ tab('Info', '', true) }}
+  {{ tab('Edit') }}
+  {{ tab('Tasks') }}
+  {{ tab('Report') }}
+  {{ tab('Slides') }}
+</div>
+<div class=col-wide>
+  <p><b>Supervisors:</b> {{ project.supervisor | userlink | safe }}</p>
+  <p><b>Students:</b> {{ project.participants | map('userlink')
+                         | join(', ') | safe }}</p>
+  <p>{{ project.description }}</p>
+</div>
+{% endblock %}
