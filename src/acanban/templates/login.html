@@ -21,8 +21,7 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-<h1>Log in to acanban</h1>
-<form action=login method=POST>
+<form action=login method=POST class=col-narrow>
   {% if error %}
   <div class=error>{{ error }}</div>
   {% endif %}
@@ -30,6 +29,6 @@
   <input type=password name=password id=password placeholder=password required>
   <input type=checkbox name=remember id=remember>
   <label for=remember>Remember me</label>
-  <input type=submit name=submit value=Login>
+  <button>Login</button>
 </form>
 {% endblock %}

@@ -20,8 +20,7 @@
 {% extends "base.html" %}
 {% block title %}Registration{% endblock %}
 {% block content %}
-<h1>Register for acanban</h1>
-<form action=register method=POST>
+<form action=register method=POST class=col-narrow>
   {% if error %}
   <div class=error>{{ error }}</div>
   {% endif %}
@@ -34,6 +33,6 @@
     <option value=supervisor>supervisor</option>
     <option value=staff>staff</option>
   </select>
-  <input type=submit name=submit value=Register>
+  <button>Register</button>
 </form>
 {% endblock %}

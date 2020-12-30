@@ -53,6 +53,7 @@
         {% endif %}
       </div>
     </nav>
-    <main>{% block content %}{% endblock %}</main>
+    <h1>{{ self.title() }}</h1>
+    {% block content %}{% endblock %}
   </body>
 </html>

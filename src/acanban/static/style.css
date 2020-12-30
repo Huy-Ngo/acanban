@@ -2,19 +2,19 @@
  * Global stylesheet
  * Copyright (C) 2020  Đào Dương Hoàng Long
  * Copyright (C) 2020  Nguyễn Gia Phong
-
+ *
  * This file is part of Acanban.
-
+ *
  * Acanban is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
-
+ *
  * Acanban is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
-
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -22,6 +22,7 @@
 :root {
     --color-bg: #ffffff;
     --color-fg: #171c24;
+    --color-bg-alt: #eeeeec;
     --color-fg-alt: #2e3436;
     --color-primary-dark: #0088ff;
     --color-primary-medium: #40a6ff;
@@ -46,28 +47,33 @@ body {
     margin: 0;
     padding: 0;
 }
-main {
-    margin: auto;
-    max-width: 36rem;
-    padding: 1rem;
+
+/* common elements */
+h1 {
+    margin: 1rem;
+    text-align: center;
 }
-h1 { text-align: center }
 p {
     hyphens: auto;
     text-align: justify;
 }
+a { text-decoration: none }
+
+/* columns */
+.col-narrow, .col-wide {
+    padding: 0 1rem;
+    margin: auto;
+}
+.col-narrow { max-width: 25rem }
+.col-wide { max-width: 36rem }
 
 /* form */
-form {
-    margin: auto;
-    max-width: 27rem;
-}
 button, input, select, textarea {
     font-family: inherit;
     font-size: 100%;
 }
-button, input[type=text], input[type=password], input[type=email], input[type=submit],
-select {
+button, select, textarea,
+input[type=text], input[type=password], input[type=email] {
     background-color: var(--color-bg);
     border: 0.1rem solid var(--color-fg);
     box-sizing: border-box;
@@ -84,12 +90,18 @@ input:focus, select:focus {
     border-color: var(--color-primary-dark);
     box-shadow: 0 0 0.5rem var(--color-primary-bright);
 }
-button, input[type=submit] {
+button {
     background-color: var(--color-primary-dark);
     color: var(--color-bg);
     cursor: pointer;
 }
-button, input[type=submit]:hover { background-color: var(--color-primary-medium) }
+button:hover { background-color: var(--color-primary-medium) }
+textarea {
+    height: 11rem;
+    overflow-y: scroll;
+    resize: vertical;
+    scrollbar-color: var(--color-bg-alt) transparent;
+}
 
 /* messages */
 .error, .info, .success, .warning {
@@ -128,13 +140,12 @@ nav {
     margin-bottom: auto;
     margin-top: auto;
     padding: 1rem;
-    text-decoration: none;
 }
 #logo::selection, #hambutton::selection, #nav-entries > a::selection {
     background-color: var(--color-fg);
 }
 #logo:hover, #nav-entries > a:hover, #hambutton:hover {
-    color: var(--color-primary-dark);
+    color: var(--color-primary-bright);
 }
 #logo {
     font-size: 1.8rem;
