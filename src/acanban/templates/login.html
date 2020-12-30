@@ -21,19 +21,16 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-<div class="container">
-  <h1>Log in</h1>
-  <form action=login method=POST id=login>
-    {% if error %}
-    <div class=error>{{ error }}</div>
-    {% endif %}
-    <label for="username">Username</label>
-    <input type=text name=username id=username required>
-    <label for="password">Password</label>
-    <input type=password name=password id=password required>
-    <input type=checkbox name=remember id=remember>
-    <label for=remember>Remember me</label>
-    <input type=submit name=submit value=Login>
-  </form>
-</div>
+<form action=login method=POST class=col-narrow>
+  {% if error %}
+  <div class=error>{{ error }}</div>
+  {% endif %}
+  <label for="username">Username</label>
+  <input type=text name=username id=username required>
+  <label for="password">Password</label>
+  <input type=password name=password id=password required>
+  <input type=checkbox name=remember id=remember>
+  <label for=remember>Remember me</label>
+  <button>Login</button>
+</form>
 {% endblock %}

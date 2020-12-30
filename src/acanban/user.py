@@ -16,19 +16,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from http import HTTPStatus
-
-from quart import (Blueprint, ResponseReturnValue, abort,
-                   redirect, render_template, request, url_for)
+from quart import (Blueprint, ResponseReturnValue, current_app,
+                   redirect, render_template, request)
+from quart.exceptions import Forbidden, NotFound
 from quart_auth import current_user
-from rethinkdb.errors import ReqlNonExistenceError
-from werkzeug.exceptions import BadRequestKeyError
-
-from .auth import User
+from rethinkdb import r
 
 __all__ = ['blueprint']
+MUTABLE_FIELDS = 'name', 'email', 'student-id', 'department'
 
 blueprint = Blueprint('user', __name__, url_prefix='/u')
+users = r.table('users')
 
 
 @blueprint.app_template_filter()
@@ -40,34 +38,22 @@ def userlink(username: str) -> str:
 @blueprint.route('/<username>', methods=['GET'])
 async def view_user_profile(username: str) -> ResponseReturnValue:
     """Handle the user profile page."""
-    user = User(username)
-    try:
-        return await render_template('user_profile.html',
-                                     username=user.key,
-                                     email=await user.email,
-                                     role=await user.role,
-                                     name=await user.name)
-    except ReqlNonExistenceError:
-        abort(HTTPStatus.NOT_FOUND)
+    async with current_app.db_pool.connection() as conn:
+        user = await users.get(username).run(conn)
+    if user is None: raise NotFound
+    return await render_template('user.html', user=user)
 
 
 @blueprint.route('/<username>/edit', methods=['GET', 'POST'])
 async def edit_user_profile(username: str) -> ResponseReturnValue:
     """Handle the profile edit page."""
-    user = User(username)
-    if user.key != current_user.key:
-        abort(HTTPStatus.FORBIDDEN)
+    if username != current_user.key: raise Forbidden
     if request.method == 'GET':
-        return await render_template('user_profile_edit.html',
-                                     email=await user.email,
-                                     name=await user.name)
-    info = await request.form
-    try:
-        data = {'name': info['name'],
-                'email': info['email']}
-    except BadRequestKeyError:
-        abort(HTTPStatus.BAD_REQUEST)
-    if data['name'] == '' or data['email'] == '':
-        abort(HTTPStatus.BAD_REQUEST)
-    await user.update(**data)
-    return redirect(url_for('user.view_user_profile', username=username))
+        async with current_app.db_pool.connection() as conn:
+            user = await users.get(username).run(conn)
+        return await render_template('user-edit.html', user=user)
+    updated = {key: value for key, value in (await request.form).items()
+               if key in MUTABLE_FIELDS and value}
+    async with current_app.db_pool.connection() as conn:
+        await users.get(username).update(updated).run(conn)
+    return redirect(f'/u/{username}')
