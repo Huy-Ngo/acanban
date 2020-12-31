@@ -83,7 +83,12 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Objective</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Objective</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-collaboration-platform">The Collaboration Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-academic-integration">The Academic Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-applicable-web-application">The Applicable Web Application</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="req/index.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="choices.html">Technical Choices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design/index.html">System Design</a></li>
@@ -155,6 +160,41 @@
             
   <div class="section" id="objective">
 <h1>Objective<a class="headerlink" href="#objective" title="Permalink to this headline">¶</a></h1>
+<p>In this project, we aimed to develop a collaboration platform
+for students and mentors.  The resulting system should be able to
+not only integrate well into their workflows and academic management tasks
+but also effectively perform on back-end servers often with limited resources
+and across a wide variety of end-user machines.</p>
+<div class="section" id="the-collaboration-platform">
+<h2>The Collaboration Platform<a class="headerlink" href="#the-collaboration-platform" title="Permalink to this headline">¶</a></h2>
+<p>At the lowest level, discussion would be facilitated through comment threads,
+organized into logical tasks.  The tasks would be categorized by stages
+such as <em>to-do</em>, <em>doing</em> and <em>done</em>.  These stages would then be visualized
+as columns in a <a class="reference external" href="https://en.wikipedia.org/wiki/Kanban_board">Kanban board</a> to aid managing and prioritizing tasks.</p>
+</div>
+<div class="section" id="the-academic-integration">
+<h2>The Academic Integration<a class="headerlink" href="#the-academic-integration" title="Permalink to this headline">¶</a></h2>
+<p>In addition to discussion and job scheduling, the system-to-be would
+support academic tasks.  To mentors and committees, these are grading
+and giving feedback.  To academic assistants, these include (but not
+limited to) exporting transcripts and statistical reports, and tracking
+students’ overall progress to provide help if necessary.</p>
+</div>
+<div class="section" id="the-applicable-web-application">
+<h2>The Applicable Web Application<a class="headerlink" href="#the-applicable-web-application" title="Permalink to this headline">¶</a></h2>
+<p>The system should be implemented as a web application for portability
+<a class="reference internal" href="#mikkonen2008" id="id1"><span>[mikkonen2008]</span></a>.  It should be easy to be adopted by users on
+different devices network connection quality, whilst being simple
+to maintain by a small number of administrators to run on modest hardware.</p>
+<dl class="citation">
+<dt class="label" id="mikkonen2008"><span class="brackets"><a class="fn-backref" href="#id1">mikkonen2008</a></span></dt>
+<dd><p>T. Mikkonen and A. Taivalsaari, “Web Applications
+– Spaghetti Code for the 21st Century,” 2008 Sixth International Conference
+on Software Engineering Research, Management and Applications, Prague, 2008,
+pp. 319–328, <a class="reference external" href="https://doi.org/10.1109/SERA.2008.16">doi: 10.1109/SERA.2008.16</a>.</p>
+</dd>
+</dl>
+</div>
 </div>
 
 
