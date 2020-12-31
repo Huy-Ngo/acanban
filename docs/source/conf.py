@@ -15,7 +15,9 @@ release = __version__
 # Add any Sphinx extension module names here, as strings.
 # They can be extensions coming with Sphinx (named 'sphinx.ext.*')
 # or your custom ones.
-extensions = ['sphinx.ext.githubpages', 'sphinxcontrib.plantuml']
+extensions = ['sphinx.ext.extlinks', 'sphinx.ext.githubpages',
+              'sphinxcontrib.plantuml']
+extlinks = {'doi': ('https://doi.org/%s', 'doi: ')}
 plantuml_output_format = 'svg_img'
 plantuml_latex_output_format = 'pdf'
 
@@ -37,5 +39,8 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = []
 
 # Options for LaTeX
-latex_elements = {'papersize': 'a4paper', 'pointsize': '12pt',
-                  'fontpkg': r'\usepackage{lmodern}'}
+latex_elements = {
+    'papersize': 'a4paper', 'pointsize': '12pt',
+    'fontpkg': r'\usepackage{lmodern}',
+    'babel': r'\usepackage[english,vietnamese]{babel}',
+    'tableofcontents': r'\selectlanguage{english}\sphinxtableofcontents'}
