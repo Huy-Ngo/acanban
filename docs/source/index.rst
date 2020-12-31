@@ -9,4 +9,7 @@ Overview
    req/index
    choices
    design/index
-   deploy
+   collab/index
+   academic/index
+   other/index
+   webapp/index
