@@ -200,13 +200,16 @@ It is also the primary key and allows the user to sign in.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">admin</span></code>: The system admin</p></li>
 </ul>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">department</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code> <em>optional</em></span></dt><dd><p>The department of the user, such as <code class="docutils literal notranslate"><span class="pre">ICT</span></code>, <code class="docutils literal notranslate"><span class="pre">SA</span></code>, or <code class="docutils literal notranslate"><span class="pre">LS</span></code>.
+<dt><code class="docutils literal notranslate"><span class="pre">projects</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em></span></dt><dd><p>UUIDs of projects the user participates in,
+if perse is a student or a supervisor.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">department</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em></span></dt><dd><p>The department of the user, such as <code class="docutils literal notranslate"><span class="pre">ICT</span></code>, <code class="docutils literal notranslate"><span class="pre">SA</span></code>, or <code class="docutils literal notranslate"><span class="pre">LS</span></code>.
 Required for students and assistants.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">student-id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>Only applicable for users with role <code class="docutils literal notranslate"><span class="pre">student</span></code>:
+<dt><code class="docutils literal notranslate"><span class="pre">student-id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em></span></dt><dd><p>Only applicable for users with role <code class="docutils literal notranslate"><span class="pre">student</span></code>:
 A unique identifier assigned to students to be used outside this system</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">bio</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">object</span></code> <em>optional</em></span></dt><dd><p>A self-description of the user. It can have following fields:</p>
+<dt><code class="docutils literal notranslate"><span class="pre">bio</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">object</span></code>, <em>optional</em></span></dt><dd><p>A self-description of the user. It can have following fields:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: A markdown text describing the user</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">institution</span></code>: The institution the user is working at, mainly for supervisors</p></li>
@@ -221,15 +224,13 @@ A unique identifier assigned to students to be used outside this system</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The name of the project</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The creator of the project.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">supervisor</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The supervisor of the project, must be a <code class="docutils literal notranslate"><span class="pre">User</span></code> with role <code class="docutils literal notranslate"><span class="pre">supervisor</span></code>.</p>
-</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">description</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The summary of a project</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">participants</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">User</span></code> s who participate in this project.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">supervisors</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>Usernames of supervisors of the project.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">tasks</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Task</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Task</span></code> s created for this project.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">students</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>Usernames of students participating in the project.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tasks</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Task</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Task</span></code>s created for this project.</p>
 </dd>
 </dl>
 </div>
