@@ -1,16 +1,23 @@
 image: debian/buster
+arch: amd64
 packages:
   - python3-pip
   - rethinkdb
+  - wget
 repositories:
   rethinkdb: https://download.rethinkdb.com/repository/debian-buster buster main 539A3A8C6692E6E3F69B3FE81D85E93F801BB43F
 sources:
   - https://github.com/Huy-Ngo/acanban
 tasks:
-  - rethinkdb: |
-      sudo cp /etc/rethinkdb/default.conf.sample /etc/rethinkdb/instances.d/instance1.conf
-      sudo /etc/init.d/rethinkdb start
+  - ipfs: |
+      wget https://dist.ipfs.io/go-ipfs/v0.7.0/go-ipfs_v0.7.0_linux-amd64.tar.gz
+      tar -xvzf go-ipfs_v0.7.0_linux-amd64.tar.gz
+      sudo go-ipfs/install.sh
+      rm -r go-ipfs*
+      ipfs init
   - test: |
+      ipfs daemon &
+      rethinkdb --no-http-admin &
       python3 -m pip install tox
       python3 -m tox -c acanban -e py
 environment:
