@@ -1,0 +1,25 @@
+image: debian/sid
+arch: amd64
+packages:
+  - ghostscript
+  - latexmk
+  - lmodern
+  - graphviz
+  - plantuml
+  - python3-pip
+  - python3-sphinx
+  - texlive
+  - texlive-font-utils
+  - texlive-lang-other
+  - texlive-latex-extra
+artifacts:
+  - acanban/docs/build/latex/acanban.pdf
+sources:
+  - https://github.com/Huy-Ngo/acanban
+tasks:
+  - prepare: |
+      python3 -m pip install -U pip
+      python3 -m pip install sphinxcontrib.plantuml ./acanban
+  - print: make -C acanban/docs latexpdf
+environment:
+  PIP_PROGRESS_BAR: 'off'
