@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Use-Case Model &mdash; Acanban 0.0.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Constructing the Web Application" href="../webapp/index.html" />
+    <link rel="prev" title="Other functionalities" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Acanban
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obj.html">Objective</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collab/index.html">Building the Collaboration Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../academic/index.html">Features for Academic Support</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Other functionalities</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Use-Case Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#register">Register</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#brief-description">Brief Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flow-of-events">Flow of Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-conditions">Post-Conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#login">Login</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Brief Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Flow of Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pre-conditions">Pre-Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Post-Conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#logout">Logout</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Brief Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Flow of Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Pre-Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Post-Conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#search-student">Search Student</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Brief Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">Flow of Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#special-requirements">Special Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">Pre-Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">Post-Conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#search-supervisor">Search Supervisor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id17">Brief Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">Flow of Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21">Pre-Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">Post-Conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#search-project">Search Project</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id23">Brief Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">Flow of Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28">Special Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29">Pre-Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">Post-Conditions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../webapp/index.html">Constructing the Web Application</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Acanban</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Other functionalities</a> &raquo;</li>
+        
+      <li>Use-Case Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/other/use-case.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="use-case-model">
+<h1>Use-Case Model<a class="headerlink" href="#use-case-model" title="Permalink to this headline">¶</a></h1>
+<p>As for most web applications, this system is required to perform basic tasks
+such as authentication and searching.</p>
+<p class="plantuml">
+<img src="../_images/plantuml-25c7fbf475283799f516f685e761b82cdfaf0087.svg" alt="skinparam packageStyle rectangle
+left to right direction
+actor User
+actor &quot;Project Participant&quot; as parti
+actor Student
+actor &quot;Academic Assistant&quot; as assist
+actor Supervisor
+
+rectangle Search {
+   usecase &quot;Search student&quot; as SearchS
+   usecase &quot;Search lecturer&quot; as SearchL
+   usecase &quot;Search project&quot; as SearchP
+}
+
+rectangle Authentication {
+   usecase Register
+   usecase Login
+   usecase Logout
+}
+
+Student --|&gt; parti
+Supervisor --|&gt; parti
+parti --|&gt; User
+assist --|&gt; User
+
+User --&gt; SearchS
+User --&gt; SearchL
+User --&gt; SearchP
+User --&gt; Register
+User --&gt; Login
+User --&gt; Logout"/></p>
+<div class="section" id="register">
+<h2>Register<a class="headerlink" href="#register" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="brief-description">
+<h3>Brief Description<a class="headerlink" href="#brief-description" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows user to create his/her own account.</p>
+</div>
+<div class="section" id="flow-of-events">
+<h3>Flow of Events<a class="headerlink" href="#flow-of-events" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="basic-flow">
+<h4>Basic Flow<a class="headerlink" href="#basic-flow" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>User requests sign up for the system.</p></li>
+<li><p>System receives the request and requests user to enter
+<strong>username</strong>, <strong>password</strong>, <strong>name</strong>, <strong>role</strong>, <strong>and email</strong></p></li>
+<li><p>User provides necessary information.</p></li>
+<li><p>System requests user to verify by his/her provided email.</p></li>
+<li><p>User verifies by his/her provided email.</p></li>
+<li><p>System allows user to log in the system with newly created account.</p></li>
+</ol>
+</div>
+<div class="section" id="alternative-flow">
+<h4>Alternative Flow<a class="headerlink" href="#alternative-flow" title="Permalink to this headline">¶</a></h4>
+<dl class="simple">
+<dt>Invalid username</dt><dd><p>If in step 2, user uses an username with invalid characters, the system
+will display an alert message. User could either re-enter his/her username or
+cancel the operation.</p>
+</dd>
+<dt>Existed username</dt><dd><p>If in step 2, user enters an existed username, the system will display
+an alert message. User could either select another username
+or cancel the operation.</p>
+</dd>
+<dt>Invalid email</dt><dd><p>If in step 2, user enters an invalid email, the system will display
+an alert message. User could either re-enter his/her email
+or cancel the operation.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="post-conditions">
+<h3>Post-Conditions<a class="headerlink" href="#post-conditions" title="Permalink to this headline">¶</a></h3>
+<p>User is now granted a new account and be logged in the system.</p>
+</div>
+</div>
+<div class="section" id="login">
+<h2>Login<a class="headerlink" href="#login" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Brief Description<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows user to log in the system.</p>
+</div>
+<div class="section" id="id2">
+<h3>Flow of Events<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h4>Basic Flow<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>User requests to log in the system.</p></li>
+<li><p>System receives the request and requests user enter <strong>username</strong> and <strong>password</strong>.</p></li>
+<li><p>User provides username and password.</p></li>
+<li><p>System validates the entered username and password and allows user to log in
+the system.</p></li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h4>Alternative Flow<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<dl class="simple">
+<dt>Incorrect username/password</dt><dd><p>If in step 2, user enters username or password incorrectly, the system
+will display an error message and terminate the operation.</p>
+</dd>
+<dt>Invalid username</dt><dd><p>If in step 2, user enters and invalid character for username, the system
+will display an error message and terminate the operation.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="pre-conditions">
+<h3>Pre-Conditions<a class="headerlink" href="#pre-conditions" title="Permalink to this headline">¶</a></h3>
+<p>User must own an account before the use case begins.</p>
+</div>
+<div class="section" id="id5">
+<h3>Post-Conditions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>The user is logged in the system.</p>
+</div>
+</div>
+<div class="section" id="logout">
+<h2>Logout<a class="headerlink" href="#logout" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h3>Brief Description<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows user to logout the system.</p>
+</div>
+<div class="section" id="id7">
+<h3>Flow of Events<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h4>Basic Flow<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>User requests to log in the system.</p></li>
+<li><p>System receives the request and allows user to logout the system.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>Pre-Conditions<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>User must be logged in the system before the use case begins.</p>
+</div>
+<div class="section" id="id10">
+<h3>Post-Conditions<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>The user is logged out the system.</p>
+</div>
+</div>
+<div class="section" id="search-student">
+<h2>Search Student<a class="headerlink" href="#search-student" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h3>Brief Description<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows user to search in list of students.</p>
+</div>
+<div class="section" id="id12">
+<h3>Flow of Events<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id13">
+<h4>Basic Flow<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>User selects “Student” on search bar.</p></li>
+<li><p>Sytem requests user to select which type of search, including:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Search by name</strong>: this allows user to search for specific student name.</p></li>
+<li><p><strong>Search by year</strong>: this allows user to get a list of students in a specific year.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="sub-flow">
+<h4>Sub Flow<a class="headerlink" href="#sub-flow" title="Permalink to this headline">¶</a></h4>
+<p><strong>Search by name</strong></p>
+<ol class="arabic simple">
+<li><p>User enters name of student that his/her wants to search.</p></li>
+<li><p>System receives the search request including the name, and responses with
+a list of students matched with the provided name.</p></li>
+</ol>
+<p><strong>Search by year</strong></p>
+<ol class="arabic simple">
+<li><p>System displays a list of years.</p></li>
+<li><p>User selects a specific year that his/her wants to search.</p></li>
+<li><p>System receives the search request including the selected year, and responses
+with a list of students studing in that year.</p></li>
+</ol>
+</div>
+<div class="section" id="id14">
+<h4>Alternative Flow<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h4>
+<dl class="simple">
+<dt>Invalid name</dt><dd><p>If, in <strong>Search by name</strong> sub flow, user enters a name with invalid characters,
+the system will display an alert message. User could either re-enter the name
+or cancel the operation.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="special-requirements">
+<h3>Special Requirements<a class="headerlink" href="#special-requirements" title="Permalink to this headline">¶</a></h3>
+<p>If, in <strong>Search by name</strong> sub flow, user has successfully received the list of
+student name and want to sort it, he/she could select to sort it by <em>year</em> or <em>major</em>.</p>
+<p>If, in <strong>Search by name</strong> sub flow, user enters a name which is not matched
+with any student name, the system should display a message that there are no
+matching student.</p>
+</div>
+<div class="section" id="id15">
+<h3>Pre-Conditions<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<p>User must be logged in the system before the use case begins.</p>
+</div>
+<div class="section" id="id16">
+<h3>Post-Conditions<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<p>The system state is unchanged.</p>
+</div>
+</div>
+<div class="section" id="search-supervisor">
+<h2>Search Supervisor<a class="headerlink" href="#search-supervisor" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id17">
+<h3>Brief Description<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows user to search in list of lecturers.</p>
+</div>
+<div class="section" id="id18">
+<h3>Flow of Events<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id19">
+<h4>Basic Flow<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>User selects “Supervisor” on search bar.</p></li>
+<li><p>User enters name of lecturer that his/her wants to search.</p></li>
+<li><p>System receive the search request including the name, and response with
+a list of lecturer matched with the provided name.</p></li>
+</ol>
+</div>
+<div class="section" id="id20">
+<h4>Alternative Flow<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
+<dl class="simple">
+<dt>Invalid name</dt><dd><p>If, in step 2, user enters a name with invalid characters, the system
+will display an alert message. User could either re-enters the name
+or cancel the operation.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="id21">
+<h3>Pre-Conditions<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<p>User must be logged in the system before the use case begins.</p>
+</div>
+<div class="section" id="id22">
+<h3>Post-Conditions<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<p>The system state is unchanged.</p>
+</div>
+</div>
+<div class="section" id="search-project">
+<h2>Search Project<a class="headerlink" href="#search-project" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id23">
+<h3>Brief Description<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows user to search in list of projects.</p>
+</div>
+<div class="section" id="id24">
+<h3>Flow of Events<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id25">
+<h4>Basic Flow<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>User selects “Project” on search bar.</p></li>
+<li><p>Sytem requests user to select which type of search, including:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Search by name</strong>: this allows user to search for specific project name.</p></li>
+<li><p><strong>Search by year</strong>: this allows user to get a list of projects in a specific year.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id26">
+<h4>Sub Flow<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h4>
+<p><strong>Search by name</strong></p>
+<ol class="arabic simple">
+<li><p>User enters name of project that his/her wants to search.</p></li>
+<li><p>System receives the search request including the name, and responses with
+a list of projects matched with the provided name.</p></li>
+</ol>
+<p><strong>Search by year</strong></p>
+<ol class="arabic simple">
+<li><p>System displays a list of years.</p></li>
+<li><p>User selects a specific year that his/her wants to search.</p></li>
+<li><p>System receives the search request including the selected year, and responses
+with a list of projects in that year.</p></li>
+</ol>
+</div>
+<div class="section" id="id27">
+<h4>Alternative Flow<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h4>
+<dl class="simple">
+<dt>Invalid name</dt><dd><p>If, in <strong>Search by name</strong> sub flow, user enters a name with invalid characters,
+the system will display an alert message. User could either re-enter the name
+or cancel the operation.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="id28">
+<h3>Special Requirements<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
+<p>In <strong>Search by name</strong> sub flow, user has successfully received the list of
+student name and might want to sort it by <em>year</em>.</p>
+<p>If, in <strong>Search by name</strong> sub flow, user enters a name which is not matched
+with any project name, the system should display a message that there are no
+matching project.</p>
+</div>
+<div class="section" id="id29">
+<h3>Pre-Conditions<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
+<p>User must be logged in the system before the use case begins.</p>
+</div>
+<div class="section" id="id30">
+<h3>Post-Conditions<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
+<p>The system state is unchanged.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../webapp/index.html" class="btn btn-neutral float-right" title="Constructing the Web Application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Other functionalities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020  Ngô Ngọc Đức Huy et al.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

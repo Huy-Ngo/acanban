@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Use-Case Model &mdash; Acanban 0.0.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Database Design" href="database.html" />
+    <link rel="prev" title="Features for Academic Support" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Acanban
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obj.html">Objective</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collab/index.html">Building the Collaboration Platform</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Features for Academic Support</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Use-Case Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#evaluate">Evaluate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#brief-description">Brief Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flow-of-events">Flow of Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pre-conditions">Pre-Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-conditions">Post-Conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#make-report">Make Report</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Brief Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Flow of Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Pre-Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Post-Conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#export-transcript">Export Transcript</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Brief Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Flow of Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Pre-Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">Post-Conditions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html">Database Design</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../other/index.html">Other functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webapp/index.html">Constructing the Web Application</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Acanban</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Features for Academic Support</a> &raquo;</li>
+        
+      <li>Use-Case Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/academic/use-case.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="use-case-model">
+<h1>Use-Case Model<a class="headerlink" href="#use-case-model" title="Permalink to this headline">¶</a></h1>
+<p class="plantuml">
+<img src="../_images/plantuml-be339df721773d457356ff63199287c989aa19d4.svg" alt="left to right direction
+actor &quot;Academic Assistant&quot; as assist
+actor Supervisor
+
+usecase Evaluate
+
+usecase &quot;Make Report&quot; as Report
+usecase &quot;Export transcript&quot; as Export
+
+assist --&gt; Export
+assist --&gt; Report
+
+Supervisor --&gt; Evaluate"/></p>
+<div class="section" id="evaluate">
+<h2>Evaluate<a class="headerlink" href="#evaluate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="brief-description">
+<h3>Brief Description<a class="headerlink" href="#brief-description" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows Supervisor to evaluate the project.</p>
+</div>
+<div class="section" id="flow-of-events">
+<h3>Flow of Events<a class="headerlink" href="#flow-of-events" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="basic-flow">
+<h4>Basic Flow<a class="headerlink" href="#basic-flow" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Supervisor request to evaluate the project.</p></li>
+<li><p>System receive the request provide an <strong>evaluation</strong> and <strong>comment</strong>.</p></li>
+<li><p>Supervisor provide evaluation with comments.</p></li>
+<li><p>System receive the data and terminate the project.</p></li>
+</ol>
+</div>
+<div class="section" id="alternative-flow">
+<h4>Alternative Flow<a class="headerlink" href="#alternative-flow" title="Permalink to this headline">¶</a></h4>
+<p>Missing information</p>
+<blockquote>
+<div><p>If in step 3, the Supervisor missed to fill in a necessary field,
+the system display an alert message. Supervisor can either fill in missing fields
+or cancel the operation.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="pre-conditions">
+<h3>Pre-Conditions<a class="headerlink" href="#pre-conditions" title="Permalink to this headline">¶</a></h3>
+<p>User must be Supervisor and be logged in the system
+before this use case begins.</p>
+</div>
+<div class="section" id="post-conditions">
+<h3>Post-Conditions<a class="headerlink" href="#post-conditions" title="Permalink to this headline">¶</a></h3>
+<p>After this use case ends, other project-related use case could not be executed.</p>
+</div>
+</div>
+<div class="section" id="make-report">
+<h2>Make Report<a class="headerlink" href="#make-report" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Brief Description<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows Academic Assistant make report base on the result of the project.</p>
+</div>
+<div class="section" id="id2">
+<h3>Flow of Events<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h4>Basic Flow<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Academic Assistant requests to make a report.</p></li>
+<li><p>System receives the request and displays the result of the project.</p></li>
+<li><p>Academic Assistant requests to make a hard copy.</p></li>
+<li><p>System responses by a document file format of the report.</p></li>
+<li><p>Academic Assistant downloads the file for printing purpose later.</p></li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h4>Alternative Flow<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<dl class="simple">
+<dt>Project has not done</dt><dd><p>If in step 2, Student has not provided the result, the system will display
+a message that the report is not yet ready and terminate the operation.
+The system will then notify Student by sending an email or via
+notification bar.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>Pre-Conditions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>User must be Academic Assistant and be logged in the system before this use case begins.</p>
+<p>Academic Assistant must search and select the project(s) before the use case begins.</p>
+</div>
+<div class="section" id="id6">
+<h3>Post-Conditions<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>The system state is unchanged.</p>
+</div>
+</div>
+<div class="section" id="export-transcript">
+<h2>Export Transcript<a class="headerlink" href="#export-transcript" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h3>Brief Description<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows Academic Assistant to export transcript based on the evaluation of Supervisor.</p>
+</div>
+<div class="section" id="id8">
+<h3>Flow of Events<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h4>Basic Flow<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Academic Assistant requests to export the transcript.</p></li>
+<li><p>System receives the request and displays the evaluation of Supervisor.</p></li>
+<li><p>Academic Assistant requests to make a hard copy.</p></li>
+<li><p>System responses by a document file format of the transcript.</p></li>
+<li><p>Academic Assistant downloads the file for printing purpose later.</p></li>
+</ol>
+</div>
+<div class="section" id="id10">
+<h4>Alternative Flow<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<dl class="simple">
+<dt>Not yet evaluated</dt><dd><p>If in step 2, Supervisor has not given the evaluation, the system will display
+a message that the transcript is not ready yet and terminate the operation.
+The system will then notify Supervisor by sending an email or via
+notification bar.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>Pre-Conditions<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>User must be Academic Assistant and be logged in the system before this use case begins.</p>
+<p>Academic Assistant must search and select the project(s) before the use case begins.</p>
+</div>
+<div class="section" id="id12">
+<h3>Post-Conditions<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>The system state is unchanged.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="database.html" class="btn btn-neutral float-right" title="Database Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Features for Academic Support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020  Ngô Ngọc Đức Huy et al.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

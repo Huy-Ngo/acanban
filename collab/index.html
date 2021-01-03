@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Requirements &mdash; Acanban 0.0.3 documentation</title>
+  <title>Building the Collaboration Platform &mdash; Acanban 0.0.3 documentation</title>
   
 
   
@@ -84,14 +84,14 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../obj.html">Objective</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building the Collaboration Platform</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="use-case.html">Use-Case Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html">Supplementary Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html">Database Design</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../choices.html">Technical Choices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/index.html">System Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../academic/index.html">Features for Academic Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/index.html">Other functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webapp/index.html">Constructing the Web Application</a></li>
 </ul>
 
             
@@ -138,13 +138,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Requirements</li>
+      <li>Building the Collaboration Platform</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/req/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/collab/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -157,13 +157,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="requirements">
-<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="building-the-collaboration-platform">
+<h1>Building the Collaboration Platform<a class="headerlink" href="#building-the-collaboration-platform" title="Permalink to this headline">¶</a></h1>
+<p>Collaboration is the key feature of acanban.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="use-case.html">Use-Case Model</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="use-case.html#create-project">Create Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case.html#join-project">Join Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use-case.html#add-project-members">Add Project Members</a></li>
 <li class="toctree-l2"><a class="reference internal" href="use-case.html#create-tasks">Create Tasks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="use-case.html#assign-tasks">Assign Tasks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="use-case.html#complete-tasks">Complete Tasks</a></li>
@@ -171,23 +172,15 @@
 <li class="toctree-l2"><a class="reference internal" href="use-case.html#evaluate">Evaluate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="use-case.html#create-discussion-thread">Create Discussion Thread</a></li>
 <li class="toctree-l2"><a class="reference internal" href="use-case.html#add-comment">Add Comment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case.html#receive-notification">Receive Notification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case.html#make-report">Make Report</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case.html#export-transcript">Export Transcript</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case.html#register">Register</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case.html#login">Login</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case.html#logout">Logout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case.html#search-student">Search Student</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case.html#search-lecturer">Search Lecturer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case.html#search-project">Search Project</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="suppl-spec.html">Supplementary Specification</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html#usability">Usability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html#reliability">Reliability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html#performance">Performance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html#supportability">Supportability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html#security">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#user">User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#project">Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#task">Task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#discussion-thread">Discussion Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#comment">Comment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#file">File</a></li>
 </ul>
 </li>
 </ul>

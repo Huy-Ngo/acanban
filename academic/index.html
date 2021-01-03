@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Supplementary Specification &mdash; Acanban 0.0.3 documentation</title>
+  <title>Features for Academic Support &mdash; Acanban 0.0.3 documentation</title>
   
 
   
@@ -35,8 +35,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Technical Choices" href="../choices.html" />
-    <link rel="prev" title="Use-Case Model" href="use-case.html" /> 
+    <link rel="next" title="Use-Case Model" href="use-case.html" />
+    <link rel="prev" title="Database Design" href="../collab/database.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,21 +84,14 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../obj.html">Objective</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requirements</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../collab/index.html">Building the Collaboration Platform</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Features for Academic Support</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="use-case.html">Use-Case Model</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Supplementary Specification</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#usability">Usability</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reliability">Reliability</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#performance">Performance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#supportability">Supportability</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#security">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html">Database Design</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../choices.html">Technical Choices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design/index.html">System Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/index.html">Other functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webapp/index.html">Constructing the Web Application</a></li>
 </ul>
 
             
@@ -145,15 +138,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index.html">Requirements</a> &raquo;</li>
-        
-      <li>Supplementary Specification</li>
+      <li>Features for Academic Support</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/req/suppl-spec.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/academic/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -166,30 +157,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="supplementary-specification">
-<h1>Supplementary Specification<a class="headerlink" href="#supplementary-specification" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="usability">
-<h2>Usability<a class="headerlink" href="#usability" title="Permalink to this headline">¶</a></h2>
-<p>The user interface must be functional on both desktop computers
-as well as on smartphones.</p>
-</div>
-<div class="section" id="reliability">
-<h2>Reliability<a class="headerlink" href="#reliability" title="Permalink to this headline">¶</a></h2>
-<p>The system must be available 99.99% of the time (that is,
-there must be no more than a few seconds of outage a day).</p>
-</div>
-<div class="section" id="performance">
-<h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h2>
-<p>The system should be able to support up to 1000 users
-simultaneously performing different tasks at any given time.</p>
-</div>
-<div class="section" id="supportability">
-<h2>Supportability<a class="headerlink" href="#supportability" title="Permalink to this headline">¶</a></h2>
-<p>TBD</p>
-</div>
-<div class="section" id="security">
-<h2>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h2>
-<p>TBD</p>
+  <div class="section" id="features-for-academic-support">
+<h1>Features for Academic Support<a class="headerlink" href="#features-for-academic-support" title="Permalink to this headline">¶</a></h1>
+<p>What makes our system different from other project management software
+is academic support.  This includes allowing supervisors to evaluate
+project progress and academic assistants to make statistical reports
+and export transcripts for students.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="use-case.html">Use-Case Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="use-case.html#evaluate">Evaluate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use-case.html#make-report">Make Report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use-case.html#export-transcript">Export Transcript</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#project">Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#task">Task</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -201,10 +188,10 @@ simultaneously performing different tasks at any given time.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../choices.html" class="btn btn-neutral float-right" title="Technical Choices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="use-case.html" class="btn btn-neutral float-right" title="Use-Case Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="use-case.html" class="btn btn-neutral float-left" title="Use-Case Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../collab/database.html" class="btn btn-neutral float-left" title="Database Design" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
