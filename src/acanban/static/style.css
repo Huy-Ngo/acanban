@@ -19,11 +19,11 @@
  * along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 :root {
     --color-bg: #ffffff;
     --color-fg: #171c24;
     --color-fg-alt: #2e3436;
+    --color-bg-alt: #eeeeec;
     --color-primary-dark: #0088ff;
     --color-primary-medium: #40a6ff;
     --color-primary-bright: #22d1ee;
@@ -47,6 +47,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .container {
     margin: auto;
     max-width: 36rem;
