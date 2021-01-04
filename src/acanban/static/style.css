@@ -60,7 +60,7 @@ body {
     padding: 0;
     background-color: var(--color-main);
 }
-main {
+.container {
     margin: auto;
     max-width: 45rem;
     padding: 1rem;
@@ -69,14 +69,25 @@ main {
 
 h1 { 
     text-align: center;
-    font-size: 4rem;
+    font-size: 2rem;
 }
 
 p {
     hyphens: auto;
-    text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
+
+main{
+    text-align: center;
+    min-height: 80vh;
+}
+
+img {
+    max-width: 40%;
+    max-height: 40%;
+    margin: 2rem;
+}
+
 
 /* form */
 form {
@@ -97,6 +108,7 @@ input[type=textarea],select, textarea {
     padding: 0.5rem;
     width: 100%;
     border-radius: 10px;
+    height: 5vh;
 }
 textarea {
     resize: none;
