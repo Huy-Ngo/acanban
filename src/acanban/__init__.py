@@ -28,7 +28,7 @@ from rethinkdb import r
 from rethinkdb.trio_net.net_trio import TrioConnectionPool
 from trio import open_nursery
 
-from .project import ProjectManagement, blueprint as project
+from .project import blueprint as project
 from .auth import Authenticator, blueprint as auth
 from .config import RETHINKDB_DEFAULT
 from .user import blueprint as user
@@ -66,6 +66,7 @@ class Acanban(QuartTrio):
 app = Acanban(__name__)
 app.register_blueprint(auth)
 app.register_blueprint(user)
+app.register_blueprint(project)
 
 
 @app.before_serving
