@@ -35,21 +35,18 @@ class Project(RethinkObject):
     table = 'projects'
 
 
-async def create_project(self, name: str, description: str) -> None:
-    async with current_app.db_pool.connection() as connection:
-        project = {'name': name, 'description': description}
-        await r.table('projects').insert(project).run(connection)
-
 @blueprint.route('/p', methods=['GET', 'POST'])
 async def create_projects() -> ResponseReturnValue:
     if request.method == 'GET':
         return await render_template('project.html')
     project = await request.form
     try:
-        await current_app.create_project(project['name'],
-                                         project['description'])
+        async with current_app.db_pool.connection() as connection:
+            project = {'name': project['name'],
+                       'description': project['description']}
+            await r.table('projects').insert(project).run(connection)
     except ValueError as e:
         return await render_template('project.html', error=str(e))
     else:
         print(project['name'])
-        return redirect('/p')
+        return redirect('/')
