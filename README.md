@@ -38,6 +38,14 @@ Acanban's configuration files are looked for
 in [user and site config dir][appdirs] (in that order),
 with `acanban` namespace.
 
+With third-party configuration separated to dedicated files,
+`acanban.toml` may define the following keys:
+
+```toml
+# Used for HTTP to HTTPS redirection if defined
+domain = 'example.com'
+```
+
 ### Hypercorn
 
 [Hypercorn configuration][hypercorn.toml] is loaded from `hypercorn.toml`.
@@ -55,6 +63,17 @@ port = 28015
 user = 'admin'
 timeout = 20
 db = 'test'
+```
+
+### IPFS
+
+Custom `ipfs.toml` must define the following keys,
+whose default values are listed as follows:
+
+```toml
+[gateway]
+base = 'http://127.0.0.1:8080/ipfs'
+fallback = 'https://ipfs.io'
 ```
 
 ## Hacking

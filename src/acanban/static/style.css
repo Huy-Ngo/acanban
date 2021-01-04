@@ -23,10 +23,15 @@
     --color-bg: #ffffff;
     --color-fg: #171c24;
     --color-fg-alt: #2e3436;
+    --color-bg-alt: #eeeeec;
     --color-primary-dark: #0088ff;
     --color-primary-medium: #40a6ff;
-    --color-primary-bright: #80c3ff;
+    --color-primary-bright: #22d1ee;
     --color-header-search: #eb4034;
+
+    --color-link: #0645AD;
+    --color-visited: #663366;
+    --color-hover: #3366BB;
 
     --color-error-bg: #FFD2D2;
     --color-error-fg: #D8000C;
@@ -46,16 +51,46 @@ body {
     margin: 0;
     padding: 0;
 }
-main {
+
+.container {
     margin: auto;
     max-width: 36rem;
     padding: 1rem;
+    min-height: 80vh;
 }
-h1 { text-align: center }
+
+h1 { 
+    text-align: center;
+    font-size: 2rem;
+}
+
 p {
     hyphens: auto;
-    text-align: justify;
+    font-size: 1.5rem;
+    text-align:center;
 }
+
+main{
+    min-height: 80vh;
+    padding: 1rem;
+}
+a { text-decoration: none }
+a:link { color: var(--color-link) }
+a:visited { color: var(--color-visited) }
+a:hover {
+    color: var(--color-hover);
+    cursor: pointer;
+}
+
+img {
+    max-width: 40%;
+    max-height: 40%;
+    margin: 2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 /* form */
 form {
@@ -67,7 +102,7 @@ button, input, select, textarea {
     font-size: 100%;
 }
 button, input[type=text], input[type=password], input[type=email], input[type=submit],
-select {
+select, textarea {
     background-color: var(--color-bg);
     border: 0.1rem solid var(--color-fg);
     box-sizing: border-box;
@@ -75,12 +110,22 @@ select {
     margin: 0.5rem 0;
     padding: 0.5rem;
     width: 100%;
+    border-radius: 30px;
+    height: 3rem;
+    outline: none;
+    letter-spacing: 1px;
+}
+textarea {
+    height: 11rem;
+    overflow-y: scroll;
+    resize: vertical;
+    scrollbar-color: var(--color-bg-alt) transparent;
 }
 select {
     appearance: none;
     background: url(/static/dropdown-icon.svg) right center no-repeat;
 }
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
     border-color: var(--color-primary-dark);
     box-shadow: 0 0 0.5rem var(--color-primary-bright);
 }
@@ -113,6 +158,9 @@ button, input[type=submit]:hover { background-color: var(--color-primary-medium)
     color: var(--color-warning-fg);
 }
 
+/* specialized containers */
+.block { padding-bottom: 1.5em }
+
 /* header */
 nav {
     background-color: var(--color-fg);
@@ -128,13 +176,12 @@ nav {
     margin-bottom: auto;
     margin-top: auto;
     padding: 1rem;
-    text-decoration: none;
 }
 #logo::selection, #hambutton::selection, #nav-entries > a::selection {
     background-color: var(--color-fg);
 }
 #logo:hover, #nav-entries > a:hover, #hambutton:hover {
-    color: var(--color-primary-dark);
+    color: var(--color-primary-bright);
 }
 #logo {
     font-size: 1.8rem;

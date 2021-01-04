@@ -1,0 +1,3 @@
+[gateway]
+base = 'http://localhost:8080/ipfs'
+fallback = 'https://dweb.link'

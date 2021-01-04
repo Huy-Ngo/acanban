@@ -1,5 +1,6 @@
-# Initialization code
+# Project pages
 # Copyright (C) 2020  Ngô Xuân Minh
+# Copyright (C) 2020  Nguyễn Gia Phong
 #
 # This file is part of Acanban.
 #
@@ -22,8 +23,10 @@ from quart import (Blueprint, ResponseReturnValue,
 from .db import RethinkObject
 
 
+__all__ = ['blueprint']
 ROLES = 'student', 'supervisor'
-blueprint = Blueprint('project', __name__)
+BASIC_FIELDS = 'name', 'supervisor', 'participants', 'description'
+blueprint = Blueprint('project', __name__, url_prefix='/p')
 
 
 class Project(RethinkObject):
@@ -49,3 +52,14 @@ async def create_projects() -> ResponseReturnValue:
     else:
         print(project['name'])
         return redirect('/')
+from quart import Blueprint, ResponseReturnValue, current_app, render_template
+from rethinkdb import r
+
+
+@blueprint.route('/')
+async def list_projects() -> ResponseReturnValue:
+    """Return a page listing all projects."""
+    project_list = r.table('projects').pluck(*BASIC_FIELDS)
+    async with current_app.db_pool.connection() as connection:
+        projects = await project_list.run(connection)
+    return await render_template('projects.html', projects=projects)

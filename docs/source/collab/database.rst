@@ -1,8 +1,7 @@
 Database Design
 ===============
 
-The database used for the system is document-oriented.  That is, it is stored
-and queried in JSON-like format.  The database consists of following objects:
+The collaboration tasks require following data:
 
 - ``User``
 - ``Project``
@@ -15,6 +14,11 @@ Each of them is described in following sections.
 
 User
 ----
+
+A ``User`` object represents either a student, a supervisor,
+or an academic assistant.  The object contains the user's projects
+as well as other contact information, which allows the users to communicate
+with each other.
 
 Each ``User`` object has following attributes:
 
@@ -61,7 +65,9 @@ Each ``User`` object has following attributes:
 Project
 -------
 
-Each ``Project`` object has following attributes:
+A ``Project`` object includes the project description as well as the links to participants.
+
+It has following attributes:
 
 ``name`` : ``string``
    The name of the project
@@ -90,11 +96,8 @@ Each ``Task`` object has following attributes:
 ``creator`` : ``User``
    The user who created the task
 
-``is-done`` : ``boolean``
-   Whether the task is done
-
-``evaluation`` : ``number``
-   The evaluation of the task
+``status`` : ``integer``
+   The status of the project in the Kanban board: to-do, in progress, or done.
 
 ``assigned-to`` : ``User``
    The assignee of the task. Must have role ``student``.
@@ -108,11 +111,14 @@ Each ``Task`` object has following attributes:
 ``discussion`` : ``array`` of ``Thread``
    List of ``Thread`` s created for this task
 
+``file`` : ``File``
+   Optional file that shows the assignee's work to address the task.
+
 
 Discussion Thread
 -----------------
 
-Each ``Task`` object has following attributes:
+Each ``Thread`` object has following attributes:
 
 
 ``creator`` : ``User``
@@ -145,8 +151,13 @@ Each ``Comment`` object has following attributes:
 File
 ----
 
-``address`` : ``string``
-   The IPFS address for the file object, which is also used as primary key.
+The ``File`` object is needed to store the metadata about the files
+used in project.
 
-``name`` : ``string``
-   The file name
+``cid`` : ``string``
+   Content identifier of the file in CID_ v1.
+
+``filename`` : ``string``, *optional*
+   Filename of the file.
+
+.. _CID: https://github.com/multiformats/cid

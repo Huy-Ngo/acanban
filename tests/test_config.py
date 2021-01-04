@@ -1,5 +1,5 @@
 # Test configuration parsing
-# Copyright (C) 2020  Nguyễn Gia Phong
+# Copyright (C) 2020-2021  Nguyễn Gia Phong
 #
 # This file is part of Acanban.
 #
@@ -22,8 +22,9 @@ from typing import Any, Mapping, Sequence
 import toml
 from pytest import mark, param
 
-from acanban.config import (ACANBAN_DEFAULT, RETHINKDB_DEFAULT, acanban_config,
-                            hypercorn_config, rethinkdb_config)
+from acanban.config import (ACANBAN_DEFAULT, IPFS_DEFAULT, RETHINKDB_DEFAULT,
+                            acanban_config, hypercorn_config, ipfs_config,
+                            rethinkdb_config)
 
 CONFIG_DIR = abspath(join(dirname(__file__), 'assets'))
 EMPTY_DIR = 'this directory does not exist'
@@ -31,6 +32,7 @@ EMPTY_DIR = 'this directory does not exist'
 ACANBAN_MOCK = toml.load(join(CONFIG_DIR, 'acanban.toml'))
 HYPERCORN_MOCK = toml.load(join(CONFIG_DIR, 'hypercorn.toml'))
 HYPERCORN_DEFAULT = {'bind': ['127.0.0.1:8000']}
+IPFS_MOCK = toml.load(join(CONFIG_DIR, 'ipfs.toml'))
 RETHINKDB_MOCK = toml.load(join(CONFIG_DIR, 'rethinkdb.toml'))
 
 
@@ -53,6 +55,15 @@ def test_hypercorn_config(dirs: Sequence[str],
     """Test loading Hypercorn configuration."""
     config = hypercorn_config(dirs)
     for key, value in mapping.items(): assert getattr(config, key) == value
+
+
+@mark.parametrize(('dirs', 'mapping'), (
+    param([CONFIG_DIR], IPFS_MOCK, id='load'),
+    param([EMPTY_DIR, CONFIG_DIR], IPFS_MOCK, id='find'),
+    param([EMPTY_DIR], IPFS_DEFAULT, id='fallback')))
+def test_ipfs_config(dirs: Sequence[str], mapping: Mapping[str, Any]) -> None:
+    """Test loading IPFS configuration."""
+    assert ipfs_config(dirs) == mapping
 
 
 @mark.parametrize(('dirs', 'mapping'), (
