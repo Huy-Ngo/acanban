@@ -16,19 +16,18 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from typing import Optional
 from rethinkdb import r
-from quart import (Blueprint, Quart, ResponseReturnValue,
+from quart import (Blueprint, ResponseReturnValue,
                    current_app, redirect, render_template, request)
-from quart_auth import login_user, logout_user
 from .db import RethinkObject
 
 
 ROLES = 'student', 'supervisor'
 blueprint = Blueprint('project', __name__)
 
+
 class Project(RethinkObject):
-    slots = ['name', 'description' 
+    slots = ['name', 'description',
              'creator', 'supervisor',
              'participants', 'tasks']
 

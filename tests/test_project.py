@@ -19,16 +19,16 @@
 from pytest import mark
 from quart.testing import QuartClient
 
+
 @mark.parametrize(('name', 'code'),
                   (('minigh', 302),
-                   ('acanban', 200)))
-async def test_create(name: str, code: int,
-                     client: QuartClient) -> None:
+                   ('acanban', 302)))
+async def test_create(name: str, code: int, client: QuartClient) -> None:
     """Test successful and failed create project."""
-    response = await client.post('/project', form=dict(
+    response = await client.post('/p', form=dict(
         name=name, description='MAD',
         creator='Fô Bả', supervisor='f@o.o',
-        participants = ['huy', 'phong', 'minh'],
+        participants=['huy', 'phong', 'minh'],
         tasks=['login', 'menu', 'repo']))
 
-    assert response.status_code == code 
+    assert response.status_code == code
