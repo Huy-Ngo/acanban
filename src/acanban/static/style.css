@@ -80,6 +80,7 @@ p {
 main{
     text-align: center;
     min-height: 80vh;
+    padding: 1rem;
 }
 
 img {
