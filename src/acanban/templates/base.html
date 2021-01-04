@@ -37,13 +37,14 @@
       <input type=checkbox id=hamburger>
 
       <div id=nav-entries>
+        {% if current_user.is_authenticated %}
         <form id=search>
           <input type=search placeholder=Search>
           <input type=submit value=Go>
         </form>
         <a href=/p>Projects</a>
         <a href=/t>Tasks</a>
-
+        {% endif %}
         {% if current_user.is_authenticated %}
         <a href='/u/{{ current_user.key }}' class=expand>My Profile</a>
         <a href=/logout>Logout</a>
