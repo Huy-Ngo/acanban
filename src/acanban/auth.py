@@ -60,7 +60,7 @@ class User(AuthUser, RethinkObject):
         Role of the user.
     """
 
-    slots = 'username', 'password', 'name', 'email', 'role'
+    slots = 'username', 'password', 'name', 'email', 'role', 'projects'
     table = 'users'
 
     def __init__(self, username: Optional[str]) -> None:
