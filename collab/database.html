@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Database Design &mdash; Acanban 0.0.3 documentation</title>
+  <title>Database Design &mdash; Acanban 0.0.4 documentation</title>
   
 
   
@@ -292,9 +292,9 @@ A unique identifier assigned to students to be used outside this system</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">File</span></code> object is needed to store the metadata about the files
 used in project.</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">address</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The IPFS address for the file object, which is also used as primary key.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">cid</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>Content identifier of the file in <a class="reference external" href="https://github.com/multiformats/cid">CID</a> v1.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The file name</p>
+<dt><code class="docutils literal notranslate"><span class="pre">filename</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em></span></dt><dd><p>Filename of the file.</p>
 </dd>
 </dl>
 </div>
