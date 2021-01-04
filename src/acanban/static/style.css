@@ -19,17 +19,6 @@
  * along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
  */
 
- select {
-   text-align-last: center;
-   text-align: center;
-   -ms-text-align-last: center;
-   -moz-text-align-last: center;
-}
-
-/*placeholder center*/
-::placeholder{
-    text-align: center;
-}
 
 :root {
     --color-bg: #ffffff;
@@ -39,7 +28,6 @@
     --color-primary-medium: #40a6ff;
     --color-primary-bright: #22d1ee;
     --color-header-search: #eb4034;
-    --color-main: #e2f3f5;
 
     --color-error-bg: #FFD2D2;
     --color-error-fg: #D8000C;
@@ -58,7 +46,6 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: var(--color-main);
 }
 .container {
     margin: auto;
@@ -75,10 +62,10 @@ h1 {
 p {
     hyphens: auto;
     font-size: 1.5rem;
+    text-align:center;
 }
 
 main{
-    text-align: center;
     min-height: 80vh;
     padding: 1rem;
 }
@@ -87,6 +74,9 @@ img {
     max-width: 40%;
     max-height: 40%;
     margin: 2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -99,8 +89,7 @@ button, input, select, textarea {
     font-family: inherit;
     font-size: 100%;
 }
-input[type=text], input[type=password], input[type=email], input[type=submit],
-input[type=textarea],select, textarea {
+input[type=text], input[type=password], input[type=email], input[type=submit],select, textarea {
     background-color: var(--color-bg);
     border: 0.1rem solid var(--color-fg);
     box-sizing: border-box;
@@ -108,18 +97,22 @@ input[type=textarea],select, textarea {
     margin: 0.5rem 0;
     padding: 0.5rem;
     width: 100%;
-    border-radius: 10px;
-    height: 5vh;
+    border-radius: 30px;
+    height: 3rem;
+    outline: none;
+    letter-spacing: 1px;
 }
 textarea {
-    resize: none;
-    height: 10vh;
+    height: 11rem;
+    overflow-y: scroll;
+    resize: vertical;
+    scrollbar-color: var(--color-bg-alt) transparent;
 }
 select {
     appearance: none;
     background: url(/static/dropdown-icon.svg) right center no-repeat;
 }
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
     border-color: var(--color-primary-dark);
     box-shadow: 0 0 0.5rem var(--color-primary-bright);
 }
@@ -213,9 +206,6 @@ nav {
 
 /* hamburger menu */
 @media screen and (max-width: 54rem) {
-    h1{
-        font-size: 2rem;
-    }
     nav {
         padding: 0;
         position: sticky;

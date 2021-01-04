@@ -27,8 +27,10 @@
     {% if error %}
     <div class=error>{{ error }}</div>
     {% endif %}
-    <input type=text name=username id=username placeholder=username required>
-    <input type=password name=password id=password placeholder=password required>
+    <label for="username">Username</label>
+    <input type=text name=username id=username required>
+    <label for="password">Password</label>
+    <input type=password name=password id=password required>
     <input type=checkbox name=remember id=remember>
     <label for=remember>Remember me</label>
     <input type=submit name=submit value=Login>
