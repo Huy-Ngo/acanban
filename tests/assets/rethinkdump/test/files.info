@@ -1,0 +1,16 @@
+{
+  "db": {
+    "id": "20f2695e-895c-4c8d-9a1d-56d7d949d50e",
+    "name": "test",
+    "type": "DB"
+  },
+  "doc_count_estimates": [
+    2
+  ],
+  "id": "2424c10f-b42e-4aaf-a8f9-89be42117611",
+  "indexes": [],
+  "name": "files",
+  "primary_key": "cid",
+  "type": "TABLE",
+  "write_hook": null
+}

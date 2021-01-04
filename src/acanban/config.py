@@ -1,5 +1,5 @@
 # Configuration parser
-# Copyright (C) 2020  Nguyễn Gia Phong
+# Copyright (C) 2020-2021  Nguyễn Gia Phong
 #
 # This file is part of Acanban.
 #
@@ -27,6 +27,9 @@ TomMapping = MutableMapping[str, Any]
 
 CONFIG_DIRS = user_config_dir('acanban'), site_config_dir('acanban')
 ACANBAN_DEFAULT: TomMapping = {}
+IPFS_DEFAULT: TomMapping = {
+    'gateway': {'base': 'http://127.0.0.1:8080/ipfs',
+                'fallback': 'https://ipfs.io'}}
 RETHINKDB_DEFAULT: TomMapping = {'db': 'test'}
 
 
@@ -36,6 +39,14 @@ def acanban_config(dirs: Sequence[str] = CONFIG_DIRS) -> TomMapping:
         file = join(directory, 'acanban.toml')
         if isfile(file): return toml.load(file)
     return ACANBAN_DEFAULT
+
+
+def ipfs_config(dirs: Sequence[str] = CONFIG_DIRS) -> TomMapping:
+    """Return IPFS configuration first found in given directories."""
+    for directory in dirs:
+        file = join(directory, 'ipfs.toml')
+        if isfile(file): return toml.load(file)
+    return IPFS_DEFAULT
 
 
 def hypercorn_config(dirs: Sequence[str] = CONFIG_DIRS) -> HyperConf:

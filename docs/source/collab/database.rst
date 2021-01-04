@@ -154,8 +154,10 @@ File
 The ``File`` object is needed to store the metadata about the files
 used in project.
 
-``address`` : ``string``
-   The IPFS address for the file object, which is also used as primary key.
+``cid`` : ``string``
+   Content identifier of the file in CID_ v1.
 
-``name`` : ``string``
-   The file name
+``filename`` : ``string``, *optional*
+   Filename of the file.
+
+.. _CID: https://github.com/multiformats/cid

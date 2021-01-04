@@ -1,0 +1,9 @@
+from typing import Union
+
+class CIDv0:
+    def to_v1(self) -> CIDv1: ...
+
+class CIDv1:
+    def encode(self) -> bytes: ...
+
+def make_cid(multihash: str) -> Union[CIDv0, CIDv1]: ...

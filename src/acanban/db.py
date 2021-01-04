@@ -1,4 +1,4 @@
-# Authentication handler
+# RethinkDB wrappers
 # Copyright (C) 2020  Nguyễn Gia Phong
 #
 # This file is part of Acanban.

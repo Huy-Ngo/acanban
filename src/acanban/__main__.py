@@ -1,5 +1,5 @@
 # Server console script
-# Copyright (C) 2020  Nguyễn Gia Phong
+# Copyright (C) 2020-2021  Nguyễn Gia Phong
 # Copyright (C) 2020  Ngô Ngọc Đức Huy
 #
 # This file is part of Acanban.
@@ -23,11 +23,13 @@ from hypercorn.typing import ASGIFramework
 from trio import run
 
 from . import app as acanban
-from .config import acanban_config, hypercorn_config, rethinkdb_config
+from .config import (acanban_config, hypercorn_config,
+                     ipfs_config, rethinkdb_config)
 
 if __name__ == '__main__':
     domain = acanban_config().get('domain')
-    acanban.rethinkdb_config = rethinkdb_config()
+    acanban.db_config = rethinkdb_config()
+    acanban.ipfs_config = ipfs_config()
     if domain is None:
         app: ASGIFramework = acanban
     else:

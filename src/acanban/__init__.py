@@ -1,5 +1,5 @@
 # Initialization code
-# Copyright (C) 2020  Nguyễn Gia Phong
+# Copyright (C) 2020-2021  Nguyễn Gia Phong
 #
 # This file is part of Acanban.
 #
@@ -22,6 +22,7 @@ from contextlib import asynccontextmanager
 from secrets import token_urlsafe
 from typing import Any, AsyncIterator
 
+from httpx import AsyncClient
 from quart import render_template
 from quart_trio import QuartTrio
 from rethinkdb import r
@@ -29,21 +30,24 @@ from rethinkdb.trio_net.net_trio import TrioConnectionPool
 from trio import open_nursery
 
 from .auth import Authenticator, blueprint as auth
-from .config import RETHINKDB_DEFAULT
+from .config import IPFS_DEFAULT, RETHINKDB_DEFAULT
+from .ipfs import blueprint as ipfs
 from .project import blueprint as project
 from .user import blueprint as user
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 
 
 class Acanban(QuartTrio):
     """Acanban web application."""
 
     auth_manager: Authenticator
+    db_config = RETHINKDB_DEFAULT
     db_pool: TrioConnectionPool
-    rethinkdb_config = RETHINKDB_DEFAULT
+    ipfs_config = IPFS_DEFAULT
+    ipfs_gateway: AsyncClient
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
@@ -65,6 +69,7 @@ class Acanban(QuartTrio):
 
 app = Acanban(__name__)
 app.register_blueprint(auth)
+app.register_blueprint(ipfs)
 app.register_blueprint(user)
 app.register_blueprint(project)
 
@@ -73,14 +78,25 @@ app.register_blueprint(project)
 async def create_db_pool() -> None:
     """Create RethinkDB connection pool."""
     r.set_loop_type('trio')
-    app.db_pool = r.ConnectionPool(
-        nursery=app.nursery, **app.rethinkdb_config)
+    app.db_pool = r.ConnectionPool(nursery=app.nursery, **app.db_config)
 
 
 @app.after_serving
 async def close_db_pool() -> None:
     """Close RethinkDB connection pool."""
     await app.db_pool.close()
+
+
+@app.before_serving
+async def open_ipfs_gateway() -> None:
+    """Open HTTPX client for IPFS gateway."""
+    app.ipfs_gateway = AsyncClient(base_url=app.ipfs_config['gateway']['base'])
+
+
+@app.after_serving
+async def close_ipfs_gateway() -> None:
+    """Close HTTPX client for IPFS gateway."""
+    await app.ipfs_gateway.aclose()
 
 
 @app.route('/')
