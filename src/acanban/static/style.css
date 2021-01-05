@@ -91,6 +91,7 @@ button, select, textarea,
 input[type=text], input[type=password], input[type=email] {
     background-color: var(--color-bg);
     border: 0.1rem solid var(--color-fg);
+    border-radius: 0.3rem;
     box-sizing: border-box;
     color: var(--color-fg);
     margin: 0.5rem 0;
