@@ -37,7 +37,7 @@ def client(app: Acanban) -> QuartClient:
 
 @fixture
 async def assistant(client: QuartClient) -> QuartClient:
-    """Return a test client that is signed in as an academic assistant."""
+    """Return a test client logged in as an academic assistant."""
     await client.post(
         '/login', form=dict(username='silasl', password='lsalis'))
     return client
@@ -45,7 +45,7 @@ async def assistant(client: QuartClient) -> QuartClient:
 
 @fixture
 async def student(client: QuartClient) -> QuartClient:
-    """Return a test client that is signed in as a student."""
+    """Return a test client logged in as a student."""
     await client.post(
         '/login', form=dict(username='adaml', password='lmada'))
     return client
@@ -53,7 +53,7 @@ async def student(client: QuartClient) -> QuartClient:
 
 @fixture
 async def supervisor(client: QuartClient) -> QuartClient:
-    """Return a test client that is signed in as a supervisor."""
+    """Return a test client logged in as a supervisor."""
     await client.post(
-        '/login', form=dict(username='elir', password='rile'))
+        '/login', form=dict(username='ronanf', password='fnanor'))
     return client

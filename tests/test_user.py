@@ -39,23 +39,9 @@ async def test_edit_view(username: str, code: int,
     assert response.status_code == code
 
 
-async def test_edit_good(assistant: QuartClient) -> None:
+async def test_edit(assistant: QuartClient) -> None:
     """Test for user editing name (POST method)."""
     response = await assistant.post(
         '/u/silasl/edit', form=dict(name='Silas Salis',
                                     email='newemail@example.edu'))
     assert response.status_code == 302
-
-
-async def test_edit_bad_1(assistant: QuartClient) -> None:
-    """Test for user bad request (send empty string)."""
-    response = await assistant.post(
-        '/u/silasl/edit', form=dict(name='', email='newmail@example.edu'))
-    assert response.status_code == 400
-
-
-async def test_edit_bad_2(assistant: QuartClient) -> None:
-    """Test for user sending bad request (lacking field)."""
-    response = await assistant.post(
-        '/u/silasl/edit', form=dict(name='Lacking Email'))
-    assert response.status_code == 400

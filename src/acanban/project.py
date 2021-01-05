@@ -20,7 +20,7 @@ from quart import Blueprint, ResponseReturnValue, current_app, render_template
 from rethinkdb import r
 
 __all__ = ['blueprint']
-BASIC_FIELDS = 'name', 'supervisor', 'participants', 'description'
+BASIC_FIELDS = 'id', 'name', 'supervisors', 'students', 'description'
 
 blueprint = Blueprint('project', __name__, url_prefix='/p')
 

@@ -18,21 +18,26 @@ along with Acanban.  If not, see <https://www.gnu.org/licenses/>. -->
 
 {% extends 'base.html' %}
 
-{% block title %}
-{{name}}'s profile
-{% endblock %}
+{% block title %}Edit profile{% endblock %}
 
 {% block content %}
-
-<h1>{{ name }}</h1>
-<div>{{ role }}</div>
-<div>u/{{ username }}</div>
-<div>{{ email }}</div>
-
-{% if username == current_user.key %}
-<a href="{{url_for('user.edit_user_profile', username=username) }}">
-  <button>Edit profile</button>
-</a>
-{% endif %}
-
+<div class=col-wide>
+  <form action="edit" method="POST">
+    <label for="name">Full name</label>
+    <input type="text" name="name" id="name"
+           value="{{ user.name }}" required/>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email"
+           value="{{ user.email }}" required/>
+    {% if user.role == 'student' %}
+    <label for="student-id">Student ID</label>
+    <input type="text" name="student-id" id="student-id"
+           value="{{ user['student-id'] }}">
+    {% endif %}
+    <label for="department">Department</label>
+    <input type="text" name="department" id="department"
+           value="{{ user.department }}">
+    <button>Save</button>
+  </form>
+</div>
 {% endblock%}
