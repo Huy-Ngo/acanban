@@ -17,7 +17,10 @@
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
 from quart import Blueprint, ResponseReturnValue, current_app, render_template
+from quart.exceptions import NotFound
+from quart_auth import Unauthorized, current_user, login_required
 from rethinkdb import r
+from rethinkdb.errors import ReqlNonExistenceError
 
 __all__ = ['blueprint']
 BASIC_FIELDS = 'id', 'name', 'supervisors', 'students', 'description'
@@ -32,3 +35,21 @@ async def list_projects() -> ResponseReturnValue:
     async with current_app.db_pool.connection() as connection:
         projects = await project_list.run(connection)
     return await render_template('projects.html', projects=projects)
+
+
+@blueprint.route('/<uuid>/')
+@login_required
+async def info(uuid: str) -> ResponseReturnValue:
+    """Return the page containing the projects' basic infomation."""
+    probject = r.table('projects').get(uuid)
+    async with current_app.db_pool.connection() as connection:
+        try:
+            project = await probject.pluck(*BASIC_FIELDS).run(connection)
+        except ReqlNonExistenceError:
+            raise NotFound
+    try:
+        user_projects = await current_user.projects
+    except ReqlNonExistenceError:
+        raise Unauthorized
+    if uuid not in user_projects: raise Unauthorized
+    return await render_template('project-info.html', project=project)
