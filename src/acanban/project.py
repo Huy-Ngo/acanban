@@ -16,7 +16,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from quart import Blueprint, ResponseReturnValue, current_app, render_template
+from quart import (Blueprint, ResponseReturnValue, current_app,
+                   redirect, render_template, request)
 from quart.exceptions import NotFound
 from quart_auth import Unauthorized, current_user, login_required
 from rethinkdb import r
@@ -26,6 +27,18 @@ __all__ = ['blueprint']
 BASIC_FIELDS = 'id', 'name', 'supervisors', 'students', 'description'
 
 blueprint = Blueprint('project', __name__, url_prefix='/p')
+
+
+@blueprint.route('/create', methods=['GET', 'POST'])
+async def create_projects() -> ResponseReturnValue:
+    if request.method == 'GET':
+        return await render_template('project-create.html')
+    project = await request.form
+    async with current_app.db_pool.connection() as connection:
+        project = {'name': project['name'],
+                   'description': project['description']}
+        await r.table('projects').insert(project).run(connection)
+    return redirect('/p')
 
 
 @blueprint.route('/')
