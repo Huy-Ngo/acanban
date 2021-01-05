@@ -31,3 +31,10 @@ async def test_status(uri: str, status_code: int, client: QuartClient) -> None:
     response = await client.get(uri)
     assert response.status_code == status_code
     await response.get_data()
+
+
+async def test_myproject_status(student: QuartClient) -> None:
+    """Test the status of basic routes."""
+    response = await student.get('/')
+    assert response.status_code == 200
+    await response.get_data()

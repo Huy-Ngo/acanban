@@ -23,7 +23,8 @@ from secrets import token_urlsafe
 from typing import Any, AsyncIterator
 
 from httpx import AsyncClient
-from quart import render_template
+from quart import ResponseReturnValue, current_app, render_template
+from quart_auth import current_user
 from quart_trio import QuartTrio
 from rethinkdb import r
 from rethinkdb.trio_net.net_trio import TrioConnectionPool
@@ -100,6 +101,13 @@ async def close_ipfs_gateway() -> None:
 
 
 @app.route('/')
-async def index() -> str:
+async def index() -> ResponseReturnValue:
     """Return the index page."""
-    return await render_template('index.html')
+    if await current_user.is_authenticated:
+        uuids = await current_user.projects
+        my_project_list = r.table('projects').get_all(*uuids)
+        async with current_app.db_pool.connection() as connection:
+            projects = await my_project_list.run(connection)
+        return await render_template('myproject.html', projects=projects)
+    else:
+        return await render_template('index.html')
