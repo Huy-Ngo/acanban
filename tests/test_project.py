@@ -39,12 +39,14 @@ async def test_info_access_assistant(assistant: QuartClient) -> None:
     assert response.status_code == 401  # unauthorized
 
 
+# This supervisor is not a member of PROJECT.
 async def test_info_access_nonmember(supervisor: QuartClient) -> None:
     """Test project info page access by a non-member user."""
     response = await supervisor.get(PROJECT)
     assert response.status_code == 401  # unauthorized
 
 
+# This student is a member of PROJECT.
 async def test_info_access_member(student: QuartClient) -> None:
     """Test project info page access by a member."""
     response = await student.get(PROJECT)
