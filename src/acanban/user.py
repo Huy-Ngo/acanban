@@ -40,8 +40,15 @@ async def view_user_profile(username: str) -> ResponseReturnValue:
     """Handle the user profile page."""
     async with current_app.db_pool.connection() as conn:
         user = await users.get(username).run(conn)
-    if user is None: raise NotFound
-    return await render_template('user.html', user=user)
+        if user is None: raise NotFound
+        project_uuids = user.get('projects', None)
+        if project_uuids is not None:
+            project_list = r.table('projects').get_all(*project_uuids)
+            projects = await project_list.run(conn)
+            return await render_template(
+                'user.html', user=user, projects=projects)
+        else:
+            return await render_template('user.html', user=user)
 
 
 @blueprint.route('/<username>/edit', methods=['GET', 'POST'])
