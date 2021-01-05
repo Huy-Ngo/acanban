@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Project{% endblock %}
+{% block content %}
+<h1>Create Project</h1>
+<form action=p method=POST>
+  {% if error %}
+  <div class=error>{{ error }}</div>
+  {% endif %}
+  <input type=text name=name id=project_name placeholder='project name' required>
+  <input type=text name=description id=description placeholder=description required>
+  <input type=submit name=submit id=submit placeholder="Create project">
+</form>
+{% endblock %}
