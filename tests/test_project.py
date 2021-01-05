@@ -23,12 +23,9 @@ from quart.testing import QuartClient
 @mark.parametrize(('name', 'code'),
                   (('minigh', 302),
                    ('acanban', 302)))
-async def test_create(name: str, code: int, client: QuartClient) -> None:
+async def test_create(name: str, code: int, student: QuartClient) -> None:
     """Test successful and failed create project."""
-    response = await client.post('/p', form=dict(
-        name=name, description='MAD',
-        creator='Fô Bả', supervisor='f@o.o',
-        participants=['huy', 'phong', 'minh'],
-        tasks=['login', 'menu', 'repo']))
+    response = await student.post('/p/create', form=dict(
+        name=name, description='MAD'))
 
     assert response.status_code == code

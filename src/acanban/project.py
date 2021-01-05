@@ -17,9 +17,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from rethinkdb import r
 from quart import (Blueprint, ResponseReturnValue,
                    current_app, redirect, render_template, request)
+from rethinkdb import r
 from .db import RethinkObject
 
 
@@ -30,30 +30,22 @@ blueprint = Blueprint('project', __name__, url_prefix='/p')
 
 
 class Project(RethinkObject):
-    slots = ['name', 'description',
-             'creator', 'supervisor',
-             'participants', 'tasks']
+    slots = ('name', 'description', 'creator',
+             'supervisor', 'participants', 'tasks')
 
     table = 'projects'
 
 
-@blueprint.route('/p', methods=['GET', 'POST'])
+@blueprint.route('/create', methods=['GET', 'POST'])
 async def create_projects() -> ResponseReturnValue:
     if request.method == 'GET':
-        return await render_template('project.html')
+        return await render_template('project_create.html')
     project = await request.form
-    try:
-        async with current_app.db_pool.connection() as connection:
-            project = {'name': project['name'],
-                       'description': project['description']}
-            await r.table('projects').insert(project).run(connection)
-    except ValueError as e:
-        return await render_template('project.html', error=str(e))
-    else:
-        print(project['name'])
-        return redirect('/')
-from quart import Blueprint, ResponseReturnValue, current_app, render_template
-from rethinkdb import r
+    async with current_app.db_pool.connection() as connection:
+        project = {'name': project['name'],
+                    'description': project['description']}
+        await r.table('projects').insert(project).run(connection)
+    return redirect('/p')
 
 
 @blueprint.route('/')
@@ -62,4 +54,4 @@ async def list_projects() -> ResponseReturnValue:
     project_list = r.table('projects').pluck(*BASIC_FIELDS)
     async with current_app.db_pool.connection() as connection:
         projects = await project_list.run(connection)
-    return await render_template('projects.html', projects=projects)
+    return await render_template('project_list.html', projects=projects)

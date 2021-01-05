@@ -21,8 +21,8 @@ from quart.testing import QuartClient
 
 
 @mark.parametrize(('uri', 'status_code'), (
-    ('/', 200), ('/p/', 200),
-    ('/register', 200), ('/login', 200), ('/logout', 302), ('/p', 200),
+    ('/', 200), ('/p/', 200), ('/p/create', 200),
+    ('/register', 200), ('/login', 200), ('/logout', 302),
     ('/ipfs/QmUy4o1EszCiu9XmtHD4ysScfSYhZUKGLLKiESEL3Ynq5X', 200),
     ('/ipfs/QmRW3V9znzFW9M5FYbitSEvd5dQrPWGvPvgQD6LM22Tv8D', 301),
     ('/ipns/ipfs.io', 301), ('/ipfs/ipfs.io', 404)))
