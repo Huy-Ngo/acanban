@@ -1,0 +1,18 @@
+{% extends 'project-detail.html' %}
+
+{% block tabbarlayout %}
+{{ tabbar('Edit') }}
+{% endblock %}
+
+{% block tabcontent %}
+<div class=col-wide>
+  <form action=edit method=POST>
+    <label for=name>Project name</label>
+    <input type=text name=name id=name
+           value="{{ project.name }}" required/>
+    <label for=description>Description</label>
+    <textarea name=description id=description>{{ project.description }}</textarea>
+    <button>Save</button>
+  </form>
+</div>
+{% endblock%} 
