@@ -1,5 +1,6 @@
 # Project pages
 # Copyright (C) 2020  Nguyễn Gia Phong
+# Copyright (C) 2020  Ngô Ngọc Đức Huy
 #
 # This file is part of Acanban.
 #
@@ -16,7 +17,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from quart import Blueprint, ResponseReturnValue, current_app, render_template
+from quart import (Blueprint, ResponseReturnValue, current_app,
+                   redirect, render_template)
 from quart.exceptions import NotFound
 from quart_auth import Unauthorized, current_user, login_required
 from rethinkdb import r
@@ -39,12 +41,19 @@ async def list_projects() -> ResponseReturnValue:
 
 @blueprint.route('/<uuid>/')
 @login_required
+async def info_redirect(uuid: str) -> ResponseReturnValue:
+    """Redirect to the project info page."""
+    return redirect(f'/p/{uuid}/info')
+
+
+@blueprint.route('/<uuid>/info')
+@login_required
 async def info(uuid: str) -> ResponseReturnValue:
     """Return the page containing the projects' basic infomation."""
-    probject = r.table('projects').get(uuid)
+    project = r.table('projects').get(uuid)
     async with current_app.db_pool.connection() as connection:
         try:
-            project = await probject.pluck(*BASIC_FIELDS).run(connection)
+            project = await project.pluck(*BASIC_FIELDS).run(connection)
         except ReqlNonExistenceError:
             raise NotFound
     try:
