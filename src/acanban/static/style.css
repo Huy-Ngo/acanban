@@ -124,6 +124,30 @@ textarea {
     resize: vertical;
     scrollbar-color: var(--color-bg-alt) transparent;
 }
+dl {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--color-fg);
+  border-radius: .3rem;
+}
+
+dt, dd {
+  margin: 0;
+  width: 50%;
+  border-bottom: 1px solid var(--color-fg);
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+dt {
+  border-right: 1px solid var(--color-fg);
+  font-weight: bold;
+}
+
+dt:last-of-type,
+dd:last-of-type {
+  border-bottom: none;
+}
 
 /* messages */
 .error, .info, .success, .warning {
@@ -148,7 +172,12 @@ textarea {
 }
 
 /* specialized containers */
-.block { padding-bottom: 1.5em }
+.block { 
+    margin: 1.5rem;
+    padding: 1.5em;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    border-radius: 1rem;
+}
 
 /* tabs */
 #tabs {
