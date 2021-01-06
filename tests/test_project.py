@@ -1,6 +1,6 @@
 # Test project pages
 # Copyright (C) 2020  Nguyễn Gia Phong
-# Copyright (C) 2020  Ngô Ngọc Đức Huy
+# Copyright (C) 2021  Ngô Ngọc Đức Huy
 #
 # This file is part of Acanban.
 #
@@ -32,10 +32,22 @@ async def test_info_nonexist(student: QuartClient) -> None:
     assert response.status_code == Status.NOT_FOUND
 
 
-async def test_redirect(client: QuartClient) -> None:
+async def test_edit_nonexist(student: QuartClient) -> None:
+    """Test accessing a nonexistent project edit page."""
+    response = await student.get('/p/this-project-does-not-exist/edit')
+    assert response.status_code == Status.NOT_FOUND
+
+
+async def test_redirect(student: QuartClient) -> None:
     """Test the redirect for the client."""
+    response = await student.get(PROJECT)
+    assert response.status_code == Status.FOUND
+
+
+async def test_guest_redirect(client: QuartClient) -> None:
+    """Test that the redirecting page is also not allowed."""
     response = await client.get(PROJECT)
-    assert response.status_code == Status.PERMANENT_REDIRECT
+    assert response.status_code == Status.UNAUTHORIZED
 
 
 async def test_info_access_guest(client: QuartClient) -> None:
@@ -62,3 +74,49 @@ async def test_info_access_member(student: QuartClient) -> None:
     """Test project info page access by a member."""
     response = await student.get(PROJECT_INFO)
     assert response.status_code == Status.OK
+
+
+async def test_edit_access_assistant(assistant: QuartClient) -> None:
+    """Test project edit page access by an assistant."""
+    response = await assistant.get(PROJECT_EDIT)
+    assert response.status_code == Status.UNAUTHORIZED
+
+
+# This supervisor is not a member of PROJECT.
+async def test_edit_access_nonmember(supervisor: QuartClient) -> None:
+    """Test project edit page access by a non-member user."""
+    response = await supervisor.get(PROJECT_EDIT)
+    assert response.status_code == Status.UNAUTHORIZED
+
+
+# This student is a member of PROJECT.
+async def test_edit_access_member(student: QuartClient) -> None:
+    """Test project edit page access by a member."""
+    response = await student.get(PROJECT_EDIT)
+    assert response.status_code == Status.OK
+
+
+async def test_edit_assistant(assistant: QuartClient) -> None:
+    """Test project edit request by an assistant."""
+    response = await assistant.post(PROJECT_EDIT,
+                                    form=dict(name='New Project Name',
+                                              description='new description'))
+    assert response.status_code == Status.UNAUTHORIZED
+
+
+# This supervisor is not a member of PROJECT.
+async def test_edit_nonmember(supervisor: QuartClient) -> None:
+    """Test project edit request by a non-member user."""
+    response = await supervisor.post(PROJECT_EDIT,
+                                     form=dict(name='New Project Name',
+                                               description='new description'))
+    assert response.status_code == Status.UNAUTHORIZED
+
+
+# This student is a member of PROJECT.
+async def test_edit_member(student: QuartClient) -> None:
+    """Test project edit request by a member."""
+    response = await student.post(PROJECT_EDIT,
+                                  form=dict(name='New Project Name',
+                                            description='new description'))
+    assert response.status_code == Status.FOUND
