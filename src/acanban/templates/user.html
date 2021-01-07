@@ -23,18 +23,18 @@ along with Acanban.  If not, see <https://www.gnu.org/licenses/>. -->
 {% block content %}
 <div class=col-wide>
   <dl>
-    <dt><b>Role</b></dt>
+    <dt>Role</dt>
     <dd>{{ user.role }}</dd>
-    <dt><b>Username </b></dt>
+    <dt>Username</dt>
     <dd>{{ user.username }}</dd>
-    <dt><b>Email</b></dt>
+    <dt>Email</dt>
     <dd>{{ user.email }}</dd>
     {% if user['student-id'] %}
-    <dt><b>Student ID</b></dt>
+    <dt>Student ID</dt>
     <dd>{{ user['student-id'] }}</dd>
     {% endif %}
     {% if user.department %}
-    <dt><b>Department</b></dt>
+    <dt>Department</dt>
     <dd>{{ user.department }}</dd>
     {% endif %}
   </dl>

@@ -141,6 +141,7 @@ dt, dd {
 
 dt { 
   border-right: .1rem solid var(--color-fg);
+  font-weight: bold;
 }
 
 dt:last-of-type,
