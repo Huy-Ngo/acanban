@@ -6,7 +6,6 @@ The collaboration tasks require following data:
 - ``User``
 - ``Project``
 - ``Task``
-- Discussion ``Thread``
 - ``Comment``
 - ``File``
 
@@ -105,14 +104,14 @@ Each ``Task`` object has following attributes:
 ``status`` : ``integer``
    The status of the project in the Kanban board: to-do, in progress, or done.
 
-``assigned-to`` : ``User``
+``assigned_to`` : ``User``
    The assignee of the task. Must have role ``student``.
 
 ``description`` : ``string``
    The summary of a task
 
-``discussion`` : ``array`` of ``Thread``
-   List of ``Thread`` s created for this task
+``discussion`` : ``array`` of ``Comment``
+   List of ``Comment``\s created for this task
 
 ``file`` : ``File``
    Optional file that shows the assignee's work to address the task.
@@ -122,25 +121,6 @@ Each ``Task`` object has following attributes:
 
 ``deadline`` : ``time``
    The date and time for the deadline of the task.
-
-
-Discussion Thread
------------------
-
-Each ``Thread`` object has following attributes:
-
-
-``creator`` : ``User``
-   The user who created the discussion thread
-
-``title`` : ``string``
-   The title of the discussion thread
-
-``content`` : ``string``
-   The description of the issue addressed in the thread
-
-``comments`` : ``array`` of ``Comment``
-   List of ``Comment`` s on this thread
 
 
 Comment
@@ -155,7 +135,11 @@ Each ``Comment`` object has following attributes:
    The content of the comment
 
 ``comments`` : ``array`` of ``Comment``
-   List of ``Comment`` s replying to it
+   List of ``Comment``\s replying to it
+
+``created_on`` : ``time``
+   The date and time the comment is created.
+
 
 File
 ----
