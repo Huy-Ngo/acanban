@@ -51,7 +51,6 @@ body {
     margin: 0;
     padding: 0;
 }
-
 /* common elements */
 h1 {
     margin: 1rem;
@@ -80,7 +79,7 @@ img {
     margin: auto;
 }
 .col-narrow { max-width: 25rem }
-.col-wide { max-width: 36rem }
+.col-wide { max-width: 40rem }
 
 /* form */
 button, input, select, textarea {
@@ -124,6 +123,31 @@ textarea {
     resize: vertical;
     scrollbar-color: var(--color-bg-alt) transparent;
 }
+dl {
+  display: flex;
+  flex-wrap: wrap;
+  border: .1rem solid var(--color-fg);
+  border-radius: .3rem;
+}
+
+dt, dd {
+  margin: 0;
+  width: 50%;
+  border-bottom: .1rem solid var(--color-fg);
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+
+dt { 
+  border-right: .1rem solid var(--color-fg);
+  font-weight: bold;
+}
+
+dt:last-of-type,
+dd:last-of-type {
+  border-bottom: none;
+}
 
 /* messages */
 .error, .info, .success, .warning {
@@ -148,7 +172,12 @@ textarea {
 }
 
 /* specialized containers */
-.block { padding-bottom: 1.5em }
+.block { 
+    margin: 1.5rem;
+    padding: 1.5em;
+    box-shadow: 0 .5rem 1.5rem 0 rgba( 31, 38, 135, 0.37 );
+    border-radius: 1rem;
+}
 
 /* tabs */
 #tabs {
@@ -190,7 +219,7 @@ nav {
 #logo::selection, #hambutton::selection, #nav-entries > a::selection {
     background-color: var(--color-fg);
 }
-#logo:hover, #nav-entries > a:hover, #hambutton:hover {
+#nav-entries > a:hover, #hambutton:hover {
     color: var(--color-primary-bright);
 }
 #logo {
