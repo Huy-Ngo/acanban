@@ -1,13 +1,13 @@
 {
   "db": {
-    "id": "20f2695e-895c-4c8d-9a1d-56d7d949d50e",
+    "id": "fa469717-6544-4fb6-b0ec-a0bd35e7bc06",
     "name": "test",
     "type": "DB"
   },
   "doc_count_estimates": [
-    2
+    4
   ],
-  "id": "2424c10f-b42e-4aaf-a8f9-89be42117611",
+  "id": "ff12cefd-9fcd-4075-a3c0-6f5b2576e79d",
   "indexes": [],
   "name": "files",
   "primary_key": "cid",

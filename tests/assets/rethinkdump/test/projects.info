@@ -1,1 +1,16 @@
-{"db": {"id": "af166242-27ff-4a95-a390-af884d436ffd", "name": "test", "type": "DB"}, "doc_count_estimates": [3], "id": "34b47f1d-8464-48eb-a8b9-71de755a4995", "indexes": [], "name": "projects", "primary_key": "id", "type": "TABLE", "write_hook": null}
+{
+  "db": {
+    "id": "fa469717-6544-4fb6-b0ec-a0bd35e7bc06",
+    "name": "test",
+    "type": "DB"
+  },
+  "doc_count_estimates": [
+    3
+  ],
+  "id": "19fc83d1-806f-4357-881b-e612737f8c0c",
+  "indexes": [],
+  "name": "projects",
+  "primary_key": "id",
+  "type": "TABLE",
+  "write_hook": null
+}
