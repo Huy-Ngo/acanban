@@ -84,6 +84,12 @@ It has following attributes:
 ``tasks`` : ``array`` of ``Task``
    List of ``Task``\s created for this project.
 
+``created_on`` : ``time``
+   The date and time the project is created.
+
+``deadline`` : ``time``
+   The date and time for the deadline of the project.
+
 
 Task
 ----
@@ -105,14 +111,17 @@ Each ``Task`` object has following attributes:
 ``description`` : ``string``
    The summary of a task
 
-``deadline`` : ``string``
-   Deadline for the task, in ISO 8601 format
-
 ``discussion`` : ``array`` of ``Thread``
    List of ``Thread`` s created for this task
 
 ``file`` : ``File``
    Optional file that shows the assignee's work to address the task.
+
+``created_on`` : ``time``
+   The date and time the task is created.
+
+``deadline`` : ``time``
+   The date and time for the deadline of the task.
 
 
 Discussion Thread
