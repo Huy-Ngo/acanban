@@ -55,7 +55,7 @@ async def list_projects() -> ResponseReturnValue:
     project_list = r.table('projects').pluck(*BASIC_FIELDS)
     async with current_app.db_pool.connection() as connection:
         projects = await project_list.run(connection)
-    return await render_template('projects.html', projects=projects)
+    return await render_template('project-list.html', projects=projects)
 
 
 @blueprint.route('/<uuid>/')
