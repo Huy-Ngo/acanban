@@ -30,15 +30,22 @@ blueprint = Blueprint('project', __name__, url_prefix='/p')
 
 
 @blueprint.route('/create', methods=['GET', 'POST'])
+@login_required
 async def create_projects() -> ResponseReturnValue:
+    role = await current_user.role
+    if role == 'assistant':
+        raise Unauthorized
     if request.method == 'GET':
         return await render_template('project-create.html')
     project = await request.form
+    project = {'name': project['name'],
+               'description': project['description'],
+               f'{role}s': [current_user.key]}
     async with current_app.db_pool.connection() as connection:
-        project = {'name': project['name'],
-                   'description': project['description']}
-        await r.table('projects').insert(project).run(connection)
-    return redirect('/p')
+        response = await r.table('projects').insert(project).run(connection)
+        uuid = response['generated_keys'][0]
+        await r.table('users').get(current_user.key)['projects'].append(uuid).run(connection)
+    return redirect(f'/p/{uuid}')
 
 
 @blueprint.route('/')
