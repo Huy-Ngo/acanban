@@ -17,11 +17,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from pytest import mark
 from quart.testing import QuartClient
-from quart_auth import login_required
 
-<<<<<<< HEAD
 PROJECT = '/p/be7a04b8-650f-41dc-912b-10d225baff29/'
 
 
@@ -56,26 +53,23 @@ async def test_info_access_member(student: QuartClient) -> None:
     response = await student.get(PROJECT)
     assert response.status_code == 200  # OK
 
+
 async def test_route_create_by_student(student: QuartClient) -> None:
     response = await student.get('/p/create')
     assert response.status_code == 200
 
-=======
-async def test_route_create_by_student(student: QuartClient) -> None:
-    response = await student.get('/p/create')
-    assert response.status_code == 200
 
->>>>>>> 29aa1d1 (Add test for project creation)
 async def test_route_create_by_assisstant(assistant: QuartClient) -> None:
     response = await assistant.get('/p/create')
     assert response.status_code == 401
+
 
 async def test_create_student(student: QuartClient) -> None:
     """Test successful and failed create project."""
     response = await student.post('/p/create', form=dict(
         name='acanban', description='group project'))
     assert response.status_code == 302
-<<<<<<< HEAD
+
 
 async def test_create_supervisor(supervisor: QuartClient) -> None:
     """Test successful and failed create project."""
@@ -83,15 +77,7 @@ async def test_create_supervisor(supervisor: QuartClient) -> None:
         name='minigh', description='MAD'))
     assert response.status_code == 302
 
-=======
 
-async def test_create_supervisor(supervisor: QuartClient) -> None:
-    """Test successful and failed create project."""
-    response = await supervisor.post('/p/create', form=dict(
-        name='minigh', description='MAD'))
-    assert response.status_code == 302
-
->>>>>>> 29aa1d1 (Add test for project creation)
 async def test_create_assistant(assistant: QuartClient) -> None:
     """Test successful and failed create project."""
     response = await assistant.post('/p/create', form=dict(
