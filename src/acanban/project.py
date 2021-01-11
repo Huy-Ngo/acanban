@@ -44,8 +44,8 @@ async def create_projects() -> ResponseReturnValue:
     async with current_app.db_pool.connection() as connection:
         response = await r.table('projects').insert(project).run(connection)
         uuid = response['generated_keys'][0]
-        project_field = r.table('users').get(current_user.key)['projects']
-        await project_field.append(uuid).run(connection)
+        await r.table('users').get(current_user.key).update(
+            {'projects': r.row['projects'].append(uuid)}).run(connection)
     return redirect(f'/p/{uuid}')
 
 
