@@ -55,31 +55,33 @@ async def test_info_access_member(student: QuartClient) -> None:
 
 
 async def test_route_create_by_student(student: QuartClient) -> None:
+    """Test routing create project as student"""
     response = await student.get('/p/create')
     assert response.status_code == 200
 
 
-async def test_route_create_by_assisstant(assistant: QuartClient) -> None:
+async def test_route_create_by_assistant(assistant: QuartClient) -> None:
+    """Test routing create project as assistant"""
     response = await assistant.get('/p/create')
     assert response.status_code == 401
 
 
 async def test_create_student(student: QuartClient) -> None:
-    """Test successful and failed create project."""
+    """Test successful and failed create project as student."""
     response = await student.post('/p/create', form=dict(
         name='acanban', description='group project'))
     assert response.status_code == 302
 
 
 async def test_create_supervisor(supervisor: QuartClient) -> None:
-    """Test successful and failed create project."""
+    """Test successful and failed create project as supervisor."""
     response = await supervisor.post('/p/create', form=dict(
         name='minigh', description='MAD'))
     assert response.status_code == 302
 
 
 async def test_create_assistant(assistant: QuartClient) -> None:
-    """Test successful and failed create project."""
+    """Test successful and failed create project as assistant."""
     response = await assistant.post('/p/create', form=dict(
         name='FooBar', description='Fô Bả'))
     assert response.status_code == 401
