@@ -20,7 +20,7 @@ extensions = ['sphinx.ext.extlinks', 'sphinx.ext.githubpages',
 extlinks = {'doi': ('https://doi.org/%s', 'doi: ')}
 plantuml_output_format = 'svg_img'
 plantuml_latex_output_format = 'pdf'
-	
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = []
 
