@@ -2,9 +2,6 @@
 {% block title %}Create Project{% endblock %}
 {% block content %}
 <form action=create method=POST class="col-wide">
-  {% if error %}
-  <div class=error>{{ error }}</div>
-  {% endif %}
   <label for="name">Project name</label>
   <input type=text name=name id=name required>
   <label for="description">Description</label>
