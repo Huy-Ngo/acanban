@@ -6,10 +6,8 @@ Overview
 
    intro
    obj
-   req/index
-   choices
-   design/index
-   collab/index
-   academic/index
-   other/index
-   webapp/index
+   .. req/index.
+   .. choices.
+   .. design/index.
+   requirement/index
+   method/index
