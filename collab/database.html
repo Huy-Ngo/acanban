@@ -93,7 +93,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#user">User</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#project">Project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#task">Task</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#discussion-thread">Discussion Thread</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#comment">Comment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#file">File</a></li>
 </ul>
@@ -179,7 +178,6 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">User</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Project</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Task</span></code></p></li>
-<li><p>Discussion <code class="docutils literal notranslate"><span class="pre">Thread</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Comment</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">File</span></code></p></li>
 </ul>
@@ -242,6 +240,10 @@ A unique identifier assigned to students to be used outside this system</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">tasks</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Task</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Task</span></code>s created for this project.</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">created_on</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">time</span></code></span></dt><dd><p>The date and time the project is created.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">deadline</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">time</span></code></span></dt><dd><p>The date and time for the deadline of the project.</p>
+</dd>
 </dl>
 </div>
 <div class="section" id="task">
@@ -254,29 +256,17 @@ A unique identifier assigned to students to be used outside this system</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">status</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">integer</span></code></span></dt><dd><p>The status of the project in the Kanban board: to-do, in progress, or done.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">assigned-to</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The assignee of the task. Must have role <code class="docutils literal notranslate"><span class="pre">student</span></code>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">assigned_to</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The assignee of the task. Must have role <code class="docutils literal notranslate"><span class="pre">student</span></code>.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">description</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The summary of a task</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">deadline</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>Deadline for the task, in ISO 8601 format</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">discussion</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Thread</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Thread</span></code> s created for this task</p>
+<dt><code class="docutils literal notranslate"><span class="pre">discussion</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Comment</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Comment</span></code>s created for this task</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">file</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">File</span></code></span></dt><dd><p>Optional file that shows the assignee’s work to address the task.</p>
 </dd>
-</dl>
-</div>
-<div class="section" id="discussion-thread">
-<h2>Discussion Thread<a class="headerlink" href="#discussion-thread" title="Permalink to this headline">¶</a></h2>
-<p>Each <code class="docutils literal notranslate"><span class="pre">Thread</span></code> object has following attributes:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The user who created the discussion thread</p>
+<dt><code class="docutils literal notranslate"><span class="pre">created_on</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">time</span></code></span></dt><dd><p>The date and time the task is created.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">title</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The title of the discussion thread</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">content</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The description of the issue addressed in the thread</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">comments</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Comment</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Comment</span></code> s on this thread</p>
+<dt><code class="docutils literal notranslate"><span class="pre">deadline</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">time</span></code></span></dt><dd><p>The date and time for the deadline of the task.</p>
 </dd>
 </dl>
 </div>
@@ -288,7 +278,9 @@ A unique identifier assigned to students to be used outside this system</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">content</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The content of the comment</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">comments</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Comment</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Comment</span></code> s replying to it</p>
+<dt><code class="docutils literal notranslate"><span class="pre">comments</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Comment</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Comment</span></code>s replying to it</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">created_on</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">time</span></code></span></dt><dd><p>The date and time the comment is created.</p>
 </dd>
 </dl>
 </div>
