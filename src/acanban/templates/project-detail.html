@@ -1,0 +1,28 @@
+{% macro tab(name, active=false) -%}
+{% set endpoint = name|lower %}
+<a href="/p/{{ project.id }}/{{ endpoint }}"><div
+  class=tab {% if active %}id=tab-active{% endif %}>{{ name }}</div></a>
+{%- endmacro %}
+
+{% macro tabbar(current) -%}
+
+{% set items = ['Info', 'Edit', 'Tasks', 'Report', 'Slides'] %}
+
+<div id=tabs>
+  {% for item in items %}
+  {% if item == current %}
+  {{ tab(item, true) }}
+  {% else %}
+  {{ tab(item) }}
+  {% endif %}
+  {% endfor %}
+</div>
+
+{%- endmacro %}
+
+{% extends "base.html" %}
+{% block title %}{{ project.name }}{% endblock %}
+{% block content %}
+{% block tabbarlayout %}{% endblock %}
+{% block tabcontent %}{% endblock %}
+{% endblock %} 

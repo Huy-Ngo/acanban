@@ -1,5 +1,6 @@
 # Project pages
 # Copyright (C) 2020  Nguyễn Gia Phong
+# Copyright (C) 2021  Ngô Ngọc Đức Huy
 #
 # This file is part of Acanban.
 #
@@ -60,12 +61,19 @@ async def list_projects() -> ResponseReturnValue:
 
 @blueprint.route('/<uuid>/')
 @login_required
+async def info_redirect(uuid: str) -> ResponseReturnValue:
+    """Redirect to the project info page."""
+    return redirect(f'/p/{uuid}/info')
+
+
+@blueprint.route('/<uuid>/info')
+@login_required
 async def info(uuid: str) -> ResponseReturnValue:
     """Return the page containing the projects' basic infomation."""
-    probject = r.table('projects').get(uuid)
+    project = r.table('projects').get(uuid)
     async with current_app.db_pool.connection() as connection:
         try:
-            project = await probject.pluck(*BASIC_FIELDS).run(connection)
+            project = await project.pluck(*BASIC_FIELDS).run(connection)
         except ReqlNonExistenceError:
             raise NotFound
     try:
@@ -74,3 +82,27 @@ async def info(uuid: str) -> ResponseReturnValue:
         raise Unauthorized
     if uuid not in user_projects: raise Unauthorized
     return await render_template('project-info.html', project=project)
+
+
+@blueprint.route('/<uuid>/edit', methods=['GET', 'POST'])
+@login_required
+async def edit(uuid: str) -> ResponseReturnValue:
+    """Return the page containing the projects' basic infomation."""
+    project_query = r.table('projects').get(uuid)
+    async with current_app.db_pool.connection() as connection:
+        try:
+            project = await project_query.pluck(*BASIC_FIELDS).run(connection)
+        except ReqlNonExistenceError:
+            raise NotFound
+        try:
+            user_projects = await current_user.projects
+        except ReqlNonExistenceError:
+            raise Unauthorized
+        if uuid not in user_projects: raise Unauthorized
+    if request.method == 'GET':
+        return await render_template('project-edit.html', project=project)
+    updated = {key: value for key, value in (await request.form).items()
+               if key in BASIC_FIELDS and value}
+    async with current_app.db_pool.connection() as conn:
+        await project_query.update(updated).run(conn)
+    return redirect(f'/p/{uuid}/info')

@@ -1,20 +1,21 @@
-<!-- User profile page
-Copyright (C) 2020  Ngô Ngọc Đức Huy
-
-This file is part of Acanban.
-
-Acanban is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-Acanban is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with Acanban.  If not, see <https://www.gnu.org/licenses/>. -->
+{# User profile page
+ # Copyright (C) 2020  Ngô Ngọc Đức Huy
+ # 
+ # This file is part of Acanban.
+ # 
+ # Acanban is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU Affero General Public License as published
+ # by the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+ # 
+ # Acanban is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU Affero General Public License for more details.
+ # 
+ # You should have received a copy of the GNU Affero General Public License
+ # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
+ #}
 
 {% extends 'base.html' %}
 
@@ -42,6 +43,19 @@ along with Acanban.  If not, see <https://www.gnu.org/licenses/>. -->
   <a href=/u/{{ user.username }}/edit>
     <button>Edit profile</button>
   </a>
+  {% endif %}
+  {% if projects %}
+  <h1>{{ user.name }}'s project(s)</h1>
+  {% for project in projects %}
+  <div class=block>
+    <h2><a href=/p/{{ project.id }}><b>Title:</b> {{ project.name }}</a></h2>
+    <p><b>Supervisors:</b> {{ project.supervisors | map('userlink')
+      | join(', ') | safe }}</p>
+    <p><b>Students:</b> {{ project.students | map('userlink')
+      | join(', ') | safe }}</p>
+    <p><b>Description:</b> {{ project.description }}</p>
+  </div>
+  {% endfor %}
   {% endif %}
 </div>
 {% endblock%}
