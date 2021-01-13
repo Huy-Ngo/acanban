@@ -150,6 +150,7 @@ async def artifact_eval(tab: str, uuid: str) -> ResponseReturnValue:
     query = r.table('projects').get(uuid).update({tab: updated})
     async with current_app.db_pool.connection() as conn: await query.run(conn)
     return redirect(request.referrer)
+<<<<<<< HEAD
 
 
 def add_artifact_tab(blueprint: Blueprint, tab: str) -> None:
@@ -172,3 +173,23 @@ def add_artifact_tab(blueprint: Blueprint, tab: str) -> None:
 
 add_artifact_tab(blueprint, 'report')
 add_artifact_tab(blueprint, 'slides')
+=======
+@blueprint.route('/<uuid>/members')
+@login_required
+async def member_list(uuid: str) -> ResponseReturnValue:
+    """Return the page listing the member of a project."""
+    project_query = r.table('projects').get(uuid)
+    async with current_app.db_pool.connection() as connection:
+        try:
+            project = await project_query.pluck(*BASIC_FIELDS).run(connection)
+        except ReqlNonExistenceError:
+            raise NotFound
+        supervisors = project['supervisors']
+        students = project['students']
+        if (current_user.key not in supervisors
+                and current_user.key not in students
+                and current_user.role != 'assistant'):
+            raise Unauthorized
+        return await render_template('project-member-list.html',
+                                     project=project)
+>>>>>>> 3bd962e (Add Members tab to project file)
