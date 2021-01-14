@@ -2,6 +2,7 @@
 {% block title %}Projects{% endblock %}
 {% block content %}
 <div class=col-wide>
+  <a href="/p/create"><button>Create Project</button></a>
   {% for project in projects %}
   <div class=block>
     <h2><a href=/p/{{ project.id }}><b>Title:</b> {{ project.name }}</a></h2>
