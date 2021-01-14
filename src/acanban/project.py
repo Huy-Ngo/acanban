@@ -24,7 +24,7 @@ from typing import Any, Dict, Optional, Sequence
 from quart import (Blueprint, ResponseReturnValue, current_app,
                    redirect, render_template, request)
 from quart.exceptions import Forbidden, NotFound
-from quart_auth import current_user, login_required
+from quart_auth import Unauthorized, current_user, login_required
 from rethinkdb import r
 from rethinkdb.errors import ReqlNonExistenceError
 
@@ -192,3 +192,37 @@ async def member_list(uuid: str) -> ResponseReturnValue:
             raise Unauthorized
         return await render_template('project-member-list.html',
                                      project=project)
+
+
+@blueprint.route('/<uuid>/invite', methods=['POST'])
+@login_required
+async def invite_member(uuid: str) -> ResponseReturnValue:
+    """Add a member to the project."""
+    project_query = r.table('projects').get(uuid)
+    async with current_app.db_pool.connection() as connection:
+        try:
+            project = await project_query.pluck(*BASIC_FIELDS).run(connection)
+        except ReqlNonExistenceError:
+            raise NotFound
+        supervisors = project['supervisors']
+        students = project['students']
+        # FIX ME: checking student and supervisors not working
+        if (current_user.key not in supervisors
+                and current_user.key not in students):
+            raise Unauthorized
+        try:
+            form = await request.form
+            new_name = form['new-user']
+            user = await r.table('users').get(new_name).run(connection)
+        except ReqlNonExistenceError:
+            raise NotFound
+        if project['name'] in user['projects']:
+            flash('That user is already a member of the project')
+            return redirect(f'/p/{uuid}/members')
+        updated_projects = r.row['projects'].append(uuid)
+        await r.table('users').get(new_name).update(
+            {'projects': updated_projects}).run(connection)
+        member_field = f'{user["role"]}s'
+        await project_query.update(
+            {member_field: r.row[member_field].append(new_name)}).run(connection)
+    return redirect(f'/p/{uuid}/members')
