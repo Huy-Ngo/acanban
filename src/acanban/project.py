@@ -150,7 +150,6 @@ async def artifact_eval(tab: str, uuid: str) -> ResponseReturnValue:
     query = r.table('projects').get(uuid).update({tab: updated})
     async with current_app.db_pool.connection() as conn: await query.run(conn)
     return redirect(request.referrer)
-<<<<<<< HEAD
 
 
 def add_artifact_tab(blueprint: Blueprint, tab: str) -> None:
@@ -173,7 +172,8 @@ def add_artifact_tab(blueprint: Blueprint, tab: str) -> None:
 
 add_artifact_tab(blueprint, 'report')
 add_artifact_tab(blueprint, 'slides')
-=======
+
+
 @blueprint.route('/<uuid>/members')
 @login_required
 async def member_list(uuid: str) -> ResponseReturnValue:
@@ -192,4 +192,3 @@ async def member_list(uuid: str) -> ResponseReturnValue:
             raise Unauthorized
         return await render_template('project-member-list.html',
                                      project=project)
->>>>>>> 3bd962e (Add Members tab to project file)
