@@ -1,5 +1,5 @@
-Use-Case Model
-==============
+Other Use-Cases
+===============
 
 As for most web applications, this system is required to perform basic tasks
 such as authentication and searching.

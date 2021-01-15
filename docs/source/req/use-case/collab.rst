@@ -1,5 +1,5 @@
-Use-Case Model
-==============
+Project Collaboration
+=====================
 
 .. uml::
 
