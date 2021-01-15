@@ -7,9 +7,7 @@ Overview
    intro
    obj
    req/index
-   choices
-   design/index
-   collab/index
-   academic/index
-   other/index
-   webapp/index
+   meth/index
+   result/index
+   conclusion/index
+   appendix/index
