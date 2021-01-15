@@ -1,5 +1,5 @@
-Use-Case Model
-==============
+Academic Evaluation
+===================
 
 .. uml::
 
