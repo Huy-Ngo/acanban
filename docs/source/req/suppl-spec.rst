@@ -1,11 +1,14 @@
 Supplementary Specification
 ===========================
 
+Besides the functionalities specified in the Use-Case model,
+following are more specifications for non-functional requirements.
+
 Usability
 ---------
 
-The user interface must be functional on both desktop computers
-as well as on smartphones.
+The system should be intuitive to any users.
+Users should be able to use it with little to no training.
 
 Reliability
 -----------
@@ -22,7 +25,8 @@ simultaneously performing different tasks at any given time.
 Supportability
 --------------
 
-TBD
+The user interface must be functional on both desktop computers
+as well as on smartphones.
 
 Security
 --------
