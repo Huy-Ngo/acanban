@@ -18,7 +18,7 @@ To achieve this, the interface should:
 - All bodies of text should be readable and legible.
   Text font should thus be decided by the user
   since each user finds a different font easier to read.
-
+- Error messages should be informative
 
 Reliability
 -----------
@@ -35,17 +35,27 @@ simultaneously performing different tasks at any given time.
 Supportability
 --------------
 
-The user interface must be functional on both desktop computers
-as well as on smartphones.
+The user interface must be functional on both desktop or laptop computers,
+tablet, as well as on smartphones.
+
+The file system must support uploading various file formats
+that are used for discussing and reporting project results:
+
+- Document: docx, pdf, tex, md, rst, plain text, etc.
+- Audiovisual: png, jpg/jpeg, tiff, ogg, mp3, mp4, etc.
+- Presentation: pptx, tex, pdf
 
 Security
 --------
 
 The system must not allow internal information to be accessed and modified
-by an unauthorized user.
+by an unauthorized user.  Passwords should be all stored as hash.
 
 The systems should not be vulnerable to common security threat, such as
 XSS, SQL injection, DDoS attack.
+
+The connection to the server must use HTTPS protocol,
+that is, it must be encrypted with TLS/SSL.
 
 Legal Constraints
 -----------------
