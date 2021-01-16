@@ -10,6 +10,16 @@ Usability
 The system should be intuitive to any users.
 Users should be able to use it with little to no training.
 
+To achieve this, the interface should:
+
+- not contain superfluous and distracting features
+- the user's projects should be easily found as soon as the user sign in
+  (for students and supervisors)
+- All bodies of text should be readable and legible.
+  Text font should thus be decided by the user
+  since each user finds a different font easier to read.
+
+
 Reliability
 -----------
 
@@ -31,4 +41,15 @@ as well as on smartphones.
 Security
 --------
 
-TBD
+The system must not allow internal information to be accessed and modified
+by an unauthorized user.
+
+The systems should not be vulnerable to common security threat, such as
+XSS, SQL injection, DDoS attack.
+
+Legal Constraints
+-----------------
+
+The resulted software should be released under a copyleft free license,
+namely Affero General Public License version 3.0,
+in order to persist digital freedom for education.
