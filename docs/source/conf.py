@@ -44,3 +44,6 @@ latex_elements = {
     'fontpkg': r'\usepackage{lmodern}',
     'babel': r'\usepackage[english,vietnamese]{babel}',
     'tableofcontents': r'\selectlanguage{english}\sphinxtableofcontents'}
+
+numfig = True
+numfig_format = {'figure': 'Figure %s', 'table': 'Table %s'}
