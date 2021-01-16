@@ -10,11 +10,11 @@ Usability
 The system should be intuitive to any users.
 Users should be able to use it with little to no training.
 
-To achieve this, the interface should:
+In order to achieve this, we derived specific design contraints:
 
-- not contain superfluous and distracting features
-- the user's projects should be easily found as soon as the user sign in
-  (for students and supervisors)
+- The user interface should not contain superfluous and distracting features.
+- The user's projects should be easily found as soon as the user sign in
+  (for students and supervisors).
 - All bodies of text should be readable and legible.
   Text font should thus be decided by the user
   since each user finds a different font easier to read.
