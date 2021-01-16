@@ -56,17 +56,17 @@ They can write concurrently to a shared database.
       component NGINX as nginx <<load balancer>>
    }
 
-   node Server as server_1 {
+   node "Web Server" as server_1 {
       component Acanban as acanban_1
       component Hypercorn as hypercorn_1
    }
 
-   node Server as server_2 {
+   node "Web Server" as server_2 {
       component Acanban as acanban_2
       component Hypercorn as hypercorn_2
    }
 
-   node Server as server_3 {
+   node "Web Server" as server_3 {
       component Acanban as acanban_3
       component Hypercorn as hypercorn_3
    }
