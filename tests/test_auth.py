@@ -24,9 +24,9 @@ from quart.testing import QuartClient
 
 
 @mark.parametrize(('username', 'role', 'code'),
-                  (('huyngo', 'student', 302), ('kiddo', 'pupil', 200),
+                  (('kiddo', 'pupil', 200),
                    ('silasl', 'supervisor', 200),
-                   ('adaml', 'supervisor', 200)))
+                   ('huyngo', 'student', 302)))
 async def test_register(username: str, role: str, code: int,
                         client: QuartClient) -> None:
     """Test successful and failed registration."""
