@@ -18,6 +18,12 @@ and the server.  For server, Hypercorn_ was picked for its first-class support
 for Trio.  The application was built on top of Quart_, a microframework
 similar to Flask_ but for ASGI, for its flexibility.
 
+Templating Language
+-------------------
+
+We use Jinja2_ for templating, which is default choice for Quart.
+It provides us with various tools that help secure the website easier.
+
 Persistency
 -----------
 
@@ -45,3 +51,4 @@ but built as methods in the implementing language.
 .. _Flask: https://flask.palletsprojects.com
 .. _document-oriented database:
    https://en.wikipedia.org/wiki/Document-oriented_database
+.. _Jinja2: https://jinja.palletsprojects.com/en/2.11.x/templates
