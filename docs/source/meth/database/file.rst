@@ -4,10 +4,22 @@ File
 The ``File`` object is needed to store the metadata about the files
 used in project.
 
+``id`` : ``string``
+   UUID unique to the upload.
+
 ``cid`` : ``string``
    Content identifier of the file in CID_ v1.
 
-``filename`` : ``string``, *optional*
-   Filename of the file.
+``name`` : ``string``
+   Name of the file.
+
+``size`` : ``integer``
+   Size of the file, in bytes.
+
+``time`` : ``datetime``
+   The time when the file was uploaded.
+
+``user`` : ``string``
+   Username of the uploader.
 
 .. _CID: https://github.com/multiformats/cid

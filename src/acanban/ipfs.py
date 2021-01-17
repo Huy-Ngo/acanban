@@ -23,12 +23,42 @@ from cid import CIDv1, make_cid
 from httpx import Response
 from quart import (Blueprint, ResponseReturnValue,
                    current_app, redirect, request)
-from quart.exceptions import NotFound
+from quart.exceptions import NotFound, RequestTimeout
+from quart_auth import current_user
 from rethinkdb import r
+from rethinkdb.errors import ReqlNonExistenceError
+from trio import TooSlowError, fail_after
 
-__all__ = ['blueprint']
+__all__ = ['add', 'blueprint']
 
 blueprint = Blueprint('ipfs', __name__)
+
+
+def ensure_cidv1(multihash: str) -> str:
+    """Return the given multihash encoded as base58 in CIDv1."""
+    cid = make_cid(multihash)
+    return (cid if isinstance(cid, CIDv1) else cid.to_v1()).encode().decode()
+
+
+async def add() -> str:
+    """Proxy file upload to IPFS add and return UUID in table files."""
+    headers = {'Content-Length': request.headers['Content-Length'],
+               'Content-Type': request.headers['Content-Type']}
+    try:
+        with fail_after(current_app.config['BODY_TIMEOUT']):
+            response = await current_app.ipfs_api.post(
+                '/add', headers=headers, data=request.body)
+    except TooSlowError:
+        raise RequestTimeout
+    response.raise_for_status()
+
+    file = response.json()
+    async with current_app.db_pool.connection() as conn:
+        result = await r.table('files').insert(dict(
+            cid=ensure_cidv1(file['Hash']),
+            name=file['Name'], size=int(file['Size']),
+            time=r.now(), user=current_user.key)).run(conn)
+    return result['generated_keys'][0]
 
 
 def fallback() -> ResponseReturnValue:
@@ -61,13 +91,15 @@ async def proxy_gateway(path: str) -> ResponseReturnValue:
     redirect to the fallback gateway instead.
     """
     try:
-        cid_orig = make_cid(path.split('/', 1)[0])
+        cid = ensure_cidv1(path.split('/', 1)[0])
     except ValueError:
         raise NotFound
-    cid = cid_orig if isinstance(cid_orig, CIDv1) else cid_orig.to_v1()
-    content = r.table('files').get(cid.encode().decode())
+    query = r.table('files').get_all(cid, index='cid')[0].pluck()
     async with current_app.db_pool.connection() as connection:
-        if await content.run(connection) is None: return fallback()
+        try:
+            await query.run(connection)
+        except ReqlNonExistenceError:
+            return fallback()
 
     client = current_app.ipfs_gateway
     proxied_request = client.build_request(

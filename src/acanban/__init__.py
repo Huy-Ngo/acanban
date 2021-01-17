@@ -21,6 +21,7 @@ from __future__ import annotations
 from contextlib import asynccontextmanager
 from secrets import token_urlsafe
 from typing import Any, AsyncIterator
+from urllib.parse import urlsplit
 
 from httpx import AsyncClient
 from quart import ResponseReturnValue, current_app, render_template
@@ -49,6 +50,7 @@ class Acanban(QuartTrio):
     db_pool: TrioConnectionPool
     ipfs_config = IPFS_DEFAULT
     ipfs_gateway: AsyncClient
+    ipfs_api: AsyncClient
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
@@ -89,15 +91,20 @@ async def close_db_pool() -> None:
 
 
 @app.before_serving
-async def open_ipfs_gateway() -> None:
-    """Open HTTPX client for IPFS gateway."""
+async def open_ipfs_clients() -> None:
+    """Open HTTPX client for IPFS gateway and HTTP API."""
     app.ipfs_gateway = AsyncClient(base_url=app.ipfs_config['gateway']['base'])
+    api_url = app.ipfs_config['api']['base']
+    app.ipfs_api = AsyncClient(base_url=api_url, headers={
+        'Accept': 'application/json', 'Host': urlsplit(api_url)[1],
+        'User-Agent': f'acanban/{__version__}'})
 
 
 @app.after_serving
-async def close_ipfs_gateway() -> None:
-    """Close HTTPX client for IPFS gateway."""
+async def close_ipfs_clients() -> None:
+    """Close HTTPX client for IPFS gateway and HTTP API."""
     await app.ipfs_gateway.aclose()
+    await app.ipfs_api.aclose()
 
 
 @app.route('/')
