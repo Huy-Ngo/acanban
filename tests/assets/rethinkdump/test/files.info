@@ -8,9 +8,22 @@
     4
   ],
   "id": "ff12cefd-9fcd-4075-a3c0-6f5b2576e79d",
-  "indexes": [],
+  "indexes": [
+    {
+      "function": {
+        "$reql_type$": "BINARY",
+        "data": "JHJlcWxfaW5kZXhfZnVuY3Rpb24kCQcHBwAAAAAAAAHt/////////ygAAABbMzEsW1sxMCxbWzEs\r\nLTE5LDBdXSwwXSxbMSwiY2lkIiwwXV0sMF0AAAAAAAAA"
+      },
+      "geo": false,
+      "index": "cid",
+      "multi": false,
+      "outdated": false,
+      "query": "indexCreate('cid', function(_var19) { return _var19.getField(\"cid\"); })",
+      "ready": true
+    }
+  ],
   "name": "files",
-  "primary_key": "cid",
+  "primary_key": "id",
   "type": "TABLE",
   "write_hook": null
 }

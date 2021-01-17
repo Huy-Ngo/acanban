@@ -28,6 +28,7 @@ TomMapping = MutableMapping[str, Any]
 CONFIG_DIRS = user_config_dir('acanban'), site_config_dir('acanban')
 ACANBAN_DEFAULT: TomMapping = {}
 IPFS_DEFAULT: TomMapping = {
+    'api': {'base': 'http://127.0.0.1:5001/api/v0'},
     'gateway': {'base': 'http://127.0.0.1:8080/ipfs',
                 'fallback': 'https://ipfs.io'}}
 RETHINKDB_DEFAULT: TomMapping = {'db': 'test'}
