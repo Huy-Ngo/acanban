@@ -10,12 +10,86 @@ their identity, i.e., authenticate the users.
 Register
 ''''''''
 
-TBD
+To register for an account, the user should fill a form
+with personal information:
+
+- real name
+- username
+- password
+- the user's role, which can be student, supervisor, or assistant
+
+When user submits a form to register for an account, the register controller
+will check the database to see if the username exists.  If the username
+does not exist, the controller will continue to create an account
+in the database.  The password is stored in the database as a hash
+for security.
+
+After the successful account creation, the user will be
+redirected to the home page.
+
+.. uml:: register.puml
+   :caption: Analysis sequence diagram
+      for the basic flow of registration process
+   :name: reg-basic
+
+If the username is taken, the controller should inform so to the user.
+
+.. uml:: register-exist-username.puml
+   :caption: Analysis sequence diagram
+      for the alternative flow of the registration process
+      where the username is taken
+   :name: reg-exist
+
+Another exceptional flow happens when the user request an invalid role.
+This should not happen when the user submit the form via browser,
+but it can happen if someone is submitting it via a nonstandard way.
+
+.. uml:: register-wrong-role.puml
+   :caption: Analysis sequence diagram
+      for the alternative flow of the registration process
+      where the role is invalid
+   :name: reg-role
+
+In order to prevent faking identity, we intended to require a token
+for registration.  This token is provided by the system administrator
+and each person can only receive one token, so if they use it
+for faking identity, they cannot create their account anymore and
+have to suffer th consequence.
+
+Alternatively, the administrator can remove the register endpoint
+and generate the accounts for each user.
+
+However, we did not implement either of these schemes.
 
 Log In
 ''''''
 
-TBD
+The user can log in to the site in the login endpoint.
+After submitting the form with their username and password,
+they should be logged in.
+
+.. uml:: login.puml
+   :caption: Analysis sequence diagram
+      for the basic flow of login
+   :name: log-basic
+
+However, if the user tries to log in with a non-existent account,
+the controller should raise an error and inform the user so.
+
+.. uml:: login-no-user.puml
+   :caption: Analysis sequence diagram
+      for the alternative flow of login
+      where there is no user with the username
+   :name: log-no-user
+
+If the user input wrong password, the user should also not be logged in
+and be informed of wrong password.
+
+.. uml:: login-wrong-pass.puml
+   :caption: Analysis sequence diagram
+      for the alternative flow of login
+      where the 
+   :name: log-wrong-path
 
 Authorization
 -------------

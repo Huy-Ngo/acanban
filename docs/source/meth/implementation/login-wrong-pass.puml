@@ -1,0 +1,16 @@
+@startuml
+hide footbox
+autoactivate on
+actor ":Unauthorized User" as usr
+boundary ":LoginForm" as form
+control ":LoginController" as ctl
+entity ":Account" as acc
+
+usr -> form: // open login page()
+form -> form: // display form()
+usr -> form: // submit form()
+form -> ctl: // request to login user()
+ctl -> acc: // retrieve user from the database()
+ctl <-- acc: // return
+form <-- ctl: // inform about wrong password()
+@enduml
