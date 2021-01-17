@@ -1,5 +1,5 @@
 # Project pages
-# Copyright (C) 2020  Nguyễn Gia Phong
+# Copyright (C) 2020-2021  Nguyễn Gia Phong
 # Copyright (C) 2021  Ngô Ngọc Đức Huy
 #
 # This file is part of Acanban.
@@ -18,7 +18,7 @@
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
 from operator import itemgetter
-from typing import Any, Dict, Sequence
+from typing import Any, Dict, Optional, Sequence
 
 from quart import (Blueprint, ResponseReturnValue, current_app,
                    redirect, render_template, request)
@@ -71,7 +71,8 @@ async def info_redirect(uuid: str) -> ResponseReturnValue:
     return redirect(f'/p/{uuid}/info')
 
 
-async def pluck(uuid: str, fields: Sequence[str] = ()) -> Dict[str, Any]:
+async def pluck(uuid: str, fields: Sequence[str] = (),
+                projects: Optional[Sequence[str]] = None) -> Dict[str, Any]:
     """Pluck the given fields from the project, with permission check."""
     query = r.table('projects').get(uuid).pluck(*fields)
     async with current_app.db_pool.connection() as connection:
@@ -79,11 +80,13 @@ async def pluck(uuid: str, fields: Sequence[str] = ()) -> Dict[str, Any]:
             project = await query.run(connection)
         except ReqlNonExistenceError:
             raise NotFound
-    try:
-        user_projects = await current_user.projects
-    except ReqlNonExistenceError:
-        raise Unauthorized
-    if uuid not in user_projects: raise Unauthorized
+
+    if projects is None:
+        try:
+            projects = await current_user.projects
+        except ReqlNonExistenceError:
+            raise Unauthorized
+    if uuid not in projects: raise Unauthorized
     return project
 
 
@@ -111,22 +114,42 @@ async def edit(uuid: str) -> ResponseReturnValue:
     return redirect(f'/p/{uuid}/info')
 
 
-@blueprint.route('/<uuid>/report', methods=['GET', 'POST'])
+@blueprint.route('/<uuid>/report')
 @login_required
 async def report(uuid: str) -> ResponseReturnValue:
-    """Return the page for editting the projects' basic infomation."""
-    if request.method == 'POST':
-        await pluck(uuid)  # check project's existence and permission
-        file = await ipfs_add()
-        async with current_app.db_pool.connection() as conn:
-            await r.table('projects').get(uuid).update(
-                {'reports': r.row['reports'].append(file)}).run(conn)
-        return redirect(request.referrer)
-
-    project = await pluck(uuid, ('id', 'name', 'reports'))
-    query = r.table('files').get_all(*project['reports'])
+    """Return the projects' report infomation and forms."""
+    user = await current_user.pluck('projects', 'role')
+    project = await pluck(uuid, ('id', 'name', 'report'), user['projects'])
+    query = r.table('files').get_all(*project['report']['revisions'])
     async with current_app.db_pool.connection() as conn:
-        reports = [report async for report in await query.run(conn)]
-    reports.sort(key=itemgetter('time'), reverse=True)
-    return await render_template('project-report.html',
-                                 project=project, reports=reports)
+        revisions = [file async for file in await query.run(conn)]
+    revisions.sort(key=itemgetter('time'), reverse=True)
+    return await render_template(
+        'project-report.html', project=project, report=project['report'],
+        revisions=revisions, for_student=(user['role']=='student'))
+
+
+@blueprint.route('/<uuid>/report/upload', methods=['POST'])
+@login_required
+async def report_upload(uuid: str) -> ResponseReturnValue:
+    """Handle report upload."""
+    await pluck(uuid)  # check project's existence and permission
+    action = r.row['report']['revisions'].append(await ipfs_add())
+    async with current_app.db_pool.connection() as conn:
+        await r.table('projects').get(uuid).update(
+            {'report': {'revisions': action}}).run(conn)
+    return redirect(request.referrer)
+
+
+@blueprint.route('/<uuid>/report/eval', methods=['POST'])
+@login_required
+async def report_eval(uuid: str) -> ResponseReturnValue:
+    """Handle report evaluation."""
+    user = await current_user.pluck('role', 'projects')
+    if 'role' == 'student': raise Unauthorized
+    await pluck(uuid, projects=user['projects'])
+    form = await request.form
+    updated = {'grade': int(form['grade']), 'comment': form['comment']}
+    query = r.table('projects').get(uuid).update({'report': updated})
+    async with current_app.db_pool.connection() as conn: await query.run(conn)
+    return redirect(request.referrer)
