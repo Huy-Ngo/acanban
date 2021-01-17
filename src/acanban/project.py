@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
+from typing import Sequence
+
 from quart import (Blueprint, ResponseReturnValue, current_app,
                    redirect, render_template, request)
 from quart.exceptions import NotFound
@@ -66,14 +68,12 @@ async def info_redirect(uuid: str) -> ResponseReturnValue:
     return redirect(f'/p/{uuid}/info')
 
 
-@blueprint.route('/<uuid>/info')
-@login_required
-async def info(uuid: str) -> ResponseReturnValue:
-    """Return the page containing the projects' basic infomation."""
-    project = r.table('projects').get(uuid)
+async def pluck(uuid: str, fields: Sequence[str] = ()) -> None:
+    """Pluck the given fields from the project, with permission check."""
+    query = r.table('projects').get(uuid).pluck(*fields)
     async with current_app.db_pool.connection() as connection:
         try:
-            project = await project.pluck(*BASIC_FIELDS).run(connection)
+            project = await query.run(connection)
         except ReqlNonExistenceError:
             raise NotFound
     try:
@@ -81,28 +81,28 @@ async def info(uuid: str) -> ResponseReturnValue:
     except ReqlNonExistenceError:
         raise Unauthorized
     if uuid not in user_projects: raise Unauthorized
+    return project
+
+
+@blueprint.route('/<uuid>/info')
+@login_required
+async def info(uuid: str) -> ResponseReturnValue:
+    """Return the page containing the projects' basic infomation."""
+    project = await pluck(uuid, BASIC_FIELDS)
     return await render_template('project-info.html', project=project)
 
 
 @blueprint.route('/<uuid>/edit', methods=['GET', 'POST'])
 @login_required
 async def edit(uuid: str) -> ResponseReturnValue:
-    """Return the page containing the projects' basic infomation."""
-    project_query = r.table('projects').get(uuid)
-    async with current_app.db_pool.connection() as connection:
-        try:
-            project = await project_query.pluck(*BASIC_FIELDS).run(connection)
-        except ReqlNonExistenceError:
-            raise NotFound
-        try:
-            user_projects = await current_user.projects
-        except ReqlNonExistenceError:
-            raise Unauthorized
-        if uuid not in user_projects: raise Unauthorized
+    """Return the page for editting the projects' basic infomation."""
     if request.method == 'GET':
+        project = await pluck(uuid, BASIC_FIELDS)
         return await render_template('project-edit.html', project=project)
+
+    await pluck(uuid)  # check project's existence and permission
     updated = {key: value for key, value in (await request.form).items()
                if key in BASIC_FIELDS and value}
     async with current_app.db_pool.connection() as conn:
-        await project_query.update(updated).run(conn)
+        await r.table('projects').get(uuid).update(updated).run(conn)
     return redirect(f'/p/{uuid}/info')
