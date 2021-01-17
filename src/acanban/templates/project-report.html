@@ -5,22 +5,34 @@
 {% block tabcontent %}
 <div class=col-wide>
   <h2>Evaluation</h2>
+  <form action=/p/{{ project.id }}/report/eval method=POST>
+    <label for=grade>Grade</label>
+    <input {% if for_student %}readonly{% endif %}
+           type=text name=grade id=grade value={{ report.grade }}>
+    <label for=comment>Comment</label>
+    <textarea {% if for_student %}readonly{% endif %}
+              name=comment id=comment>{{ report.comment }}</textarea>
+    {% if not for_student %}<button>Save evaluation</button>{% endif %}
+  </form>
+
   <h2>Report revisions</h2>
-  <form action=/p/{{ project.id }}/report method=POST
+  {% if for_student %}
+  <form action=/p/{{ project.id }}/report/upload method=POST
         enctype=multipart/form-data>
     <label for=file>Select report to upload</label>
     <input type=file name=file id=file>
     <button>Upload new report</button>
   </form>
-  {% for report in reports %}
-  {% set uri = "/ipfs/" ~ report.cid %}
+  {% endif %}
+
+  {% for file in revisions %}
   <dl>
     <dt>File</dt>
-    <dd><a href={{ uri }}>{{ report.name }}</a></dd>
+    <dd><a href=/ipfs/{{ file.cid }}>{{ file.name }}</a></dd>
     <dt>Uploader</dt>
-    <dd><a href=/u/{{ report.user }}>{{ report.user }}</a></dd>
+    <dd><a href=/u/{{ file.user }}>{{ file.user }}</a></dd>
     <dt>Revision</dt>
-    <dd>{{ report.time }}</a></dd>
+    <dd>{{ file.time }}</a></dd>
   </dl>
   {% endfor %}
 </div>
