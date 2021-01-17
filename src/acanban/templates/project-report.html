@@ -1,0 +1,27 @@
+{% extends 'project-detail.html' %}
+{% block tabbarlayout %}
+{{ tabbar('Report') }}
+{% endblock %}
+{% block tabcontent %}
+<div class=col-wide>
+  <h2>Evaluation</h2>
+  <h2>Report revisions</h2>
+  <form action=/p/{{ project.id }}/report method=POST
+        enctype=multipart/form-data>
+    <label for=file>Select report to upload</label>
+    <input type=file name=file id=file>
+    <button>Upload new report</button>
+  </form>
+  {% for report in reports %}
+  {% set uri = "/ipfs/" ~ report.cid %}
+  <dl>
+    <dt>File</dt>
+    <dd><a href={{ uri }}>{{ report.name }}</a></dd>
+    <dt>Uploader</dt>
+    <dd><a href=/u/{{ report.user }}>{{ report.user }}</a></dd>
+    <dt>Revision</dt>
+    <dd>{{ report.time }}</a></dd>
+  </dl>
+  {% endfor %}
+</div>
+{% endblock %}
