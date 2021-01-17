@@ -29,6 +29,11 @@ Such database, however, is performance-wise unsuitable for larger files,
 so IPFS_, which is a distributed file system that provides similar abstraction,
 is used instead in the latter case.
 
+By choosing RethinkDB instead of SQL,
+we do not have to worry about SQL injection or similar database attack.
+This is because the query language ReQL is not based on string parsing,
+but built as methods in the implementing language.
+
 .. _Trio: https://trio.readthedocs.io
 .. _RethinkDB: https://rethinkdb.com
 .. _IPFS: https://ipfs.io
