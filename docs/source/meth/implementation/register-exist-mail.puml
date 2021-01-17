@@ -12,8 +12,6 @@ usr -> form: // submit form()
 form -> ctl: // try adding user to database()
 ctl -> acc: // check existing accounts()
 ctl <-- acc: // return
-ctl -> acc: // add account()
-ctl <-- acc: // raise key error
-form <-- ctl: // Inform that the username is taken()
+form <-- ctl: // Inform that the email is used()
 deactivate form
 @enduml

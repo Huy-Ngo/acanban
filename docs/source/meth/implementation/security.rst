@@ -32,13 +32,20 @@ redirected to the home page.
       for the basic flow of registration process
    :name: reg-basic
 
-If the username is taken, the controller should inform so to the user.
+If the username or email is taken,
+the controller should inform so to the user.
+
+.. uml:: register-exist-mail.puml
+   :caption: Analysis sequence diagram
+      for the alternative flow of the registration process
+      where the mail is taken
+   :name: reg-exist-email
 
 .. uml:: register-exist-username.puml
    :caption: Analysis sequence diagram
       for the alternative flow of the registration process
       where the username is taken
-   :name: reg-exist
+   :name: reg-exist-name
 
 Another exceptional flow happens when the user request an invalid role.
 This should not happen when the user submit the form via browser,
