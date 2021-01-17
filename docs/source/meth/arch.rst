@@ -46,7 +46,6 @@ They can write concurrently to a shared database.
    :caption: Alternative architecture with load balancer
    :name: arch-alt
 
-   left to right direction
 
    node Client {
       node Browser
@@ -56,24 +55,39 @@ They can write concurrently to a shared database.
       component NGINX as nginx <<load balancer>>
    }
 
-   node "Web Server" as server_1 {
-      component Acanban as acanban_1
-      component Hypercorn as hypercorn_1
+   rectangle "Load Balancing Cluster" as balance_cluster {
+      node "Web Server" as server_1 {
+         component Acanban as acanban_1
+         component Hypercorn as hypercorn_1
+      }
+
+      node "Web Server" as server_2 {
+         component Acanban as acanban_2
+         component Hypercorn as hypercorn_2
+      }
+
+      node "Web Server" as server_3 {
+         component Acanban as acanban_3
+         component Hypercorn as hypercorn_3
+      }
    }
 
-   node "Web Server" as server_2 {
-      component Acanban as acanban_2
-      component Hypercorn as hypercorn_2
-   }
+   rectangle "Database Cluster" as db_cluster {
 
-   node "Web Server" as server_3 {
-      component Acanban as acanban_3
-      component Hypercorn as hypercorn_3
-   }
+      node "Database Server" as db_1 {
+         database "RethinkDB" as r_1
+         component "IPFS" as ipfs_1
+      }
 
-   node "Database Server" as db_server {
-      database "RethinkDB" as db
-      component IPFS
+      node "Database Server" as db_2 {
+         database "RethinkDB" as r_2
+         component "IPFS" as ifps_2
+      }
+
+      node "Database Server" as db_3 {
+         database "RethinkDB" as r_3
+         component "IPFS" as ipfs_3
+      }
    }
 
    Browser --- nginx: HTTPS
@@ -85,9 +99,13 @@ They can write concurrently to a shared database.
    hypercorn_1 - acanban_1
    hypercorn_2 - acanban_2
    hypercorn_3 - acanban_3
-   acanban_1  -- db_server
-   acanban_2  -- db_server
-   acanban_3  -- db_server
+   acanban_1  --- db_1
+   acanban_1  --- db_2
+   acanban_2  --- db_2
+   acanban_2  --- db_3
+   acanban_2  --- db_1
+   acanban_3  --- db_1
+   acanban_3  --- db_3
 
 However, we do not implement this architecture within the scope of this project,
 due to following reasons:
