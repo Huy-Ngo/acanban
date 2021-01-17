@@ -17,7 +17,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from typing import Sequence
+from operator import itemgetter
+from typing import Any, Dict, Sequence
 
 from quart import (Blueprint, ResponseReturnValue, current_app,
                    redirect, render_template, request)
@@ -25,6 +26,8 @@ from quart.exceptions import NotFound
 from quart_auth import Unauthorized, current_user, login_required
 from rethinkdb import r
 from rethinkdb.errors import ReqlNonExistenceError
+
+from .ipfs import add as ipfs_add
 
 __all__ = ['blueprint']
 BASIC_FIELDS = 'id', 'name', 'supervisors', 'students', 'description'
@@ -68,7 +71,7 @@ async def info_redirect(uuid: str) -> ResponseReturnValue:
     return redirect(f'/p/{uuid}/info')
 
 
-async def pluck(uuid: str, fields: Sequence[str] = ()) -> None:
+async def pluck(uuid: str, fields: Sequence[str] = ()) -> Dict[str, Any]:
     """Pluck the given fields from the project, with permission check."""
     query = r.table('projects').get(uuid).pluck(*fields)
     async with current_app.db_pool.connection() as connection:
@@ -106,3 +109,24 @@ async def edit(uuid: str) -> ResponseReturnValue:
     async with current_app.db_pool.connection() as conn:
         await r.table('projects').get(uuid).update(updated).run(conn)
     return redirect(f'/p/{uuid}/info')
+
+
+@blueprint.route('/<uuid>/report', methods=['GET', 'POST'])
+@login_required
+async def report(uuid: str) -> ResponseReturnValue:
+    """Return the page for editting the projects' basic infomation."""
+    if request.method == 'POST':
+        await pluck(uuid)  # check project's existence and permission
+        file = await ipfs_add()
+        async with current_app.db_pool.connection() as conn:
+            await r.table('projects').get(uuid).update(
+                {'reports': r.row['reports'].append(file)}).run(conn)
+        return redirect(request.referrer)
+
+    project = await pluck(uuid, ('id', 'name', 'reports'))
+    query = r.table('files').get_all(*project['reports'])
+    async with current_app.db_pool.connection() as conn:
+        reports = [report async for report in await query.run(conn)]
+    reports.sort(key=itemgetter('time'), reverse=True)
+    return await render_template('project-report.html',
+                                 project=project, reports=reports)
