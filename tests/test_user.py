@@ -20,12 +20,14 @@
 from http import HTTPStatus as Status
 
 from conftest import ClientFactory, parametrize
+from pytest import param
 from quart.testing import QuartClient
 
 
 @parametrize(('username', 'status_code'),
-             (('nexistepas', Status.NOT_FOUND),
-              ('silasl', Status.OK)))
+             (param('nexistepas', Status.NOT_FOUND, id='not exist'),
+              param('adaml', Status.OK, id='can have projects'),
+              param('silasl', Status.OK, id='cannot have projects')))
 async def test_get(username: str, status_code: int,
                    client: QuartClient) -> None:
     """Test GET user root endpoint."""
