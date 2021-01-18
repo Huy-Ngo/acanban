@@ -1,0 +1,20 @@
+@startuml
+hide footbox
+autoactivate on
+actor ":Unauthorized User" as usr
+boundary ":RegisterForm" as form
+control ":RegisterController" as ctl
+entity ":Account" as acc
+
+usr -> form: // open registration page()
+form -> form: // display form()
+usr -> form: // submit form()
+form -> ctl: // try adding user to database()
+ctl -> acc: // check existing accounts()
+ctl <-- acc: // return
+ctl -> acc: // add user()
+ctl <-- acc: //return
+form <-- ctl !!: // redirect to home page()
+deactivate form
+deactivate form
+@enduml
