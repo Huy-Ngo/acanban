@@ -23,6 +23,7 @@ Templating Language
 
 We use Jinja2_ for templating, which is default choice for Quart.
 It provides us with various tools that help secure the website easier.
+For example, it allows HTML escaping [jinjadoc]_, which helps avoiding XSS injection.
 
 Persistency
 -----------
@@ -37,7 +38,7 @@ is used instead in the latter case.
 
 By choosing RethinkDB instead of SQL,
 we do not have to worry about SQL injection or similar database attack.
-This is because the query language ReQL is not based on string parsing,
+This is because the query language ReQL is not based on string parsing [rethinkdbdoc]_,
 but built as methods in the implementing language.
 
 .. _Trio: https://trio.readthedocs.io
@@ -52,3 +53,5 @@ but built as methods in the implementing language.
 .. _document-oriented database:
    https://en.wikipedia.org/wiki/Document-oriented_database
 .. _Jinja2: https://jinja.palletsprojects.com/en/2.11.x/templates
+.. [jinjadoc] https://jinja.palletsprojects.com/en/2.11.x/templates/#html-escaping
+.. [rethinkdbdoc] https://rethinkdb.com/docs/introduction-to-reql/#reql-embeds-into-your-programming-language
