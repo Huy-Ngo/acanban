@@ -6,6 +6,10 @@ or an academic assistant.  The object contains the user's projects
 as well as other contact information, which allows the users to communicate
 with each other.
 
+Since all users of this system have similar basic information, such as username
+and password, we represented them all as ``User`` object, and restrict their
+behaviors according to a field ``role``.
+
 Each ``User`` object has following attributes:
 
 ``username`` : ``string``
@@ -13,13 +17,14 @@ Each ``User`` object has following attributes:
    It is also the primary key and allows the user to sign in.
 
 ``name`` : ``string``
-   The legal name of the user
+   The legal name of the user.  This is required for group members to recognize
+   each other, and for the academic assistants to collect their results.
 
 ``email`` : ``string``
    The email that is used to contact with the user.
 
 ``password`` : ``string``
-   The password for the user's account, encrypted with a hash function
+   The password for the user's account, encrypted with a hash function.
 
 ``role`` : ``string``
    The role of the user in this system.  It can be:
@@ -42,8 +47,6 @@ Each ``User`` object has following attributes:
    A unique identifier assigned to students to be used outside this system
 
 ``bio`` : ``object``, *optional*
-   A self-description of the user. It can have following fields:
-
-   - ``description``: A markdown text describing the user
-   - ``institution``: The institution the user is working at, mainly for supervisors
-   - ``interest``: Research interests of a supervisor or student
+   A markup text describing the user.  This is not necessary, but it can be
+   helpful for a supervisor to have a biography to show their credibility in
+   their respective field.
