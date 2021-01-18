@@ -53,5 +53,7 @@ but built as methods in the implementing language.
 .. _document-oriented database:
    https://en.wikipedia.org/wiki/Document-oriented_database
 .. _Jinja2: https://jinja.palletsprojects.com/en/2.11.x/templates
-.. [jinjadoc] https://jinja.palletsprojects.com/en/2.11.x/templates/#html-escaping
-.. [rethinkdbdoc] https://rethinkdb.com/docs/introduction-to-reql/#reql-embeds-into-your-programming-language
+.. [jinjadoc] Pallets Project (2007), Template Designer Documentation — Jinja Documentation (2.11.x),
+   retrieved 2021-01-18, URL: https://jinja.palletsprojects.com/en/2.11.x/templates/#html-escaping
+.. [rethinkdbdoc] RethinkDB, Introduction to ReQL - RethinkDB,
+   retrieved 2021-01-18, URL: https://rethinkdb.com/docs/introduction-to-reql/#reql-embeds-into-your-programming-language
