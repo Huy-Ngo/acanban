@@ -48,7 +48,7 @@ async def add() -> str:
         with fail_after(current_app.config['BODY_TIMEOUT']):
             response = await current_app.ipfs_api.post(
                 '/add', headers=headers, data=request.body)
-    except TooSlowError:
+    except TooSlowError:  # pragma: no cover
         raise RequestTimeout
     response.raise_for_status()
 

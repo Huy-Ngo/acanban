@@ -1,5 +1,5 @@
 # Test project pages
-# Copyright (C) 2020  Nguyễn Gia Phong
+# Copyright (C) 2020-2021  Nguyễn Gia Phong
 # Copyright (C) 2020  Ngô Xuân Minh
 # Copyright (C) 2021  Ngô Ngọc Đức Huy
 #
@@ -154,3 +154,49 @@ async def test_edit_member(student: QuartClient) -> None:
                                   form=dict(name='New Project Name',
                                             description='new description'))
     assert response.status_code == Status.FOUND
+
+
+async def test_report_get(student: QuartClient) -> None:
+    """Test GET report view."""
+    response = await student.get(f'{PROJECT}report')
+    assert response.status_code == Status.OK
+
+
+async def test_report_upload(student: QuartClient) -> None:
+    """Test POST report file."""
+    response = await student.post(
+        f'{PROJECT}report/upload',
+        headers={
+            'Content-Length': 199,
+            'Content-Type': (
+                'multipart/form-data;'
+                ' boundary=------------------------e70696c7f3938bcf')},
+        data=(
+            b'--------------------------e70696c7f3938bcf\r\n'
+            b'Content-Disposition: form-data; name="file"; filename="foo"\r\n'
+            b'Content-Type: application/octet-stream\r\n\r\n'
+            b'bar\n\r\n--------------------------e70696c7f3938bcf--\r\n'))
+    assert response.status_code == Status.FOUND
+
+
+async def test_report_upload_by_nonstudent(client: QuartClient) -> None:
+    """Test POST report file by unauthorized member."""
+    await client.post(  # TODO: fixturize this
+        '/login', form=dict(username='oliviak', password='kaivilo'))
+    response = await client.post(f'{PROJECT}report/upload')
+    assert response.status_code == Status.UNAUTHORIZED
+
+
+async def test_report_eval(client: QuartClient) -> None:
+    """Test POST report evaluation."""
+    await client.post(  # TODO: fixturize this
+        '/login', form=dict(username='oliviak', password='kaivilo'))
+    response = await client.post(
+        f'{PROJECT}report/eval', form=dict(grade=6.9, comment='blaze it'))
+    assert response.status_code == Status.FOUND
+
+
+async def test_report_eval_by_student(student: QuartClient) -> None:
+    """Test POST report evaluation by unauthorized member."""
+    response = await student.post(f'{PROJECT}report/eval')
+    assert response.status_code == Status.UNAUTHORIZED

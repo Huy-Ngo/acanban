@@ -133,7 +133,9 @@ async def report(uuid: str) -> ResponseReturnValue:
 @login_required
 async def report_upload(uuid: str) -> ResponseReturnValue:
     """Handle report upload."""
-    await pluck(uuid)  # check project's existence and permission
+    user = await current_user.pluck('role', 'projects')
+    await pluck(uuid, projects=user['projects'])
+    if user['role'] != 'student': raise Unauthorized
     action = r.row['report']['revisions'].append(await ipfs_add())
     async with current_app.db_pool.connection() as conn:
         await r.table('projects').get(uuid).update(
@@ -146,10 +148,10 @@ async def report_upload(uuid: str) -> ResponseReturnValue:
 async def report_eval(uuid: str) -> ResponseReturnValue:
     """Handle report evaluation."""
     user = await current_user.pluck('role', 'projects')
-    if 'role' == 'student': raise Unauthorized
     await pluck(uuid, projects=user['projects'])
+    if user['role'] == 'student': raise Unauthorized
     form = await request.form
-    updated = {'grade': int(form['grade']), 'comment': form['comment']}
+    updated = {'grade': float(form['grade']), 'comment': form['comment']}
     query = r.table('projects').get(uuid).update({'report': updated})
     async with current_app.db_pool.connection() as conn: await query.run(conn)
     return redirect(request.referrer)

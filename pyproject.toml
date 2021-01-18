@@ -7,8 +7,8 @@ module = 'acanban'
 author = 'Ngô Ngọc Đức Huy'
 author-email = 'duchuy29092000@gmail.com'
 home-page = 'https://Huy-Ngo.github.io/acanban'
-requires = ['appdirs', 'httpx', 'hypercorn', 'py-cid', 'quart <0.14',
-            'quart-auth', 'quart-trio', 'rethinkdb >=2.4.8']
+requires = ['appdirs', 'httpx', 'hypercorn', 'py-cid',
+            'quart-auth', 'quart-trio-twice', 'rethinkdb >=2.4.8']
 description-file = 'README.md'
 classifiers = [
     'Development Status :: 1 - Planning',
