@@ -43,13 +43,11 @@ async def view_user_profile(username: str) -> ResponseReturnValue:
         if user is None:
             raise NotFound
         project_uuids = user.get('projects', None)
-        if project_uuids is not None:
-            project_list = r.table('projects').get_all(*project_uuids)
-            projects = await project_list.run(conn)
-            return await render_template(
-                'user.html', user=user, projects=projects)
-        else:
+        if project_uuids is None:
             return await render_template('user.html', user=user)
+        project_list = r.table('projects').get_all(*project_uuids)
+        projects = await project_list.run(conn)
+        return await render_template('user.html', user=user, projects=projects)
 
 
 @blueprint.route('/<username>/edit', methods=['GET', 'POST'])

@@ -71,6 +71,9 @@ Custom `ipfs.toml` must define the following keys,
 whose default values are listed as follows:
 
 ```toml
+[api]
+base = 'http://127.0.0.1:5001/api/v0'
+
 [gateway]
 base = 'http://127.0.0.1:8080/ipfs'
 fallback = 'https://ipfs.io'
