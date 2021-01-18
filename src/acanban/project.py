@@ -119,7 +119,7 @@ async def edit(uuid: str) -> ResponseReturnValue:
 async def report(uuid: str) -> ResponseReturnValue:
     """Return the projects' report infomation and forms."""
     user = await current_user.pluck('projects', 'role')
-    project = await pluck(uuid, ('id', 'name', 'report'), user['projects'])
+    project = await pluck(uuid, ('id', 'name', 'report'), user.get('projects'))
     query = r.table('files').get_all(*project['report']['revisions'])
     async with current_app.db_pool.connection() as conn:
         revisions = [file async for file in await query.run(conn)]
@@ -134,7 +134,7 @@ async def report(uuid: str) -> ResponseReturnValue:
 async def report_upload(uuid: str) -> ResponseReturnValue:
     """Handle report upload."""
     user = await current_user.pluck('role', 'projects')
-    await pluck(uuid, projects=user['projects'])
+    await pluck(uuid, projects=user.get('projects'))
     if user['role'] != 'student': raise Unauthorized
     action = r.row['report']['revisions'].append(await ipfs_add())
     async with current_app.db_pool.connection() as conn:
@@ -148,7 +148,7 @@ async def report_upload(uuid: str) -> ResponseReturnValue:
 async def report_eval(uuid: str) -> ResponseReturnValue:
     """Handle report evaluation."""
     user = await current_user.pluck('role', 'projects')
-    await pluck(uuid, projects=user['projects'])
+    await pluck(uuid, projects=user.get('projects'))
     if user['role'] == 'student': raise Unauthorized
     form = await request.form
     updated = {'grade': float(form['grade']), 'comment': form['comment']}
