@@ -1,0 +1,17 @@
+@startuml
+
+class User
+class File
+class Project
+class Task
+class Comment
+
+User "1..*" --- "0..*" Project
+User "0..1" --- "1..*" Task
+Project "1" -[norank]--- "0..*" Task
+Task "1" -- "0..*" Comment
+Comment "1" --- "0..*" Comment
+Project "0..1" --- "0..*" File: report
+Project "0..1" --- "0..*" File: slides
+
+@enduml
