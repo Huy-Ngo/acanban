@@ -83,7 +83,7 @@ img {
 
 /* form */
 button, select, textarea,
-input[type=text], input[type=password], input[type=email], label[for=file] {
+input[type=text], input[type=password], input[type=email] {
     background-color: var(--color-bg);
     border: 0.1rem solid var(--color-fg);
     border-radius: 0.3rem;
@@ -105,12 +105,11 @@ select {
     appearance: none;
     background: url(/static/dropdown-icon.svg) right center no-repeat;
 }
-input[type=file] { display: none }
 input:focus, select:focus, textarea:focus {
     border-color: var(--color-primary-dark);
     box-shadow: 0 0 0.5rem var(--color-primary-bright);
 }
-label[for=file], button {
+button {
     background-color: var(--color-primary-dark);
     color: var(--color-bg);
     cursor: pointer;
@@ -118,7 +117,7 @@ label[for=file], button {
     height: 2.5rem;
     text-align: center;
 }
-label[for=file]:hover, button:hover {
+button:hover {
     background-color: var(--color-primary-medium);
 }
 dl {

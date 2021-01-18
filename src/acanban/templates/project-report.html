@@ -19,7 +19,6 @@
   {% if for_student %}
   <form action=/p/{{ project.id }}/report/upload method=POST
         enctype=multipart/form-data>
-    <label for=file>Select report to upload</label>
     <input type=file name=file id=file>
     <button>Upload new report</button>
   </form>
