@@ -26,8 +26,21 @@ data structure.  This structure is described by a self-referrential one-to-many
 relation.
 
 Additionally, there should be a ``File`` data table
-for storing reports and slides.  There should be two relations
-between ``Project`` and ``File``.  However, a file in ``File`` table
+for storing reports and slides.
+We allowed uploading multiple reports and slides,
+considering several scenarios:
+
+- In previous years, there should be two reports for a group project
+- Each person in the group may have a different slide
+  to fit their own preference and their style of presentation.
+- The group can continually update their reports and presentations,
+  which can be reviewed by any participants.  All the uploaded revisions
+  should be kept separate for comparision or combination.
+
+Therefore, there should be two one-to-many relations
+between ``Project`` and ``File``.
+
+However, a file in ``File`` table
 does not necessarily tie to any project, since they can be referred in comments
 or by academic assistants in their statistical reports.
 
