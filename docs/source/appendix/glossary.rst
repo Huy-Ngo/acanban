@@ -31,7 +31,7 @@ that are used throughout this report:
       A person, normally a lecturer, that supervises, supports, and evaluate
       one or several project groups.
 
-   (Cross-site Scripting) XSS attack
+   Cross-site scripting (XSS) attack
 
       Cross-site scripting (XSS) is an code injection attack where
       the attacker inserts client-side scripts into web pages.
