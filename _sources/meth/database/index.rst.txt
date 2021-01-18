@@ -8,6 +8,7 @@ We will need these tables:
 - ``User``
 - ``Project``
 - ``Task``
+- ``Report``
 - ``Comment``
 - ``File``
 
@@ -20,5 +21,6 @@ Each of them is described in following sections.
    user
    project
    task
+   report
    comment
    file

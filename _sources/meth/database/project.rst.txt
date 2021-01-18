@@ -30,5 +30,5 @@ It has following attributes:
    Final evaluation of the project.  It can be based on previous evaluation
    of individual tasks.
 
-``report`` : ``File`` or ``array`` of ``File``
+``report`` : ``Report``
    A file that contains the report(s) for the group project.
