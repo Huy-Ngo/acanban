@@ -16,11 +16,11 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from pytest import mark
+from conftest import ClientFactory, parametrize
 from quart.testing import QuartClient
 
 
-@mark.parametrize(('uri', 'status_code'), (
+@parametrize(('uri', 'status_code'), (
     ('/', 200), ('/p/', 200),
     ('/register', 200), ('/login', 200), ('/logout', 302),
     ('/ipfs/QmPTWcNNxPdVwqQ939rsxJQiiditfw9YNyLMs9QZJM4gCU', 200),
@@ -33,8 +33,8 @@ async def test_status(uri: str, status_code: int, client: QuartClient) -> None:
     await response.get_data()
 
 
-async def test_myproject_status(student: QuartClient) -> None:
-    """Test the status of basic routes."""
-    response = await student.get('/')
+async def test_myproject_status(user: ClientFactory) -> None:
+    """Test the status of user dashboard."""
+    client = await user('adaml')
+    response = await client.get('/')
     assert response.status_code == 200
-    await response.get_data()

@@ -1,5 +1,6 @@
 # Test users
 # Copyright (C) 2020  Ngô Ngọc Đức Huy
+# Copyright (C) 2021  Nguyễn Gia Phong
 #
 # This file is part of Acanban.
 #
@@ -16,32 +17,40 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from pytest import mark
+from http import HTTPStatus as Status
+
+from conftest import ClientFactory, parametrize
 from quart.testing import QuartClient
 
 
-@mark.parametrize(('username', 'code'),
-                  (('nexistepas', 404), ('kiddo', 404),
-                   ('silasl', 200), ('adaml', 200)))
-async def test_view(username: str, code: int,
-                    client: QuartClient) -> None:
-    """Test user view endpoint."""
+@parametrize(('username', 'status_code'),
+             (('nexistepas', Status.NOT_FOUND),
+              ('silasl', Status.OK)))
+async def test_get(username: str, status_code: int,
+                   client: QuartClient) -> None:
+    """Test GET user root endpoint."""
     response = await client.get(f'/u/{username}')
-    assert response.status_code == code
+    assert response.status_code == status_code
 
 
-@mark.parametrize(('username', 'code'),
-                  (('silasl', 200), ('adaml', 403)))
-async def test_edit_view(username: str, code: int,
-                         assistant: QuartClient) -> None:
-    """Test user edit endpoint (GET method)."""
-    response = await assistant.get(f'/u/{username}/edit')
-    assert response.status_code == code
+@parametrize(('username', 'profile', 'status_code'),
+             (('adaml', 'silasl', Status.FORBIDDEN),
+              ('adaml', 'adaml', Status.OK)))
+async def test_edit_get(username: str, profile: str,
+                        status_code: int, user: ClientFactory) -> None:
+    """Test GET user edit endpoint."""
+    client = await user(username)
+    response = await client.get(f'/u/{profile}/edit')
+    assert response.status_code == status_code
 
 
-async def test_edit(assistant: QuartClient) -> None:
-    """Test for user editing name (POST method)."""
-    response = await assistant.post(
-        '/u/silasl/edit', form=dict(name='Silas Salis',
-                                    email='newemail@example.edu'))
-    assert response.status_code == 302
+@parametrize(('username', 'profile', 'status_code'),
+             (('adaml', 'silasl', Status.FORBIDDEN),
+              ('adaml', 'adaml', Status.FOUND)))
+async def test_edit_post(username: str, profile: str,
+                         status_code: int, user: ClientFactory) -> None:
+    """Test POST user edit endpoint."""
+    client = await user(username)
+    info = {'name': 'Silas Salis', 'email': 'newemail@example.edu'}
+    response = await client.post(f'/u/{profile}/edit', form=info)
+    assert response.status_code == status_code
