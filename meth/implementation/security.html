@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Security &mdash; Acanban 0.0.4 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Results and Discussion" href="../../result/index.html" />
+    <link rel="prev" title="Implementation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Acanban
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obj.html">Objective</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../req/index.html">System Requirements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Methodology</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../choices.html">Technical Choices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arch.html">System Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/index.html">Database design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Implementation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Security</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#authentication">Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#authorization">Authorization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encrypted-connection">Encrypted Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#injection-attacks">Injection Attacks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../result/index.html">Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion/index.html">Conclusion and Future Work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendix/index.html">Appendix</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Acanban</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Methodology</a> &raquo;</li>
+        
+          <li><a href="index.html">Implementation</a> &raquo;</li>
+        
+      <li>Security</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/meth/implementation/security.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="security">
+<h1>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
+<p>In order to protect the data from unauthorized users, we must first verify
+their identity, i.e., authenticate the users.</p>
+<div class="section" id="register">
+<h3>Register<a class="headerlink" href="#register" title="Permalink to this headline">¶</a></h3>
+<p>To register for an account, the user should fill a form
+with personal information:</p>
+<ul class="simple">
+<li><p>real name</p></li>
+<li><p>username</p></li>
+<li><p>password</p></li>
+<li><p>the user’s role, which can be student, supervisor, or assistant</p></li>
+</ul>
+<p>When user submits a form to register for an account, the register controller
+will check the database to see if the username exists.  If the username
+does not exist, the controller will continue to create an account
+in the database.  The password is stored in the database as a hash
+for security.</p>
+<p>After the successful account creation, the user will be
+redirected to the home page.</p>
+<div class="figure align-default" id="reg-basic">
+<p class="plantuml">
+<img src="../../_images/plantuml-1d68cb043550d9cf1d0e2d3795d3b9cf5712b73a.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+actor &quot;:Unauthorized User&quot; as usr
+boundary &quot;:RegisterForm&quot; as form
+control &quot;:RegisterController&quot; as ctl
+entity &quot;:Account&quot; as acc
+
+usr -&gt; form: // open registration page()
+form -&gt; form: // display form()
+usr -&gt; form: // submit form()
+form -&gt; ctl: // try adding user to database()
+ctl -&gt; acc: // check existing accounts()
+ctl &lt;-- acc: // return
+ctl -&gt; acc: // add user()
+ctl &lt;-- acc: //return
+form &lt;-- ctl !!: // redirect to home page()
+deactivate form
+deactivate form
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 3 </span><span class="caption-text">Analysis sequence diagram
+for the basic flow of registration process</span><a class="headerlink" href="#reg-basic" title="Permalink to this image">¶</a></p>
+</div>
+<p>If the username or email is taken,
+the controller should inform so to the user.</p>
+<div class="figure align-default" id="reg-exist-email">
+<p class="plantuml">
+<img src="../../_images/plantuml-b8d06d030e145322433502e8ef195331ba7c1d68.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+actor &quot;:Unauthorized User&quot; as usr
+boundary &quot;:RegisterForm&quot; as form
+control &quot;:RegisterController&quot; as ctl
+entity &quot;:Account&quot; as acc
+
+usr -&gt; form: // open registration page()
+form -&gt; form: // display form()
+usr -&gt; form: // submit form()
+form -&gt; ctl: // try adding user to database()
+ctl -&gt; acc: // check existing accounts()
+ctl &lt;-- acc: // return
+form &lt;-- ctl: // Inform that the email is used()
+deactivate form
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 4 </span><span class="caption-text">Analysis sequence diagram
+for the alternative flow of the registration process
+where the mail is taken</span><a class="headerlink" href="#reg-exist-email" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="reg-exist-name">
+<p class="plantuml">
+<img src="../../_images/plantuml-07c689b6bb72242276a75040168d74e54e2754d6.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+actor &quot;:Unauthorized User&quot; as usr
+boundary &quot;:RegisterForm&quot; as form
+control &quot;:RegisterController&quot; as ctl
+entity &quot;:Account&quot; as acc
+
+usr -&gt; form: // open registration page()
+form -&gt; form: // display form()
+usr -&gt; form: // submit form()
+form -&gt; ctl: // try adding user to database()
+ctl -&gt; acc: // check existing accounts()
+ctl &lt;-- acc: // return
+ctl -&gt; acc: // add account()
+ctl &lt;-- acc: // raise key error
+form &lt;-- ctl: // Inform that the username is taken()
+deactivate form
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 5 </span><span class="caption-text">Analysis sequence diagram
+for the alternative flow of the registration process
+where the username is taken</span><a class="headerlink" href="#reg-exist-name" title="Permalink to this image">¶</a></p>
+</div>
+<p>Another exceptional flow happens when the user request an invalid role.
+This should not happen when the user submit the form via browser,
+but it can happen if someone is submitting it via a nonstandard way.</p>
+<div class="figure align-default" id="reg-role">
+<p class="plantuml">
+<img src="../../_images/plantuml-14e9590a3391db154cb1094aa14051373db85085.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+actor &quot;:Unauthorized User&quot; as usr
+boundary &quot;:RegisterForm&quot; as form
+control &quot;:RegisterController&quot; as ctl
+entity &quot;:Account&quot; as acc
+
+usr -&gt; form: // open registration page()
+form -&gt; form: // display form()
+usr -&gt; form: // submit form()
+form -&gt; ctl: // try adding user to database()
+form &lt;-- ctl !!: // raise value error()
+deactivate form
+deactivate form
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 6 </span><span class="caption-text">Analysis sequence diagram
+for the alternative flow of the registration process
+where the role is invalid</span><a class="headerlink" href="#reg-role" title="Permalink to this image">¶</a></p>
+</div>
+<p>In order to prevent faking identity, we intended to require a token
+for registration.  This token is provided by the system administrator
+and each person can only receive one token, so if they use it
+for faking identity, they cannot create their account anymore and
+have to suffer th consequence.</p>
+<p>Alternatively, the administrator can remove the register endpoint
+and generate the accounts for each user.</p>
+<p>However, we did not implement either of these schemes.</p>
+</div>
+<div class="section" id="log-in">
+<h3>Log In<a class="headerlink" href="#log-in" title="Permalink to this headline">¶</a></h3>
+<p>The user can log in to the site in the login endpoint.
+After submitting the form with their username and password,
+they should be logged in.</p>
+<div class="figure align-default" id="log-basic">
+<p class="plantuml">
+<img src="../../_images/plantuml-f15a8391ee34cc8e80b1d75197dcbdbcdb7e87b5.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+actor &quot;:Unauthorized User&quot; as usr
+boundary &quot;:LoginForm&quot; as form
+control &quot;:LoginController&quot; as ctl
+entity &quot;:Account&quot; as acc
+
+usr -&gt; form: // open login page()
+form -&gt; form: // display form()
+usr -&gt; form: // submit form()
+form -&gt; ctl: // request to login user()
+ctl -&gt; acc: // retrieve user from the database()
+ctl &lt;-- acc: // return
+form &lt;-- ctl !!: // redirect to home page()
+deactivate form
+deactivate form
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 7 </span><span class="caption-text">Analysis sequence diagram
+for the basic flow of login</span><a class="headerlink" href="#log-basic" title="Permalink to this image">¶</a></p>
+</div>
+<p>However, if the user tries to log in with a non-existent account,
+the controller should raise an error and inform the user so.</p>
+<div class="figure align-default" id="log-no-user">
+<p class="plantuml">
+<img src="../../_images/plantuml-f377969f83ef783edd9e928ec354e7dea18ecd04.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+actor &quot;:Unauthorized User&quot; as usr
+boundary &quot;:LoginForm&quot; as form
+control &quot;:LoginController&quot; as ctl
+entity &quot;:Account&quot; as acc
+
+usr -&gt; form: // open login page()
+form -&gt; form: // display form()
+usr -&gt; form: // submit form()
+form -&gt; ctl: // request to login user()
+ctl -&gt; acc: // retrieve user from the database()
+ctl &lt;-- acc: // return
+form &lt;-- ctl: // inform about username not registered()
+deactivate form
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 8 </span><span class="caption-text">Analysis sequence diagram
+for the alternative flow of login
+where there is no user with the username</span><a class="headerlink" href="#log-no-user" title="Permalink to this image">¶</a></p>
+</div>
+<p>If the user input wrong password, the user should also not be logged in
+and be informed of wrong password.</p>
+<div class="figure align-default" id="log-wrong-path">
+<p class="plantuml">
+<img src="../../_images/plantuml-534052283caea704d69c2a2f9afe5d160ab0a37b.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+actor &quot;:Unauthorized User&quot; as usr
+boundary &quot;:LoginForm&quot; as form
+control &quot;:LoginController&quot; as ctl
+entity &quot;:Account&quot; as acc
+
+usr -&gt; form: // open login page()
+form -&gt; form: // display form()
+usr -&gt; form: // submit form()
+form -&gt; ctl: // request to login user()
+ctl -&gt; acc: // retrieve user from the database()
+ctl &lt;-- acc: // return
+form &lt;-- ctl: // inform about wrong password()
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 9 </span><span class="caption-text">Analysis sequence diagram
+for the alternative flow of login
+where the</span><a class="headerlink" href="#log-wrong-path" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="authorization">
+<h2>Authorization<a class="headerlink" href="#authorization" title="Permalink to this headline">¶</a></h2>
+<p>After authenticated, the users are authorized according to their role
+and their identity.
+For example, a user with role “assistant” cannot participate in a project,
+or student cannots edit a projects they do not participate in.</p>
+</div>
+<div class="section" id="encrypted-connection">
+<h2>Encrypted Connection<a class="headerlink" href="#encrypted-connection" title="Permalink to this headline">¶</a></h2>
+<p>To protect the data sent through HTTP, we upgraded it to HTTPS by creating
+a TLS certificate on the server side.
+Furthermore, the server is configured to use secure cookies, that is, cookies
+that can only be sent via HTTPS.</p>
+</div>
+<div class="section" id="injection-attacks">
+<h2>Injection Attacks<a class="headerlink" href="#injection-attacks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="xss-attack">
+<h3>XSS Attack<a class="headerlink" href="#xss-attack" title="Permalink to this headline">¶</a></h3>
+<p>Jinja by default escapes all HTML tags.  This means that if an attacker tries
+to inject a script into the content, for example, setting project description
+as <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;sendSensitiveData()&lt;/script&gt;</span></code>, the script tags would appear
+as is and not parsed as a script element.</p>
+<p>Moreover, the server is configured to use same-site and HTTP-only cookies,
+which renders any cookie-stealing JavaScript useless.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../../result/index.html" class="btn btn-neutral float-right" title="Results and Discussion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Implementation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020  Ngô Ngọc Đức Huy et al..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
