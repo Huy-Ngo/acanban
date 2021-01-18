@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Deployment &mdash; Acanban 0.0.4 documentation</title>
+  <title>System Architecture &mdash; Acanban 0.0.4 documentation</title>
   
 
   
@@ -90,7 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../req/index.html">System Requirements</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Methodology</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="choices.html">Technical Choices</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Deployment</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">System Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="database/index.html">Database design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implementation/index.html">Implementation</a></li>
 </ul>
@@ -148,7 +148,7 @@
         
           <li><a href="index.html">Methodology</a> &raquo;</li>
         
-      <li>Deployment</li>
+      <li>System Architecture</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -167,60 +167,92 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="deployment">
-<h1>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="system-architecture">
+<h1>System Architecture<a class="headerlink" href="#system-architecture" title="Permalink to this headline">¶</a></h1>
+<p>All the data and business logic handling is done on the server side in order
+to reduce workload for clients.</p>
+<p>Since client only renders UI from HTML sent from server and send requests
+to the server, its internal details are not discussed in this section.</p>
+<p><a class="reference internal" href="#arch"><span class="std std-numref">Figure 1</span></a> describes the architecture for our system.
+When a user access the site, a HTTPS request is sent to the server.
+The ASGI web server Hypercorn will take this request.
+Acanban module will process the request and make query to RethinkDB or IPFS
+if needed and respond to the client.</p>
+<div class="figure align-default" id="arch">
 <p class="plantuml">
-<img src="../_images/plantuml-35fb9cdbd1561932af15e113bb754740abc5f50b.svg" alt="node Client {
+<img src="../_images/plantuml-bde89f79890a595791c0354615c28ec1705acf8c.svg" alt="left to right direction
+
+node Client {
    node Browser
 }
 
 node Server {
    database &quot;RethinkDB&quot; as db
-   artifact &quot;acanban.service&quot; as systemd_conf
    component Acanban
    component Hypercorn
-   node systemd &lt;&lt;daemon&gt;&gt;
    component IPFS
 }
 
 Browser --- Hypercorn: HTTPS
-Hypercorn - systemd: run instance
-systemd &lt;- systemd_conf: configure
 Hypercorn -- Acanban
-Acanban - IPFS
+IPFS - Acanban
 Acanban - db"/></p>
-<p>Alternative deployment model with load-balancing and a separate data server:</p>
+<p class="caption"><span class="caption-number">Figure 1 </span><span class="caption-text">Server-Client architecture</span><a class="headerlink" href="#arch" title="Permalink to this image">¶</a></p>
+</div>
+<p>Alternatively, a load balancer such as nginx can be added to distribute
+the requests to multiple server as is shown in <a class="reference internal" href="#arch-alt"><span class="std std-numref">Figure 2</span></a>.
+Multiple instances of acanban are run to process incoming requests.
+They can write concurrently to a shared database.</p>
+<div class="figure align-default" id="arch-alt">
 <p class="plantuml">
-<img src="../_images/plantuml-73b484492f213aa6fb5e125f18a0646e7aa36731.svg" alt="node Client {
+<img src="../_images/plantuml-980cb0eb971ec83cd3025ea924ad6960ff24f8b4.svg" alt="&#64;startuml
+skinparam Padding 10
+
+node Client {
    node Browser
 }
 
-node &quot;Load Balancing Server&quot; as balancer {
-   component NGINX as nginx &lt;&lt;load balancer&gt;&gt;
-   artifact &quot;/etc/nginx/sites-available/acanban&quot; as nginx_conf
+node &quot;Load Balancing Server&quot; {
+component NGINX as nginx &lt;&lt;load balancer&gt;&gt;
 }
 
-node Server {
-   artifact &quot;acanban.service&quot; as systemd_conf
-   component Acanban
-   component Hypercorn
-   node systemd &lt;&lt;daemon&gt;&gt;
+node &quot;Web Server&quot; as server {
+   component Acanban as acanban
+   component Hypercorn as hypercorn
 }
 
-node &quot;Database Server&quot; as db_server {
-   database &quot;RethinkDB&quot; as db
-   component IPFS
+node &quot;Database cluster&quot; as db {
+   database &quot;RethinkDB&quot; as r_1
+   database &quot;RethinkDB&quot; as r_2
+   database &quot;RethinkDB&quot; as r_3
+   database &quot;RethinkDB&quot; as r_4
 }
 
-Browser --- balancer: HTTPS
+node &quot;IPFS Cluster&quot; as ipfs {
+   component &quot;IPFS&quot; as i_1
+   component &quot;IPFS&quot; as i_2
+   component &quot;IPFS&quot; as i_3
+   component &quot;IPFS&quot; as i_4
+}
 
-nginx &lt;. nginx_conf: configure
-nginx &quot;1&quot; --- &quot;1..*&quot; Server
+Browser -[norank]- nginx: HTTPS
 
-Hypercorn - systemd: run instance
-systemd &lt;. systemd_conf: configure
-Hypercorn -- Acanban
-Acanban &quot;1..*&quot; -- &quot;1&quot; db_server"/></p>
+nginx &quot;1&quot; --- &quot;1..*&quot; hypercorn
+
+hypercorn - acanban
+acanban &quot;1..*&quot; --- &quot;1..*&quot; db
+acanban &quot;1..*&quot; --- &quot;1..*&quot; ipfs
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 2 </span><span class="caption-text">Alternative architecture with load balancer</span><a class="headerlink" href="#arch-alt" title="Permalink to this image">¶</a></p>
+</div>
+<p>However, we do not implement this architecture within the scope of this project,
+due to following reasons:</p>
+<ul class="simple">
+<li><p>We do not have several servers to implement.</p></li>
+<li><p>For intended use, the expected requests can go up to as many as 1000.
+Load balancing for such few requests is overhead.</p></li>
+</ul>
 </div>
 
 

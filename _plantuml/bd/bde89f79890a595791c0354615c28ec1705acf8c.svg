@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="280px" preserveAspectRatio="none" style="width:588px;height:280px;" version="1.1" viewBox="0 0 588 280" width="588px" zoomAndPan="magnify"><defs><filter height="300%" id="f6m4vlllom930" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--cluster Client--><polygon fill="#FFFFFF" filter="url(#f6m4vlllom930)" points="22,110,32,100,151,100,151,192,141,202,22,202,22,110" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="141" x2="150" y1="110" y2="101"/><line style="stroke: #000000; stroke-width: 1.5;" x1="22" x2="141" y1="110" y2="110"/><line style="stroke: #000000; stroke-width: 1.5;" x1="141" x2="141" y1="110" y2="202"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="45" x="60" y="125.9951">Client</text><!--cluster Server--><polygon fill="#FFFFFF" filter="url(#f6m4vlllom930)" points="288,34,298,24,566,24,566,258,556,268,288,268,288,34" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="556" x2="565" y1="34" y2="25"/><line style="stroke: #000000; stroke-width: 1.5;" x1="288" x2="556" y1="34" y2="34"/><line style="stroke: #000000; stroke-width: 1.5;" x1="556" x2="556" y1="34" y2="268"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="396.5" y="49.9951">Server</text><!--entity Browser--><polygon fill="#FEFECE" filter="url(#f6m4vlllom930)" points="38,150,48,140,135,140,135,176.2969,125,186.2969,38,186.2969,38,150" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="125" x2="134" y1="150" y2="141"/><line style="stroke: #000000; stroke-width: 1.5;" x1="38" x2="125" y1="150" y2="150"/><line style="stroke: #000000; stroke-width: 1.5;" x1="125" x2="125" y1="150" y2="186.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="57" x="53" y="172.9951">Browser</text><!--entity db--><path d="M456,74.5 C456,64.5 503,64.5 503,64.5 C503,64.5 550,64.5 550,74.5 L550,99.7969 C550,109.7969 503,109.7969 503,109.7969 C503,109.7969 456,109.7969 456,99.7969 L456,74.5 " fill="#FEFECE" filter="url(#f6m4vlllom930)" style="stroke: #000000; stroke-width: 1.5;"/><path d="M456,74.5 C456,84.5 503,84.5 503,84.5 C503,84.5 550,84.5 550,74.5 " fill="none" style="stroke: #000000; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="74" x="466" y="101.4951">RethinkDB</text><!--entity Acanban--><rect fill="#FEFECE" filter="url(#f6m4vlllom930)" height="36.2969" style="stroke: #A80036; stroke-width: 1.5;" width="80" x="463" y="145"/><rect fill="#FEFECE" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="458" y="150"/><rect fill="#FEFECE" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="458" y="171.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="473" y="167.9951">Acanban</text><!--entity Hypercorn--><rect fill="#FEFECE" filter="url(#f6m4vlllom930)" height="36.2969" style="stroke: #A80036; stroke-width: 1.5;" width="91" x="304" y="145"/><rect fill="#FEFECE" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="299" y="150"/><rect fill="#FEFECE" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="299" y="171.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="71" x="314" y="167.9951">Hypercorn</text><!--entity IPFS--><rect fill="#FEFECE" filter="url(#f6m4vlllom930)" height="36.2969" style="stroke: #A80036; stroke-width: 1.5;" width="49" x="478.5" y="216"/><rect fill="#FEFECE" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="473.5" y="221"/><rect fill="#FEFECE" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="473.5" y="242.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="29" x="488.5" y="238.9951">IPFS</text><!--link Browser to Hypercorn--><path d="M135.07,163 C183.15,163 256.87,163 303.87,163 " fill="none" id="Browser-Hypercorn" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="41" x="199" y="159.0669">HTTPS</text><!--link Hypercorn to Acanban--><path d="M395.14,163 C416.61,163 442.12,163 462.82,163 " fill="none" id="Hypercorn-Acanban" style="stroke: #A80036; stroke-width: 1.0;"/><!--link IPFS to Acanban--><path d="M503,215.97 C503,204.38 503,192.8 503,181.21 " fill="none" id="IPFS-Acanban" style="stroke: #A80036; stroke-width: 1.0;"/><!--link Acanban to db--><path d="M503,144.89 C503,133.13 503,121.37 503,109.61 " fill="none" id="Acanban-db" style="stroke: #A80036; stroke-width: 1.0;"/><!--
+@startuml
+left to right direction
+
+node Client {
+   node Browser
+}
+
+node Server {
+   database "RethinkDB" as db
+   component Acanban
+   component Hypercorn
+   component IPFS
+}
+
+Browser - - - Hypercorn: HTTPS
+Hypercorn - - Acanban
+IPFS - Acanban
+Acanban - db
+
+@enduml
+
+PlantUML version 1.2018.13(Mon Nov 26 17:11:51 UTC 2018)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.9.1+1
+Operating System: Linux
+OS Version: 5.4.0-1036-azure
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
