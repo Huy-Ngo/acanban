@@ -17,13 +17,16 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
+from http import HTTPStatus
+
 from pytest import mark
 from quart.testing import QuartClient
 
 
 @mark.parametrize(('username', 'role', 'code'),
-                  (('huyngo', 'student', 302), ('kiddo', 'pupil', 200),
-                   ('silasl', 'supervisor', 200)))
+                  (('kiddo', 'pupil', 200),
+                   ('silasl', 'supervisor', 200),
+                   ('huyngo', 'student', 302)))
 async def test_register(username: str, role: str, code: int,
                         client: QuartClient) -> None:
     """Test successful and failed registration."""
@@ -32,6 +35,14 @@ async def test_register(username: str, role: str, code: int,
         name='Fô Bả', email='f@o.o', role=role))
     # Successful registration redirects.
     assert response.status_code == code
+
+
+async def test_register_existing_email(client: QuartClient) -> None:
+    """Test failed registration where the email is taken."""
+    response = await client.post('/register', form=dict(
+        username='notronanf', password='some-password',
+        name='Ronan Franklin', email='ronanf@example.edu', role='supervisor'))
+    assert response.status_code == HTTPStatus.OK
 
 
 @mark.parametrize(('username', 'password', 'code'),

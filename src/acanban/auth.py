@@ -80,6 +80,10 @@ async def add_user(username: str, password: str,
     user = {'username': username, 'password': crypt(password),
             'name': name, 'email': email, 'role': role}
     async with current_app.db_pool.connection() as connection:
+        user_with_mail = await r.table('users').filter(
+            {'email': email}).count().run(connection)
+        if user_with_mail > 0:
+            raise ValueError('email taken')
         if (await r.table('users').insert(user).run(connection))['errors']:
             raise ValueError('username taken')
 
