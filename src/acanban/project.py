@@ -22,8 +22,8 @@ from typing import Any, Dict, Optional, Sequence
 
 from quart import (Blueprint, ResponseReturnValue, current_app,
                    redirect, render_template, request)
-from quart.exceptions import NotFound
-from quart_auth import Unauthorized, current_user, login_required
+from quart.exceptions import Forbidden, NotFound
+from quart_auth import current_user, login_required
 from rethinkdb import r
 from rethinkdb.errors import ReqlNonExistenceError
 
@@ -40,7 +40,7 @@ blueprint = Blueprint('project', __name__, url_prefix='/p')
 async def create_projects() -> ResponseReturnValue:
     role = await current_user.role
     if role == 'assistant':
-        raise Unauthorized
+        raise Forbidden
     if request.method == 'GET':
         return await render_template('project-create.html')
     project = await request.form
@@ -85,8 +85,8 @@ async def pluck(uuid: str, fields: Sequence[str] = (),
         try:
             projects = await current_user.projects
         except ReqlNonExistenceError:
-            raise Unauthorized
-    if uuid not in projects: raise Unauthorized
+            raise Forbidden
+    if uuid not in projects: raise Forbidden
     return project
 
 
@@ -135,7 +135,7 @@ async def report_upload(uuid: str) -> ResponseReturnValue:
     """Handle report upload."""
     user = await current_user.pluck('role', 'projects')
     await pluck(uuid, projects=user.get('projects'))
-    if user['role'] != 'student': raise Unauthorized
+    if user['role'] != 'student': raise Forbidden
     action = r.row['report']['revisions'].append(await ipfs_add())
     async with current_app.db_pool.connection() as conn:
         await r.table('projects').get(uuid).update(
@@ -149,7 +149,7 @@ async def report_eval(uuid: str) -> ResponseReturnValue:
     """Handle report evaluation."""
     user = await current_user.pluck('role', 'projects')
     await pluck(uuid, projects=user.get('projects'))
-    if user['role'] == 'student': raise Unauthorized
+    if user['role'] == 'student': raise Forbidden
     form = await request.form
     updated = {'grade': float(form['grade']), 'comment': form['comment']}
     query = r.table('projects').get(uuid).update({'report': updated})
