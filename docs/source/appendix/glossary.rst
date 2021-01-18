@@ -6,7 +6,7 @@ that are used throughout this report:
 
 .. glossary::
 
-   DDoS attack
+   Distributed Denial of Service (DDoS) attack
 
       Denial of Service (DoS) attack is an attack where
       the attacker overloads the system with requests.
@@ -31,7 +31,7 @@ that are used throughout this report:
       A person, normally a lecturer, that supervises, supports, and evaluate
       one or several project groups.
 
-   XSS attack
+   (Cross-site Scripting) XSS attack
 
       Cross-site scripting (XSS) is an code injection attack where
       the attacker inserts client-side scripts into web pages.
