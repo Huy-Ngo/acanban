@@ -41,7 +41,7 @@ async def test_nonexist(tab: str, user: ClientFactory) -> None:
 
 @parametrize(('username', 'status_code'),
              (param(None, Status.UNAUTHORIZED, id='guest'),
-              param('silasl', Status.UNAUTHORIZED, id='assistant'),
+              param('silasl', Status.FORBIDDEN, id='assistant'),
               param('ronanf', Status.OK, id='supervisor'),
               param('adaml', Status.OK, id='student')))
 async def test_create_get(username: Optional[str], status_code: int,
@@ -54,7 +54,7 @@ async def test_create_get(username: Optional[str], status_code: int,
 
 @parametrize(('username', 'status_code'),
              (param(None, Status.UNAUTHORIZED, id='guest'),
-              param('silasl', Status.UNAUTHORIZED, id='assistant'),
+              param('silasl', Status.FORBIDDEN, id='assistant'),
               param('ronanf', Status.FOUND, id='supervisor'),
               param('adaml', Status.FOUND, id='student')))
 async def test_create_post(username: Optional[str], status_code: int,
@@ -69,8 +69,8 @@ async def test_create_post(username: Optional[str], status_code: int,
 
 @parametrize(('username', 'status_code'),
              (param(None, Status.UNAUTHORIZED, id='guest'),
-              param('silasl', Status.UNAUTHORIZED, id='assistant'),
-              param('ronanf', Status.UNAUTHORIZED, id='nonmember'),
+              param('silasl', Status.FORBIDDEN, id='assistant'),
+              param('ronanf', Status.FORBIDDEN, id='nonmember'),
               param('adaml', Status.OK, id='member')))
 @parametrize('tab', ('info', 'edit', 'report'))
 async def test_get(username: Optional[str], status_code: int,
@@ -90,8 +90,8 @@ async def test_info_redirect(user: ClientFactory) -> None:
 
 @parametrize(('username', 'status_code'),
              (param(None, Status.UNAUTHORIZED, id='guest'),
-              param('silasl', Status.UNAUTHORIZED, id='assistant'),
-              param('ronanf', Status.UNAUTHORIZED, id='nonmember'),
+              param('silasl', Status.FORBIDDEN, id='assistant'),
+              param('ronanf', Status.FORBIDDEN, id='nonmember'),
               param('adaml', Status.FOUND, id='member')))
 async def test_edit_post(username: Optional[str], status_code: int,
                          user: ClientFactory) -> None:
@@ -105,9 +105,9 @@ async def test_edit_post(username: Optional[str], status_code: int,
 
 @parametrize(('username', 'status_code'),
              (param(None, Status.UNAUTHORIZED, id='guest'),
-              param('silasl', Status.UNAUTHORIZED, id='nonstudent nonmember'),
-              param('lucyl', Status.UNAUTHORIZED, id='student nonmember'),
-              param('oliviak', Status.UNAUTHORIZED, id='nonstudent member'),
+              param('silasl', Status.FORBIDDEN, id='nonstudent nonmember'),
+              param('lucyl', Status.FORBIDDEN, id='student nonmember'),
+              param('oliviak', Status.FORBIDDEN, id='nonstudent member'),
               param('adaml', Status.FOUND, id='student member')))
 async def test_report_upload(username: Optional[str], status_code: int,
                              user: ClientFactory) -> None:
@@ -129,9 +129,9 @@ async def test_report_upload(username: Optional[str], status_code: int,
 
 @parametrize(('username', 'status_code'),
              (param(None, Status.UNAUTHORIZED, id='guest'),
-              param('silasl', Status.UNAUTHORIZED, id='nonstudent nonmember'),
-              param('lucyl', Status.UNAUTHORIZED, id='student nonmember'),
-              param('adaml', Status.UNAUTHORIZED, id='student member'),
+              param('silasl', Status.FORBIDDEN, id='nonstudent nonmember'),
+              param('lucyl', Status.FORBIDDEN, id='student nonmember'),
+              param('adaml', Status.FORBIDDEN, id='student member'),
               param('oliviak', Status.FOUND, id='nonstudent member')))
 async def test_report_eval(username: Optional[str], status_code: int,
                            user: ClientFactory) -> None:
