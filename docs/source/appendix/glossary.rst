@@ -13,6 +13,12 @@ that are used throughout this report:
       DDoS is the distributed DoS attack, that is, the requests are flooding
       from multiple sources.
 
+   Metadata
+
+      Data that does not describe the information rather than containing
+      the information itself.  This can includes primary key of a table,
+      creation date, etc.
+
    Participant
 
       People who participates in a project.
