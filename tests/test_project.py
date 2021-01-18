@@ -19,153 +19,101 @@
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
 from http import HTTPStatus as Status
+from random import choices, uniform
+from string import printable
+from typing import Optional
 
-from quart.testing import QuartClient
+from conftest import ClientFactory, parametrize
+from pytest import param
 
-PROJECT = '/p/be7a04b8-650f-41dc-912b-10d225baff29/'
-PROJECT_INFO = f'{PROJECT}info'
-PROJECT_EDIT = f'{PROJECT}edit'
+# Some members: adaml (student), oliviak (supervisor)
+# Some nonmembers: ronanf (supervisor), silasl (assistant)
+PROJECT = 'be7a04b8-650f-41dc-912b-10d225baff29'
 
 
-async def test_info_nonexist(student: QuartClient) -> None:
-    """Test accessing a nonexistent project info page."""
-    response = await student.get('/p/this-project-does-not-exist/info')
+@parametrize('tab', ('info', 'edit', 'tasks', 'report', 'slides'))
+async def test_nonexist(tab: str, user: ClientFactory) -> None:
+    """Test accessing tabs on a nonexistent project."""
+    adaml = await user('adaml')
+    response = await adaml.get(f'/p/this-project-does-not-exist/{tab}')
     assert response.status_code == Status.NOT_FOUND
 
 
-async def test_edit_nonexist(student: QuartClient) -> None:
-    """Test accessing a nonexistent project edit page."""
-    response = await student.get('/p/this-project-does-not-exist/edit')
-    assert response.status_code == Status.NOT_FOUND
+@parametrize(('username', 'status_code'),
+             (param(None, Status.UNAUTHORIZED, id='guest'),
+              param('silasl', Status.UNAUTHORIZED, id='assistant'),
+              param('ronanf', Status.OK, id='supervisor'),
+              param('adaml', Status.OK, id='student')))
+async def test_create_get(username: Optional[str], status_code: int,
+                          user: ClientFactory) -> None:
+    """Test project creation page access permission."""
+    client = await user(username)
+    response = await client.get('/p/create')
+    assert response.status_code == status_code
 
 
-async def test_redirect(student: QuartClient) -> None:
-    """Test the redirect for the client."""
-    response = await student.get(PROJECT)
+@parametrize(('username', 'status_code'),
+             (param(None, Status.UNAUTHORIZED, id='guest'),
+              param('silasl', Status.UNAUTHORIZED, id='assistant'),
+              param('ronanf', Status.FOUND, id='supervisor'),
+              param('adaml', Status.FOUND, id='student')))
+async def test_create_post(username: Optional[str], status_code: int,
+                           user: ClientFactory) -> None:
+    """Test project creation permission."""
+    client = await user(username)
+    info = {'name': choices(printable, k=42),
+            'description': choices(printable, k=42)}
+    response = await client.post('/p/create', form=info)
+    assert response.status_code == status_code
+
+
+@parametrize(('username', 'status_code'),
+             (param(None, Status.UNAUTHORIZED, id='guest'),
+              param('silasl', Status.UNAUTHORIZED, id='assistant'),
+              param('ronanf', Status.UNAUTHORIZED, id='nonmember'),
+              param('adaml', Status.OK, id='member')))
+@parametrize('tab', ('info', 'edit', 'report'))
+async def test_get(username: Optional[str], status_code: int,
+                   tab: str, user: ClientFactory) -> None:
+    """Test project tabs access permission."""
+    client = await user(username)
+    response = await client.get(f'/p/{PROJECT}/{tab}')
+    assert response.status_code == status_code
+
+
+async def test_info_redirect(user: ClientFactory) -> None:
+    """Test redirect from project's root URI."""
+    adaml = await user('adaml')
+    response = await adaml.get(f'/p/{PROJECT}/')
     assert response.status_code == Status.FOUND
 
 
-async def test_guest_redirect(client: QuartClient) -> None:
-    """Test that the redirecting page is also not allowed."""
-    response = await client.get(PROJECT)
-    assert response.status_code == Status.UNAUTHORIZED
+@parametrize(('username', 'status_code'),
+             (param(None, Status.UNAUTHORIZED, id='guest'),
+              param('silasl', Status.UNAUTHORIZED, id='assistant'),
+              param('ronanf', Status.UNAUTHORIZED, id='nonmember'),
+              param('adaml', Status.FOUND, id='member')))
+async def test_edit_post(username: Optional[str], status_code: int,
+                         user: ClientFactory) -> None:
+    """Test project edit permission."""
+    client = await user(username)
+    info = {'name': choices(printable, k=42),
+            'description': choices(printable, k=42)}
+    response = await client.post(f'/p/{PROJECT}/edit', form=info)
+    assert response.status_code == status_code
 
 
-async def test_info_access_guest(client: QuartClient) -> None:
-    """Test project info page access by a guest."""
-    response = await client.get(PROJECT_INFO)
-    assert response.status_code == Status.UNAUTHORIZED
-
-
-async def test_info_access_assistant(assistant: QuartClient) -> None:
-    """Test project info page access by an assistant."""
-    response = await assistant.get(PROJECT_INFO)
-    assert response.status_code == Status.UNAUTHORIZED
-
-
-# This supervisor is not a member of PROJECT.
-async def test_info_access_nonmember(supervisor: QuartClient) -> None:
-    """Test project info page access by a non-member user."""
-    response = await supervisor.get(PROJECT_INFO)
-    assert response.status_code == Status.UNAUTHORIZED
-
-
-# This student is a member of PROJECT.
-async def test_info_access_member(student: QuartClient) -> None:
-    """Test project info page access by a member."""
-    response = await student.get(PROJECT_INFO)
-    assert response.status_code == Status.OK
-
-
-async def test_route_create_by_student(student: QuartClient) -> None:
-    """Test routing create project as student"""
-    response = await student.get('/p/create')
-    assert response.status_code == Status.OK
-
-
-async def test_route_create_by_assistant(assistant: QuartClient) -> None:
-    """Test routing create project as assistant"""
-    response = await assistant.get('/p/create')
-    assert response.status_code == Status.UNAUTHORIZED
-
-
-async def test_create_student(student: QuartClient) -> None:
-    """Test successful and failed create project as student."""
-    response = await student.post('/p/create', form=dict(
-        name='acanban', description='group project'))
-    assert response.status_code == Status.FOUND
-
-
-async def test_create_supervisor(supervisor: QuartClient) -> None:
-    """Test successful and failed create project as supervisor."""
-    response = await supervisor.post('/p/create', form=dict(
-        name='minigh', description='MAD'))
-    assert response.status_code == Status.FOUND
-
-
-async def test_create_assistant(assistant: QuartClient) -> None:
-    """Test successful and failed create project as assistant."""
-    response = await assistant.post('/p/create', form=dict(
-        name='FooBar', description='Fô Bả'))
-    assert response.status_code == Status.UNAUTHORIZED
-
-
-async def test_edit_access_assistant(assistant: QuartClient) -> None:
-    """Test project edit page access by an assistant."""
-    response = await assistant.get(PROJECT_EDIT)
-    assert response.status_code == Status.UNAUTHORIZED
-
-
-# This supervisor is not a member of PROJECT.
-async def test_edit_access_nonmember(supervisor: QuartClient) -> None:
-    """Test project edit page access by a non-member user."""
-    response = await supervisor.get(PROJECT_EDIT)
-    assert response.status_code == Status.UNAUTHORIZED
-
-
-# This student is a member of PROJECT.
-async def test_edit_access_member(student: QuartClient) -> None:
-    """Test project edit page access by a member."""
-    response = await student.get(PROJECT_EDIT)
-    assert response.status_code == Status.OK
-
-
-async def test_edit_assistant(assistant: QuartClient) -> None:
-    """Test project edit request by an assistant."""
-    response = await assistant.post(PROJECT_EDIT,
-                                    form=dict(name='New Project Name',
-                                              description='new description'))
-    assert response.status_code == Status.UNAUTHORIZED
-
-
-# This supervisor is not a member of PROJECT.
-async def test_edit_nonmember(supervisor: QuartClient) -> None:
-    """Test project edit request by a non-member user."""
-    response = await supervisor.post(PROJECT_EDIT,
-                                     form=dict(name='New Project Name',
-                                               description='new description'))
-    assert response.status_code == Status.UNAUTHORIZED
-
-
-# This student is a member of PROJECT.
-async def test_edit_member(student: QuartClient) -> None:
-    """Test project edit request by a member."""
-    response = await student.post(PROJECT_EDIT,
-                                  form=dict(name='New Project Name',
-                                            description='new description'))
-    assert response.status_code == Status.FOUND
-
-
-async def test_report_get(student: QuartClient) -> None:
-    """Test GET report view."""
-    response = await student.get(f'{PROJECT}report')
-    assert response.status_code == Status.OK
-
-
-async def test_report_upload(student: QuartClient) -> None:
+@parametrize(('username', 'status_code'),
+             (param(None, Status.UNAUTHORIZED, id='guest'),
+              param('silasl', Status.UNAUTHORIZED, id='nonstudent nonmember'),
+              param('lucyl', Status.UNAUTHORIZED, id='student nonmember'),
+              param('oliviak', Status.UNAUTHORIZED, id='nonstudent member'),
+              param('adaml', Status.FOUND, id='student member')))
+async def test_report_upload(username: Optional[str], status_code: int,
+                             user: ClientFactory) -> None:
     """Test POST report file."""
-    response = await student.post(
-        f'{PROJECT}report/upload',
+    response = await (await user(username)).post(
+        f'/p/{PROJECT}/report/upload',
         headers={
             'Content-Length': 199,
             'Content-Type': (
@@ -176,27 +124,19 @@ async def test_report_upload(student: QuartClient) -> None:
             b'Content-Disposition: form-data; name="file"; filename="foo"\r\n'
             b'Content-Type: application/octet-stream\r\n\r\n'
             b'bar\n\r\n--------------------------e70696c7f3938bcf--\r\n'))
-    assert response.status_code == Status.FOUND
+    assert response.status_code == status_code
 
 
-async def test_report_upload_by_nonstudent(client: QuartClient) -> None:
-    """Test POST report file by unauthorized member."""
-    await client.post(  # TODO: fixturize this
-        '/login', form=dict(username='oliviak', password='kaivilo'))
-    response = await client.post(f'{PROJECT}report/upload')
-    assert response.status_code == Status.UNAUTHORIZED
-
-
-async def test_report_eval(client: QuartClient) -> None:
+@parametrize(('username', 'status_code'),
+             (param(None, Status.UNAUTHORIZED, id='guest'),
+              param('silasl', Status.UNAUTHORIZED, id='nonstudent nonmember'),
+              param('lucyl', Status.UNAUTHORIZED, id='student nonmember'),
+              param('adaml', Status.UNAUTHORIZED, id='student member'),
+              param('oliviak', Status.FOUND, id='nonstudent member')))
+async def test_report_eval(username: Optional[str], status_code: int,
+                           user: ClientFactory) -> None:
     """Test POST report evaluation."""
-    await client.post(  # TODO: fixturize this
-        '/login', form=dict(username='oliviak', password='kaivilo'))
-    response = await client.post(
-        f'{PROJECT}report/eval', form=dict(grade=6.9, comment='blaze it'))
-    assert response.status_code == Status.FOUND
-
-
-async def test_report_eval_by_student(student: QuartClient) -> None:
-    """Test POST report evaluation by unauthorized member."""
-    response = await student.post(f'{PROJECT}report/eval')
-    assert response.status_code == Status.UNAUTHORIZED
+    client = await user(username)
+    evaluation = {'grade': uniform(0, 20), 'comment': choices(printable, k=42)}
+    response = await client.post(f'/p/{PROJECT}/report/eval', form=evaluation)
+    assert response.status_code == status_code
