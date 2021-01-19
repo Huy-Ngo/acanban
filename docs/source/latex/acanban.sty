@@ -1,0 +1,29 @@
+% Bibliography as an appendix
+\usepackage[numbib]{tocbibind}
+\renewenvironment{sphinxthebibliography}[1]
+                 {\if@openright\cleardoublepage\else\clearpage\fi
+                  \begin{thebibliography}{69}}
+                 {\end{thebibliography}}
+
+% Ignore hard-coded bibliography label
+\let\origbibitem\bibitem
+\renewcommand{\bibitem}[2][label]{\origbibitem{#2}}
+
+% Number \subsubsection and \paragraph
+\setcounter{secnumdepth}{4}
+% Include \subsubsection in ToC
+\setcounter{tocdepth}{3}
+
+% Headers and footers
+\fancypagestyle{normal}{
+  \fancyhf{}
+  \fancyhead[LE]{\nouppercase{\leftmark}}
+  \fancyhead[RO]{\nouppercase{\rightmark}}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0pt}}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}}

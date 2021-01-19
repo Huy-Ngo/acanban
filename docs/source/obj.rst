@@ -27,13 +27,14 @@ students' overall progress to provide help if necessary.
 The Applicable Web Application
 ------------------------------
 
-The system should be implemented as a web application for portability
-[mikkonen2008]_.  It should be easy to be adopted by users on
+The system should be implemented as a web application for
+portability |~| [mikkonen2008]_.  It should be easy to be adopted by users on
 different devices network connection quality, whilst being simple
 to maintain by a small number of administrators to run on modest hardware.
 
 .. _Kanban board: https://en.wikipedia.org/wiki/Kanban_board
-.. [mikkonen2008] T. Mikkonen and A. Taivalsaari, "Web Applications
-   – Spaghetti Code for the 21st Century," 2008 Sixth International Conference
-   on Software Engineering Research, Management and Applications, Prague, 2008,
-   pp. 319--328, :doi:`10.1109/SERA.2008.16`.
+.. [mikkonen2008] Tommi Mikkonen and Antero Taivalsaari.
+   "Web Applications---Spaghetti Code for the 21st Century".
+   *2008 Sixth International Conference on Software Engineering Research,
+   Management and Applications*, p. 319--328, Prague, 2008.
+   :doi:`10.1109/SERA.2008.16`.
