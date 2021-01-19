@@ -4,7 +4,12 @@
 # For a full list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+from os.path import join
+from pathlib import Path
+
 from acanban import __version__
+
+pwd = Path(__name__).parent
 
 # Project information
 project = 'Acanban'
@@ -20,6 +25,12 @@ extensions = ['sphinx.ext.extlinks', 'sphinx.ext.githubpages',
 extlinks = {'doi': ('https://doi.org/%s', 'doi: ')}
 plantuml_output_format = 'svg_img'
 plantuml_latex_output_format = 'pdf'
+
+rst_epilog = """
+.. Non-breaking space
+.. |~| unicode:: 0xA0
+   :trim:
+"""
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = []
@@ -41,9 +52,18 @@ html_static_path = []
 # Options for LaTeX
 latex_elements = {
     'papersize': 'a4paper', 'pointsize': '12pt',
-    'fontpkg': r'\usepackage{lmodern}',
     'babel': r'\usepackage[english,vietnamese]{babel}',
-    'tableofcontents': r'\selectlanguage{english}\sphinxtableofcontents'}
+    'fontpkg': r'\usepackage{lmodern}',
+    'fncychap': r'\usepackage[Rejne]{fncychap}',
+    'preamble': r'\usepackage{acanban}',
+    'extrapackages': r'\usepackage{booktabs}',  # for title-page
+    'geometry': '',  # fallback to LaTeX default margins
+    'maketitle': (pwd/'latex'/'title-page.tex').read_text(),
+    'tableofcontents': r'\selectlanguage{english}\sphinxtableofcontents',
+    'printindex': '', 'sphinxsetup': r'HeaderFamily=\bfseries'}
+latex_appendices = [join('appendix', 'glossary')]
+latex_additional_files = [join('latex', 'acanban.sty'),
+                          join('latex', 'usth-logo.pdf')]
 
 numfig = True
 numfig_format = {'figure': 'Figure %s', 'table': 'Table %s'}
