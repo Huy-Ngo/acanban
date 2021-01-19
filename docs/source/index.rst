@@ -10,4 +10,9 @@ Overview
    meth/index
    result/index
    conclusion/index
-   appendix/index
+
+.. only:: html
+
+   .. toctree::
+
+      appendix/index
