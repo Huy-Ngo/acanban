@@ -40,7 +40,8 @@ However, a file in ``File`` table
 does not necessarily tie to any project, since they can be referred in comments
 or by academic assistants in their statistical reports.
 
-Visually, that can be represented in :numref:`rel`.
+Visually, the relations between entities described above
+can be represented in :numref:`rel`.
 
 .. uml:: rel.puml
    :caption: Relationship between entities in the database
