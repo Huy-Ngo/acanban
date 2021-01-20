@@ -9,6 +9,9 @@
     <input type=text id=new-user name="new-user"/>
     <button>Invite</button>
   </form>
+  {% for message in get_flashed_messages() %}
+  <p class=error>{{ message }}</p>
+  {% endfor %}
   <h3>Supervisors</h3>
   <ul>
     {% for supervisor in project.supervisors %}

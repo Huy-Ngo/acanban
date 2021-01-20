@@ -23,7 +23,7 @@ from typing import Any, Dict, Optional, Sequence
 
 from quart import (Blueprint, ResponseReturnValue, current_app,
                    flash, redirect, render_template, request)
-from quart.exceptions import NotFound, Forbidden
+from quart.exceptions import Forbidden, NotFound
 from quart_auth import Unauthorized, current_user, login_required
 from rethinkdb import r
 from rethinkdb.errors import ReqlNonExistenceError
@@ -213,19 +213,20 @@ async def invite_member(uuid: str) -> ResponseReturnValue:
         if (current_user.key not in supervisors
                 and current_user.key not in students):
             raise Unauthorized
-        try:
-            form = await request.form
-            new_name = form['new-user']
-            user = await r.table('users').get(new_name).run(connection)
-        except ReqlNonExistenceError:
-            raise NotFound
-        if project['name'] in user['projects']:
-            flash('That user is already a member of the project')
-            return redirect(f'/p/{uuid}/members')
-        updated_projects = r.row['projects'].append(uuid)
-        await r.table('users').get(new_name).update(
-            {'projects': updated_projects}).run(connection)
-        mem_field = f'{user["role"]}s'
-        await project_query.update(
-            {mem_field: r.row[mem_field].append(new_name)}).run(connection)
+        form = await request.form
+        new_name = form['new-user']
+        user = await r.table('users').get(new_name).run(connection)
+        if user is None:
+            await flash('That user has not registered')
+            
+        else:
+            if project['id'] in user['projects']:
+                await flash('That user is already a member of the project')
+                return redirect(f'/p/{uuid}/members')
+            updated_projects = r.row['projects'].append(uuid)
+            await r.table('users').get(new_name).update(
+                {'projects': updated_projects}).run(connection)
+            mem_field = f'{user["role"]}s'
+            await project_query.update(
+                {mem_field: r.row[mem_field].append(new_name)}).run(connection)
     return redirect(f'/p/{uuid}/members')
