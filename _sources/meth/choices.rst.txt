@@ -23,7 +23,8 @@ Templating Language
 
 We use Jinja2_ for templating, which is default choice for Quart.
 It provides us with various tools that help secure the website easier.
-For example, it allows HTML escaping [jinjadoc]_, which helps avoiding XSS injection.
+For example, it allows HTML escaping |~| [jinja2esc]_,
+which helps avoiding XSS injection.
 
 Persistency
 -----------
@@ -38,8 +39,9 @@ is used instead in the latter case.
 
 By choosing RethinkDB instead of SQL,
 we do not have to worry about SQL injection or similar database attack.
-This is because the query language ReQL is not based on string parsing [rethinkdbdoc]_,
-but built as methods in the implementing language.
+This is because the query language ReQL is not based on
+string parsing |~| [rethinkdbdoc]_, but built as methods
+in the implementing language.
 
 .. _Trio: https://trio.readthedocs.io
 .. _RethinkDB: https://rethinkdb.com
@@ -52,8 +54,9 @@ but built as methods in the implementing language.
 .. _Flask: https://flask.palletsprojects.com
 .. _document-oriented database:
    https://en.wikipedia.org/wiki/Document-oriented_database
-.. _Jinja2: https://jinja.palletsprojects.com/en/2.11.x/templates
-.. [jinjadoc] Pallets Project, *Template Designer Documentation -- Jinja Documentation (2.11.x)*,
-   retrieved 2021-01-18, URL: https://jinja.palletsprojects.com/en/2.11.x/templates/#html-escaping
-.. [rethinkdbdoc] RethinkDB, *Introduction to ReQL -- RethinkDB*,
-   retrieved 2021-01-18, URL: https://rethinkdb.com/docs/introduction-to-reql/#reql-embeds-into-your-programming-language
+.. _Jinja2: https://jinja.palletsprojects.com
+.. [jinja2esc] The Pallets Project.  "Template Designer Documentation".
+   *Jinja Documentation (2.11.x)*.  Retrieved 2021-01-18.
+   https://jinja.palletsprojects.com/en/2.11.x/templates/#html-escaping
+.. [rethinkdbdoc] RethinkDB. "Introduction to ReQL".  Retrieved 2021-01-18.
+   https://rethinkdb.com/docs/introduction-to-reql/#reql-embeds-into-your-programming-language
