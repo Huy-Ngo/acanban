@@ -10,7 +10,7 @@ We modeled this as double links:
   there is a field ``projects``.
 - Each ``Project`` has a ``supervisors`` and a ``students`` fields.
   We model both of these fields as list, since there can be occasions
-  where two supervisors co-supervise a project.
+  where two or more supervisors co-supervise a project.
 
 In each project, there could be many tasks which participants would complete
 to advance the progress of the project.  There should be thus a one-to-many
