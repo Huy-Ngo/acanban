@@ -15,8 +15,8 @@ that are used throughout this report:
 
    Metadata
 
-      Data that does not describe the information rather than containing
-      the information itself.  This can includes primary key of a table,
+      Data that describes the information rather than containing
+      the information itself.  This can include primary key of a table,
       creation date, etc.
 
    Participant
