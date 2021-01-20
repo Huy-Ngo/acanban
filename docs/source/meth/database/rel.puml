@@ -1,0 +1,18 @@
+@startuml
+
+entity User
+entity Report
+entity Slide
+entity Project
+entity Task
+entity Comment
+
+User "1..*" --- "0..*" Project
+User "0..1" --- "1..*" Task
+Project "1" -[norank]--- "0..*" Task
+Task "1" -- "0..*" Comment
+Comment "1" --- "0..*" Comment
+Project "0..1" -- "0..*" Report
+Project "0..1" -- "0..*" Slide
+
+@enduml
