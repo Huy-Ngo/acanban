@@ -217,8 +217,7 @@ async def invite_member(uuid: str) -> ResponseReturnValue:
         new_name = form['new-user']
         user = await r.table('users').get(new_name).run(connection)
         if user is None:
-            await flash('That user has not registered')
-            
+            await flash('That user has not registered')            
         else:
             if project['id'] in user['projects']:
                 await flash('That user is already a member of the project')
