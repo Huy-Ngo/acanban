@@ -179,16 +179,66 @@
             
   <div class="section" id="database-design">
 <h1>Database design<a class="headerlink" href="#database-design" title="Permalink to this headline">¶</a></h1>
-<p>We will need these tables:</p>
+<p>Since each user can have zero, one, or several projects and
+a group project can have several participating users, we model
+the relation between them as many-to-many.
+We modeled this as double links:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">User</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Project</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Task</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Report</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Comment</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">File</span></code></p></li>
+<li><p>Each <code class="docutils literal notranslate"><span class="pre">User</span></code> object of appropriate role (student or supervisor),
+there is a field <code class="docutils literal notranslate"><span class="pre">projects</span></code>.</p></li>
+<li><p>Each <code class="docutils literal notranslate"><span class="pre">Project</span></code> has a <code class="docutils literal notranslate"><span class="pre">supervisors</span></code> and a <code class="docutils literal notranslate"><span class="pre">students</span></code> fields.
+We model both of these fields as lists, since there can be occasions
+where two or more supervisors co-supervise a project.</p></li>
 </ul>
-<p>Each of them is described in following sections.</p>
+<p>In each project, there could be many tasks which participants would complete
+to advance the progress of the project.  There should be thus a one-to-many
+relation between <code class="docutils literal notranslate"><span class="pre">Project</span></code> and <code class="docutils literal notranslate"><span class="pre">Task</span></code>, and between user and task.</p>
+<p>For each task, we designed a comment thread, in which students can discuss
+their problems, or ask their supervisors for help, to resolve them faster.
+Since there can be many comments in a task, the relation between <code class="docutils literal notranslate"><span class="pre">Task</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Comment</span></code> should be one-to-many.</p>
+<p>There can be comments replying to other comments, constructing a tree
+data structure.  This structure is described by a self-referential one-to-many
+relation.</p>
+<p>Additionally, there should be a <code class="docutils literal notranslate"><span class="pre">File</span></code> data table
+for storing reports and slides.
+We allowed uploading multiple reports and slides,
+considering that the group can continually
+update their reports and presentations,
+which can be reviewed by any participants.  All the uploaded revisions
+should be kept separate for comparison or combination.</p>
+<p>Therefore, there should be two one-to-many relations
+between <code class="docutils literal notranslate"><span class="pre">Project</span></code> and <code class="docutils literal notranslate"><span class="pre">File</span></code>.</p>
+<p>However, a file in <code class="docutils literal notranslate"><span class="pre">File</span></code> table
+does not necessarily tie to any project, since they can be referred in comments
+or by academic assistants in their statistical reports.</p>
+<p>Visually, the relations between entities described above
+can be represented in <a class="reference internal" href="#rel"><span class="std std-numref">Figure 3</span></a>.</p>
+<div class="figure align-default" id="rel">
+<p class="plantuml">
+<img src="../../_images/plantuml-01bd28cb09a17ec7006edae9d30b039ffe13063e.svg" alt="&#64;startuml
+
+entity User
+entity Report
+entity Slide
+entity Project
+entity Task
+entity Comment
+
+User &quot;1..*&quot; --- &quot;0..*&quot; Project
+User &quot;0..1&quot; --- &quot;1..*&quot; Task
+Project &quot;1&quot; -[norank]--- &quot;0..*&quot; Task
+Task &quot;1&quot; -- &quot;0..*&quot; Comment
+Comment &quot;1&quot; --- &quot;0..*&quot; Comment
+Project &quot;0..1&quot; -- &quot;0..*&quot; Report
+Project &quot;0..1&quot; -- &quot;0..*&quot; Slide
+
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 3 </span><span class="caption-text">Relationship between entities in the database</span><a class="headerlink" href="#rel" title="Permalink to this image">¶</a></p>
+</div>
+<p>In each entity, there are other attributes and metadata which assists
+the management.  They are described in the following sections.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="user.html">User</a></li>

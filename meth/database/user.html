@@ -185,23 +185,27 @@
 or an academic assistant.  The object contains the user’s projects
 as well as other contact information, which allows the users to communicate
 with each other.</p>
+<p>Since all users of this system have similar basic information, such as username
+and password, we represented them all as <code class="docutils literal notranslate"><span class="pre">User</span></code> object, and restrict their
+behaviors according to a field <code class="docutils literal notranslate"><span class="pre">role</span></code>.</p>
 <p>Each <code class="docutils literal notranslate"><span class="pre">User</span></code> object has following attributes:</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">username</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>A unique name with which the user can refer to one another.
 It is also the primary key and allows the user to sign in.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The legal name of the user</p>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The legal name of the user.  This is required for group members to recognize
+each other, and for the academic assistants to collect their results.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">email</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The email that is used to contact with the user.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">email</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The email address that is used to contact with the user.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">password</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The password for the user’s account, encrypted with a hash function</p>
+<dt><code class="docutils literal notranslate"><span class="pre">password</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The password for the user’s account, encrypted with a hash function.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">role</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The role of the user in this system.  It can be:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">student</span></code>: Students who are participating a group project or internship</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">supervisor</span></code>: The supervisor of project(s)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">assistant</span></code>: The academic assistant of a department</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">admin</span></code>: The system admin</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">student</span></code>: Students who are participating in a group project or internship.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">supervisor</span></code>: The supervisor of project(s).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">assistant</span></code>: The academic assistant of a department.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">admin</span></code>: The system admin.</p></li>
 </ul>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">projects</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em></span></dt><dd><p>UUIDs of projects the user participates in,
@@ -211,14 +215,11 @@ if perse is a student or a supervisor.</p>
 Required for students and assistants.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">student-id</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em></span></dt><dd><p>Only applicable for users with role <code class="docutils literal notranslate"><span class="pre">student</span></code>:
-A unique identifier assigned to students to be used outside this system</p>
+A unique identifier assigned to students to be used outside this system.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">bio</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">object</span></code>, <em>optional</em></span></dt><dd><p>A self-description of the user. It can have following fields:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: A markdown text describing the user</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">institution</span></code>: The institution the user is working at, mainly for supervisors</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">interest</span></code>: Research interests of a supervisor or student</p></li>
-</ul>
+<dt><code class="docutils literal notranslate"><span class="pre">bio</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">object</span></code>, <em>optional</em></span></dt><dd><p>A markup text describing the user.  This is not necessary, but it can be
+helpful for a supervisor to have a biography to show their credibility in
+their respective field.</p>
 </dd>
 </dl>
 </div>

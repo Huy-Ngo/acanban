@@ -181,14 +181,22 @@
             
   <div class="section" id="comment">
 <h1>Comment<a class="headerlink" href="#comment" title="Permalink to this headline">¶</a></h1>
-<p>Each <code class="docutils literal notranslate"><span class="pre">Comment</span></code> object has following attributes:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Comment</span></code> object represent a comment insides a task’s discussion.
+It should contain the identifier for the commenter and its content.</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The user who created the comment</p>
+<dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The user who created the comment.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">content</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The content of the comment</p>
+<dt><code class="docutils literal notranslate"><span class="pre">content</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The content of the comment.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">comments</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Comment</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Comment</span></code>s replying to it</p>
+</dl>
+<p>Since the discussion follows a forest structure, each comment recursively
+contains a list of replying comment.</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">comments</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Comment</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Comment</span></code>s replying to it.</p>
 </dd>
+</dl>
+<p>To let the user know if the comment is new or old, creation time is also added.</p>
+<dl>
 <dt><code class="docutils literal notranslate"><span class="pre">created_on</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">time</span></code></span></dt><dd><p>The date and time the comment is created.</p>
 </dd>
 </dl>

@@ -181,26 +181,51 @@
             
   <div class="section" id="task">
 <h1>Task<a class="headerlink" href="#task" title="Permalink to this headline">¶</a></h1>
-<p>Each <code class="docutils literal notranslate"><span class="pre">Task</span></code> object has following attributes:</p>
+<p>To identify the tasks, the tasks’ names and descriptions are needed.</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The name of the task</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">creator</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The user who created the task</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">status</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">integer</span></code></span></dt><dd><p>The status of the project in the Kanban board: to-do, in progress, or done.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">assigned_to</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The assignee of the task. Must have role <code class="docutils literal notranslate"><span class="pre">student</span></code>.</p>
-</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">description</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The summary of a task</p>
 </dd>
+</dl>
+<p>Since tasks should be assigned to someone to perform the tasks,
+there should be a field for linking to the assignee.
+Moreover, there should be a status to track if the task is in progress
+or has been done.
+The user can upload a report or add a link to show their work
+to address the task.</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">assigned_to</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">User</span></code></span></dt><dd><p>The assignee of the task. Must have role <code class="docutils literal notranslate"><span class="pre">student</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">status</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">integer</span></code></span></dt><dd><p>The status of the project in the Kanban board: to-do, in progress, or done.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">work</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code> (URL)</span></dt><dd><p>The URL to the work by the assignee that addresses the task.
+It can be a link to a file hosted on the acanban server
+(if the user uploads it to acanban)
+or an external link (e.g. to a GitHub pull request, or to a document hosted
+by some other services)</p>
+</dd>
+</dl>
+<p>To facilitate collaboration, there should be a discussion thread for participants
+to discuss the problems of the tasks:</p>
+<dl>
 <dt><code class="docutils literal notranslate"><span class="pre">discussion</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Comment</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Comment</span></code>s created for this task</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">file</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">File</span></code></span></dt><dd><p>Optional file that shows the assignee’s work to address the task.</p>
-</dd>
+</dl>
+<p>Like for projects, creation date and deadline are added so that participants
+can keep their progress.  It can also help sort the tasks by timeline.</p>
+<dl>
 <dt><code class="docutils literal notranslate"><span class="pre">created_on</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">time</span></code></span></dt><dd><p>The date and time the task is created.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">deadline</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">time</span></code></span></dt><dd><p>The date and time for the deadline of the task.</p>
 </dd>
+</dl>
+<p>Even though individual tasks are not required to be evaluated and the evaluation
+does not add to the final evaluation, an evaluation field was designed for tasks
+so that the assignees can receive a measurable feedback on their work.</p>
+<dl>
 <dt><code class="docutils literal notranslate"><span class="pre">evaluation</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">number</span></code></span></dt><dd><p>The evaluation of the task</p>
 </dd>
 </dl>

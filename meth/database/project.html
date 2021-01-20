@@ -181,27 +181,45 @@
             
   <div class="section" id="project">
 <h1>Project<a class="headerlink" href="#project" title="Permalink to this headline">¶</a></h1>
-<p>A <code class="docutils literal notranslate"><span class="pre">Project</span></code> object includes the project description as well as the links to participants.</p>
-<p>It has following attributes:</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Project</span></code> object includes the project description
+as well as the links to participants.</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The name of the project</p>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The name of the project.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">description</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The summary of a project</p>
+<dt><code class="docutils literal notranslate"><span class="pre">description</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>The summary of a project, which gives outsiders a brief idea of
+the objective or the scope of the project.</p>
 </dd>
+</dl>
+<p>We separated the list of the members as supervisors and students
+so that the view functions do not have to check for their roles all the time.</p>
+<dl>
 <dt><code class="docutils literal notranslate"><span class="pre">supervisors</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>Usernames of supervisors of the project.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">students</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">string</span></code></span></dt><dd><p>Usernames of students participating in the project.</p>
 </dd>
+</dl>
+<p>As described above, a project should have several tasks,
+some revisions for reports and slides:</p>
+<dl>
 <dt><code class="docutils literal notranslate"><span class="pre">tasks</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">Task</span></code></span></dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">Task</span></code>s created for this project.</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">reports</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Report</span></code></span></dt><dd><p>An object representing the reports for the project.</p>
+</dd>
+</dl>
+<p>Each project must be evaluated by the supervisor(s);
+the evaluation should therefore be stored as a property of the project.</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">evaluation</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">number</span></code></span></dt><dd><p>The evaluation of the work for the project
+that is provided by the supervisor.
+It can be based on previous evaluation of individual tasks.</p>
+</dd>
+</dl>
+<p>Additionally, information about the timeframe of the project is also needed.
+It can be used for sorting, filtering and reminding participants of the deadline.</p>
+<dl>
 <dt><code class="docutils literal notranslate"><span class="pre">created_on</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">time</span></code></span></dt><dd><p>The date and time the project is created.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">deadline</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">time</span></code></span></dt><dd><p>The date and time for the deadline of the project.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">evaluation</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">number</span></code></span></dt><dd><p>Final evaluation of the project.  It can be based on previous evaluation
-of individual tasks.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">report</span></code><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Report</span></code></span></dt><dd><p>A file that contains the report(s) for the group project.</p>
 </dd>
 </dl>
 </div>
