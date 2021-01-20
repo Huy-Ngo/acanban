@@ -2,7 +2,8 @@ File
 ====
 
 The ``File`` object is needed to store the metadata about the files
-used in project.
+used in project.  The object indicates the IPFS link to the file,
+besides other metadata such as uploader, uploaded time, file name, ...
 
 ``id`` : ``string``
    UUID unique to the upload.

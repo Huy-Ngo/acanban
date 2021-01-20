@@ -28,14 +28,10 @@ relation.
 Additionally, there should be a ``File`` data table
 for storing reports and slides.
 We allowed uploading multiple reports and slides,
-considering several scenarios:
-
-- In previous years, there should be two reports for a group project
-- Each person in the group may have a different slide
-  to fit their own preference and their style of presentation.
-- The group can continually update their reports and presentations,
-  which can be reviewed by any participants.  All the uploaded revisions
-  should be kept separate for comparision or combination.
+considering that the group can continually
+update their reports and presentations,
+which can be reviewed by any participants.  All the uploaded revisions
+should be kept separate for comparision or combination.
 
 Therefore, there should be two one-to-many relations
 between ``Project`` and ``File``.

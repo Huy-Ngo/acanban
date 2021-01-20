@@ -38,7 +38,7 @@ This is the evaluation of the supervisor. (rewrite this paragraph)
    It can be based on previous evaluation of individual tasks.
 
 Additionally, information about the timeframe of the project is also needed.
-(TBD)
+It can be used for sorting, filtering and reminding participants of the deadline.
 
 ``created_on`` : ``time``
    The date and time the project is created.
