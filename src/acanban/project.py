@@ -22,8 +22,8 @@ from operator import itemgetter
 from typing import Any, Dict, Optional, Sequence
 
 from quart import (Blueprint, ResponseReturnValue, current_app,
-                   redirect, render_template, request)
-from quart.exceptions import Forbidden, NotFound
+                   flash, redirect, render_template, request)
+from quart.exceptions import NotFound, Forbidden
 from quart_auth import Unauthorized, current_user, login_required
 from rethinkdb import r
 from rethinkdb.errors import ReqlNonExistenceError
@@ -152,6 +152,7 @@ async def artifact_eval(tab: str, uuid: str) -> ResponseReturnValue:
     return redirect(request.referrer)
 
 
+<<<<<<< HEAD
 def add_artifact_tab(blueprint: Blueprint, tab: str) -> None:
     """Add tab of the given name to the blueprint.
 
@@ -174,6 +175,8 @@ add_artifact_tab(blueprint, 'report')
 add_artifact_tab(blueprint, 'slides')
 
 
+=======
+>>>>>>> 3e4e968 (Fix linting)
 @blueprint.route('/<uuid>/members')
 @login_required
 async def member_list(uuid: str) -> ResponseReturnValue:
@@ -222,7 +225,7 @@ async def invite_member(uuid: str) -> ResponseReturnValue:
         updated_projects = r.row['projects'].append(uuid)
         await r.table('users').get(new_name).update(
             {'projects': updated_projects}).run(connection)
-        member_field = f'{user["role"]}s'
+        mem_field = f'{user["role"]}s'
         await project_query.update(
-            {member_field: r.row[member_field].append(new_name)}).run(connection)
+            {mem_field: r.row[mem_field].append(new_name)}).run(connection)
     return redirect(f'/p/{uuid}/members')
