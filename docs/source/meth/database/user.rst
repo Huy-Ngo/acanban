@@ -21,7 +21,7 @@ Each ``User`` object has following attributes:
    each other, and for the academic assistants to collect their results.
 
 ``email`` : ``string``
-   The email that is used to contact with the user.
+   The email address that is used to contact with the user.
 
 ``password`` : ``string``
    The password for the user's account, encrypted with a hash function.
@@ -29,7 +29,7 @@ Each ``User`` object has following attributes:
 ``role`` : ``string``
    The role of the user in this system.  It can be:
 
-   - ``student``: Students who are participating a group project or internship.
+   - ``student``: Students who are participating in a group project or internship.
    - ``supervisor``: The supervisor of project(s).
    - ``assistant``: The academic assistant of a department.
    - ``admin``: The system admin.

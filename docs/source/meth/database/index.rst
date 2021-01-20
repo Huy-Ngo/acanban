@@ -2,14 +2,14 @@ Database design
 ===============
 
 Since each user can have zero, one, or several projects and
-group project can have several participating users, we model
+a group project can have several participating users, we model
 the relation between them as many-to-many.
 We modeled this as double links:
 
 - Each ``User`` object of appropriate role (student or supervisor),
   there is a field ``projects``.
 - Each ``Project`` has a ``supervisors`` and a ``students`` fields.
-  We model both of these fields as list, since there can be occasions
+  We model both of these fields as lists, since there can be occasions
   where two or more supervisors co-supervise a project.
 
 In each project, there could be many tasks which participants would complete

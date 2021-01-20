@@ -2,7 +2,7 @@ Comment
 =======
 
 ``Comment`` object represent a comment insides a task's discussion.
-It should contains identifier for the commenter and its content.
+It should contain the identifier for the commenter and its content.
 
 ``creator`` : ``User``
    The user who created the comment.

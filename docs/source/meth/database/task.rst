@@ -27,7 +27,7 @@ to address the task.
 
 ``work`` : ``string`` (URL)
    The URL to the work by the assignee that addresses the task.
-   It can be link to files hosted on the acanban server
+   It can be a link to a file hosted on the acanban server
    (if the user uploads it to acanban)
    or an external link (e.g. to a GitHub pull request, or to a document hosted
    by some other services)
@@ -38,7 +38,7 @@ to discuss the problems of the tasks:
 ``discussion`` : ``array`` of ``Comment``
    List of ``Comment``\s created for this task
 
-Like for project, creation date and deadline are added so that participants
+Like for projects, creation date and deadline are added so that participants
 can keep their progress.  It can also help sort the tasks by timeline.
 
 ``created_on`` : ``time``
@@ -48,7 +48,7 @@ can keep their progress.  It can also help sort the tasks by timeline.
    The date and time for the deadline of the task.
 
 Even though individual tasks are not required to be evaluated and the evaluation
-does not add to the final evaluation, an evaluation field was designed for task
+does not add to the final evaluation, an evaluation field was designed for tasks
 so that the assignees can receive a measurable feedback on their work.
 
 ``evaluation`` : ``number``

@@ -21,7 +21,7 @@ that are used throughout this report:
 
    Participant
 
-      People who participates in a project.
+      People who participate in a project.
 
    SQL injection
 
@@ -39,5 +39,5 @@ that are used throughout this report:
 
    Cross-site scripting (XSS) attack
 
-      Cross-site scripting (XSS) is an code injection attack where
+      Cross-site scripting (XSS) is a code injection attack where
       the attacker inserts client-side scripts into web pages.
