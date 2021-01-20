@@ -22,7 +22,7 @@ Since there can be many comments in a task, the relation between ``Task``
 and ``Comment`` should be one-to-many.
 
 There can be comments replying to other comments, constructing a tree
-data structure.  This structure is described by a self-referrential one-to-many
+data structure.  This structure is described by a self-referential one-to-many
 relation.
 
 Additionally, there should be a ``File`` data table
@@ -31,7 +31,7 @@ We allowed uploading multiple reports and slides,
 considering that the group can continually
 update their reports and presentations,
 which can be reviewed by any participants.  All the uploaded revisions
-should be kept separate for comparision or combination.
+should be kept separate for comparison or combination.
 
 Therefore, there should be two one-to-many relations
 between ``Project`` and ``File``.
@@ -48,7 +48,7 @@ can be represented in :numref:`rel`.
    :name: rel
 
 In each entity, there are other attributes and metadata which assists
-the managment.  They are described in the following sections.
+the management.  They are described in the following sections.
 
 .. toctree::
    :maxdepth: 2
