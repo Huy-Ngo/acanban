@@ -5,7 +5,7 @@ A ``Project`` object includes the project description
 as well as the links to participants.
 
 ``name`` : ``string``
-   The name of the project
+   The name of the project.
 
 ``description`` : ``string``
    The summary of a project, which gives outsiders a brief idea of
@@ -29,8 +29,8 @@ some revisions for reports and slides:
 ``reports`` : ``Report``
    An object representing the reports for the project.
 
-An important part of the project is the evaluation.
-This is the evaluation of the supervisor. (rewrite this paragraph)
+Each project must be evaluated by the supervisor(s);
+the evaluation should therefore be stored as a property of the project.
 
 ``evaluation`` : ``number``
    The evaluation of the work for the project

@@ -29,10 +29,10 @@ Each ``User`` object has following attributes:
 ``role`` : ``string``
    The role of the user in this system.  It can be:
 
-   - ``student``: Students who are participating a group project or internship
-   - ``supervisor``: The supervisor of project(s)
-   - ``assistant``: The academic assistant of a department
-   - ``admin``: The system admin
+   - ``student``: Students who are participating a group project or internship.
+   - ``supervisor``: The supervisor of project(s).
+   - ``assistant``: The academic assistant of a department.
+   - ``admin``: The system admin.
 
 ``projects`` : ``array`` of ``string``, *optional*
    UUIDs of projects the user participates in,
@@ -44,7 +44,7 @@ Each ``User`` object has following attributes:
 
 ``student-id`` : ``string``, *optional*
    Only applicable for users with role ``student``:
-   A unique identifier assigned to students to be used outside this system
+   A unique identifier assigned to students to be used outside this system.
 
 ``bio`` : ``object``, *optional*
    A markup text describing the user.  This is not necessary, but it can be
