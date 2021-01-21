@@ -34,7 +34,7 @@ from acanban.project import add_artifact_tab
 PROJECT = 'be7a04b8-650f-41dc-912b-10d225baff29'
 
 
-@parametrize('tab', ('info', 'edit', 'tasks', 'report', 'slides'))
+@parametrize('tab', ('info', 'edit', 'members', 'tasks', 'report', 'slides'))
 async def test_nonexist(tab: str, user: ClientFactory) -> None:
     """Test accessing tabs on a nonexistent project."""
     adaml = await user('adaml')
@@ -75,7 +75,7 @@ async def test_create_post(username: Optional[str], status_code: int,
               param('silasl', Status.FORBIDDEN, id='assistant'),
               param('ronanf', Status.FORBIDDEN, id='nonmember'),
               param('adaml', Status.OK, id='member')))
-@parametrize('tab', ('info', 'edit', 'report', 'slides'))
+@parametrize('tab', ('info', 'members', 'edit', 'report', 'slides'))
 async def test_get(username: Optional[str], status_code: int,
                    tab: str, user: ClientFactory) -> None:
     """Test project tabs access permission."""
@@ -105,6 +105,31 @@ async def test_edit_post(username: Optional[str], status_code: int,
     response = await client.post(f'/p/{PROJECT}/edit', form=info)
     assert response.status_code == status_code
 
+@parametrize(('username', 'status_code'),
+             (param('silasl', Status.FORBIDDEN, id='assistant'),
+              param('ronanf', Status.FORBIDDEN, id='supervisor'),
+              param('adaml', Status.FOUND, id='student')))
+async def test_member_invite_post(username: Optional[str], status_code: int,
+                         user: ClientFactory) -> None:
+    """Test member invite permission."""
+    client = await user(username)
+    new_user = {'new-user': 'adaml'}
+    response = await client.post(f'/p/{PROJECT}/invite', form=new_user)
+    assert response.status_code == status_code
+
+async def test_member_invite_success(user: ClientFactory) -> None:
+    client = await user('oliviak')
+    new_user = {'new-user': 'ronanf'}
+    response = await client.post(f'/p/{PROJECT}/invite', form=new_user)
+    assert response.status_code == Status.FOUND
+
+async def test_member_invite_fail(user: ClientFactory) -> None:
+    client = await user('oliviak')
+    new_user = {'new-user': 'this-user-does-not-exists'}
+    response = await client.post(f'/p/{PROJECT}/invite', form=new_user)
+    assert response.status_code == Status.FOUND
+    response = await client.post(f'/p/this-project-does-not-exist/invite')
+    assert response.status_code == Status.NOT_FOUND
 
 @parametrize(('username', 'status_code'),
              (param(None, Status.UNAUTHORIZED, id='guest'),

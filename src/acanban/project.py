@@ -192,7 +192,7 @@ async def member_list(uuid: str) -> ResponseReturnValue:
         if (current_user.key not in supervisors
                 and current_user.key not in students
                 and current_user.role != 'assistant'):
-            raise Unauthorized
+            raise Forbidden
         return await render_template('project-member-list.html',
                                      project=project)
 
@@ -209,10 +209,9 @@ async def invite_member(uuid: str) -> ResponseReturnValue:
             raise NotFound
         supervisors = project['supervisors']
         students = project['students']
-        # FIX ME: checking student and supervisors not working
         if (current_user.key not in supervisors
                 and current_user.key not in students):
-            raise Unauthorized
+            raise Forbidden
         form = await request.form
         new_name = form['new-user']
         user = await r.table('users').get(new_name).run(connection)
