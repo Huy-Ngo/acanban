@@ -128,9 +128,6 @@ async def test_member_invite_success(user: ClientFactory) -> None:
 
 
 async def test_member_invite_fail(user: ClientFactory) -> None:
-    client = await user('silasl')
-    response = await client.post(f'/p/{PROJECT}/invite')
-    assert response.status_code == Status.FORBIDDEN
     client = await user('adaml')
     new_user = {'new-user': 'non-exist'}
     response = await client.post(f'/p/{PROJECT}/invite', form=new_user)
