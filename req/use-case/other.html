@@ -241,7 +241,7 @@ User --&gt; Logout"/></p>
 <div class="section" id="alternative-flow">
 <h4>Alternative Flow<a class="headerlink" href="#alternative-flow" title="Permalink to this headline">¶</a></h4>
 <dl class="simple">
-<dt>Invalid username</dt><dd><p>If in step 2, user uses an username with invalid characters, the system
+<dt>Invalid username</dt><dd><p>If in step 2, user uses a username with invalid characters, the system
 will display an alert message. User could either re-enter his/her username or
 cancel the operation.</p>
 </dd>
@@ -258,7 +258,7 @@ or cancel the operation.</p>
 </div>
 <div class="section" id="post-conditions">
 <h3>Post-Conditions<a class="headerlink" href="#post-conditions" title="Permalink to this headline">¶</a></h3>
-<p>User is now granted a new account and be logged in the system.</p>
+<p>User is now granted a new account and logged in the system.</p>
 </div>
 </div>
 <div class="section" id="login">
@@ -297,21 +297,21 @@ will display an error message and terminate the operation.</p>
 </div>
 <div class="section" id="id5">
 <h3>Post-Conditions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>The user is logged in the system.</p>
+<p>The user logged in to the system.</p>
 </div>
 </div>
 <div class="section" id="logout">
 <h2>Logout<a class="headerlink" href="#logout" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id6">
 <h3>Brief Description<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<p>This use case allows user to logout the system.</p>
+<p>This use case allows user to log out of the system.</p>
 </div>
 <div class="section" id="id7">
 <h3>Flow of Events<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id8">
 <h4>Basic Flow<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
-<li><p>User requests to log in the system.</p></li>
+<li><p>User requests to log in to the system.</p></li>
 <li><p>System receives the request and allows user to logout the system.</p></li>
 </ol>
 </div>
@@ -322,14 +322,14 @@ will display an error message and terminate the operation.</p>
 </div>
 <div class="section" id="id10">
 <h3>Post-Conditions<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
-<p>The user is logged out the system.</p>
+<p>The user logged out of the system.</p>
 </div>
 </div>
 <div class="section" id="search-student">
 <h2>Search Student<a class="headerlink" href="#search-student" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id11">
 <h3>Brief Description<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
-<p>This use case allows user to search in list of students.</p>
+<p>This use case allows User to search for students.</p>
 </div>
 <div class="section" id="id12">
 <h3>Flow of Events<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
@@ -350,15 +350,15 @@ will display an error message and terminate the operation.</p>
 <h4>Sub Flow<a class="headerlink" href="#sub-flow" title="Permalink to this headline">¶</a></h4>
 <p><strong>Search by name</strong></p>
 <ol class="arabic simple">
-<li><p>User enters name of student that his/her wants to search.</p></li>
-<li><p>System receives the search request including the name, and responses with
+<li><p>User enters the name of student that his/her wants to search.</p></li>
+<li><p>System receives the search request including the name, and responds with
 a list of students matched with the provided name.</p></li>
 </ol>
 <p><strong>Search by year</strong></p>
 <ol class="arabic simple">
 <li><p>System displays a list of years.</p></li>
-<li><p>User selects a specific year that his/her wants to search.</p></li>
-<li><p>System receives the search request including the selected year, and responses
+<li><p>User selects a specific year that he/she wants to search.</p></li>
+<li><p>System receives the search request including the selected year, and responds
 with a list of students studing in that year.</p></li>
 </ol>
 </div>
@@ -378,7 +378,7 @@ or cancel the operation.</p>
 student name and want to sort it, he/she could select to sort it by <em>year</em> or <em>major</em>.</p>
 <p>If, in <strong>Search by name</strong> sub flow, user enters a name which is not matched
 with any student name, the system should display a message that there are no
-matching student.</p>
+matching students.</p>
 </div>
 <div class="section" id="id15">
 <h3>Pre-Conditions<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
@@ -402,15 +402,15 @@ matching student.</p>
 <ol class="arabic simple">
 <li><p>User selects “Supervisor” on search bar.</p></li>
 <li><p>User enters name of lecturer that his/her wants to search.</p></li>
-<li><p>System receive the search request including the name, and response with
-a list of lecturer matched with the provided name.</p></li>
+<li><p>System receives the search request including the name, and responds with
+a list of supervisors matching the provided name.</p></li>
 </ol>
 </div>
 <div class="section" id="id20">
 <h4>Alternative Flow<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
 <dl class="simple">
 <dt>Invalid name</dt><dd><p>If, in step 2, user enters a name with invalid characters, the system
-will display an alert message. User could either re-enters the name
+will display an alert message. User could either re-enter the name
 or cancel the operation.</p>
 </dd>
 </dl>
@@ -475,10 +475,10 @@ or cancel the operation.</p>
 <div class="section" id="id28">
 <h3>Special Requirements<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
 <p>In <strong>Search by name</strong> sub flow, user has successfully received the list of
-student name and might want to sort it by <em>year</em>.</p>
-<p>If, in <strong>Search by name</strong> sub flow, user enters a name which is not matched
+student names and might want to sort them by <em>year</em>.</p>
+<p>If, in <strong>Search by name</strong> sub flow, user enters a name which is not matching
 with any project name, the system should display a message that there are no
-matching project.</p>
+matching projects.</p>
 </div>
 <div class="section" id="id29">
 <h3>Pre-Conditions<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>

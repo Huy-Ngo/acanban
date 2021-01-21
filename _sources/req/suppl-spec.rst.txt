@@ -36,7 +36,7 @@ Supportability
 --------------
 
 The user interface must be functional on both desktop or laptop computers,
-tablet, as well as on smartphones.
+tablet, and on smartphones.
 
 The file system must support uploading various file formats
 that are used for discussing and reporting project results:

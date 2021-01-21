@@ -21,10 +21,10 @@ similar to Flask_ but for ASGI, for its flexibility.
 Templating Language
 -------------------
 
-We use Jinja2_ for templating, which is default choice for Quart.
+We use Jinja2_ for templating, which is the default choice for Quart.
 It provides us with various tools that help secure the website easier.
 For example, it allows HTML escaping |~| [jinja2esc]_,
-which helps avoiding XSS injection.
+which helps avoid XSS injection.
 
 Persistency
 -----------
