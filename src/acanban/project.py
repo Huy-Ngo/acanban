@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
+from functools import partial
 from operator import itemgetter
 from typing import Any, Dict, Optional, Sequence
 
@@ -114,44 +115,60 @@ async def edit(uuid: str) -> ResponseReturnValue:
     return redirect(f'/p/{uuid}/info')
 
 
-@blueprint.route('/<uuid>/report')
-@login_required
-async def report(uuid: str) -> ResponseReturnValue:
-    """Return the projects' report infomation and forms."""
+async def artifact_view(tab: str, uuid: str) -> ResponseReturnValue:
+    """Return the tab with artifact upload and evaluation."""
     user = await current_user.pluck('projects', 'role')
-    project = await pluck(uuid, ('id', 'name', 'report'), user.get('projects'))
-    query = r.table('files').get_all(*project['report']['revisions'])
+    project = await pluck(uuid, ('id', 'name', tab), user.get('projects'))
+    query = r.table('files').get_all(*project[tab]['revisions'])
     async with current_app.db_pool.connection() as conn:
         revisions = [file async for file in await query.run(conn)]
     revisions.sort(key=itemgetter('time'), reverse=True)
-    return await render_template(
-        'project-report.html', project=project, report=project['report'],
-        revisions=revisions, for_student=(user['role']=='student'))
+    variables = {'project': project, tab: project[tab], 'revisions': revisions,
+                 'for_student': user['role']=='student'}
+    return await render_template(f'project-{tab}.html', **variables)
 
 
-@blueprint.route('/<uuid>/report/upload', methods=['POST'])
-@login_required
-async def report_upload(uuid: str) -> ResponseReturnValue:
-    """Handle report upload."""
+async def artifact_upload(tab: str, uuid: str) -> ResponseReturnValue:
+    """Handle file upload to the corresponding tab."""
     user = await current_user.pluck('role', 'projects')
     await pluck(uuid, projects=user.get('projects'))
     if user['role'] != 'student': raise Forbidden
-    action = r.row['report']['revisions'].append(await ipfs_add())
+    action = r.row[tab]['revisions'].append(await ipfs_add())
     async with current_app.db_pool.connection() as conn:
         await r.table('projects').get(uuid).update(
-            {'report': {'revisions': action}}).run(conn)
+            {tab: {'revisions': action}}).run(conn)
     return redirect(request.referrer)
 
 
-@blueprint.route('/<uuid>/report/eval', methods=['POST'])
-@login_required
-async def report_eval(uuid: str) -> ResponseReturnValue:
-    """Handle report evaluation."""
+async def artifact_eval(tab: str, uuid: str) -> ResponseReturnValue:
+    """Handle evaluation of the work in the corresponding tab."""
     user = await current_user.pluck('role', 'projects')
     await pluck(uuid, projects=user.get('projects'))
     if user['role'] == 'student': raise Forbidden
     form = await request.form
     updated = {'grade': float(form['grade']), 'comment': form['comment']}
-    query = r.table('projects').get(uuid).update({'report': updated})
+    query = r.table('projects').get(uuid).update({tab: updated})
     async with current_app.db_pool.connection() as conn: await query.run(conn)
     return redirect(request.referrer)
+
+
+def add_artifact_tab(blueprint: Blueprint, tab: str) -> None:
+    """Add tab of the given name to the blueprint.
+
+    Raise ValueError if tab is neither report nor slides.
+    """
+    if tab not in ('report', 'slides'):
+        raise ValueError(f'tab is neither report nor slides: {tab}')
+    blueprint.add_url_rule(
+        f'/<uuid>/{tab}', methods=['GET'], endpoint=f'{tab}_view',
+        view_func=login_required(partial(artifact_view, tab)))
+    blueprint.add_url_rule(
+        f'/<uuid>/{tab}/upload', methods=['POST'], endpoint=f'{tab}_upload',
+        view_func=login_required(partial(artifact_upload, tab)))
+    blueprint.add_url_rule(
+        f'/<uuid>/{tab}/eval', methods=['POST'], endpoint=f'{tab}_eval',
+        view_func=login_required(partial(artifact_eval, tab)))
+
+
+add_artifact_tab(blueprint, 'report')
+add_artifact_tab(blueprint, 'slides')
