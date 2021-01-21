@@ -71,7 +71,7 @@ Existing project
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Supervisor and has logged in to the system
+User must be Student or Supervisor and be logged in the system
 before this use case begins.
 
 Post-Conditions
@@ -142,7 +142,7 @@ Missing metadata
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Supervisor and has logged in to the system
+User must be Student or Supervisor and be logged in the system
 before this use case begins.
 
 Post-Conditions
@@ -173,7 +173,7 @@ Basic Flow
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be a participant and has logged in to the system before this use case begins.
+User must be a participant and be logged in the system before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -214,7 +214,7 @@ Empty file provided
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student and has logged in to the system before this use case begins.
+User must be Student and be logged in the system before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -242,7 +242,7 @@ Basic Flow
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be a Supervisor and has logged in to the system before this use case begins.
+User must be a Supervisor and be logged in the system before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -261,24 +261,16 @@ This use case allows Student or Supervisor to create a discussion thread.
 Flow of Events
 ^^^^^^^^^^^^^^
 
-Basic Flow
-""""""""""
-
 1. User requests to create a new discussion thread.
 2. System receives the request and requests user to enter
    **title** and **content**.
 3. User provides necessary data.
 4. System processes the data and create a new thread.
 
-Alternative Flow
-""""""""""""""""
-
-None.
-
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Supervisor and has logged in to the system
+User must be Student or Supervisor and be logged in the system
 before this use case begins.
 
 Post-Conditions
@@ -310,7 +302,7 @@ Basic Flow
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Supervisor and has logged in to the system
+User must be Student or Supervisor and be logged in the system
 before this use case begins.
 
 Post-Conditions

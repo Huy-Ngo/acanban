@@ -49,7 +49,7 @@ Missing information
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be a Supervisor and has logged in to the system
+User must be a Supervisor and be logged in the system
 before this use case begins.
 
 Post-Conditions
@@ -91,7 +91,7 @@ Project is not finished
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Academic Assistant and has logged in to the system before this use case begins.
+User must be Academic Assistant and be logged in the system before this use case begins.
 
 Academic Assistant must search and select the project(s) before the use case begins.
 
@@ -133,7 +133,7 @@ Not yet evaluated
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Academic Assistant and has logged in to the system before this use case begins.
+User must be Academic Assistant and be logged in the system before this use case begins.
 
 Academic Assistant must search and select the project(s) before the use case begins.
 

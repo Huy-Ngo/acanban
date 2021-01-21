@@ -82,7 +82,7 @@ Invalid email
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-User is now granted a new account and has logged in to the system.
+User is now granted a new account and logged in the system.
 
 
 Login
@@ -147,7 +147,7 @@ Basic Flow
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must have logged in to the system before the use case begins.
+User must be logged in the system before the use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -212,7 +212,7 @@ matching students.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must have logged in to the system before the use case begins.
+User must be logged in the system before the use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -250,7 +250,7 @@ Invalid name
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must have logged in to the system before the use case begins.
+User must be logged in the system before the use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -316,7 +316,7 @@ matching projects.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must have logged in to the system before the use case begins.
+User must be logged in the system before the use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
