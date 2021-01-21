@@ -24,7 +24,10 @@ from string import printable
 from typing import Optional
 
 from conftest import ClientFactory, parametrize
-from pytest import param
+from pytest import param, raises
+from quart import Blueprint
+
+from acanban.project import add_artifact_tab
 
 # Some members: adaml (student), oliviak (supervisor)
 # Some nonmembers: ronanf (supervisor), silasl (assistant)
@@ -72,7 +75,7 @@ async def test_create_post(username: Optional[str], status_code: int,
               param('silasl', Status.FORBIDDEN, id='assistant'),
               param('ronanf', Status.FORBIDDEN, id='nonmember'),
               param('adaml', Status.OK, id='member')))
-@parametrize('tab', ('info', 'edit', 'report'))
+@parametrize('tab', ('info', 'edit', 'report', 'slides'))
 async def test_get(username: Optional[str], status_code: int,
                    tab: str, user: ClientFactory) -> None:
     """Test project tabs access permission."""
@@ -109,11 +112,12 @@ async def test_edit_post(username: Optional[str], status_code: int,
               param('lucyl', Status.FORBIDDEN, id='student nonmember'),
               param('oliviak', Status.FORBIDDEN, id='nonstudent member'),
               param('adaml', Status.FOUND, id='student member')))
-async def test_report_upload(username: Optional[str], status_code: int,
-                             user: ClientFactory) -> None:
-    """Test POST report file."""
+@parametrize('tab', ('report', 'slides'))
+async def test_artifact_upload(username: Optional[str], status_code: int,
+                               tab: str, user: ClientFactory) -> None:
+    """Test report and slides upload."""
     response = await (await user(username)).post(
-        f'/p/{PROJECT}/report/upload',
+        f'/p/{PROJECT}/{tab}/upload',
         headers={
             'Content-Length': 199,
             'Content-Type': (
@@ -133,10 +137,16 @@ async def test_report_upload(username: Optional[str], status_code: int,
               param('lucyl', Status.FORBIDDEN, id='student nonmember'),
               param('adaml', Status.FORBIDDEN, id='student member'),
               param('oliviak', Status.FOUND, id='nonstudent member')))
-async def test_report_eval(username: Optional[str], status_code: int,
-                           user: ClientFactory) -> None:
-    """Test POST report evaluation."""
+@parametrize('tab', ('report', 'slides'))
+async def test_artifact_eval(username: Optional[str], status_code: int,
+                             tab: str, user: ClientFactory) -> None:
+    """Test report and presentation evaluation."""
     client = await user(username)
     evaluation = {'grade': uniform(0, 20), 'comment': choices(printable, k=42)}
     response = await client.post(f'/p/{PROJECT}/report/eval', form=evaluation)
     assert response.status_code == status_code
+
+
+def test_add_invalid_artifact_tab() -> None:
+    """Test adding an artifact tab that is neither report nor slides."""
+    with raises(ValueError): add_artifact_tab(Blueprint('foo', 'bar'), 'baz')

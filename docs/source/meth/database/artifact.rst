@@ -1,7 +1,8 @@
-Report
-======
+Artifact
+========
 
-The ``Report`` object is used for storing reports' revisions and evaluation.
+The ``Artifact`` object is used for storing artifacts with multiple revisions
+and can be academically evaluated.
 
 ``comment`` : ``string``
    Evaluation comment.

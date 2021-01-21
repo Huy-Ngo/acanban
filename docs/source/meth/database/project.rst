@@ -26,8 +26,11 @@ some revisions for reports and slides:
 ``tasks`` : ``array`` of ``Task``
    List of ``Task``\s created for this project.
 
-``reports`` : ``Report``
-   An object representing the reports for the project.
+``reports`` : ``Artifact``
+   An object representing the reports of the project.
+
+``slides`` : ``Artifact``
+   An object representing the presentation slides of the project.
 
 Each project must be evaluated by the supervisor(s);
 the evaluation should therefore be stored as a property of the project.
