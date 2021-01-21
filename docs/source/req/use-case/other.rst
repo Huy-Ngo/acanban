@@ -147,7 +147,7 @@ Basic Flow
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must has logged in to the system before the use case begins.
+User must have logged in to the system before the use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -236,21 +236,21 @@ Basic Flow
 
 1. User selects "Supervisor" on search bar.
 2. User enters name of lecturer that his/her wants to search.
-3. System receive the search request including the name, and response with
-   a list of lecturer matched with the provided name.
+3. System receives the search request including the name, and responds with
+   a list of supervisors matching the provided name.
 
 Alternative Flow
 """"""""""""""""
 
 Invalid name
    If, in step 2, user enters a name with invalid characters, the system
-   will display an alert message. User could either re-enters the name
+   will display an alert message. User could either re-enter the name
    or cancel the operation.
 
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must has logged in to the system before the use case begins.
+User must have logged in to the system before the use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -306,17 +306,17 @@ Special Requirements
 ^^^^^^^^^^^^^^^^^^^^
 
 In **Search by name** sub flow, user has successfully received the list of
-student name and might want to sort it by *year*.
+student names and might want to sort them by *year*.
 
 
-If, in **Search by name** sub flow, user enters a name which is not matched
+If, in **Search by name** sub flow, user enters a name which is not matching
 with any project name, the system should display a message that there are no
-matching project.
+matching projects.
 
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must has logged in to the system before the use case begins.
+User must have logged in to the system before the use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
