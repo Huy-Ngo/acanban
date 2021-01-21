@@ -65,7 +65,7 @@ Alternative Flow
 """"""""""""""""
 
 Invalid username
-   If in step 2, user uses an username with invalid characters, the system
+   If in step 2, user uses a username with invalid characters, the system
    will display an alert message. User could either re-enter his/her username or
    cancel the operation.
 
@@ -82,7 +82,7 @@ Invalid email
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-User is now granted a new account and be logged in the system.
+User is now granted a new account and has logged in to the system.
 
 
 Login
@@ -124,7 +124,7 @@ User must own an account before the use case begins.
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-The user is logged in the system.
+The user logged in to the system.
 
 
 Logout
@@ -133,7 +133,7 @@ Logout
 Brief Description
 ^^^^^^^^^^^^^^^^^
 
-This use case allows user to logout the system.
+This use case allows user to log out of the system.
 
 Flow of Events
 ^^^^^^^^^^^^^^
@@ -141,18 +141,18 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. User requests to log in the system.
+1. User requests to log in to the system.
 2. System receives the request and allows user to logout the system.
 
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be logged in the system before the use case begins.
+User must has logged in to the system before the use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-The user is logged out the system.
+The user logged out of the system.
 
 
 Search Student
@@ -161,7 +161,7 @@ Search Student
 Brief Description
 ^^^^^^^^^^^^^^^^^
 
-This use case allows user to search in list of students.
+This use case allows User to search for students.
 
 Flow of Events
 ^^^^^^^^^^^^^^
@@ -180,15 +180,15 @@ Sub Flow
 
 **Search by name**
 
-1. User enters name of student that his/her wants to search.
-2. System receives the search request including the name, and responses with
+1. User enters the name of student that his/her wants to search.
+2. System receives the search request including the name, and responds with
    a list of students matched with the provided name.
 
 **Search by year**
 
 1. System displays a list of years.
-2. User selects a specific year that his/her wants to search.
-3. System receives the search request including the selected year, and responses
+2. User selects a specific year that he/she wants to search.
+3. System receives the search request including the selected year, and responds
    with a list of students studing in that year.
 
 Alternative Flow
@@ -207,12 +207,12 @@ student name and want to sort it, he/she could select to sort it by *year* or *m
 
 If, in **Search by name** sub flow, user enters a name which is not matched
 with any student name, the system should display a message that there are no
-matching student.
+matching students.
 
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be logged in the system before the use case begins.
+User must have logged in to the system before the use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -250,7 +250,7 @@ Invalid name
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be logged in the system before the use case begins.
+User must has logged in to the system before the use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -316,7 +316,7 @@ matching project.
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be logged in the system before the use case begins.
+User must has logged in to the system before the use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^

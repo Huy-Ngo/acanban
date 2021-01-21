@@ -71,7 +71,7 @@ Existing project
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Supervisor and be logged in the system
+User must be Student or Supervisor and has logged in to the system
 before this use case begins.
 
 Post-Conditions
@@ -130,25 +130,25 @@ Basic Flow
 Alternative Flow
 """"""""""""""""
 
-Task is existed
-   In step 4, if the user entered a task that is already existed in task list,
+Task exists
+   In step 4, if the user enters a task that already exists in the task list,
    the system will display an error message and terminate the operation.
 
-Missing meta data
-   In step 4, if user missed to enter some data, (e.g: deadline for the task),
+Missing metadata
+   In step 4, if user forgets to enter some data, (e.g: deadline for the task),
    the system will display an alert message. User can either fill in
    missing fields or cancel the operation.
 
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Supervisor and be logged in the system
+User must be Student or Supervisor and has logged in to the system
 before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
-A new tasks is created in task list.
+A new task is created in task list.
 
 
 Assign Tasks
@@ -165,15 +165,15 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. Student selects the task and and choose "Assign".
-2. Student choose the participant to assign to.
+1. Student selects the task and choose "Assign".
+2. Student chooses the participant to assign to.
 3. System receives the request and register the participant
    as assigned for that task.
 
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student and be logged in the system before this use case begins.
+User must be a participant and has logged in to the system before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -197,24 +197,24 @@ Basic Flow
 
 1. Student requests to complete task(s) in the task list.
 2. System receives the request and requests Student to hand in evidences.
-3. Student submits files or image as evidences.
-4. System receives evidences and marks task(s) as completed.
+3. Student submits a file or a link as evidence.
+4. System receives the evidence and marks task(s) as completed.
 
 Alternative Flow
 """"""""""""""""
 
-No evidences provided
-   In step 3, if Student do not submit files,
+No evidence provided
+   In step 3, if Student does not submit a file or a link,
    the system will display an alert message and terminate the operation.
 
-Empty files provided
-   In step 4, if Student submits empty files,
+Empty file provided
+   In step 4, if Student submits an empty file,
    the system will display an alert message and terminate the operation.
 
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student and be logged in the system before this use case begins.
+User must be Student and has logged in to the system before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
@@ -236,58 +236,18 @@ Flow of Events
 Basic Flow
 """"""""""
 
-1. Supervisor request to view the result of the participating project.
-2. System receive the request and provides results.
+1. Supervisor requests to view the result of the participating project.
+2. System receives the request and provides results.
 
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Supervisor and be logged in the system before this use case begins.
+User must be a Supervisor and has logged in to the system before this use case begins.
 
 Post-Conditions
 ^^^^^^^^^^^^^^^
 
 The system state is unchanged.
-
-
-Evaluate
---------
-
-Brief Description
-^^^^^^^^^^^^^^^^^
-
-This use case allows Supervisor to evaluate the project.
-
-Flow of Events
-^^^^^^^^^^^^^^
-
-Basic Flow
-""""""""""
-
-1. Supervisor request to evaluate the project.
-2. System receive the request provide an **evaluation** and **comment**.
-3. Supervisor provide evaluation with comments.
-4. System receive the data and terminate the project.
-
-Alternative Flow
-""""""""""""""""
-
-Missing information
-
-   If in step 3, the Supervisor missed to fill in a necessary field,
-   the system display an alert message. Supervisor can either fill in missing fields
-   or cancel the operation. 
-
-Pre-Conditions
-^^^^^^^^^^^^^^
-
-User must be Supervisor and be logged in the system
-before this use case begins.
-
-Post-Conditions
-^^^^^^^^^^^^^^^
-
-After this use case ends, other project-related use case could not be executed.
 
 
 Create Discussion Thread
@@ -313,15 +273,12 @@ Basic Flow
 Alternative Flow
 """"""""""""""""
 
-Thread existed
-   If in step 5, an user recognizes that another thread has the solution,
-   he/she could mark the thread as existed. The system require that user
-   to provide clear instruction leading to the existed thread.
+None.
 
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Supervisor and be logged in the system
+User must be Student or Supervisor and has logged in to the system
 before this use case begins.
 
 Post-Conditions
@@ -353,7 +310,7 @@ Basic Flow
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
-User must be Student or Supervisor and be logged in the system
+User must be Student or Supervisor and has logged in to the system
 before this use case begins.
 
 Post-Conditions

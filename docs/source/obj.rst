@@ -29,8 +29,8 @@ The Applicable Web Application
 
 The system should be implemented as a web application for
 portability |~| [mikkonen2008]_.  It should be easy to be adopted by users on
-different devices network connection quality, whilst being simple
-to maintain by a small number of administrators to run on modest hardware.
+different devices network connection quality, whilst being simple enough
+to be maintained by a few administrators to run on modest hardware.
 
 .. _Kanban board: https://en.wikipedia.org/wiki/Kanban_board
 .. [mikkonen2008] Tommi Mikkonen and Antero Taivalsaari.
