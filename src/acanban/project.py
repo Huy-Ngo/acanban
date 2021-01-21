@@ -24,7 +24,7 @@ from typing import Any, Dict, Optional, Sequence
 from quart import (Blueprint, ResponseReturnValue, current_app,
                    flash, redirect, render_template, request)
 from quart.exceptions import Forbidden, NotFound
-from quart_auth import Unauthorized, current_user, login_required
+from quart_auth import current_user, login_required
 from rethinkdb import r
 from rethinkdb.errors import ReqlNonExistenceError
 
@@ -181,40 +181,19 @@ add_artifact_tab(blueprint, 'slides')
 @login_required
 async def member_list(uuid: str) -> ResponseReturnValue:
     """Return the page listing the member of a project."""
-    project_query = r.table('projects').get(uuid)
-    async with current_app.db_pool.connection() as connection:
-        try:
-            project = await project_query.pluck(*BASIC_FIELDS).run(connection)
-        except ReqlNonExistenceError:
-            raise NotFound
-        supervisors = project['supervisors']
-        students = project['students']
-        if (current_user.key not in supervisors
-                and current_user.key not in students
-                and current_user.role != 'assistant'):
-            raise Forbidden
-        return await render_template('project-member-list.html',
-                                     project=project)
+    project = await pluck(uuid, BASIC_FIELDS)
+    return await render_template('project-member-list.html', project=project)
 
 
 @blueprint.route('/<uuid>/invite', methods=['POST'])
 @login_required
 async def invite_member(uuid: str) -> ResponseReturnValue:
     """Add a member to the project."""
-    project_query = r.table('projects').get(uuid)
-    async with current_app.db_pool.connection() as connection:
-        try:
-            project = await project_query.pluck(*BASIC_FIELDS).run(connection)
-        except ReqlNonExistenceError:
-            raise NotFound
-        supervisors = project['supervisors']
-        students = project['students']
-        if (current_user.key not in supervisors
-                and current_user.key not in students):
-            raise Forbidden
-        form = await request.form
-        new_name = form['new-user']
-        user = await r.table('users').get(new_name).run(connection)
+    project = await pluck(uuid, BASIC_FIELDS)
+    form = await request.form
+    new_name = form['new-user']
+    async with current_app.db_pool.connection() as conn:
+        user = await r.table('users').get(new_name).run(conn)
         if user is None:
             await flash('That user has not registered')
         else:
@@ -223,8 +202,8 @@ async def invite_member(uuid: str) -> ResponseReturnValue:
                 return redirect(f'/p/{uuid}/members')
             updated_projects = r.row['projects'].append(uuid)
             await r.table('users').get(new_name).update(
-                {'projects': updated_projects}).run(connection)
+                {'projects': updated_projects}).run(conn)
             mem_field = f'{user["role"]}s'
-            await project_query.update(
-                {mem_field: r.row[mem_field].append(new_name)}).run(connection)
+            await r.table('projects').get(uuid).update(
+                {mem_field: r.row[mem_field].append(new_name)}).run(conn)
     return redirect(f'/p/{uuid}/members')

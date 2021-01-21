@@ -105,17 +105,20 @@ async def test_edit_post(username: Optional[str], status_code: int,
     response = await client.post(f'/p/{PROJECT}/edit', form=info)
     assert response.status_code == status_code
 
+
 @parametrize(('username', 'status_code'),
-             (param('silasl', Status.FORBIDDEN, id='assistant'),
+             (param(None, Status.UNAUTHORIZED, id='guest'),
+              param('silasl', Status.FORBIDDEN, id='assistant'),
               param('ronanf', Status.FORBIDDEN, id='supervisor'),
               param('adaml', Status.FOUND, id='student')))
 async def test_member_invite_post(username: Optional[str], status_code: int,
-                         user: ClientFactory) -> None:
+                                  user: ClientFactory) -> None:
     """Test member invite permission."""
     client = await user(username)
     new_user = {'new-user': 'adaml'}
     response = await client.post(f'/p/{PROJECT}/invite', form=new_user)
     assert response.status_code == status_code
+
 
 async def test_member_invite_success(user: ClientFactory) -> None:
     client = await user('oliviak')
@@ -123,13 +126,18 @@ async def test_member_invite_success(user: ClientFactory) -> None:
     response = await client.post(f'/p/{PROJECT}/invite', form=new_user)
     assert response.status_code == Status.FOUND
 
+
 async def test_member_invite_fail(user: ClientFactory) -> None:
-    client = await user('oliviak')
-    new_user = {'new-user': 'this-user-does-not-exists'}
+    client = await user('silasl')
+    response = await client.post(f'/p/{PROJECT}/invite')
+    assert response.status_code == Status.FORBIDDEN
+    client = await user('adaml')
+    new_user = {'new-user': 'non-exist'}
     response = await client.post(f'/p/{PROJECT}/invite', form=new_user)
     assert response.status_code == Status.FOUND
-    response = await client.post(f'/p/this-project-does-not-exist/invite')
+    response = await client.post('/p/this-project-does-not-exist/invite')
     assert response.status_code == Status.NOT_FOUND
+
 
 @parametrize(('username', 'status_code'),
              (param(None, Status.UNAUTHORIZED, id='guest'),
