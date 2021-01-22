@@ -85,7 +85,12 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#report-structure">Report Structure</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="obj.html">Objective</a></li>
 <li class="toctree-l1"><a class="reference internal" href="req/index.html">System Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="meth/index.html">Methodology</a></li>
@@ -163,6 +168,77 @@
             
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>Group project and internship are annual activities for master students
+and last year bachelor students in
+University of Science and Technology of Hanoi (USTH).
+With the university’s projected growth, managing them is becoming a complicated
+yet important task.  The management is required for both students and the school staff.
+From students’ and supervisors’ perspective, there should be a tool that helps
+manage numerous tasks in their projects.  From faculties’ academic assistants’
+perspective, a system that helps collect projects’ progress and evaluation
+is of great importance, since manual input for students’ grade is an exhausting task
+and can lead to error.</p>
+<p>Therefore, a collaborative platform that students and supervisors can use
+in their project, which also support academic evaluation and report, is needed.
+This tool should help students manage their projects seamlessly, and academic
+assistants collect statistical reports quickly.</p>
+</div>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>Project management is a common problem, which is why it is unsurprising
+that there have been a variety of project management systems.
+Students and supervisors have already been using some of these systems
+to manage their tasks.  We studied these systems to see how projects
+are commonly and effectively managed.</p>
+<p><a class="reference external" href="https://trello.com/">Trello</a>,a popular web service for keeping track of tasks, uses <a class="reference external" href="https://en.wikipedia.org/wiki/Kanban_board">Kanban board</a>.
+A Kanban board consists of several columns, each of which contains some tasks
+in a certain stage, such as <em>to-do</em>, <em>in progress</em>, <em>in review</em>, and <em>done</em>.
+User can move a task from a column to another.  As this workflow is easy to learn,
+it is also used by other popular collaborative platforms,
+such as <a class="reference external" href="https://www.atlassian.com/software/jira">Jira</a>, <a class="reference external" href="https://asana.com/">Asana</a>, <a class="reference external" href="https://github.com/">GitHub</a>, or <a class="reference external" href="https://www.tuleap.org/">Tuleap</a>.</p>
+<p>Some other software, such as <a class="reference external" href="https://www.ganttproject.biz/">GanttProject</a>, <a class="reference external" href="https://www.projectlibre.com/">ProjectLibre</a>, or <a class="reference external" href="http://office.microsoft.com/project/">Microsoft Project</a>
+is modeled after another tool: <a class="reference external" href="https://en.wikipedia.org/wiki/Gantt_chart">Gantt chart</a>.  Gantt chart is a way of using bar chart
+to visualize the schedule for the project.  This method simplifies scheduling
+independent tasks to be worked on at the same time to save wait time.</p>
+<p>Although many of project management systems above
+are targeting software development projects,
+The application of Kanban board and Gantt chart
+as project management tools can benefit any other fields.
+In fact, using Kanban board in other fields is also known
+to improve productivity by saving time and aid internal communication. <a class="reference internal" href="#willeke" id="id1"><span>[willeke]</span></a></p>
+<p>As effective and popular as existing project management systems are,
+they do not support academic evaluation, which is one of our main motivations.
+Extending existing free software could be an approach to achieve our target.
+However, the complexity of those systems makes it impractical
+to study within a short period.
+Therefore, we started this project to create from scratch
+an academic-oriented project management system.</p>
+</div>
+<div class="section" id="report-structure">
+<h2>Report Structure<a class="headerlink" href="#report-structure" title="Permalink to this headline">¶</a></h2>
+<p>The report contains following sections:</p>
+<ol class="arabic simple">
+<li><p><strong>Introduction</strong>: Introduce the motivation and background of the problem
+and some related works.</p></li>
+<li><p><strong>Objective</strong>: Further define the objective and scope of the project.</p></li>
+<li><p><strong>Requirements</strong>: List all important use cases with their specifications.</p></li>
+<li><p><strong>Methodology</strong>: Steps we made to develop the system:
+technical choices, analysis, design, and implementation.</p></li>
+<li><p><strong>Results and Discussion</strong>: The result and what we learned from this project.</p></li>
+<li><p><strong>Conclusion and Future Work</strong>: Our conclusion after the project
+and work that can be done to improve the system.</p></li>
+</ol>
+<dl class="citation">
+<dt class="label" id="willeke"><span class="brackets"><a class="fn-backref" href="#id1">willeke</a></span></dt>
+<dd><p>Marian H.H. Willeke,
+“Agile in Academics: Applying Agile to Instructional Design”.
+<em>2011 Agile Conference</em>, p. 246-251, Salt Lake City, UT, 2011.
+<a class="reference external" href="https://doi.org/10.1109/AGILE.2011.17">doi: 10.1109/AGILE.2011.17</a>.</p>
+</dd>
+</dl>
+</div>
 </div>
 
 
