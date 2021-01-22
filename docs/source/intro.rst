@@ -28,15 +28,15 @@ Students and supervisors have already been using some of these systems
 to manage their tasks.  We studied these systems to see how projects
 are commonly and effectively managed.
 
-Trello_ is a popular web service for keeping track of tasks using `Kanban board`_.
+Trello_,a popular web service for keeping track of tasks, uses `Kanban board`_.
 A Kanban board consists of several columns, each of which contains some tasks
-in a certain stage, such as "to-do", "in progress", "in review", and "done".
-User can move a task from a column to another.  As this workflow has short
-learning curve, it is also used by other popular collaborative platforms,
+in a certain stage, such as *to-do*, *in progress*, *in review*, and *done*.
+User can move a task from a column to another.  As this workflow is easy to learn,
+it is also used by other popular collaborative platforms,
 such as Jira_, Asana_, GitHub_, or Tuleap_.
 
 Some other software, such as GanttProject_, ProjectLibre_, or `Microsoft Project`_
-uses another tool: `Gantt chart`_.  Gantt chart is a way of using bar chart
+is modeled after another tool: `Gantt chart`_.  Gantt chart is a way of using bar chart
 to visualize the schedule for the project.  This method simplifies scheduling
 independent tasks to be worked on at the same time to save wait time.
 
@@ -82,4 +82,3 @@ The report contains following sections:
 .. _ProjectLibre: https://www.projectlibre.com/
 .. [willeke] M. Willeke,  "Agile in Academics: Applying Agile to Instructional Design," in 2011 Agile Conference, Salt Lake City, UT, 2011 pp. 246-251.
 doi: 10.1109/AGILE.2011.17
-
