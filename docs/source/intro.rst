@@ -44,7 +44,7 @@ Although many of project management systems above
 are targeting software development projects,
 The application of Kanban board and Gantt chart
 as project management tools can benefit any other fields.
-In fact, using Kanban board in non-IT fields is also known
+In fact, using Kanban board in other fields is also known
 to improve productivity by saving time and aid internal communication. |~| [willeke]_
 
 As effective and popular as existing project management systems are,
@@ -80,5 +80,7 @@ The report contains following sections:
 .. _GanttProject: https://www.ganttproject.biz/
 .. _Microsoft Project: http://office.microsoft.com/project/
 .. _ProjectLibre: https://www.projectlibre.com/
-.. [willeke] M. Willeke,  "Agile in Academics: Applying Agile to Instructional Design," in 2011 Agile Conference, Salt Lake City, UT, 2011 pp. 246-251.
-doi: 10.1109/AGILE.2011.17
+.. [willeke] Marian H.H. Willeke,
+   "Agile in Academics: Applying Agile to Instructional Design".
+   *2011 Agile Conference*, p. 246-251, Salt Lake City, UT, 2011.
+   :doi:`10.1109/AGILE.2011.17`.
