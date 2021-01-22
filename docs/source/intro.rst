@@ -4,7 +4,8 @@ Introduction
 Motivation
 ----------
 
-Group project and internship are annual activities for last-year students in
+Group project and internship are annual activities for master students
+and last year bachelor students in
 University of Science and Technology of Hanoi (USTH).
 With the university's projected growth, managing them is becoming a complicated
 yet important task.  The management is required for both students and the school staff.
@@ -49,9 +50,9 @@ to improve productivity by saving time and aid internal communication. |~| [will
 
 As effective and popular as existing project management systems are,
 they do not support academic evaluation, which is one of our main motivations.
-Furthermore, it is not practical extend systems that are free software
-with our use cases,
-because their complexity makes it hard to study within a short period.
+Extending existing free software could be an approach to achieve our target.
+However, the complexity of those systems makes it impractical
+to study within a short period.
 Therefore, we started this project to create from scratch
 an academic-oriented project management system.
 
