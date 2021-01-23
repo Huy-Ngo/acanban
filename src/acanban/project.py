@@ -152,7 +152,6 @@ async def artifact_eval(tab: str, uuid: str) -> ResponseReturnValue:
     return redirect(request.referrer)
 
 
-<<<<<<< HEAD
 def add_artifact_tab(blueprint: Blueprint, tab: str) -> None:
     """Add tab of the given name to the blueprint.
 
@@ -175,8 +174,6 @@ add_artifact_tab(blueprint, 'report')
 add_artifact_tab(blueprint, 'slides')
 
 
-=======
->>>>>>> 3e4e968 (Fix linting)
 @blueprint.route('/<uuid>/members')
 @login_required
 async def member_list(uuid: str) -> ResponseReturnValue:
