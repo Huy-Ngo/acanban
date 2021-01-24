@@ -39,7 +39,7 @@ from .user import blueprint as user
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 
 
 class Acanban(QuartTrio):
