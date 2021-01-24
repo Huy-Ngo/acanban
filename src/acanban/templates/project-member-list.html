@@ -1,0 +1,29 @@
+{% extends 'project-detail.html' %}
+{% block tabbarlayout %}
+{{ tabbar('Members') }}
+{% endblock %}
+{% block tabcontent %}
+<div class=col-wide>
+  <form action=invite method=POST>
+    <label for=new-user>
+    <input type=text id=new-user name="new-user"/>
+    <button>Invite</button>
+  </form>
+  {% for message in get_flashed_messages() %}
+  <p class=error>{{ message }}</p>
+  {% endfor %}
+  <h3>Supervisors</h3>
+  <ul>
+    {% for supervisor in project.supervisors %}
+    <li><a href="/u/{{ supervisor }}"> {{ supervisor }} </a> </li>
+    {% endfor %}
+  </ul>
+  <h3>Students</h3>
+  <ul>
+    {% for student in project.students %}
+    <li><a href="/u/{{ student }}"> {{ student }} </a> </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+

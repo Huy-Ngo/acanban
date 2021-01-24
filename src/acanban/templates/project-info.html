@@ -4,10 +4,6 @@
 {% endblock %}
 {% block tabcontent %}
 <div class=col-wide>
-  <p><b>Supervisors:</b> {{ project.supervisors | map('userlink')
-                            | join(', ') | safe }}</p>
-  <p><b>Students:</b> {{ project.students | map('userlink')
-                         | join(', ') | safe }}</p>
   <p>{{ project.description }}</p>
 </div>
 {% endblock %}
