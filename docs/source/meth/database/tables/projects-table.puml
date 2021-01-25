@@ -1,0 +1,105 @@
+@startjson
+#highlight "**table**"
+#highlight "<color:green>report" / "**Entity**"
+#highlight "<color:green>slides" / "**Entity**"
+#highlight "<color:green>tasks" / "1"/ "**Entity**"
+#highlight "<color:green>tasks" / "2" / "**Entity**"
+#highlight "<color:green>tasks" / "3" / "**Entity**"
+#highlight "**Entity**"
+  {
+    "**table**": "**projects**",
+    "created_on": {
+      "$reql_type$": "**TIME**",
+      "epoch_time": 1604163600,
+      "timezone": "+07:00"
+    },
+    "deadline": {
+      "$reql_type$": "**TIME**",
+      "epoch_time": 1611075600,
+      "timezone": "+07:00"
+    },
+    "description": "Lorem ipsum...",
+    "id": "(project ID)",
+    "name": "(project name)",
+    "<color:green>report": {
+      "**Entity**": "**Artifact**",
+      "comment": "",
+      "grade": -1,
+      "revisions": null
+    },
+    "<color:green>slides": {
+      "**Entity**": "**Artifact**",
+      "comment": "",
+      "grade": -1,
+      "revisions": null
+    },
+    "students": [
+      "**array**",
+      "opheliad",
+      "jamesm",
+      "arabellaf",
+      "evelynd",
+      "audreym"
+    ],
+    "supervisors": [
+      "ronanf"
+    ],
+    "<color:green>tasks": [
+      "**array**",
+      { 
+        "**Entity**": "**Task**",
+        "assigned_to": "arabellaf",
+        "created_on": {
+          "$reql_type$": "**TIME**",
+          "epoch_time": 1607878800,
+          "timezone": "+07:00"
+        },
+        "creator": "jamesm",
+        "deadline": {
+          "$reql_type$": "**TIME**",
+          "epoch_time": 1608742800,
+          "timezone": "+07:00"
+        },
+        "name": "(task name)",
+        "description": "Lorem ipsum...",
+        "status": 0
+      },
+      {
+        "**Entity**": "**Task**",
+        "assigned_to": "opheliad",
+        "created_on": {
+          "$reql_type$": "**TIME**",
+          "epoch_time": 1606150800,
+          "timezone": "+07:00"
+        },
+        "creator": "evelynd",
+        "deadline": {
+          "$reql_type$": "**TIME**",
+          "epoch_time": 1607014800,
+          "timezone": "+07:00"
+        },
+        "description": "Lorem ipsum...",
+        "name": "(task name)",
+        "status": 2
+      },
+      {
+        "**Entity**": "**Task**",
+        "assigned_to": "arabellaf",
+        "created_on": {
+          "$reql_type$": "**TIME**",
+          "epoch_time": 1605978000,
+          "timezone": "+07:00"
+        },
+        "creator": "jamesm",
+        "deadline": {
+          "$reql_type$": "**TIME**",
+          "epoch_time": 1606842000,
+          "timezone": "+07:00"
+        },
+        "name": "(task name)",
+        "description": "Lorem ipsum...",
+        "status": 2
+      }
+    ]
+  }
+@endjson
