@@ -56,6 +56,6 @@ the management.  They are described in the following sections.
    user
    project
    task
-   report
+   artifact
    comment
    file
