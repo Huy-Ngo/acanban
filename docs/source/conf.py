@@ -21,7 +21,7 @@ release = __version__
 # They can be extensions coming with Sphinx (named 'sphinx.ext.*')
 # or your custom ones.
 extensions = ['sphinx.ext.extlinks', 'sphinx.ext.githubpages',
-              'sphinxcontrib.plantuml']
+              'sphinxcontrib.plantuml', 'sphinxcontrib.inkscapeconverter']
 extlinks = {'doi': ('https://doi.org/%s', 'doi: ')}
 plantuml_output_format = 'svg_img'
 plantuml_latex_output_format = 'pdf'
