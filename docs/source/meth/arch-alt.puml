@@ -1,13 +1,6 @@
 @startuml
-skinparam Padding 10
-
-node Client {
-   node Browser
-}
-
-node "Load Balancing Server" {
-component NGINX as nginx <<load balancer>>
-}
+cloud "Web Browser" as Browser << Client >>
+node nginx << Load Balancing Server >>
 
 node "Web Server" as server {
    component Acanban as acanban
@@ -21,18 +14,16 @@ node "Database cluster" as db {
    database "RethinkDB" as r_4
 }
 
-node "IPFS Cluster" as ipfs {
-   component "IPFS" as i_1
-   component "IPFS" as i_2
-   component "IPFS" as i_3
-   component "IPFS" as i_4
+node "IPFS cluster" as ipfs {
+   collections "IPFS" as i_1
+   collections "IPFS" as i_2
+   collections "IPFS" as i_3
+   collections "IPFS" as i_4
 }
 
-Browser -[norank]- nginx: HTTPS
-
-nginx "1" --- "1..*" hypercorn
-
-hypercorn - acanban
-acanban "1..*" --- "1..*" db
-acanban "1..*" --- "1..*" ipfs
+nginx "0..*" --- "1" Browser : HTTPS
+nginx "1" -[norank]- "1..*" hypercorn
+hypercorn "1" -- "1" acanban
+acanban "1..*" -- "1..*" db
+acanban "1..*" -- "1..*" ipfs
 @enduml
