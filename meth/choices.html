@@ -186,11 +186,12 @@ by <a class="reference external" href="https://vorpus.org/blog/notes-on-structur
 </div>
 <div class="section" id="web-server-and-framework">
 <h2>Web Server and Framework<a class="headerlink" href="#web-server-and-framework" title="Permalink to this headline">¶</a></h2>
-<p>As asynchronous input/output was chosen, <a class="reference external" href="https://asgi.readthedocs.io">Asynchronous Server Gateway Interface
-(ASGI)</a> was needed to cooperate the asynchronous routines in the application
-and the server.  For server, <a class="reference external" href="https://pgjones.gitlab.io/hypercorn">Hypercorn</a> was picked for its first-class support
-for Trio.  The application was built on top of <a class="reference external" href="https://pgjones.gitlab.io/quart-trio">Quart</a>, a microframework
-similar to <a class="reference external" href="https://flask.palletsprojects.com">Flask</a> but for ASGI, for its flexibility.</p>
+<p>As asynchronous input/output was chosen,
+<a class="reference internal" href="../appendix/glossary.html#term-Asynchronous-Server-Gateway-Interface-ASGI"><span class="xref std std-term">ASGI</span></a> was needed
+to cooperate the asynchronous routines in the application and the server.
+For server, <a class="reference external" href="https://pgjones.gitlab.io/hypercorn">Hypercorn</a> was picked for its first-class support for Trio.
+The application was built on top of <a class="reference external" href="https://pgjones.gitlab.io/quart-trio">Quart</a>, a microframework similar to <a class="reference external" href="https://flask.palletsprojects.com">Flask</a>
+but for ASGI, for its flexibility.</p>
 </div>
 <div class="section" id="templating-language">
 <h2>Templating Language<a class="headerlink" href="#templating-language" title="Permalink to this headline">¶</a></h2>
@@ -206,7 +207,8 @@ which is a collection of small chunks of plain text, and storing the files
 uploaded by the users.  In the former case, <a class="reference external" href="https://rethinkdb.com">RethinkDB</a>, a <a class="reference external" href="https://en.wikipedia.org/wiki/Document-oriented_database">document-oriented
 database</a>, was chosen for recursive and less-structured data support.
 Such database, however, is performance-wise unsuitable for larger files,
-so <a class="reference external" href="https://ipfs.io">IPFS</a>, which is a distributed file system that provides similar abstraction,
+so <a class="reference internal" href="../appendix/glossary.html#term-InterPlanetary-File-System-IPFS"><span class="xref std std-term">IPFS</span></a>,
+which is a distributed file system that provides similar abstraction,
 is used instead in the latter case.</p>
 <p>By choosing RethinkDB instead of SQL,
 we do not have to worry about SQL injection or similar database attack.

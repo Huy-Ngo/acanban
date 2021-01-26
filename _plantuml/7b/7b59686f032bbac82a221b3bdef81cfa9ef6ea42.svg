@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="71px" preserveAspectRatio="none" style="width:725px;height:71px;" version="1.1" viewBox="0 0 725 71" width="725px" zoomAndPan="magnify"><defs><filter height="300%" id="f159jzn3lf2m8j" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--entity Clients--><path d="M9,23.5 C9,20.5 11,18.5 14,18.5 C17,18.5 19,20.5 19,23.5 C19,20.5 21,18.5 24,18.5 C27,18.5 29,20.5 29,23.5 C29,20.5 31,18.5 34,18.5 C37,18.5 39,20.5 39,23.5 C39,20.5 41,18.5 44,18.5 C47,18.5 49,20.5 49,23.5 C49,20.5 51,18.5 54,18.5 C57,18.5 59,20.5 59,23.5 C59,20.5 61,18.5 64,18.5 C67,18.5 69,20.5 69,23.5 C72,23.5 74,25.5 74,28.5 C74,31.5 72,33.5 69,33.5 C72,33.5 74,35.5 74,38.5 C74,41.5 72,43.5 69,43.5 C69,46.5 66,48.5 64,48.5 C61,48.5 59,46.5 59,43.5 C59,46.5 56,48.5 54,48.5 C51,48.5 49,46.5 49,43.5 C49,46.5 46,48.5 44,48.5 C41,48.5 39,46.5 39,43.5 C39,46.5 36,48.5 34,48.5 C31,48.5 29,46.5 29,43.5 C29,46.5 26,48.5 24,48.5 C21,48.5 19,46.5 19,43.5 C19,46.5 16,48.5 14,48.5 C11,48.5 9,46.5 9,43.5 C6,43.5 4,41.5 4,38.5 C4,35.5 6,33.5 9,33.5 C6,33.5 4,31.5 4,28.5 C4,25.5 6,23.5 9,23.5 " fill="#FEFECE" filter="url(#f159jzn3lf2m8j)" style="stroke: #000000; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="16" y="39.4951">Clients</text><!--entity Hypercorn--><rect fill="#FEFECE" filter="url(#f159jzn3lf2m8j)" height="52.5938" style="stroke: #000000; stroke-width: 1.5;" width="121" x="167" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="101" x="177" y="30.9951">«ASGI Server»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="71" x="192" y="47.292">Hypercorn</text><!--entity Quart--><rect fill="#FEFECE" filter="url(#f159jzn3lf2m8j)" height="52.5938" style="stroke: #000000; stroke-width: 1.5;" width="152" x="562" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="132" x="572" y="30.9951">«ASGI Framework»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="38" x="619" y="47.292">Quart</text><!--entity Acanban--><rect fill="#FEFECE" filter="url(#f159jzn3lf2m8j)" height="52.5938" style="stroke: #000000; stroke-width: 1.5;" width="152" x="349" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="132" x="359" y="30.9951">«ASGI Application»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="395" y="47.292">Acanban</text><!--link Clients to Hypercorn--><path d="M78.62,34.5 C102.55,34.5 134.05,34.5 161.81,34.5 " fill="none" id="Clients-Hypercorn" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="166.95,34.5,157.95,30.5,161.95,34.5,157.95,38.5,166.95,34.5" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="73.32,34.5,82.32,38.5,78.32,34.5,82.32,30.5,73.32,34.5" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="32" x="104" y="30.5669">HTTP</text><!--link Hypercorn to Acanban--><path d="M293.65,34.5 C309.65,34.5 326.97,34.5 343.6,34.5 " fill="none" id="Hypercorn-Acanban" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="348.74,34.5,339.74,30.5,343.74,34.5,339.74,38.5,348.74,34.5" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="288.22,34.5,297.22,38.5,293.22,34.5,297.22,30.5,288.22,34.5" style="stroke: #A80036; stroke-width: 1.0;"/><!--link Acanban to Quart--><path d="M501.28,34.5 C514.33,34.5 528.05,34.5 541.55,34.5 " fill="none" id="Acanban-Quart" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="541.75,27.5,561.75,34.5,541.75,41.5,541.75,27.5" style="stroke: #A80036; stroke-width: 1.0;"/><!--
+@startuml
+left to right direction
+
+cloud Clients
+rectangle Hypercorn << ASGI Server >>
+rectangle Quart << ASGI Framework >>
+rectangle Acanban << ASGI Application >>
+
+Clients <- -> Hypercorn : HTTP
+Hypercorn <- -> Acanban
+Acanban - -|> Quart
+
+@enduml
+
+PlantUML version 1.2018.13(Mon Nov 26 17:11:51 UTC 2018)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.9.1+1
+Operating System: Linux
+OS Version: 5.4.0-1032-azure
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
