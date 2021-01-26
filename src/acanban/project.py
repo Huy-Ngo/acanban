@@ -1,6 +1,7 @@
 # Project pages
 # Copyright (C) 2020-2021  Nguyễn Gia Phong
 # Copyright (C) 2021  Ngô Ngọc Đức Huy
+# Copyright (C) 2021  Ngô Xuân Minh
 #
 # This file is part of Acanban.
 #
@@ -22,7 +23,7 @@ from operator import itemgetter
 from typing import Any, Dict, Optional, Sequence
 
 from quart import (Blueprint, ResponseReturnValue, current_app,
-                   flash, redirect, render_template, request)
+                   redirect, render_template, request)
 from quart.exceptions import Forbidden, NotFound
 from quart_auth import current_user, login_required
 from rethinkdb import r
@@ -31,7 +32,9 @@ from rethinkdb.errors import ReqlNonExistenceError
 from .ipfs import add as ipfs_add
 
 __all__ = ['blueprint']
-BASIC_FIELDS = 'id', 'name', 'supervisors', 'students', 'description'
+
+INFO_FIELDS = 'id', 'name', 'description'
+MEMBERS_FIELDS = 'id', 'name', 'supervisors', 'students'
 
 blueprint = Blueprint('project', __name__, url_prefix='/p')
 
@@ -59,7 +62,7 @@ async def create_projects() -> ResponseReturnValue:
 @blueprint.route('/')
 async def list_projects() -> ResponseReturnValue:
     """Return a page listing all projects."""
-    project_list = r.table('projects').pluck(*BASIC_FIELDS)
+    project_list = r.table('projects').pluck(*INFO_FIELDS)
     async with current_app.db_pool.connection() as connection:
         projects = await project_list.run(connection)
     return await render_template('project-list.html', projects=projects)
@@ -95,7 +98,7 @@ async def pluck(uuid: str, fields: Sequence[str] = (),
 @login_required
 async def info(uuid: str) -> ResponseReturnValue:
     """Return the page containing the projects' basic infomation."""
-    project = await pluck(uuid, BASIC_FIELDS)
+    project = await pluck(uuid, INFO_FIELDS)
     return await render_template('project-info.html', project=project)
 
 
@@ -104,15 +107,50 @@ async def info(uuid: str) -> ResponseReturnValue:
 async def edit(uuid: str) -> ResponseReturnValue:
     """Return the page for editting the projects' basic infomation."""
     if request.method == 'GET':
-        project = await pluck(uuid, BASIC_FIELDS)
+        project = await pluck(uuid, INFO_FIELDS)
         return await render_template('project-edit.html', project=project)
 
     await pluck(uuid)  # check project's existence and permission
     updated = {key: value for key, value in (await request.form).items()
-               if key in BASIC_FIELDS and value}
+               if key in INFO_FIELDS and value}
     async with current_app.db_pool.connection() as conn:
         await r.table('projects').get(uuid).update(updated).run(conn)
     return redirect(f'/p/{uuid}/info')
+
+
+@blueprint.route('/<uuid>/members')
+@login_required
+async def member_list(uuid: str) -> ResponseReturnValue:
+    """Return the page listing the member of a project."""
+    project = await pluck(uuid, MEMBERS_FIELDS)
+    return await render_template('project-members.html', project=project)
+
+
+@blueprint.route('/<uuid>/invite', methods=['POST'])
+@login_required
+async def member_invite(uuid: str) -> ResponseReturnValue:
+    """Add a member to the project."""
+    username = (await request.form)['new-user']
+    project = await pluck(uuid, MEMBERS_FIELDS)
+    render = partial(render_template, 'project-members.html', project=project)
+
+    async with current_app.db_pool.connection() as conn:
+        try:
+            role = await r.table('users').get(username)['role'].run(conn)
+        except ReqlNonExistenceError:
+            return await render(error=f'{username} has not registered')
+    if role == 'assistant':
+        return await render(error=f'{username} is an assistant')
+    mem_field = f'{role}s'
+    if username in project[mem_field]:
+        return await render(error=f'{username} is already a member')
+
+    async with current_app.db_pool.connection() as conn:
+        await r.table('projects').get(uuid).update(
+            {mem_field: r.row[mem_field].append(username)}).run(conn)
+        await r.table('users').get(username).update(
+            {'projects': r.row['projects'].append(uuid)}).run(conn)
+    return redirect(request.referrer)
 
 
 async def artifact_view(tab: str, uuid: str) -> ResponseReturnValue:
@@ -172,35 +210,3 @@ def add_artifact_tab(blueprint: Blueprint, tab: str) -> None:
 
 add_artifact_tab(blueprint, 'report')
 add_artifact_tab(blueprint, 'slides')
-
-
-@blueprint.route('/<uuid>/members')
-@login_required
-async def member_list(uuid: str) -> ResponseReturnValue:
-    """Return the page listing the member of a project."""
-    project = await pluck(uuid, BASIC_FIELDS)
-    return await render_template('project-member-list.html', project=project)
-
-
-@blueprint.route('/<uuid>/invite', methods=['POST'])
-@login_required
-async def invite_member(uuid: str) -> ResponseReturnValue:
-    """Add a member to the project."""
-    project = await pluck(uuid, BASIC_FIELDS)
-    form = await request.form
-    new_name = form['new-user']
-    async with current_app.db_pool.connection() as conn:
-        user = await r.table('users').get(new_name).run(conn)
-        if user is None:
-            await flash('That user has not registered')
-        else:
-            if project['id'] in user['projects']:
-                await flash('That user is already a member of the project')
-                return redirect(f'/p/{uuid}/members')
-            updated_projects = r.row['projects'].append(uuid)
-            await r.table('users').get(new_name).update(
-                {'projects': updated_projects}).run(conn)
-            mem_field = f'{user["role"]}s'
-            await r.table('projects').get(uuid).update(
-                {mem_field: r.row[mem_field].append(new_name)}).run(conn)
-    return redirect(f'/p/{uuid}/members')
