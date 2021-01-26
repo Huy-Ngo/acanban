@@ -106,34 +106,21 @@ async def test_edit_post(username: Optional[str], status_code: int,
     assert response.status_code == status_code
 
 
-@parametrize(('username', 'status_code'),
-             (param(None, Status.UNAUTHORIZED, id='guest'),
-              param('silasl', Status.FORBIDDEN, id='assistant'),
-              param('ronanf', Status.FORBIDDEN, id='supervisor'),
-              param('adaml', Status.FOUND, id='student')))
-async def test_member_invite_post(username: Optional[str], status_code: int,
-                                  user: ClientFactory) -> None:
+@parametrize(('username', 'invited', 'status_code'), (
+    param(None, 'ronanf', Status.UNAUTHORIZED, id='guest invites'),
+    param('silasl', 'ronanf', Status.FORBIDDEN, id='assistant invites'),
+    param('ronanf', 'ronanf', Status.FORBIDDEN, id='nonmember invites'),
+    param('adaml', 'nonexist', Status.OK, id='invite nonexist'),
+    param('adaml', 'oliviak', Status.OK, id='invite member'),
+    param('adaml', 'silasl', Status.OK, id='invite assistant'),
+    param('adaml', 'ronanf', Status.FOUND, id='invite success')))
+async def test_member_invite(username: Optional[str], invited: str,
+                             status_code: int, user: ClientFactory) -> None:
     """Test member invite permission."""
     client = await user(username)
-    new_user = {'new-user': 'adaml'}
+    new_user = {'new-user': invited}
     response = await client.post(f'/p/{PROJECT}/invite', form=new_user)
     assert response.status_code == status_code
-
-
-async def test_member_invite_success(user: ClientFactory) -> None:
-    client = await user('oliviak')
-    new_user = {'new-user': 'ronanf'}
-    response = await client.post(f'/p/{PROJECT}/invite', form=new_user)
-    assert response.status_code == Status.FOUND
-
-
-async def test_member_invite_fail(user: ClientFactory) -> None:
-    client = await user('adaml')
-    new_user = {'new-user': 'non-exist'}
-    response = await client.post(f'/p/{PROJECT}/invite', form=new_user)
-    assert response.status_code == Status.FOUND
-    response = await client.post('/p/this-project-does-not-exist/invite')
-    assert response.status_code == Status.NOT_FOUND
 
 
 @parametrize(('username', 'status_code'),
