@@ -22,7 +22,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get -y install plantuml
-        python -m pip install Sphinx sphinx_rtd_theme sphinxcontrib-plantuml .
+        python -m pip install Sphinx sphinx_rtd_theme sphinxcontrib-plantuml sphinxcontrib-svg2pdfconverter .
 
     - name: Build site
       working-directory: docs
