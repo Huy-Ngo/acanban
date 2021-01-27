@@ -8,7 +8,20 @@
     3
   ],
   "id": "19fc83d1-806f-4357-881b-e612737f8c0c",
-  "indexes": [],
+  "indexes": [
+    {
+      "function": {
+        "$reql_type$": "BINARY",
+        "data": "JHJlcWxfaW5kZXhfZnVuY3Rpb24kCQcHBwAAAAAAAAEBAAAAAAAAAFoAAABbMjQsW1sxNzAsW1sx\r\nMyxbXSw5XSxbMSwic3R1ZGVudHMiLDEwXV0sOF0sWzE3MCxbWzEzLFtdLDEyXSxbMSwic3VwZXJ2\r\naXNvcnMiLDEzXV0sMTFdXSw3XQAHAAAAAQA="
+      },
+      "geo": false,
+      "index": "members",
+      "multi": true,
+      "outdated": false,
+      "query": "indexCreate('members', function(var1) { return r.add(r.row(\"students\"), r.row(\"supervisors\")); }, {multi: true})",
+      "ready": true
+    }
+  ],
   "name": "projects",
   "primary_key": "id",
   "type": "TABLE",

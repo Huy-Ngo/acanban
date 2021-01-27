@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
-from typing import Any, Awaitable, Dict, Tuple
+from typing import Any, Awaitable, Tuple
 
 from quart import current_app
 from rethinkdb import r
@@ -52,12 +52,6 @@ class RethinkObject:
             raise AttributeError(
                 f'{cls}.update must be used for dynamic attribute {name!r}')
         super().__setattr__(name, value)
-
-    async def pluck(self, *fields: str) -> Dict[str, Any]:
-        """Return the plucked fields from the wrapped object."""
-        query = r.table(self.table).get(self.key).pluck(*fields)
-        async with current_app.db_pool.connection() as conn:
-            return await query.run(conn)
 
     async def update(self, **kwargs: Any) -> None:
         """Update the RethinkDB object from given keys and values.
