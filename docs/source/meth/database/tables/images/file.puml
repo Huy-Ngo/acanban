@@ -1,0 +1,16 @@
+@startjson
+#highlight "**table**"
+  {
+    "**table**": "**File**",
+    "cid": "(IPFS CID)",
+    "id": "(generated UUID)",
+    "name": "report-draft-1.pdf",
+    "size": 34537,
+    "time": {
+      "$reql_type$": "TIME",
+      "epoch_time": 1610878758.474,
+      "timezone": "+00:00"
+    },
+    "user": "adaml"
+  }
+@endjson
