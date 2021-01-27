@@ -1,0 +1,62 @@
+@startjson
+#highlight "**Entity**"
+{
+  "**Entity**": "**Task**",
+  "assigned_to": "arabellaf",
+  "discussion": [
+    {
+      "creator": "arabellaf",
+      "content": "How to do this task?",
+      "created_on": "(time object)",
+      "comments": [
+        {
+          "creator": "jamesm",
+          "content": "This may help:\\nhttps://example.org",
+          "created_on": "(time object)",
+          "comments": [
+            {
+              "creator": "arabellaf",
+              "content": "Thanks but this\\nis irrelevant",
+              "created_on": "(time object)",
+              "comments": []
+            }
+          ]
+        },
+        {
+          "creator": "evelynd",
+          "content": "I found this link:\\nhttps://example.net",
+          "created_on": "(time object)",
+          "comments": [
+            {
+              "creator": "arabellaf",
+              "content": "Wow this is really\\nhelpful, thanks.",
+              "created_on": "(time object)",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "creator": "opheliad",
+      "content": "Task #14 depends\\non this so can\\nyou resolve this\\nfaster? @arabellaf",
+      "created_on": "(time object)",
+      "comments": [
+        {
+          "creator": "evelynd",
+          "content": "You can do #17\\nin the meantime",
+          "created_on": "(time object)",
+          "comments": []
+        },
+	{
+	  "creator": "arabellaf",
+	  "content": "Sure",
+	  "created_on": "(time object)",
+	  "comments": []
+	}
+      ]
+    }
+  ],
+  "...": "..."
+}
+@endjson

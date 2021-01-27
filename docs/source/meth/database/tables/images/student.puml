@@ -1,0 +1,13 @@
+@startjson
+#highlight "**table**"
+  {
+    "**table**": "**User**",
+    "department": "ICT",
+    "email": "adaml@example.edu",
+    "name": "Adam Lahtinen",
+    "password": "(hashed password)",
+    "role": "student",
+    "student-id": "BI9-xxx",
+    "username": "adaml"
+  }
+@endjson
