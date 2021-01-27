@@ -20,7 +20,7 @@
 
 from functools import partial
 from operator import itemgetter
-from typing import Any, Dict, Optional, Sequence
+from typing import Any, Dict, Sequence
 
 from quart import (Blueprint, ResponseReturnValue, current_app,
                    redirect, render_template, request)
@@ -75,23 +75,18 @@ async def info_redirect(uuid: str) -> ResponseReturnValue:
     return redirect(f'/p/{uuid}/info')
 
 
-async def pluck(uuid: str, fields: Sequence[str] = (),
-                projects: Optional[Sequence[str]] = None) -> Dict[str, Any]:
+async def pluck(uuid: str, fields: Sequence[str] = ()) -> Dict[str, Any]:
     """Pluck the given fields from the project, with permission check."""
-    query = r.table('projects').get(uuid).pluck(*fields)
     async with current_app.db_pool.connection() as connection:
         try:
-            project = await query.run(connection)
+            project = await r.table('projects').get(uuid).pluck(
+                'students', 'supervisors', *fields).run(connection)
         except ReqlNonExistenceError:
             raise NotFound
 
-    if projects is None:
-        try:
-            projects = await current_user.projects
-        except ReqlNonExistenceError:
-            raise Forbidden
-    if uuid not in projects: raise Forbidden
-    return project
+    members = project['students'] + project['supervisors']
+    if current_user.key not in members: raise Forbidden
+    return {key: value for key, value in project.items() if key in fields}
 
 
 @blueprint.route('/<uuid>/info')
@@ -155,22 +150,21 @@ async def member_invite(uuid: str) -> ResponseReturnValue:
 
 async def artifact_view(tab: str, uuid: str) -> ResponseReturnValue:
     """Return the tab with artifact upload and evaluation."""
-    user = await current_user.pluck('projects', 'role')
-    project = await pluck(uuid, ('id', 'name', tab), user.get('projects'))
+    await pluck(uuid)  # check project's existence and permission
+    project = await pluck(uuid, ('id', 'name', tab))
     query = r.table('files').get_all(*project[tab]['revisions'])
     async with current_app.db_pool.connection() as conn:
         revisions = [file async for file in await query.run(conn)]
     revisions.sort(key=itemgetter('time'), reverse=True)
     variables = {'project': project, tab: project[tab], 'revisions': revisions,
-                 'for_student': user['role']=='student'}
+                 'for_student': (await current_user.role)=='student'}
     return await render_template(f'project-{tab}.html', **variables)
 
 
 async def artifact_upload(tab: str, uuid: str) -> ResponseReturnValue:
     """Handle file upload to the corresponding tab."""
-    user = await current_user.pluck('role', 'projects')
-    await pluck(uuid, projects=user.get('projects'))
-    if user['role'] != 'student': raise Forbidden
+    await pluck(uuid)  # check project's existence and permission
+    if await current_user.role != 'student': raise Forbidden
     action = r.row[tab]['revisions'].append(await ipfs_add())
     async with current_app.db_pool.connection() as conn:
         await r.table('projects').get(uuid).update(
@@ -180,9 +174,8 @@ async def artifact_upload(tab: str, uuid: str) -> ResponseReturnValue:
 
 async def artifact_eval(tab: str, uuid: str) -> ResponseReturnValue:
     """Handle evaluation of the work in the corresponding tab."""
-    user = await current_user.pluck('role', 'projects')
-    await pluck(uuid, projects=user.get('projects'))
-    if user['role'] == 'student': raise Forbidden
+    await pluck(uuid)  # check project's existence and permission
+    if await current_user.role == 'student': raise Forbidden
     form = await request.form
     updated = {'grade': float(form['grade']), 'comment': form['comment']}
     query = r.table('projects').get(uuid).update({tab: updated})

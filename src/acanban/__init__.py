@@ -111,10 +111,10 @@ async def close_ipfs_clients() -> None:
 async def index() -> ResponseReturnValue:
     """Return the index page."""
     if await current_user.is_authenticated:
-        uuids = await current_user.projects
-        my_project_list = r.table('projects').get_all(*uuids)
+        username = current_user.key
+        my_projects = r.table('projects').get_all(username, index='members')
         async with current_app.db_pool.connection() as connection:
-            projects = await my_project_list.run(connection)
+            projects = await my_projects.run(connection)
         return await render_template('myproject.html', projects=projects)
     else:
         return await render_template('index.html')

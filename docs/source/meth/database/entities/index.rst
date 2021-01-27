@@ -4,13 +4,13 @@ Entity Set
 Since each user can have zero, one, or several projects and
 a group project can have several participating users, we model
 the relation between them as many-to-many.
-We modeled this as double links:
+We modeled this using foreign keys with secondary index:
 
-- Each ``User`` object of appropriate role (student or supervisor),
-  there is a field ``projects``.
 - Each ``Project`` has a ``supervisors`` and a ``students`` fields.
   We model both of these fields as lists, since there can be occasions
   where two or more supervisors co-supervise a project.
+- A secondary index named ``members`` was created for these fields
+  for the ease of querying projects a certain user participates in.
 
 In each project, there could be many tasks which participants would complete
 to advance the progress of the project.  There should be thus a one-to-many

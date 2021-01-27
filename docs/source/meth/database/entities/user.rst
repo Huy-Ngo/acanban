@@ -2,13 +2,9 @@ User
 ====
 
 A ``User`` object represents either a student, a supervisor,
-or an academic assistant.  The object contains the user's projects
-as well as other contact information, which allows the users to communicate
-with each other.
-
-Since all users of this system have similar basic information, such as username
-and password, we represented them all as ``User`` object, and restrict their
-behaviors according to a field ``role``.
+or an academic assistant.  Since all users of this system have similar
+basic information, such as username and email, we represented them all
+as ``User`` object, and restrict their behaviors according to a field ``role``.
 
 Each ``User`` object has following attributes:
 
@@ -32,11 +28,6 @@ Each ``User`` object has following attributes:
    - ``student``: Students who are participating in a group project or internship.
    - ``supervisor``: The supervisor of project(s).
    - ``assistant``: The academic assistant of a department.
-   - ``admin``: The system admin.
-
-``projects`` : ``array`` of ``string``, *optional*
-   UUIDs of projects the user participates in,
-   if perse is a student or a supervisor.
 
 ``department`` : ``string``, *optional*
    The department of the user, such as ``ICT``, ``SA``, or ``LS``.
