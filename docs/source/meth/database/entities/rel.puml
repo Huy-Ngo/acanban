@@ -1,18 +1,25 @@
 @startuml
 
+skinparam nodesep 80
+
 entity User
 entity Report
 entity Slide
 entity Project
 entity Task
 entity Comment
+entity Artifact
+entity File
 
 User "1..*" --- "0..*" Project
 User "0..1" --- "1..*" Task
-Project "1" -[norank]--- "0..*" Task
+Project "1" -right- "0..*" Task
 Task "1" -- "0..*" Comment
 Comment "1" --- "0..*" Comment
-Project "0..1" -- "0..*" Report
-Project "0..1" -- "0..*" Slide
+Project "1" -- "0..1" Report
+Project "1" -- "0..1" Slide
+Report --|> Artifact
+Slide --|> Artifact
+Artifact "0..1" -right- "1..*" File
 
 @enduml
