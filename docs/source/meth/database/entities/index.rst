@@ -25,20 +25,16 @@ There can be comments replying to other comments, constructing a tree
 data structure.  This structure is described by a self-referential one-to-many
 relation.
 
-Additionally, there should be a ``File`` data table
-for storing reports and slides.
-We allowed uploading multiple reports and slides,
-considering that the group can continually
-update their reports and presentations,
-which can be reviewed by any participants.  All the uploaded revisions
-should be kept separate for comparison or combination.
+Additionally, there should be a ``Artifact`` entity
+for storing reports and slides. Each project can have one report and one slide.
 
-Therefore, there should be two one-to-many relations
-between ``Project`` and ``File``.
+We allowed uploading multiple revisions of reports and slides,
+considering that the group can continually update their reports and presentations.
+Each ``Artifact`` entity thus can have multiple associated ``File`` as revisions.
 
-However, a file in ``File`` table
-does not necessarily tie to any project, since they can be referred in comments
-or by academic assistants in their statistical reports.
+However, a file does not necessarily tie to any project,
+since they can be referred in comments or by academic assistants
+in their statistical reports.
 
 Visually, the relations between entities described above
 can be represented in :numref:`rel`.
