@@ -1,6 +1,7 @@
 @startuml
 hide footbox
 autoactivate on
+skinparam sequenceParticipant underline
 actor ":Unauthorized User" as usr
 boundary ":LoginForm" as form
 control ":LoginController" as ctl
@@ -12,7 +13,5 @@ usr -> form: // submit form()
 form -> ctl: // request to login user()
 ctl -> acc: // retrieve user from the database()
 ctl <-- acc: // return
-form <-- ctl !!: // redirect to home page()
-deactivate form
-deactivate form
+form <-- ctl: // inform about wrong password()
 @enduml

@@ -27,7 +27,7 @@ for security.
 After the successful account creation, the user will be
 redirected to the home page.
 
-.. uml:: register.puml
+.. uml:: uml/register.puml
    :caption: Analysis sequence diagram
       for the basic flow of registration process
    :name: reg-basic
@@ -35,13 +35,13 @@ redirected to the home page.
 If the username or email is taken,
 the controller should inform so to the user.
 
-.. uml:: register-exist-mail.puml
+.. uml:: uml/register-exist-mail.puml
    :caption: Analysis sequence diagram
       for the alternative flow of the registration process
       where the mail is taken
    :name: reg-exist-email
 
-.. uml:: register-exist-username.puml
+.. uml:: uml/register-exist-username.puml
    :caption: Analysis sequence diagram
       for the alternative flow of the registration process
       where the username is taken
@@ -51,7 +51,7 @@ Another exceptional flow happens when the user request an invalid role.
 This should not happen when the user submit the form via browser,
 but it can happen if someone is submitting it via a nonstandard way.
 
-.. uml:: register-wrong-role.puml
+.. uml:: uml/register-wrong-role.puml
    :caption: Analysis sequence diagram
       for the alternative flow of the registration process
       where the role is invalid
@@ -75,7 +75,7 @@ The user can log in to the site in the login endpoint.
 After submitting the form with their username and password,
 they should be logged in.
 
-.. uml:: login.puml
+.. uml:: uml/login.puml
    :caption: Analysis sequence diagram
       for the basic flow of login
    :name: log-basic
@@ -83,7 +83,7 @@ they should be logged in.
 However, if the user tries to log in with a non-existent account,
 the controller should raise an error and inform the user so.
 
-.. uml:: login-no-user.puml
+.. uml:: uml/login-no-user.puml
    :caption: Analysis sequence diagram
       for the alternative flow of login
       where there is no user with the username
@@ -92,7 +92,7 @@ the controller should raise an error and inform the user so.
 If the user input wrong password, the user should also not be logged in
 and be informed of wrong password.
 
-.. uml:: login-wrong-pass.puml
+.. uml:: uml/login-wrong-pass.puml
    :caption: Analysis sequence diagram
       for the alternative flow of login
       where the 

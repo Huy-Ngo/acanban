@@ -1,6 +1,7 @@
 @startuml
 hide footbox
 autoactivate on
+skinparam sequenceParticipant underline
 actor ":Unauthorized User" as usr
 boundary ":RegisterForm" as form
 control ":RegisterController" as ctl
@@ -10,8 +11,7 @@ usr -> form: // open registration page()
 form -> form: // display form()
 usr -> form: // submit form()
 form -> ctl: // try adding user to database()
-ctl -> acc: // check existing accounts()
-ctl <-- acc: // return
-form <-- ctl: // Inform that the email is used()
+form <-- ctl !!: // raise value error()
+deactivate form
 deactivate form
 @enduml

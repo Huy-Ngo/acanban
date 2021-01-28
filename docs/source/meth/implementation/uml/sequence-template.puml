@@ -1,0 +1,10 @@
+@startuml
+hide footbox
+autoactivate on
+skinparam sequenceParticipant underline
+actor ":User" as usr
+boundary ":Form" as form
+control ":Controller" as ctl
+entity ":Model" as db
+usr -> form: // first message()
+@enduml
