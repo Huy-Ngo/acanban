@@ -17,6 +17,7 @@ The design for the use case :ref:`project create`
 is described in :numref:`p-create`.
 
 .. uml:: uml/p-create.puml
+   :scale: 80%
    :caption: Activity diagram illustrating project creation
    :name: p-create
 
