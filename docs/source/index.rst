@@ -8,8 +8,8 @@ Overview
    obj
    req/index
    meth/index
-   result/index
-   conclusion/index
+   result
+   conclusion
 
 .. only:: html
 
