@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Artifact Upload" href="file.html" />
-    <link rel="prev" title="Implementation" href="index.html" /> 
+    <link rel="next" title="Project Management" href="project.html" />
+    <link rel="prev" title="Use-Case Analysis and Design" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,7 +92,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../choices.html">Technical Choices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../arch.html">System Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../database/index.html">Database design</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">Implementation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Use-Case Analysis and Design</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Security</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#authentication">Authentication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#authorization">Authorization</a></li>
@@ -100,6 +100,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#injection-attacks">Injection Attacks</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="project.html">Project Management</a></li>
 <li class="toctree-l3"><a class="reference internal" href="file.html">Artifact Upload</a></li>
 </ul>
 </li>
@@ -160,7 +161,7 @@
         
           <li><a href="../index.html">Methodology</a> &raquo;</li>
         
-          <li><a href="index.html">Implementation</a> &raquo;</li>
+          <li><a href="index.html">Use-Case Analysis and Design</a> &raquo;</li>
         
       <li>Security</li>
     
@@ -168,7 +169,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/meth/implementation/security.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/meth/uc-anal-design/security.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -206,7 +207,7 @@ for security.</p>
 redirected to the home page.</p>
 <div class="figure align-default" id="reg-basic">
 <p class="plantuml">
-<img src="../../_images/plantuml-bc14f82c0f213e941e0c75e7cb5a965ddf492fc1.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-3265f00d93b9ca804bc8342d8e7e71982c74b2b3.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
@@ -235,7 +236,7 @@ for the basic flow of registration process</span><a class="headerlink" href="#re
 the controller should inform so to the user.</p>
 <div class="figure align-default" id="reg-exist-email">
 <p class="plantuml">
-<img src="../../_images/plantuml-ece783f8f228ae9a1f267cfa910737dcec87c2b5.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-0c98174ec1efde1745393ffb0afa2c454119d025.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
@@ -260,7 +261,7 @@ where the mail is taken</span><a class="headerlink" href="#reg-exist-email" titl
 </div>
 <div class="figure align-default" id="reg-exist-name">
 <p class="plantuml">
-<img src="../../_images/plantuml-d369b698f3d0318bbd3ba4081976be3f80e5fa50.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-e166af8b851897edd6316cd9faf877da031c8da4.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
@@ -290,7 +291,7 @@ This should not happen when the user submit the form via browser,
 but it can happen if someone is submitting it via a nonstandard way.</p>
 <div class="figure align-default" id="reg-role">
 <p class="plantuml">
-<img src="../../_images/plantuml-ba9eb2d785cad73a56455d1b89ab6f7b8b2aa5dd.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-17bc6215878e10b09fdcef8e6d7231463ec00505.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
@@ -328,7 +329,7 @@ After submitting the form with their username and password,
 they should be logged in.</p>
 <div class="figure align-default" id="log-basic">
 <p class="plantuml">
-<img src="../../_images/plantuml-a00c3b98d5897677b30ad6050a959501fd8b8890.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-2ce5de2fc288d81975d1679b8b8cc68f319b183a.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
@@ -355,7 +356,7 @@ for the basic flow of login</span><a class="headerlink" href="#log-basic" title=
 the controller should raise an error and inform the user so.</p>
 <div class="figure align-default" id="log-no-user">
 <p class="plantuml">
-<img src="../../_images/plantuml-0fe75695849279f126865b65e262aa53d4c5778a.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-0624b8dfa2acccab1a14298b55671fe8b3b8c83e.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
@@ -382,7 +383,7 @@ where there is no user with the username</span><a class="headerlink" href="#log-
 and be informed of wrong password.</p>
 <div class="figure align-default" id="log-wrong-path">
 <p class="plantuml">
-<img src="../../_images/plantuml-681b71754f9a50954e020864272ff6b090900e75.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-362cbba75757755a118cc006895dcf29237fb8f6.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
@@ -440,8 +441,8 @@ which renders any cookie-stealing JavaScript useless.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="file.html" class="btn btn-neutral float-right" title="Artifact Upload" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="index.html" class="btn btn-neutral float-left" title="Implementation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="project.html" class="btn btn-neutral float-right" title="Project Management" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Use-Case Analysis and Design" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

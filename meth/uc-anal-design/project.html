@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Project Management &mdash; Acanban 0.0.6 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Artifact Upload" href="file.html" />
+    <link rel="prev" title="Security" href="security.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Acanban
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obj.html">Objective</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../req/index.html">System Requirements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Methodology</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../choices.html">Technical Choices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arch.html">System Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/index.html">Database design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Use-Case Analysis and Design</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Project Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-project">Create Project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#show-project-information">Show Project Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#edit-project-information">Edit Project Information</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="file.html">Artifact Upload</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../result.html">Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion and Future Work</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../appendix/index.html">Appendix</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Acanban</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Methodology</a> &raquo;</li>
+        
+          <li><a href="index.html">Use-Case Analysis and Design</a> &raquo;</li>
+        
+      <li>Project Management</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/meth/uc-anal-design/project.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="project-management">
+<h1>Project Management<a class="headerlink" href="#project-management" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we present the system design for project management use cases.
+Task management use cases, while indeed are part of project management,
+are discussed in the next.</p>
+<p>Since Quart, the framework we employ, is not strictly object-orientated
+and the design involves a lot of short-circuiting, it is represented
+via activity diagram instead of the traditional UML diagrams often used
+in this context, namely sequence diagrams and collaboration diagrams.</p>
+<div class="section" id="create-project">
+<h2>Create Project<a class="headerlink" href="#create-project" title="Permalink to this headline">¶</a></h2>
+<p>The design for the use case <a class="reference internal" href="../../req/use-case/collab.html#project-create"><span class="std std-ref">Create Project</span></a>
+is described in <a class="reference internal" href="#p-create"><span class="std std-numref">Figure 16</span></a>.</p>
+<div class="figure align-default" id="p-create">
+<p class="plantuml">
+<img src="../../_images/plantuml-6de9f8d9c677e6c7da94f713bd981004b42cef25.svg" alt="&#64;startuml
+start
+:receive request for creating project;
+if (current user is not authenticated) then (yes)
+  stop
+endif
+if (current user's role is assistant) then (yes)
+  stop
+endif
+:send creation form to current user;
+:receive form from current user;
+if (form is invalid) then (yes)
+  stop
+endif
+:extract project name and
+description from request's form;
+:let project be collection of name,
+description and members
+(including current user);
+:insert project into database;
+:redirect to new project's info page;
+stop
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 16 </span><span class="caption-text">Activity diagram illustrating project creation</span><a class="headerlink" href="#p-create" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="show-project-information">
+<h2>Show Project Information<a class="headerlink" href="#show-project-information" title="Permalink to this headline">¶</a></h2>
+<p>The design for the use case <a class="reference internal" href="../../req/use-case/collab.html#project-info"><span class="std std-ref">Show Project Information</span></a>
+is described in <a class="reference internal" href="#p-info"><span class="std std-numref">Figure 17</span></a>.</p>
+<div class="figure align-default" id="p-info">
+<p class="plantuml">
+<img src="../../_images/plantuml-4e34ccc84ee16b80938783781ffff5b70d145f78.svg" alt="&#64;startuml
+start
+if (current user is not authenticated) then (yes)
+  stop
+endif
+:extract project ID from request;
+if (requested project does not exists) then (yes)
+  stop
+endif
+if (current user is not member of project) then (yes)
+  stop
+endif
+:retrieve project basic info from database;
+:respond with rendered project info;
+stop
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 17 </span><span class="caption-text">Activity diagram illustrating showing project’s basic information</span><a class="headerlink" href="#p-info" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="edit-project-information">
+<h2>Edit Project Information<a class="headerlink" href="#edit-project-information" title="Permalink to this headline">¶</a></h2>
+<p>The design for the use case <a class="reference internal" href="../../req/use-case/collab.html#project-edit"><span class="std std-ref">Edit Project Information</span></a>
+is described in <a class="reference internal" href="#p-edit"><span class="std std-numref">Figure 18</span></a>.</p>
+<div class="figure align-default" id="p-edit">
+<p class="plantuml">
+<img src="../../_images/plantuml-60c4b9457377bf00ce5280ffce490185fd6cd156.svg" alt="&#64;startuml
+start
+if (current user is not authenticated) then (yes)
+  stop
+endif
+:extract project ID from request;
+if (requested project does not exists) then (yes)
+  stop
+endif
+if (current user is not member of project) then (yes)
+  stop
+endif
+:send form to current user;
+:receive form from current user;
+if (form is invalid) then (yes)
+  stop
+endif
+:extract project name and
+description from request's form;
+:update project name and
+description in database;
+:redirect to project's info page;
+stop
+&#64;enduml
+"/></p>
+<p class="caption"><span class="caption-number">Figure 18 </span><span class="caption-text">Activity diagram illustrating updating project’s basic information</span><a class="headerlink" href="#p-edit" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="file.html" class="btn btn-neutral float-right" title="Artifact Upload" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="security.html" class="btn btn-neutral float-left" title="Security" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020  Ngô Ngọc Đức Huy et al..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

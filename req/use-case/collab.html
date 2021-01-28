@@ -91,6 +91,8 @@
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Use-case model</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Project Collaboration</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#create-project">Create Project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#show-project-information">Show Project Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#edit-project-information">Edit Project Information</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#add-project-members">Add Project Members</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#create-tasks">Create Tasks</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#assign-tasks">Assign Tasks</a></li>
@@ -187,12 +189,14 @@
   <div class="section" id="project-collaboration">
 <h1>Project Collaboration<a class="headerlink" href="#project-collaboration" title="Permalink to this headline">¶</a></h1>
 <p class="plantuml">
-<img src="../../_images/plantuml-4d631b28f19b56e8121c71fb2b1e555f55ac4aa3.svg" alt="skinparam packageStyle rectangle
+<img src="../../_images/plantuml-2e7f3172d8bb8634fa39d617e19f6391064a33f2.svg" alt="skinparam packageStyle rectangle
 left to right direction
 actor &quot;Project Participant&quot; as parti
 
 rectangle Project {
    usecase &quot;Create project&quot; as CreateP
+   usecase &quot;Show project information&quot; as ShowP
+   usecase &quot;Edit project information&quot; as EditP
    usecase &quot;Add project member&quot; as AddMember
 }
 
@@ -209,6 +213,8 @@ rectangle Discussion {
 }
 
 parti --&gt; CreateP
+parti --&gt; ShowP
+parti --&gt; EditP
 parti --&gt; CreateT
 parti --&gt; AddMember
 parti --&gt; AssignT
@@ -220,7 +226,7 @@ parti --&gt; View
 Student --|&gt; parti
 Supervisor --|&gt; parti"/></p>
 <div class="section" id="create-project">
-<h2>Create Project<a class="headerlink" href="#create-project" title="Permalink to this headline">¶</a></h2>
+<span id="project-create"></span><h2>Create Project<a class="headerlink" href="#create-project" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="brief-description">
 <h3>Brief Description<a class="headerlink" href="#brief-description" title="Permalink to this headline">¶</a></h3>
 <p>This use case allows Student or Supervisor to create a new project.</p>
@@ -243,9 +249,6 @@ Supervisor --|&gt; parti"/></p>
 an alert message. The user can either select to cancel operation
 or fill in missing fields.</p>
 </dd>
-<dt>Existing project</dt><dd><p>In step 4, if the user is Supervisor and the project is existed,
-the system display an error message and terminate the operation.</p>
-</dd>
 </dl>
 </div>
 </div>
@@ -259,41 +262,85 @@ before this use case begins.</p>
 <p>A new project is created.</p>
 </div>
 </div>
-<div class="section" id="add-project-members">
-<h2>Add Project Members<a class="headerlink" href="#add-project-members" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="show-project-information">
+<span id="project-info"></span><h2>Show Project Information<a class="headerlink" href="#show-project-information" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
 <h3>Brief Description<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p>This use case allows the creator of a project to add members to it.</p>
+<p>This use case allows a member to view the project’s basic information.</p>
 </div>
 <div class="section" id="id2">
 <h3>Flow of Events<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Participant requests to view a project.</p></li>
+<li><p>System respond with the project’s basic information.</p></li>
+</ol>
+</div>
 <div class="section" id="id3">
-<h4>Basic Flow<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<h3>Pre-Conditions<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>User must be logged in as a Student or a Supervisor
+that is a member of the project.</p>
+</div>
+</div>
+<div class="section" id="edit-project-information">
+<span id="project-edit"></span><h2>Edit Project Information<a class="headerlink" href="#edit-project-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>Brief Description<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows a member to edit a project’s basic information.</p>
+</div>
+<div class="section" id="id5">
+<h3>Flow of Events<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Participant requests to view a project.</p></li>
+<li><p>System respond with a form for editing basic information.</p></li>
+<li><p>Participant gives disired changes to the project’s basic information.</p></li>
+<li><p>System updates the project’s information accordingly.</p></li>
+</ol>
+</div>
+<div class="section" id="id6">
+<h3>Pre-Conditions<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>User must be Student or Supervisor and be logged in the system
+before this use case begins.</p>
+</div>
+<div class="section" id="id7">
+<h3>Post-Conditions<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>The project’s basic information is updated accordingly.</p>
+</div>
+</div>
+<div class="section" id="add-project-members">
+<h2>Add Project Members<a class="headerlink" href="#add-project-members" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3>Brief Description<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows the creator of a project to add members to it.</p>
+</div>
+<div class="section" id="id9">
+<h3>Flow of Events<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id10">
+<h4>Basic Flow<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>The creator selects other users to add to project.</p></li>
 <li><p>The System adds the selected users as members of the project.</p></li>
 </ol>
 </div>
 </div>
-<div class="section" id="id4">
-<h3>Pre-Conditions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id11">
+<h3>Pre-Conditions<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <p>The user must have created the project.</p>
 </div>
-<div class="section" id="id5">
-<h3>Post-Conditions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id12">
+<h3>Post-Conditions<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <p>Selected user(s) are added to the project.</p>
 </div>
 </div>
 <div class="section" id="create-tasks">
 <h2>Create Tasks<a class="headerlink" href="#create-tasks" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id6">
-<h3>Brief Description<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id13">
+<h3>Brief Description<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <p>This use case allows Student or Supervisor to generate tasks for the project.</p>
 </div>
-<div class="section" id="id7">
-<h3>Flow of Events<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id8">
-<h4>Basic Flow<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id14">
+<h3>Flow of Events<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id15">
+<h4>Basic Flow<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>Student/Supervisor requests to generate tasks the project.</p></li>
 <li><p>System receives the request and requests user to provide <strong>name</strong>, <strong>assignees</strong> and <strong>deadline</strong>.</p></li>
@@ -301,8 +348,8 @@ before this use case begins.</p>
 <li><p>System processes the data and updates tasks list.</p></li>
 </ol>
 </div>
-<div class="section" id="id9">
-<h4>Alternative Flow<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id16">
+<h4>Alternative Flow<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
 <dl class="simple">
 <dt>Task exists</dt><dd><p>In step 4, if the user enters a task that already exists in the task list,
 the system will display an error message and terminate the operation.</p>
@@ -314,26 +361,26 @@ missing fields or cancel the operation.</p>
 </dl>
 </div>
 </div>
-<div class="section" id="id10">
-<h3>Pre-Conditions<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id17">
+<h3>Pre-Conditions<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
 <p>User must be Student or Supervisor and be logged in the system
 before this use case begins.</p>
 </div>
-<div class="section" id="id11">
-<h3>Post-Conditions<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id18">
+<h3>Post-Conditions<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <p>A new task is created in task list.</p>
 </div>
 </div>
 <div class="section" id="assign-tasks">
 <h2>Assign Tasks<a class="headerlink" href="#assign-tasks" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id12">
-<h3>Brief Description<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id19">
+<h3>Brief Description<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
 <p>This use case allows a participant to assign a task to someone.</p>
 </div>
-<div class="section" id="id13">
-<h3>Flow of Events<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id14">
-<h4>Basic Flow<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id20">
+<h3>Flow of Events<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id21">
+<h4>Basic Flow<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>Student selects the task and choose “Assign”.</p></li>
 <li><p>Student chooses the participant to assign to.</p></li>
@@ -342,25 +389,25 @@ as assigned for that task.</p></li>
 </ol>
 </div>
 </div>
-<div class="section" id="id15">
-<h3>Pre-Conditions<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id22">
+<h3>Pre-Conditions<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
 <p>User must be a participant and be logged in the system before this use case begins.</p>
 </div>
-<div class="section" id="id16">
-<h3>Post-Conditions<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id23">
+<h3>Post-Conditions<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
 <p>Student is assigned to a task.</p>
 </div>
 </div>
 <div class="section" id="complete-tasks">
 <h2>Complete Tasks<a class="headerlink" href="#complete-tasks" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id17">
-<h3>Brief Description<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id24">
+<h3>Brief Description<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
 <p>This use case allows Student to complete task(s) in the project.</p>
 </div>
-<div class="section" id="id18">
-<h3>Flow of Events<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id19">
-<h4>Basic Flow<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id25">
+<h3>Flow of Events<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id26">
+<h4>Basic Flow<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>Student requests to complete task(s) in the task list.</p></li>
 <li><p>System receives the request and requests Student to hand in evidences.</p></li>
@@ -368,8 +415,8 @@ as assigned for that task.</p></li>
 <li><p>System receives the evidence and marks task(s) as completed.</p></li>
 </ol>
 </div>
-<div class="section" id="id20">
-<h4>Alternative Flow<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id27">
+<h4>Alternative Flow<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h4>
 <dl class="simple">
 <dt>No evidence provided</dt><dd><p>In step 3, if Student does not submit a file or a link,
 the system will display an alert message and terminate the operation.</p>
@@ -380,48 +427,48 @@ the system will display an alert message and terminate the operation.</p>
 </dl>
 </div>
 </div>
-<div class="section" id="id21">
-<h3>Pre-Conditions<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id28">
+<h3>Pre-Conditions<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
 <p>User must be Student and be logged in the system before this use case begins.</p>
 </div>
-<div class="section" id="id22">
-<h3>Post-Conditions<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id29">
+<h3>Post-Conditions<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
 <p>The task state is changed to <em>completed</em>.</p>
 </div>
 </div>
 <div class="section" id="view-result">
 <h2>View result<a class="headerlink" href="#view-result" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id23">
-<h3>Brief Description<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id30">
+<h3>Brief Description<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
 <p>This use case allows Supervisor to view result of the project.</p>
 </div>
-<div class="section" id="id24">
-<h3>Flow of Events<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id25">
-<h4>Basic Flow<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id31">
+<h3>Flow of Events<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id32">
+<h4>Basic Flow<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>Supervisor requests to view the result of the participating project.</p></li>
 <li><p>System receives the request and provides results.</p></li>
 </ol>
 </div>
 </div>
-<div class="section" id="id26">
-<h3>Pre-Conditions<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id33">
+<h3>Pre-Conditions<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h3>
 <p>User must be a Supervisor and be logged in the system before this use case begins.</p>
 </div>
-<div class="section" id="id27">
-<h3>Post-Conditions<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id34">
+<h3>Post-Conditions<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h3>
 <p>The system state is unchanged.</p>
 </div>
 </div>
 <div class="section" id="create-discussion-thread">
 <h2>Create Discussion Thread<a class="headerlink" href="#create-discussion-thread" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id28">
-<h3>Brief Description<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id35">
+<h3>Brief Description<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h3>
 <p>This use case allows Student or Supervisor to create a discussion thread.</p>
 </div>
-<div class="section" id="id29">
-<h3>Flow of Events<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id36">
+<h3>Flow of Events<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p>User requests to create a new discussion thread.</p></li>
 <li><p>System receives the request and requests user to enter
@@ -430,27 +477,27 @@ the system will display an alert message and terminate the operation.</p>
 <li><p>System processes the data and create a new thread.</p></li>
 </ol>
 </div>
-<div class="section" id="id30">
-<h3>Pre-Conditions<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id37">
+<h3>Pre-Conditions<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h3>
 <p>User must be Student or Supervisor and be logged in the system
 before this use case begins.</p>
 </div>
-<div class="section" id="id31">
-<h3>Post-Conditions<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id38">
+<h3>Post-Conditions<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h3>
 <p>A new discussion thread is created.</p>
 </div>
 </div>
 <div class="section" id="add-comment">
 <h2>Add Comment<a class="headerlink" href="#add-comment" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id32">
-<h3>Brief Description<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id39">
+<h3>Brief Description<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h3>
 <p>This use case allows Student or Supervisor to add a comment to a
 discussion thread.</p>
 </div>
-<div class="section" id="id33">
-<h3>Flow of Events<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id34">
-<h4>Basic Flow<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id40">
+<h3>Flow of Events<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id41">
+<h4>Basic Flow<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>User requests to add a new comment to the discussion thread.</p></li>
 <li><p>System receives the request and requests user to enter <strong>comment</strong>.</p></li>
@@ -459,13 +506,13 @@ discussion thread.</p>
 </ol>
 </div>
 </div>
-<div class="section" id="id35">
-<h3>Pre-Conditions<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id42">
+<h3>Pre-Conditions<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h3>
 <p>User must be Student or Supervisor and be logged in the system
 before this use case begins.</p>
 </div>
-<div class="section" id="id36">
-<h3>Post-Conditions<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id43">
+<h3>Post-Conditions<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h3>
 <p>A new comment thread is added into the discussion thread.</p>
 </div>
 </div>
