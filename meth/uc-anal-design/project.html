@@ -98,6 +98,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#create-project">Create Project</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#show-project-information">Show Project Information</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#edit-project-information">Edit Project Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#list-member">List member</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#invite-member">Invite member</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="file.html">Artifact Upload</a></li>
@@ -281,6 +283,139 @@ stop
 &#64;enduml
 "/></p>
 <p class="caption"><span class="caption-number">Figure 18 </span><span class="caption-text">Activity diagram illustrating updating project’s basic information</span><a class="headerlink" href="#p-edit" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="list-member">
+<h2>List member<a class="headerlink" href="#list-member" title="Permalink to this headline">¶</a></h2>
+<p>The function allow listing the members in the projects</p>
+<p>The implementation involves only <code class="docutils literal notranslate"><span class="pre">projects</span></code> database table, in which we get
+the member list of members. Two fields are being called is <code class="docutils literal notranslate"><span class="pre">supervisors</span></code> and
+<code class="docutils literal notranslate"><span class="pre">students</span></code></p>
+<p>When user navigate to member tab, the list of members in the project,
+classified as <code class="docutils literal notranslate"><span class="pre">supervisors</span></code> and <code class="docutils literal notranslate"><span class="pre">students</span></code> is shown in a form.</p>
+<div class="figure align-default" id="p-member-list">
+<p class="plantuml">
+<img src="../../_images/plantuml-36d9fddad014d9b17f4f7c5317d353fefaa062ec.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+skinparam sequenceParticipant underline
+actor &quot;:User&quot; as usr
+boundary &quot;:Invite Member Form&quot; as form
+control &quot;:Project Controller&quot; as ctl
+entity &quot;:Project&quot; as db_prj
+
+usr -&gt; ctl : // select member tab()
+ctl -&gt; db_prj : // list member in the project()
+ctl &lt;-- db_prj : // return
+form &lt;-- ctl : // list member
+usr &lt;-- form : // show list member in the project
+&#64;enduml"/></p>
+<p class="caption"><span class="caption-number">Figure 19 </span><span class="caption-text">Analysis sequence diagram
+for the member listing process</span><a class="headerlink" href="#p-member-list" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="invite-member">
+<h2>Invite member<a class="headerlink" href="#invite-member" title="Permalink to this headline">¶</a></h2>
+<p>Since the project is initialized with only the creator,
+we need a function to invite members.
+Only who is in the project could introduce a new member.</p>
+<p>The implementation involves two storages:
+- <code class="docutils literal notranslate"><span class="pre">projects</span></code> database table: which <cite>members</cite> field has been updated.
+- <code class="docutils literal notranslate"><span class="pre">users</span></code> database table: which <cite>projects</cite> field has been updated.</p>
+<p>When user enters the invited member’s name, the project controller checks
+both <code class="docutils literal notranslate"><span class="pre">projects</span></code> and <code class="docutils literal notranslate"><span class="pre">user</span></code> database whether the name is already in
+the project, or that user is an assistant, or that user has not registered.
+If all three conditions is satisfied, two databases is updated accordingly.</p>
+<div class="figure align-default" id="p-member-add-success">
+<p class="plantuml">
+<img src="../../_images/plantuml-791485a271ee0b5b700e9f1e0eab12bc4566b386.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+skinparam sequenceParticipant underline
+actor &quot;:User&quot; as usr
+boundary &quot;:Invite Member Form&quot; as form
+control &quot;:Project Controller&quot; as ctl
+entity &quot;:Project&quot; as db_prj
+entity &quot;:User&quot; as db_usr
+
+usr -&gt; form : // enters invited member's name()
+form -&gt; ctl : // send form()
+ctl -&gt; db_prj : // add new user's name to project database()
+ctl &lt;-- db_prj : // return 
+ctl -&gt; db_usr : // add project's id to new user's database()
+ctl &lt;-- db_usr : // return
+form &lt;-- ctl
+usr &lt;-- form
+&#64;enduml"/></p>
+<p class="caption"><span class="caption-number">Figure 20 </span><span class="caption-text">Analysis sequence diagram for successfully invite member.</span><a class="headerlink" href="#p-member-add-success" title="Permalink to this image">¶</a></p>
+</div>
+<p>If added user is already in the project</p>
+<div class="figure align-default" id="p-member-add-exist-name">
+<p class="plantuml">
+<img src="../../_images/plantuml-8dd5cf209f17d9029040ddac5ddcd0c1300092c5.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+skinparam sequenceParticipant underline
+actor &quot;:User&quot; as usr
+boundary &quot;:Invite Member Form&quot; as form
+control &quot;:Project Controller&quot; as ctl
+entity &quot;:Project&quot; as db_prj
+entity &quot;:User&quot; as db_usr
+
+usr -&gt; form : // enters invited member's name()
+form -&gt; ctl : // send form()
+ctl -&gt; db_prj : // add new user's name to project database()
+ctl &lt;-- db_prj : // added user is already in the project
+form &lt;-- ctl
+usr &lt;-- form : inform that added user is already in the project
+&#64;enduml"/></p>
+<p class="caption"><span class="caption-number">Figure 21 </span><span class="caption-text">Analysis sequence diagram for adding member
+when user is existed in project.</span><a class="headerlink" href="#p-member-add-exist-name" title="Permalink to this image">¶</a></p>
+</div>
+<p>If added user is an assistant</p>
+<div class="figure align-default" id="p-member-add-assistant">
+<p class="plantuml">
+<img src="../../_images/plantuml-ecdd7febf2f2c911b84ede8c4b4d07a97ad7642e.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+skinparam sequenceParticipant underline
+actor &quot;:User&quot; as usr
+boundary &quot;:Invite Member Form&quot; as form
+control &quot;:Project Controller&quot; as ctl
+entity &quot;:Project&quot; as db_prj
+entity &quot;:User&quot; as db_usr
+
+usr -&gt; form : // enters invited member's name()
+form -&gt; ctl : // send form()
+ctl -&gt; db_prj : // add new user's name to project database()
+ctl &lt;-- db_prj : // new user is an assistant
+form &lt;-- ctl
+usr &lt;-- form : inform that added user is an assistant
+&#64;enduml"/></p>
+<p class="caption"><span class="caption-number">Figure 22 </span><span class="caption-text">Analysis sequence diagram for adding member
+when user is an assistant.</span><a class="headerlink" href="#p-member-add-assistant" title="Permalink to this image">¶</a></p>
+</div>
+<p>If the name is not in <code class="docutils literal notranslate"><span class="pre">users</span></code> database</p>
+<div class="figure align-default" id="p-member-add-not-registered">
+<p class="plantuml">
+<img src="../../_images/plantuml-69e9e3492946d498be553b1b8fe488b89286a3ee.svg" alt="&#64;startuml
+hide footbox
+autoactivate on
+skinparam sequenceParticipant underline
+actor &quot;:User&quot; as usr
+boundary &quot;:Invite Member Form&quot; as form
+control &quot;:Project Controller&quot; as ctl
+entity &quot;:Project&quot; as db_prj
+entity &quot;:User&quot; as db_usr
+
+usr -&gt; form : // enters invited member's name()
+form -&gt; ctl : // send form()
+ctl -&gt; db_prj : // add new user's name to project database()
+ctl &lt;-- db_prj : // new user is not in database
+form &lt;-- ctl
+usr &lt;-- form : inform that added user has not registered
+&#64;enduml"/></p>
+<p class="caption"><span class="caption-number">Figure 23 </span><span class="caption-text">Analysis sequence diagram for adding non-registered user.</span><a class="headerlink" href="#p-member-add-not-registered" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
