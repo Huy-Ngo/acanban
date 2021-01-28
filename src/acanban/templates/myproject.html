@@ -21,6 +21,7 @@
 {% block title %}My project{% endblock %}
 {% block content %}
 <div class=col-wide>
+  {% if projects %}
   {% for project in projects %}
   <div class=block>
     <h2><a href=/p/{{ project.id }}><b>Title:</b> {{ project.name }}</a></h2>
@@ -31,5 +32,6 @@
     <p><b>Description:</b> {{ project.description }}</p>
   </div>
   {% endfor %}
+  {% endif %}
 </div>
 {% endblock %}

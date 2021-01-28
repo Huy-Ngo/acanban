@@ -44,6 +44,7 @@
   </form>
   {% endif %}
 
+  {% if revisions %}
   {% for file in revisions %}
   <dl>
     <dt>File</dt>
@@ -54,5 +55,6 @@
     <dd>{{ file.time }}</a></dd>
   </dl>
   {% endfor %}
+  {% endif %}
 </div>
 {% endblock %}
