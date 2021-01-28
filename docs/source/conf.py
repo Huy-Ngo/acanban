@@ -59,7 +59,8 @@ latex_elements = {
     'maketitle': (pwd/'latex'/'title-page.tex').read_text(),
     'tableofcontents': r'\selectlanguage{english}\sphinxtableofcontents',
     'printindex': '', 'sphinxsetup': r'HeaderFamily=\bfseries'}
-latex_appendices = [join('appendix', 'glossary')]
+latex_appendices = [join('appendix', 'acknowledgement'),
+                    join('appendix', 'glossary')]
 latex_additional_files = [join('latex', 'acanban.sty'),
                           join('latex', 'usth-logo.pdf')]
 
