@@ -37,6 +37,7 @@ The design for the use case :ref:`project edit`
 is described in :numref:`p-edit`.
 
 .. uml:: uml/p-edit.puml
+   :scale: 80%
    :caption: Activity diagram illustrating updating project's basic information
    :name: p-edit
 
@@ -55,7 +56,7 @@ classified as ``supervisors`` and ``students`` is shown in a form.
 .. uml:: uml/p-member-list.puml
    :caption: Analysis sequence diagram
       for the member listing process
-   :name: member-list
+   :name: p-member-list
 
 Invite member
 -------------
@@ -75,24 +76,24 @@ If all three conditions is satisfied, two databases is updated accordingly.
 
 .. uml:: uml/p-member-add-success.puml
    :caption: Analysis sequence diagram for successfully invite member.
-   :name: add-member-success
+   :name: p-member-add-success
 
 If added user is already in the project
 
 .. uml:: uml/p-member-add-exist-name.puml
    :caption: Analysis sequence diagram for adding member
       when user is existed in project.
-   :name: add-member-exist-name
+   :name: p-member-add-exist-name
 
 If added user is an assistant
 
-.. uml:: uml/p-member-add-exist-name.puml
+.. uml:: uml/p-member-add-assistant.puml
    :caption: Analysis sequence diagram for adding member
       when user is an assistant.
-   :name: add-member-exist-name
+   :name: p-member-add-assistant
 
 If the name is not in ``users`` database
 
 .. uml:: uml/p-member-add-not-registered.puml
    :caption: Analysis sequence diagram for adding non-registered user.
-   :name: add-member-not-registered
+   :name: p-member-add-not-registered
