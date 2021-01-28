@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Results and Discussion" href="../../result/index.html" />
+    <link rel="next" title="Artifact Upload" href="file.html" />
     <link rel="prev" title="Implementation" href="index.html" /> 
 </head>
 
@@ -100,6 +100,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#injection-attacks">Injection Attacks</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="file.html">Artifact Upload</a></li>
 </ul>
 </li>
 </ul>
@@ -205,9 +206,10 @@ for security.</p>
 redirected to the home page.</p>
 <div class="figure align-default" id="reg-basic">
 <p class="plantuml">
-<img src="../../_images/plantuml-1d68cb043550d9cf1d0e2d3795d3b9cf5712b73a.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-bc14f82c0f213e941e0c75e7cb5a965ddf492fc1.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
+skinparam sequenceParticipant underline
 actor &quot;:Unauthorized User&quot; as usr
 boundary &quot;:RegisterForm&quot; as form
 control &quot;:RegisterController&quot; as ctl
@@ -233,9 +235,10 @@ for the basic flow of registration process</span><a class="headerlink" href="#re
 the controller should inform so to the user.</p>
 <div class="figure align-default" id="reg-exist-email">
 <p class="plantuml">
-<img src="../../_images/plantuml-b8d06d030e145322433502e8ef195331ba7c1d68.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-ece783f8f228ae9a1f267cfa910737dcec87c2b5.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
+skinparam sequenceParticipant underline
 actor &quot;:Unauthorized User&quot; as usr
 boundary &quot;:RegisterForm&quot; as form
 control &quot;:RegisterController&quot; as ctl
@@ -257,9 +260,10 @@ where the mail is taken</span><a class="headerlink" href="#reg-exist-email" titl
 </div>
 <div class="figure align-default" id="reg-exist-name">
 <p class="plantuml">
-<img src="../../_images/plantuml-07c689b6bb72242276a75040168d74e54e2754d6.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-d369b698f3d0318bbd3ba4081976be3f80e5fa50.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
+skinparam sequenceParticipant underline
 actor &quot;:Unauthorized User&quot; as usr
 boundary &quot;:RegisterForm&quot; as form
 control &quot;:RegisterController&quot; as ctl
@@ -286,9 +290,10 @@ This should not happen when the user submit the form via browser,
 but it can happen if someone is submitting it via a nonstandard way.</p>
 <div class="figure align-default" id="reg-role">
 <p class="plantuml">
-<img src="../../_images/plantuml-14e9590a3391db154cb1094aa14051373db85085.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-ba9eb2d785cad73a56455d1b89ab6f7b8b2aa5dd.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
+skinparam sequenceParticipant underline
 actor &quot;:Unauthorized User&quot; as usr
 boundary &quot;:RegisterForm&quot; as form
 control &quot;:RegisterController&quot; as ctl
@@ -323,9 +328,10 @@ After submitting the form with their username and password,
 they should be logged in.</p>
 <div class="figure align-default" id="log-basic">
 <p class="plantuml">
-<img src="../../_images/plantuml-f15a8391ee34cc8e80b1d75197dcbdbcdb7e87b5.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-a00c3b98d5897677b30ad6050a959501fd8b8890.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
+skinparam sequenceParticipant underline
 actor &quot;:Unauthorized User&quot; as usr
 boundary &quot;:LoginForm&quot; as form
 control &quot;:LoginController&quot; as ctl
@@ -349,9 +355,10 @@ for the basic flow of login</span><a class="headerlink" href="#log-basic" title=
 the controller should raise an error and inform the user so.</p>
 <div class="figure align-default" id="log-no-user">
 <p class="plantuml">
-<img src="../../_images/plantuml-f377969f83ef783edd9e928ec354e7dea18ecd04.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-0fe75695849279f126865b65e262aa53d4c5778a.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
+skinparam sequenceParticipant underline
 actor &quot;:Unauthorized User&quot; as usr
 boundary &quot;:LoginForm&quot; as form
 control &quot;:LoginController&quot; as ctl
@@ -375,9 +382,10 @@ where there is no user with the username</span><a class="headerlink" href="#log-
 and be informed of wrong password.</p>
 <div class="figure align-default" id="log-wrong-path">
 <p class="plantuml">
-<img src="../../_images/plantuml-534052283caea704d69c2a2f9afe5d160ab0a37b.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-681b71754f9a50954e020864272ff6b090900e75.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
+skinparam sequenceParticipant underline
 actor &quot;:Unauthorized User&quot; as usr
 boundary &quot;:LoginForm&quot; as form
 control &quot;:LoginController&quot; as ctl
@@ -432,7 +440,7 @@ which renders any cookie-stealing JavaScript useless.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../../result/index.html" class="btn btn-neutral float-right" title="Results and Discussion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="file.html" class="btn btn-neutral float-right" title="Artifact Upload" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="index.html" class="btn btn-neutral float-left" title="Implementation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

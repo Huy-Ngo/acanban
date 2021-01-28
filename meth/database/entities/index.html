@@ -187,15 +187,7 @@
 <h1>Entity Set<a class="headerlink" href="#entity-set" title="Permalink to this headline">¶</a></h1>
 <p>Since each user can have zero, one, or several projects and
 a group project can have several participating users, we model
-the relation between them as many-to-many.
-We modeled this using foreign keys with secondary index:</p>
-<ul class="simple">
-<li><p>Each <code class="docutils literal notranslate"><span class="pre">Project</span></code> has a <code class="docutils literal notranslate"><span class="pre">supervisors</span></code> and a <code class="docutils literal notranslate"><span class="pre">students</span></code> fields.
-We model both of these fields as lists, since there can be occasions
-where two or more supervisors co-supervise a project.</p></li>
-<li><p>A secondary index named <code class="docutils literal notranslate"><span class="pre">members</span></code> was created for these fields
-for the ease of querying projects a certain user participates in.</p></li>
-</ul>
+the relation between them as many-to-many.</p>
 <p>In each project, there could be many tasks which participants would complete
 to advance the progress of the project.  There should be thus a one-to-many
 relation between <code class="docutils literal notranslate"><span class="pre">Project</span></code> and <code class="docutils literal notranslate"><span class="pre">Task</span></code>, and between user and task.</p>
