@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Results and Discussion &mdash; Acanban 0.0.6 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Conclusion and Future Work" href="conclusion.html" />
+    <link rel="prev" title="Artifact Upload" href="meth/implementation/file.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Acanban
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="obj.html">Objective</a></li>
+<li class="toctree-l1"><a class="reference internal" href="req/index.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meth/index.html">Methodology</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Results and Discussion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#results">Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#discussion">Discussion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion and Future Work</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix/index.html">Appendix</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Acanban</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Results and Discussion</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/result.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="results-and-discussion">
+<h1>Results and Discussion<a class="headerlink" href="#results-and-discussion" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>Based on the previous analysis and design,
+we have successfully implemented some of the use cases:</p>
+<ul class="simple">
+<li><p>Authentication</p></li>
+<li><p>Create and edit group projects</p></li>
+<li><p>Invite new members to a project</p></li>
+<li><p>Upload reports and slides</p></li>
+<li><p>Supervisors can evaluate students’ work</p></li>
+</ul>
+<p>The current implemented source code is published on GitHub <a class="footnote-reference brackets" href="#id3" id="id1">1</a>
+under <a class="reference external" href="https://www.gnu.org/licenses/agpl-3.0.html">Affero General Public License</a>.
+It is deployed on USTH ICTLab’s server <a class="footnote-reference brackets" href="#id4" id="id2">2</a>.</p>
+<div class="figure align-default" id="id5">
+<img alt="_images/registration.png" src="_images/registration.png" />
+<p class="caption"><span class="caption-number">Figure 17 </span><span class="caption-text">The registration page</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id6">
+<img alt="_images/login.png" src="_images/login.png" />
+<p class="caption"><span class="caption-number">Figure 18 </span><span class="caption-text">The login page</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id7">
+<img alt="_images/home_login.png" src="_images/home_login.png" />
+<p class="caption"><span class="caption-number">Figure 19 </span><span class="caption-text">The home page when the user is logged in</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id8">
+<img alt="_images/profile-edit.png" src="_images/profile-edit.png" />
+<p class="caption"><span class="caption-number">Figure 20 </span><span class="caption-text">The profile edit page</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id9">
+<img alt="_images/project-info.png" src="_images/project-info.png" />
+<p class="caption"><span class="caption-number">Figure 21 </span><span class="caption-text">The info page for a project</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id10">
+<img alt="_images/project-edit.png" src="_images/project-edit.png" />
+<p class="caption"><span class="caption-number">Figure 22 </span><span class="caption-text">Editing a project’s information</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id11">
+<img alt="_images/new-project.png" src="_images/new-project.png" />
+<p class="caption"><span class="caption-number">Figure 23 </span><span class="caption-text">Creating a new project</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id12">
+<img alt="_images/report.png" src="_images/report.png" />
+<p class="caption"><span class="caption-number">Figure 24 </span><span class="caption-text">Viewing and uploading project report</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id13" style="width: 40%">
+<img alt="_images/presentation.png" src="_images/presentation.png" />
+<p class="caption"><span class="caption-number">Figure 25 </span><span class="caption-text">Viewing and uploading presentation slides</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id14" style="width: 40%">
+<img alt="_images/mob-home.jpeg" src="_images/mob-home.jpeg" />
+<p class="caption"><span class="caption-number">Figure 26 </span><span class="caption-text">Home page is responsively designed for mobile</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id15">
+<img alt="_images/mob-project.jpeg" src="_images/mob-project.jpeg" />
+<p class="caption"><span class="caption-number">Figure 27 </span><span class="caption-text">Responsive design for project view</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
+<p>All of these use cases have been implemented in a simplistic manner,
+which satisfied our goal of accessibility from all devices.</p>
+<p>Nonetheless, there are numerous flaws that we have found in our system:</p>
+<ul class="simple">
+<li><p>Important features that have not been implemented:</p>
+<ul>
+<li><p>Notification</p></li>
+<li><p>Create, view, and complete tasks on a simple Kanban board</p></li>
+<li><p>Discussion</p></li>
+<li><p>Jury’s evaluation of reports and presentation</p></li>
+<li><p>Statistical reports for academic assistant</p></li>
+</ul>
+</li>
+<li><p>Registration currently allows anyone to have as many accounts as they want,
+which is not secure.</p></li>
+<li><p>There hasn’t been checking for maximum grade and minimum grade fraction.</p></li>
+<li><p>File types for reports and slides are not ensured yet.</p></li>
+<li><p>The user interface is not very attractive.</p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://github.com/Huy-Ngo/acanban">https://github.com/Huy-Ngo/acanban</a></p>
+</dd>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p><a class="reference external" href="https://acanban.ga">https://acanban.ga</a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="conclusion.html" class="btn btn-neutral float-right" title="Conclusion and Future Work" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="meth/implementation/file.html" class="btn btn-neutral float-left" title="Artifact Upload" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020  Ngô Ngọc Đức Huy et al..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
