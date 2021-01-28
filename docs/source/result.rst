@@ -4,13 +4,18 @@ Results and Discussion
 Results
 -------
 
-We have successfully implemented some of the use cases:
+Based on the previous analysis and design,
+we have successfully implemented some of the use cases:
 
 - Authentication
 - Create and edit group projects
 - Invite new members to a project
 - Upload reports and slides
 - Supervisors can evaluate students' work
+
+The current implemented source code is published on GitHub [1]_
+under `Affero General Public License`_.
+It is deployed on USTH ICTLab's server [2]_.
 
 .. figure:: screenshots/home.png
    
@@ -79,3 +84,7 @@ Nonetheless, there are numerous flaws that we have found in our system:
 - There hasn't been checking for maximum grade and minimum grade fraction.
 - File types for reports and slides are not ensured yet.
 - The user interface is not very attractive.
+
+.. _Affero General Public License: https://www.gnu.org/licenses/agpl-3.0.html
+.. [1] https://github.com/Huy-Ngo/acanban
+.. [2] https://acanban.ga
