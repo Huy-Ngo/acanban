@@ -23,7 +23,7 @@
 <div class=col-wide>
   {% for project in projects %}
   <div class=block>
-    <h2><a href=/p/{{ project.id }}><b>Title:</b> {{ project.name }}</a></h2>
+    <h2><a href=/p/{{ project.id }}>{{ project.name }}</a></h2>
     <p><b>Supervisors:</b> {{ project.supervisors | map('userlink')
                               | join(', ') | safe }}</p>
     <p><b>Students:</b> {{ project.students | map('userlink')
