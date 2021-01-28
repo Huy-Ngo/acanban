@@ -24,6 +24,6 @@ for this row, which is then added to project artifact revisions.
    :name: upload
 
 In case of uploading files for other purposes, such as including a picture in
-a comment, is similar to the flow described above, except that
+a comment, is similar to the flow described above. However,
 the primary key is not stored in the project, and the link to the stored file
 is returned instead.
