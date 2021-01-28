@@ -7,15 +7,12 @@
 from os.path import join
 from pathlib import Path
 
-from acanban import __version__
-
 pwd = Path(__name__).parent
 
 # Project information
 project = 'Acanban'
 copyright = '2020  Ngô Ngọc Đức Huy et al.'  # noqa
 author = 'Ngô Ngọc Đức Huy et al.'
-release = __version__
 
 # Add any Sphinx extension module names here, as strings.
 # They can be extensions coming with Sphinx (named 'sphinx.ext.*')
