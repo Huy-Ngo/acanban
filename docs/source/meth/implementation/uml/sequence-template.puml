@@ -1,0 +1,5 @@
+@startuml
+hide footbox
+autoactivate on
+skinparam sequenceParticipant underline
+@enduml
