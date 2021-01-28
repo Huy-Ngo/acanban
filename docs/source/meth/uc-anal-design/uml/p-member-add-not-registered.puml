@@ -1,0 +1,17 @@
+@startuml
+hide footbox
+autoactivate on
+skinparam sequenceParticipant underline
+actor ":User" as usr
+boundary ":Invite Member Form" as form
+control ":Project Controller" as ctl
+entity ":Project" as db_prj
+entity ":User" as db_usr
+
+usr -> form : // enters invited member's name()
+form -> ctl : // send form()
+ctl -> db_prj : // add new user's name to project database()
+ctl <-- db_prj : // new user is not in database
+form <-- ctl
+usr <-- form : inform that added user has not registered
+@enduml
