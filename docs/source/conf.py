@@ -58,6 +58,7 @@ latex_elements = {
     'preamble': r'\usepackage{acanban}',
     'extrapackages': r'\usepackage{booktabs}',  # for title-page
     'geometry': '',  # fallback to LaTeX default margins
+    'figure_align': 'H',
     'maketitle': (pwd/'latex'/'title-page.tex').read_text(),
     'tableofcontents': r'\selectlanguage{english}\sphinxtableofcontents',
     'printindex': '', 'sphinxsetup': r'HeaderFamily=\bfseries'}
