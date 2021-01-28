@@ -7,6 +7,8 @@ not only integrate well into their workflows and academic management tasks
 but also effectively perform on back-end servers often with limited resources
 and across a wide variety of end-user machines.
 
+.. _objcollab:
+
 The Collaboration Platform
 --------------------------
 
@@ -23,6 +25,8 @@ support academic tasks.  To mentors and committees, these are grading
 and giving feedback.  To academic assistants, these include (but not
 limited to) exporting transcripts and statistical reports, and tracking
 students' overall progress to provide help if necessary.
+
+.. _appapp:
 
 The Applicable Web Application
 ------------------------------
