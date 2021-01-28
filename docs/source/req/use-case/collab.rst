@@ -9,6 +9,8 @@ Project Collaboration
 
    rectangle Project {
       usecase "Create project" as CreateP
+      usecase "Show project information" as ShowP
+      usecase "Edit project information" as EditP
       usecase "Add project member" as AddMember
    }
    
@@ -25,6 +27,8 @@ Project Collaboration
    }
 
    parti --> CreateP
+   parti --> ShowP
+   parti --> EditP
    parti --> CreateT
    parti --> AddMember
    parti --> AssignT
@@ -36,6 +40,8 @@ Project Collaboration
    Student --|> parti
    Supervisor --|> parti
 
+
+.. _project create:
 
 Create Project
 --------------
@@ -64,10 +70,6 @@ Missing information
    an alert message. The user can either select to cancel operation
    or fill in missing fields.
 
-Existing project
-   In step 4, if the user is Supervisor and the project is existed,
-   the system display an error message and terminate the operation.
-
 Pre-Conditions
 ^^^^^^^^^^^^^^
 
@@ -78,6 +80,59 @@ Post-Conditions
 ^^^^^^^^^^^^^^^
 
 A new project is created.
+
+
+.. _project info:
+
+Show Project Information
+------------------------
+
+Brief Description
+^^^^^^^^^^^^^^^^^
+
+This use case allows a member to view the project's basic information.
+
+Flow of Events
+^^^^^^^^^^^^^^
+
+1. Participant requests to view a project.
+2. System respond with the project's basic information.
+
+Pre-Conditions
+^^^^^^^^^^^^^^
+
+User must be logged in as a Student or a Supervisor
+that is a member of the project.
+
+
+.. _project edit:
+
+Edit Project Information
+------------------------
+
+Brief Description
+^^^^^^^^^^^^^^^^^
+
+This use case allows a member to edit a project's basic information.
+
+Flow of Events
+^^^^^^^^^^^^^^
+
+1. Participant requests to view a project.
+2. System respond with a form for editing basic information.
+3. Participant gives disired changes to the project's basic information.
+4. System updates the project's information accordingly.
+
+Pre-Conditions
+^^^^^^^^^^^^^^
+
+User must be Student or Supervisor and be logged in the system
+before this use case begins.
+
+Post-Conditions
+^^^^^^^^^^^^^^^
+
+The project's basic information is updated accordingly.
 
 
 Add Project Members
