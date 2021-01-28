@@ -1,0 +1,24 @@
+@startuml
+hide footbox
+autoactivate on
+skinparam sequenceParticipant underline
+actor ":User" as usr
+boundary ":Artifact Upload Form" as form
+control ":File Controller" as ctl
+entity ":Project" as db_prj
+entity ":File" as db_file
+collections ":IPFS" as ipfs
+
+usr -> form : // submit a file()
+form -> ctl : // send form()
+ctl -> db_prj : // check permission()
+ctl <-- db_prj
+ctl -> ipfs : // add to file system()
+ctl <-- ipfs : // return CID
+ctl -> db_file : // save file metadata()
+ctl <-- db_file : // return database key()
+ctl -> db_prj : // add artifact()
+ctl <-- db_prj
+form <-- ctl
+usr <-- form
+@enduml
