@@ -179,9 +179,43 @@
 <h1>Data Tables<a class="headerlink" href="#data-tables" title="Permalink to this headline">¶</a></h1>
 <p>From the relationship between data tables we analyzed above,
 we derive three data tables: <code class="docutils literal notranslate"><span class="pre">users</span></code>, <code class="docutils literal notranslate"><span class="pre">projects</span></code>, <code class="docutils literal notranslate"><span class="pre">files</span></code>.</p>
-<div class="figure align-default" id="id1" style="width: 100%">
-<img alt="../../../_images/projects-table.svg" src="../../../_images/projects-table.svg" /><p class="caption"><span class="caption-number">Figure 5 </span><span class="caption-text">The structure of data table <code class="docutils literal notranslate"><span class="pre">projects</span></code></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">User</span></code> entity set is mapped to <code class="docutils literal notranslate"><span class="pre">users</span></code> table.
+Likewise, <code class="docutils literal notranslate"><span class="pre">File</span></code> is mapped to <code class="docutils literal notranslate"><span class="pre">files</span></code> table.</p>
+<div class="figure align-default" id="id6" style="width: 100%">
+<img alt="../../../_images/student.svg" src="../../../_images/student.svg" /><p class="caption"><span class="caption-number">Figure 5 </span><span class="caption-text">An example database row for student. <a class="footnote-reference brackets" href="#id5" id="id1">1</a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
+<div class="figure align-default" id="id7" style="width: 100%">
+<img alt="../../../_images/file.svg" src="../../../_images/file.svg" /><p class="caption"><span class="caption-number">Figure 6 </span><span class="caption-text">The structure of database table <code class="docutils literal notranslate"><span class="pre">file</span></code>. <a class="footnote-reference brackets" href="#id5" id="id2">1</a></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<p>However, most other entities are stored within a single table <code class="docutils literal notranslate"><span class="pre">projects</span></code>,
+forming a typical tree-like structure of document-oriented database.
+For example, two entities <code class="docutils literal notranslate"><span class="pre">Artifact</span></code>s storing revisions for report and slides
+are included within a table row.
+<code class="docutils literal notranslate"><span class="pre">Task</span></code>s are stored in an array in the project.</p>
+<p>The many-to-many relation between <code class="docutils literal notranslate"><span class="pre">User</span></code> and <code class="docutils literal notranslate"><span class="pre">Project</span></code>
+is realized using foreign keys with secondary index in this table as well:</p>
+<ul class="simple">
+<li><p>Each row in <code class="docutils literal notranslate"><span class="pre">projects</span></code> has a <code class="docutils literal notranslate"><span class="pre">supervisors</span></code> and a <code class="docutils literal notranslate"><span class="pre">students</span></code> fields.
+We model both of these fields as lists, since there can be occasions
+where two or more supervisors co-supervise a project.</p></li>
+<li><p>A secondary index named <code class="docutils literal notranslate"><span class="pre">members</span></code> was created for these fields
+for the ease of querying projects a certain user participates in.</p></li>
+</ul>
+<div class="figure align-default" id="id8" style="width: 100%">
+<img alt="../../../_images/project.svg" src="../../../_images/project.svg" /><p class="caption"><span class="caption-number">Figure 7 </span><span class="caption-text">The structure of database table <code class="docutils literal notranslate"><span class="pre">projects</span></code>. <a class="footnote-reference brackets" href="#id5" id="id3">1</a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<p>Within each task is a discussion thread with a forest structure of <code class="docutils literal notranslate"><span class="pre">Comment</span></code>
+entities.  There are several root comments within the discussions.
+Each comment can contain some child comments.</p>
+<div class="figure align-default" id="id9" style="width: 100%">
+<img alt="../../../_images/discussion.svg" src="../../../_images/discussion.svg" /><p class="caption"><span class="caption-number">Figure 8 </span><span class="caption-text">The forest structure of <code class="docutils literal notranslate"><span class="pre">discussion</span></code> field. <a class="footnote-reference brackets" href="#id5" id="id4">1</a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<dl class="footnote brackets">
+<dt class="label" id="id5"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>,<a href="#id4">4</a>)</span></dt>
+<dd><p>The JSON structure is visualized by PlantUML.
+Source text used can be found at <a class="reference external" href="https://github.com/Huy-Ngo/acanban/tree/main/docs/source/meth/database/tables/images">https://github.com/Huy-Ngo/acanban/tree/main/docs/source/meth/database/tables/images</a></p>
+</dd>
+</dl>
 </div>
 
 
