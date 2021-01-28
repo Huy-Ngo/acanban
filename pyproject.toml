@@ -11,7 +11,7 @@ requires = ['appdirs', 'httpx', 'hypercorn', 'py-cid',
             'quart-auth', 'quart-trio-twice', 'rethinkdb >=2.4.8']
 description-file = 'README.md'
 classifiers = [
-    'Development Status :: 1 - Planning',
+    'Development Status :: 2 - Pre-Alpha',
     'Environment :: Web Environment',
     'Framework :: Trio',
     'Intended Audience :: Education',
