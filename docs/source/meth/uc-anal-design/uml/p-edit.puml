@@ -1,0 +1,24 @@
+@startuml
+start
+if (current user is not authenticated) then (yes)
+  stop
+endif
+:extract project ID from request;
+if (requested project does not exists) then (yes)
+  stop
+endif
+if (current user is not member of project) then (yes)
+  stop
+endif
+:send form to current user;
+:receive form from current user;
+if (form is invalid) then (yes)
+  stop
+endif
+:extract project name and
+description from request's form;
+:update project name and
+description in database;
+:redirect to project's info page;
+stop
+@enduml

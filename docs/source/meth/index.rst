@@ -10,4 +10,4 @@ and implementation.
    choices
    arch
    database/index
-   implementation/index
+   uc-anal-design/index

@@ -1,0 +1,23 @@
+@startuml
+start
+:receive request for creating project;
+if (current user is not authenticated) then (yes)
+  stop
+endif
+if (current user's role is assistant) then (yes)
+  stop
+endif
+:send creation form to current user;
+:receive form from current user;
+if (form is invalid) then (yes)
+  stop
+endif
+:extract project name and
+description from request's form;
+:let project be collection of name,
+description and members
+(including current user);
+:insert project into database;
+:redirect to new project's info page;
+stop
+@enduml
