@@ -1,16 +1,30 @@
 Acknowledgement
 ===============
 
-We would like to express our gratitude to Dr. Đoàn Nhật Quang for providing us
-instruction and feedback during his supervision.  We would also like to extend
-our sincere thanks to Dr. Trần Giang Sơn support with USTH ICTLab's server
-that we used for testing our deployment.
+.. only:: html or text
 
-We would also like to thank P. G. Jones, the maintainer of our frame work,
-as well as the maintainers RethinkDB for their timely technical support and bug fixes.
-The following organizations are also appreciated for providing their services for free:
+   We would like to express our gratitude
+   to Dr. |~| Đoàn Nhật Quang for providing us
+   instruction and feedback during his supervision.  We would also like to
+   extend our sincere thanks to Dr. |~| Trần Giang Sơn
+   for his support with USTH ICTLab's server that we used
+   for testing our deployment.
 
-- matrix.org (messaging)
+.. raw:: latex
+
+   We would like to express our gratitude
+   to {\selectlanguage{vietnamese}Dr.~Đoàn Nhật Quang} for providing us
+   instruction and feedback during his supervision.  We would also like to
+   extend our sincere thanks to {\selectlanguage{vietnamese}Dr.~Trần Giang Sơn}
+   for his support with USTH ICTLab's server that we used
+   for testing our deployment.
+
+We would also like to thank Philip Jones, the author and maintainer of
+the framework Quart, as well as the maintainers of RethinkDB for their timely
+technical support and bug fixes.  The following organizations are also
+appreciated for providing their services free of charge:
+
+- Matrix.org (instant messaging server)
 - GitHub (code hosting and collaboration)
-- sourcehut (automated CI/CD)
-- PlantUML (generating UML and non-UML diagrams)
+- SourceHut (automated CI/CD)
+- PlantUML web server (diagrams generation)

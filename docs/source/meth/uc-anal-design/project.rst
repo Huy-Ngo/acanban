@@ -67,6 +67,7 @@ we need a function to invite members.
 Only who is in the project could introduce a new member.
 
 The implementation involves two storages:
+
 - ``projects`` database table: which `members` field has been updated.
 - ``users`` database table: which `projects` field has been updated.
 

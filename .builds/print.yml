@@ -20,7 +20,8 @@ sources:
 tasks:
   - prepare: |
       python3 -m pip install -U pip
-      python3 -m pip install sphinxcontrib.plantuml sphinxcontrib-svg2pdfconverter ./acanban
+      python3 -m pip install sphinxcontrib.plantuml \
+        sphinxcontrib-svg2pdfconverter
   - print: make -C acanban/docs latexpdf
 environment:
   PIP_PROGRESS_BAR: 'off'
