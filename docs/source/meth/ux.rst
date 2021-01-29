@@ -70,11 +70,11 @@ Each project's page is divided into several tabs, namely ``info``, ``edit``,
 
    (*) --> "/p/<uuid>" as root
    root --> "/p/<uuid>/info" as info
-   root --> "/p/<uuid>/edit" as edit
-   root --> "/p/<uuid>/members" as members
-   root --> "/p/<uuid>/tasks" as tasks
-   root --> "/p/<uuid>/report" as report
-   root --> "/p/<uuid>/slides" as slides
+   info --> "/p/<uuid>/edit" as edit
+   info --> "/p/<uuid>/members" as members
+   info --> "/p/<uuid>/tasks" as tasks
+   info --> "/p/<uuid>/report" as report
+   info --> "/p/<uuid>/slides" as slides
 
    members --> "/u/<username>"
    members --> "/p/<uuid>/invite"
@@ -89,7 +89,10 @@ Each project's page is divided into several tabs, namely ``info``, ``edit``,
    slides --> "/p/<uuid>/slides/eval"
 
 Project's tabs are mutually interlinked but for brevity they are not connected
-in the figure.  Due to complexity, task-related endpoints are documented
+in the figure.  Additionally, POST-only endpoints redirects back to referrer
+upon success.
+
+Due to complexity, task-related endpoints are documented
 separately in :numref:`tnav`, which consists of the ones listed below.
 Pages in ``/p/<uuid>/tasks``, including the Kanban board,
 exclusively serves :ref:`objcollab`.
