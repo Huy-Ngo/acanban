@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Project Management &mdash; Acanban 0.0.6 documentation</title>
+  <title>Project Management &mdash; Acanban  documentation</title>
   
 
   
@@ -319,9 +319,11 @@ for the member listing process</span><a class="headerlink" href="#p-member-list"
 <p>Since the project is initialized with only the creator,
 we need a function to invite members.
 Only who is in the project could introduce a new member.</p>
-<p>The implementation involves two storages:
-- <code class="docutils literal notranslate"><span class="pre">projects</span></code> database table: which <cite>members</cite> field has been updated.
-- <code class="docutils literal notranslate"><span class="pre">users</span></code> database table: which <cite>projects</cite> field has been updated.</p>
+<p>The implementation involves two storages:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">projects</span></code> database table: which <cite>members</cite> field has been updated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">users</span></code> database table: which <cite>projects</cite> field has been updated.</p></li>
+</ul>
 <p>When user enters the invited member’s name, the project controller checks
 both <code class="docutils literal notranslate"><span class="pre">projects</span></code> and <code class="docutils literal notranslate"><span class="pre">user</span></code> database whether the name is already in
 the project, or that user is an assistant, or that user has not registered.
