@@ -11,7 +11,7 @@ Overview
    result
    conclusion
 
-.. only:: html
+.. only:: html or text
 
    .. toctree::
 
