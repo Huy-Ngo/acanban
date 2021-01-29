@@ -31,8 +31,8 @@ auxiliary endpoints are available, as illustrated in :numref:`auxnav`.
 
    (*) --> "/register" as register
    (*) --> "/login" as login
-   register --> login
    login --> "/" as root
+   register --> root
    root --> "/p" as projects
    projects --> "/p/create"
    projects --> "/p/<uuid>" as project
