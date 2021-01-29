@@ -31,10 +31,11 @@ from rethinkdb.errors import ReqlNonExistenceError
 
 from .ipfs import add as ipfs_add
 
-__all__ = ['blueprint']
+__all__ = ['PREVIEW_FIELDS', 'blueprint']
 
 INFO_FIELDS = 'id', 'name', 'description'
 MEMBERS_FIELDS = 'id', 'name', 'supervisors', 'students'
+PREVIEW_FIELDS = 'id', 'name', 'description', 'supervisors', 'students'
 
 blueprint = Blueprint('project', __name__, url_prefix='/p')
 
@@ -62,7 +63,7 @@ async def create_projects() -> ResponseReturnValue:
 @blueprint.route('/')
 async def list_projects() -> ResponseReturnValue:
     """Return a page listing all projects."""
-    project_list = r.table('projects').pluck(*INFO_FIELDS)
+    project_list = r.table('projects').pluck(*PREVIEW_FIELDS)
     async with current_app.db_pool.connection() as connection:
         projects = await project_list.run(connection)
     return await render_template('project-list.html', projects=projects)

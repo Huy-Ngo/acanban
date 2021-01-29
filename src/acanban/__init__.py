@@ -34,12 +34,12 @@ from trio import open_nursery
 from .auth import Authenticator, blueprint as auth
 from .config import IPFS_DEFAULT, RETHINKDB_DEFAULT
 from .ipfs import blueprint as ipfs
-from .project import blueprint as project
+from .project import PREVIEW_FIELDS, blueprint as project
 from .user import blueprint as user
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
-__version__ = '0.0.6'
+__version__ = '0.0.7'
 
 
 class Acanban(QuartTrio):
@@ -114,7 +114,7 @@ async def index() -> ResponseReturnValue:
         username = current_user.key
         my_projects = r.table('projects').get_all(username, index='members')
         async with current_app.db_pool.connection() as connection:
-            projects = await my_projects.run(connection)
+            projects = await my_projects.pluck(*PREVIEW_FIELDS).run(connection)
         return await render_template('myproject.html', projects=projects)
     else:
         return await render_template('index.html')
