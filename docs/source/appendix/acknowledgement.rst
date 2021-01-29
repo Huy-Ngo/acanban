@@ -24,7 +24,7 @@ the framework Quart, as well as the maintainers of RethinkDB for their timely
 technical support and bug fixes.  The following organizations are also
 appreciated for providing their services free of charge:
 
-- matrix.org (instant messaging server)
+- Matrix.org (instant messaging server)
 - GitHub (code hosting and collaboration)
 - SourceHut (automated CI/CD)
 - PlantUML web server (diagrams generation)
