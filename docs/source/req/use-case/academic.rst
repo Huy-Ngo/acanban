@@ -83,6 +83,7 @@ Alternative Flow
 """"""""""""""""
 
 Project is not finished
+
    If in step 2, Student has not provided the result, the system will display
    a message that the report is not yet ready and terminate the operation.
    The system will then notify Student by sending an email or via
@@ -125,6 +126,7 @@ Alternative Flow
 """"""""""""""""
 
 Not yet evaluated
+
    If in step 2, Supervisor has not given the evaluation, the system will display
    a message that the transcript is not ready yet and terminate the operation.
    The system will then notify Supervisor by sending an email or via

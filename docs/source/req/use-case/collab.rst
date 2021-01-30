@@ -66,6 +66,7 @@ Alternative Flow
 """"""""""""""""
 
 Missing information
+
    In step 4, if the user missed some information, the system will display
    an alert message. The user can either select to cancel operation
    or fill in missing fields.
@@ -186,10 +187,12 @@ Alternative Flow
 """"""""""""""""
 
 Task exists
+
    In step 4, if the user enters a task that already exists in the task list,
    the system will display an error message and terminate the operation.
 
 Missing metadata
+
    In step 4, if user forgets to enter some data, (e.g: deadline for the task),
    the system will display an alert message. User can either fill in
    missing fields or cancel the operation.
@@ -259,10 +262,12 @@ Alternative Flow
 """"""""""""""""
 
 No evidence provided
+
    In step 3, if Student does not submit a file or a link,
    the system will display an alert message and terminate the operation.
 
 Empty file provided
+
    In step 4, if Student submits an empty file,
    the system will display an alert message and terminate the operation.
 

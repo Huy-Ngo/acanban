@@ -65,16 +65,19 @@ Alternative Flow
 """"""""""""""""
 
 Invalid username
+
    If in step 2, user uses a username with invalid characters, the system
    will display an alert message. User could either re-enter his/her username or
    cancel the operation.
 
 Existed username
+
    If in step 2, user enters an existed username, the system will display
    an alert message. User could either select another username
    or cancel the operation.
 
 Invalid email
+
    If in step 2, user enters an invalid email, the system will display
    an alert message. User could either re-enter his/her email
    or cancel the operation.
@@ -109,10 +112,12 @@ Alternative Flow
 """"""""""""""""
 
 Incorrect username/password
+
    If in step 2, user enters username or password incorrectly, the system
    will display an error message and terminate the operation.
 
 Invalid username
+
    If in step 2, user enters and invalid character for username, the system
    will display an error message and terminate the operation.
 
@@ -195,6 +200,7 @@ Alternative Flow
 """"""""""""""""
 
 Invalid name
+
    If, in **Search by name** sub flow, user enters a name with invalid characters,
    the system will display an alert message. User could either re-enter the name
    or cancel the operation.
@@ -243,6 +249,7 @@ Alternative Flow
 """"""""""""""""
 
 Invalid name
+
    If, in step 2, user enters a name with invalid characters, the system
    will display an alert message. User could either re-enter the name
    or cancel the operation.
@@ -298,6 +305,7 @@ Alternative Flow
 """"""""""""""""
 
 Invalid name
+
    If, in **Search by name** sub flow, user enters a name with invalid characters,
    the system will display an alert message. User could either re-enter the name
    or cancel the operation.
