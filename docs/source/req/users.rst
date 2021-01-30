@@ -30,6 +30,8 @@ statistical reports of each project and print the results of the subject.
 
 The system's user categories can be summarized in the table below
 
+.. tabularcolumns:: |l|L|L|
+
 ==========  =========================  ===============================
 Type        Responsibility             Ability                        
 ==========  =========================  ===============================
