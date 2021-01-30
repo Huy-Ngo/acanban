@@ -12,13 +12,13 @@
     {
       "function": {
         "$reql_type$": "BINARY",
-        "data": "JHJlcWxfaW5kZXhfZnVuY3Rpb24kCQcHBwAAAAAAAAEBAAAAAAAAAFoAAABbMjQsW1sxNzAsW1sx\r\nMyxbXSw5XSxbMSwic3R1ZGVudHMiLDEwXV0sOF0sWzE3MCxbWzEzLFtdLDEyXSxbMSwic3VwZXJ2\r\naXNvcnMiLDEzXV0sMTFdXSw3XQAHAAAAAQA="
+        "data": "JHJlcWxfaW5kZXhfZnVuY3Rpb24kCQcHBwAAAAAAAAEKAAAAAAAAAPcAAABbMjQsW1s2NSxbWzMy\r\nLFtbMTAsW1sxLDEwLDExXV0sMTBdLFsxLCJzdHVkZW50cyIsMTJdXSw5XSxbMTcwLFtbMTAsW1sx\r\nLDEwLDE1XV0sMTRdLFsxLCJzdHVkZW50cyIsMTZdXSwxM10sWzIsW10sMTddXSw4XSxbNjUsW1sz\r\nMixbWzEwLFtbMSwxMCwyMV1dLDIwXSxbMSwic3VwZXJ2aXNvcnMiLDIyXV0sMTldLFsxNzAsW1sx\r\nMCxbWzEsMTAsMjVdXSwyNF0sWzEsInN1cGVydmlzb3JzIiwyNl1dLDIzXSxbMixbXSwyN11dLDE4\r\nXV0sN10ABwAAAAEA"
       },
       "geo": false,
       "index": "members",
       "multi": true,
       "outdated": false,
-      "query": "indexCreate('members', function(var1) { return r.add(r.row(\"students\"), r.row(\"supervisors\")); }, {multi: true})",
+      "query": "indexCreate('members', function(project) { return r.add(r.branch(project.hasFields(\"students\"), project(\"students\"), []), r.branch(project.hasFields(\"supervisors\"), project(\"supervisors\"), [])); }, {multi: true})",
       "ready": true
     }
   ],

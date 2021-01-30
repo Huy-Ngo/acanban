@@ -49,14 +49,13 @@ async def create_projects() -> ResponseReturnValue:
     if request.method == 'GET':
         return await render_template('project-create.html')
     project = await request.form
-    project = {'name': project['name'],
-               'description': project['description'],
-               f'{role}s': [current_user.key]}
+    project = {
+        'name': project['name'], 'description': project['description'],
+        'students': [], 'supervisors': [], f'{role}s': [current_user.key],
+        'tasks': [], 'report': {'revisions': []}, 'slides': {'revisions': []}}
     async with current_app.db_pool.connection() as connection:
         response = await r.table('projects').insert(project).run(connection)
         uuid = response['generated_keys'][0]
-        await r.table('users').get(current_user.key).update(
-            {'projects': r.row['projects'].append(uuid)}).run(connection)
     return redirect(f'/p/{uuid}')
 
 
