@@ -29,7 +29,7 @@ Students and supervisors have already been using some of these systems
 to manage their tasks.  We studied these systems to see how projects
 are commonly and effectively managed.
 
-Trello_,a popular web service for keeping track of tasks, uses `Kanban board`_.
+Trello_, a popular web service for keeping track of tasks, uses `Kanban board`_.
 A Kanban board consists of several columns, each of which contains some tasks
 in a certain stage, such as *to-do*, *in progress*, *in review*, and *done*.
 User can move a task from a column to another.  As this workflow is easy to learn,
