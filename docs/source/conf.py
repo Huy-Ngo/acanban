@@ -51,7 +51,7 @@ latex_elements = {
     'papersize': 'a4paper', 'pointsize': '12pt',
     'babel': r'\usepackage[english,vietnamese]{babel}',
     'fontpkg': r'\usepackage{lmodern}',
-    'fncychap': r'\usepackage[Rejne]{fncychap}',
+    'fncychap': '',  # disable fancy chapter heading
     'preamble': r'\usepackage{acanban}',
     'extrapackages': r'\usepackage{booktabs}',  # for title-page
     'geometry': '',  # fallback to LaTeX default margins
