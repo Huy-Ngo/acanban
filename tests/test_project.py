@@ -64,7 +64,7 @@ async def test_create_post(username: Optional[str], status_code: int,
                            user: ClientFactory) -> None:
     """Test project creation permission."""
     client = await user(username)
-    info = {'name': choices(printable, k=42),
+    info = {'name': choices(printable, k=42), 'deadline': '2020-02-02',
             'description': choices(printable, k=42)}
     response = await client.post('/p/create', form=info)
     assert response.status_code == status_code

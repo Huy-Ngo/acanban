@@ -22,6 +22,8 @@ from quart.exceptions import Forbidden, NotFound
 from quart_auth import current_user
 from rethinkdb import r
 
+from .project import PREVIEW_FIELDS
+
 __all__ = ['blueprint']
 MUTABLE_FIELDS = 'name', 'email', 'student-id', 'department'
 
@@ -44,7 +46,7 @@ async def view_user_profile(username: str) -> ResponseReturnValue:
         raise NotFound
     project_list = r.table('projects').get_all(username, index='members')
     async with current_app.db_pool.connection() as connection:
-        projects = await project_list.run(connection)
+        projects = await project_list.pluck(*PREVIEW_FIELDS).run(connection)
     return await render_template('user.html', user=user, projects=projects)
 
 

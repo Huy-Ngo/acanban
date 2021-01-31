@@ -4,6 +4,8 @@
 {% endblock %}
 {% block tabcontent %}
 <div class=col-wide>
-  <p>{{ project.description }}</p>
+  <p><b>Created on:</b> {{ project.created_on|naturaltime|safe }}</p>
+  <p><b>Deadline:</b> {{ project.deadline|naturaltime|safe }}</p>
+  <p><b>Description:</b> {{ project.description }}</p>
 </div>
 {% endblock %}

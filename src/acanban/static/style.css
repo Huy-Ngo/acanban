@@ -83,7 +83,7 @@ img {
 
 /* form */
 button, select, textarea,
-input[type=text], input[type=password], input[type=email] {
+input[type=text], input[type=password], input[type=email], input[type=date] {
     background-color: var(--color-bg);
     border: 0.1rem solid var(--color-fg);
     border-radius: 0.3rem;

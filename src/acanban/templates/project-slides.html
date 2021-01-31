@@ -46,13 +46,16 @@
 
   {% if revisions %}
   {% for file in revisions %}
+  {% set uri = '/ipfs/' ~ file.cid ~ '?filename=' ~ file.name %}
   <dl>
     <dt>File</dt>
-    <dd><a href=/ipfs/{{ file.cid }}>{{ file.name }}</a></dd>
+    <dd><a href='{{ uri }}'>{{ file.name }}</a></dd>
+    <dt>Size</dt>
+    <dd>{{ file.size|naturalsize }}</dd>
     <dt>Uploader</dt>
     <dd><a href=/u/{{ file.user }}>{{ file.user }}</a></dd>
     <dt>Revision</dt>
-    <dd>{{ file.time }}</a></dd>
+    <dd>{{ file.time|naturaltime|safe }}</dd>
   </dl>
   {% endfor %}
   {% endif %}

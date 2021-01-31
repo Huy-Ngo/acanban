@@ -17,45 +17,32 @@
  # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
  #}
 
-{% extends 'base.html' %}
-
+{% extends 'project-list.html' %}
 {% block title %}{{ user.name }}{% endblock %}
 
-{% block content %}
-<div class=col-wide>
-  <dl>
-    <dt>Role</dt>
-    <dd>{{ user.role }}</dd>
-    <dt>Username</dt>
-    <dd>{{ user.username }}</dd>
-    <dt>Email</dt>
-    <dd>{{ user.email }}</dd>
-    {% if user['student-id'] %}
-    <dt>Student ID</dt>
-    <dd>{{ user['student-id'] }}</dd>
-    {% endif %}
-    {% if user.department %}
-    <dt>Department</dt>
-    <dd>{{ user.department }}</dd>
-    {% endif %}
-  </dl>
-  {% if user.username == current_user.key %}
-  <a href=/u/{{ user.username }}/edit>
-    <button>Edit profile</button>
-  </a>
+{% block abstract %}
+<dl>
+  <dt>Role</dt>
+  <dd>{{ user.role }}</dd>
+  <dt>Username</dt>
+  <dd>{{ user.username }}</dd>
+  <dt>Email</dt>
+  <dd>{{ user.email }}</dd>
+  {% if user['student-id'] %}
+  <dt>Student ID</dt>
+  <dd>{{ user['student-id'] }}</dd>
   {% endif %}
-  {% if projects %}
-  <h1>{{ user.name }}'s project(s)</h1>
-  {% for project in projects %}
-  <div class=block>
-    <h2><a href=/p/{{ project.id }}>{{ project.name }}</a></h2>
-    <p><b>Supervisors:</b> {{ project.supervisors | map('userlink')
-      | join(', ') | safe }}</p>
-    <p><b>Students:</b> {{ project.students | map('userlink')
-      | join(', ') | safe }}</p>
-    <p><b>Description:</b> {{ project.description }}</p>
-  </div>
-  {% endfor %}
+  {% if user.department %}
+  <dt>Department</dt>
+  <dd>{{ user.department }}</dd>
   {% endif %}
-</div>
+</dl>
+
+{% if user.username == current_user.key %}
+<a href=/u/{{ user.username }}/edit>
+  <button>Edit profile</button>
+</a>
+{% endif %}
+
+<h1>{{ user.name }}'s projects</h1>
 {% endblock%}
