@@ -19,11 +19,13 @@
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
+from datetime import datetime
 from secrets import token_urlsafe
 from typing import Any, AsyncIterator
 from urllib.parse import urlsplit
 
 from httpx import AsyncClient
+from humanize import naturalsize, naturaltime
 from quart import ResponseReturnValue, current_app, render_template
 from quart_auth import current_user
 from quart_trio import QuartTrio
@@ -75,6 +77,13 @@ app.register_blueprint(auth)
 app.register_blueprint(ipfs)
 app.register_blueprint(user)
 app.register_blueprint(project)
+app.add_template_filter(naturalsize)
+
+
+@app.template_filter('naturaltime')
+def fuzzytime(time: datetime) -> str:
+    fuzzy = naturaltime(time.replace(tzinfo=None), when=datetime.utcnow())
+    return f"<span title='{time}'>{fuzzy}</span>"
 
 
 @app.before_serving

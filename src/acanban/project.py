@@ -33,9 +33,10 @@ from .ipfs import add as ipfs_add
 
 __all__ = ['PREVIEW_FIELDS', 'blueprint']
 
-INFO_FIELDS = 'id', 'name', 'description'
+INFO_FIELDS = 'id', 'name', 'created_on', 'deadline', 'description'
 MEMBERS_FIELDS = 'id', 'name', 'supervisors', 'students'
-PREVIEW_FIELDS = 'id', 'name', 'description', 'supervisors', 'students'
+PREVIEW_FIELDS = ('id', 'name', 'created_on', 'deadline',
+                  'supervisors', 'students', 'description')
 
 blueprint = Blueprint('project', __name__, url_prefix='/p')
 
@@ -52,6 +53,8 @@ async def create_projects() -> ResponseReturnValue:
     project = {
         'name': project['name'], 'description': project['description'],
         'students': [], 'supervisors': [], f'{role}s': [current_user.key],
+        'created_on': r.now(),  # RethinkDB.now defaults to UTC
+        'deadline': r.iso8601(project['deadline'], default_timezone='+00:00'),
         'tasks': [], 'report': {'revisions': []}, 'slides': {'revisions': []}}
     async with current_app.db_pool.connection() as connection:
         response = await r.table('projects').insert(project).run(connection)

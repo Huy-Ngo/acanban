@@ -17,21 +17,5 @@
  # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
  #}
 
-{% extends "base.html" %}
-{% block title %}My project{% endblock %}
-{% block content %}
-<div class=col-wide>
-  {% if projects %}
-  {% for project in projects %}
-  <div class=block>
-    <h2><a href=/p/{{ project.id }}>{{ project.name }}</a></h2>
-    <p><b>Supervisors:</b> {{ project.supervisors | map('userlink')
-                              | join(', ') | safe }}</p>
-    <p><b>Students:</b> {{ project.students | map('userlink')
-                           | join(', ') | safe }}</p>
-    <p><b>Description:</b> {{ project.description }}</p>
-  </div>
-  {% endfor %}
-  {% endif %}
-</div>
-{% endblock %}
+{% extends "project-list.html" %}
+{% block title %}My Projects{% endblock %}
