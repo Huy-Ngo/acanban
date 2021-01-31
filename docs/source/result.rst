@@ -53,12 +53,12 @@ Moreover, there had been other time-consuming projects and labworks in other cou
 which make the management harder.
 
 Another problem was the collaboration: There were several conflicts among
-some members' expectations of the project and workflows.  People tended to work
+some members' expectations of the project and workflows. People tended to work
 at different time in day, which made code reviews take a longer time than it should.
 Some members were not too keen on the project and did not spend enough time for it.
 
 There were also some technical struggles: Not everyone in the group was familiar
-with web development in Python, let alone the framework.  This revealed another
+with web development in Python, let alone the framework. This revealed another
 issue, which is communication -- some members did not reach out to others,
 which made it hard for the others to help.
 
