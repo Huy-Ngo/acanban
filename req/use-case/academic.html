@@ -183,7 +183,9 @@
 <h1>Academic Evaluation<a class="headerlink" href="#academic-evaluation" title="Permalink to this headline">¶</a></h1>
 <p>This section aims to describe basic activities relating to the evaluation.
 In order to build the academic integration, we let supervisors do evaluation.
-In addition, academic assistant could also track student progress.</p>
+In addition, academic assistant could also track student progress.
+Overall, the use cases defined here are the functional requirements
+for <a class="reference internal" href="../../intro.html#objacademic"><span class="std std-ref">Developing Utilities for Academic Management</span></a>.</p>
 <p class="plantuml">
 <img src="../../_images/plantuml-e084d59a95484ce5abdcd0fb2290ba016f5ec22b.svg" alt="left to right direction
 actor &quot;Academic Assistant&quot; as assist
@@ -200,14 +202,8 @@ assist --&gt; Report
 Supervisor --&gt; Evaluate"/></p>
 <div class="section" id="evaluate">
 <h2>Evaluate<a class="headerlink" href="#evaluate" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="brief-description">
-<h3>Brief Description<a class="headerlink" href="#brief-description" title="Permalink to this headline">¶</a></h3>
-<p>This use case allows Supervisor to evaluate the project.</p>
-</div>
-<div class="section" id="flow-of-events">
-<h3>Flow of Events<a class="headerlink" href="#flow-of-events" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="basic-flow">
-<h4>Basic Flow<a class="headerlink" href="#basic-flow" title="Permalink to this headline">¶</a></h4>
+<p>This use case allows Supervisor to evaluate the project.
+Its flow of events can be depicted as follows:</p>
 <ol class="arabic simple">
 <li><p>Supervisor requests to evaluate the project.</p></li>
 <li><p>System receives the request provide an <strong>evaluation</strong> and <strong>comment</strong>.</p></li>
@@ -215,37 +211,11 @@ Supervisor --&gt; Evaluate"/></p>
 <li><p>System receives the data and terminate the project.</p></li>
 </ol>
 </div>
-<div class="section" id="alternative-flow">
-<h4>Alternative Flow<a class="headerlink" href="#alternative-flow" title="Permalink to this headline">¶</a></h4>
-<p>Missing information</p>
-<blockquote>
-<div><p>If in step 3, the Supervisor forgets to fill in a necessary field,
-the system will display an alert message.
-Supervisor can either fill in missing fields or cancel the operation.</p>
-</div></blockquote>
-</div>
-</div>
-<div class="section" id="pre-conditions">
-<h3>Pre-Conditions<a class="headerlink" href="#pre-conditions" title="Permalink to this headline">¶</a></h3>
-<p>User must be a Supervisor and be logged in the system
-before this use case begins.</p>
-</div>
-<div class="section" id="post-conditions">
-<h3>Post-Conditions<a class="headerlink" href="#post-conditions" title="Permalink to this headline">¶</a></h3>
-<p>After this use case ends, other project-related use cases could not be executed.</p>
-</div>
-</div>
 <div class="section" id="make-report">
 <h2>Make Report<a class="headerlink" href="#make-report" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
-<h3>Brief Description<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>This use case allows Academic Assistant to make reports
-based on the result of the project.</p>
-</div>
-<div class="section" id="id2">
-<h3>Flow of Events<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id3">
-<h4>Basic Flow<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+based on the result of the project.
+Its flow of events can be depicted as follows:</p>
 <ol class="arabic simple">
 <li><p>Academic Assistant requests to make a report.</p></li>
 <li><p>System receives the request and displays the result of the project.</p></li>
@@ -254,37 +224,11 @@ based on the result of the project.</p>
 <li><p>Academic Assistant downloads the file for printing purpose later.</p></li>
 </ol>
 </div>
-<div class="section" id="id4">
-<h4>Alternative Flow<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
-<p>Project is not finished</p>
-<blockquote>
-<div><p>If in step 2, Student has not provided the result, the system will display
-a message that the report is not yet ready and terminate the operation.
-The system will then notify Student by sending an email or via
-notification bar.</p>
-</div></blockquote>
-</div>
-</div>
-<div class="section" id="id5">
-<h3>Pre-Conditions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>User must be Academic Assistant and be logged in the system before this use case begins.</p>
-<p>Academic Assistant must search and select the project(s) before the use case begins.</p>
-</div>
-<div class="section" id="id6">
-<h3>Post-Conditions<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<p>The system state is unchanged.</p>
-</div>
-</div>
 <div class="section" id="export-transcript">
 <h2>Export Transcript<a class="headerlink" href="#export-transcript" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id7">
-<h3>Brief Description<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<p>This use case allows Academic Assistant to export transcript based on the evaluation of Supervisor.</p>
-</div>
-<div class="section" id="id8">
-<h3>Flow of Events<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id9">
-<h4>Basic Flow<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<p>This use case allows Academic Assistant to export transcript
+based on the evaluation of Supervisor.
+Its flow of events can be depicted as follows:</p>
 <ol class="arabic simple">
 <li><p>Academic Assistant requests to export the transcript.</p></li>
 <li><p>System receives the request and displays the evaluation of Supervisor.</p></li>
@@ -292,27 +236,6 @@ notification bar.</p>
 <li><p>System responses by a document file format of the transcript.</p></li>
 <li><p>Academic Assistant downloads the file for printing purpose later.</p></li>
 </ol>
-</div>
-<div class="section" id="id10">
-<h4>Alternative Flow<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
-<p>Not yet evaluated</p>
-<blockquote>
-<div><p>If in step 2, Supervisor has not given the evaluation, the system will display
-a message that the transcript is not ready yet and terminate the operation.
-The system will then notify Supervisor by sending an email or via
-notification bar.</p>
-</div></blockquote>
-</div>
-</div>
-<div class="section" id="id11">
-<h3>Pre-Conditions<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
-<p>User must be Academic Assistant and be logged in the system before this use case begins.</p>
-<p>Academic Assistant must search and select the project(s) before the use case begins.</p>
-</div>
-<div class="section" id="id12">
-<h3>Post-Conditions<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
-<p>The system state is unchanged.</p>
-</div>
 </div>
 </div>
 
