@@ -1,14 +1,14 @@
 Security
 ========
 
+Some designs that address security concerns -- authentication, authorization,
+encryption, preventing attacks -- are described in this part.
+
 Authentication
 --------------
 
 In order to protect the data from unauthorized users, we must first verify
 their identity, i.e., authenticate the users.
-
-Register
-''''''''
 
 To register for an account, the user should fill a form
 with personal information:
@@ -68,10 +68,7 @@ and generate the accounts for each user.
 
 However, we did not implement either of these schemes.
 
-Log In
-''''''
-
-The user can log in to the site in the login endpoint.
+After that, the user can log in to the site in the login endpoint.
 After submitting the form with their username and password,
 they should be logged in.
 
