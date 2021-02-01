@@ -195,7 +195,8 @@ in this context, namely sequence diagrams and collaboration diagrams.</p>
 <div class="section" id="create-project">
 <h2>Create Project<a class="headerlink" href="#create-project" title="Permalink to this headline">¶</a></h2>
 <p>The design for the use case <a class="reference internal" href="../../req/use-case/collab.html#project-create"><span class="std std-ref">Create Project</span></a>
-is described in <a class="reference internal" href="#p-create"><span class="std std-numref">Figure 12</span></a>.</p>
+is described in <a class="reference internal" href="#p-create"><span class="std std-numref">Figure 12</span></a>, where the system takes the initial values
+from the user to construct a new project and insert it into the database.</p>
 <div class="figure align-default" id="p-create">
 <p class="plantuml">
 <img src="../../_images/plantuml-6de9f8d9c677e6c7da94f713bd981004b42cef25.svg" alt="&#64;startuml
@@ -228,7 +229,9 @@ stop
 <div class="section" id="show-project-information">
 <h2>Show Project Information<a class="headerlink" href="#show-project-information" title="Permalink to this headline">¶</a></h2>
 <p>The design for the use case <a class="reference internal" href="../../req/use-case/collab.html#project-info"><span class="std std-ref">Show Project Information</span></a>
-is described in <a class="reference internal" href="#p-info"><span class="std std-numref">Figure 13</span></a>.</p>
+is described in <a class="reference internal" href="#p-info"><span class="std std-numref">Figure 13</span></a>, where the system reply
+to a specified project identifier with its basic information,
+retrieved from the database.</p>
 <div class="figure align-default" id="p-info">
 <p class="plantuml">
 <img src="../../_images/plantuml-4e34ccc84ee16b80938783781ffff5b70d145f78.svg" alt="&#64;startuml
@@ -254,7 +257,8 @@ stop
 <div class="section" id="edit-project-information">
 <h2>Edit Project Information<a class="headerlink" href="#edit-project-information" title="Permalink to this headline">¶</a></h2>
 <p>The design for the use case <a class="reference internal" href="../../req/use-case/collab.html#project-edit"><span class="std std-ref">Edit Project Information</span></a>
-is described in <a class="reference internal" href="#p-edit"><span class="std std-numref">Figure 14</span></a>.</p>
+is described in <a class="reference internal" href="#p-edit"><span class="std std-numref">Figure 14</span></a>, where the system takes the updated
+project information from the user and synchronizes the database accordingly.</p>
 <div class="figure align-default" id="p-edit">
 <p class="plantuml">
 <img src="../../_images/plantuml-60c4b9457377bf00ce5280ffce490185fd6cd156.svg" alt="&#64;startuml
@@ -287,10 +291,10 @@ stop
 </div>
 <div class="section" id="list-member">
 <h2>List member<a class="headerlink" href="#list-member" title="Permalink to this headline">¶</a></h2>
-<p>The function allow listing the members in the projects</p>
+<p>The function allow listing the members in the projects.</p>
 <p>The implementation involves only <code class="docutils literal notranslate"><span class="pre">projects</span></code> database table, in which we get
 the member list of members. Two fields are being called is <code class="docutils literal notranslate"><span class="pre">supervisors</span></code> and
-<code class="docutils literal notranslate"><span class="pre">students</span></code></p>
+<code class="docutils literal notranslate"><span class="pre">students</span></code>.</p>
 <p>When user navigate to member tab, the list of members in the project,
 classified as <code class="docutils literal notranslate"><span class="pre">supervisors</span></code> and <code class="docutils literal notranslate"><span class="pre">students</span></code> is shown in a form.</p>
 <div class="figure align-default" id="p-member-list">
@@ -317,18 +321,15 @@ for the member listing process</span><a class="headerlink" href="#p-member-list"
 <p>Since the project is initialized with only the creator,
 we need a function to invite members.
 Only who is in the project could introduce a new member.</p>
-<p>The implementation involves two storages:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">projects</span></code> database table: which <cite>members</cite> field has been updated.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">users</span></code> database table: which <cite>projects</cite> field has been updated.</p></li>
-</ul>
+<p>The design involves the <code class="docutils literal notranslate"><span class="pre">projects</span></code> database table,
+where the <cite>members</cite> index is to be updated.</p>
 <p>When user enters the invited member’s name, the project controller checks
-both <code class="docutils literal notranslate"><span class="pre">projects</span></code> and <code class="docutils literal notranslate"><span class="pre">user</span></code> database whether the name is already in
+the <code class="docutils literal notranslate"><span class="pre">projects</span></code> table in the database whether the person is already in
 the project, or that user is an assistant, or that user has not registered.
 If all three conditions is satisfied, two databases is updated accordingly.</p>
 <div class="figure align-default" id="p-member-add-success">
 <p class="plantuml">
-<img src="../../_images/plantuml-791485a271ee0b5b700e9f1e0eab12bc4566b386.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-55bf570c8d715b0cacb03e495d276742181c4da3.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
@@ -342,11 +343,10 @@ usr -&gt; form : // enters invited member's name()
 form -&gt; ctl : // send form()
 ctl -&gt; db_prj : // add new user's name to project database()
 ctl &lt;-- db_prj : // return 
-ctl -&gt; db_usr : // add project's id to new user's database()
-ctl &lt;-- db_usr : // return
 form &lt;-- ctl
 usr &lt;-- form
-&#64;enduml"/></p>
+&#64;enduml
+"/></p>
 <p class="caption"><span class="caption-number">Figure 16 </span><span class="caption-text">Analysis sequence diagram for successfully invite member.</span><a class="headerlink" href="#p-member-add-success" title="Permalink to this image">¶</a></p>
 </div>
 <p>If added user is already in the project</p>

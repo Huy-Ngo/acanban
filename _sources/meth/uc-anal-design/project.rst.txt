@@ -14,7 +14,8 @@ Create Project
 --------------
 
 The design for the use case :ref:`project create`
-is described in :numref:`p-create`.
+is described in :numref:`p-create`, where the system takes the initial values
+from the user to construct a new project and insert it into the database.
 
 .. uml:: uml/p-create.puml
    :scale: 80%
@@ -25,7 +26,9 @@ Show Project Information
 ------------------------
 
 The design for the use case :ref:`project info`
-is described in :numref:`p-info`.
+is described in :numref:`p-info`, where the system reply
+to a specified project identifier with its basic information,
+retrieved from the database.
 
 .. uml:: uml/p-info.puml
    :caption: Activity diagram illustrating showing project's basic information
@@ -35,7 +38,8 @@ Edit Project Information
 ------------------------
 
 The design for the use case :ref:`project edit`
-is described in :numref:`p-edit`.
+is described in :numref:`p-edit`, where the system takes the updated
+project information from the user and synchronizes the database accordingly.
 
 .. uml:: uml/p-edit.puml
    :scale: 80%
@@ -45,11 +49,11 @@ is described in :numref:`p-edit`.
 List member
 -----------
 
-The function allow listing the members in the projects
+The function allow listing the members in the projects.
 
 The implementation involves only ``projects`` database table, in which we get
 the member list of members. Two fields are being called is ``supervisors`` and
-``students``
+``students``.
 
 When user navigate to member tab, the list of members in the project,
 classified as ``supervisors`` and ``students`` is shown in a form.
@@ -66,13 +70,11 @@ Since the project is initialized with only the creator,
 we need a function to invite members.
 Only who is in the project could introduce a new member.
 
-The implementation involves two storages:
-
-- ``projects`` database table: which `members` field has been updated.
-- ``users`` database table: which `projects` field has been updated.
+The design involves the ``projects`` database table,
+where the `members` index is to be updated.
 
 When user enters the invited member's name, the project controller checks
-both ``projects`` and ``user`` database whether the name is already in
+the ``projects`` table in the database whether the person is already in
 the project, or that user is an assistant, or that user has not registered.
 If all three conditions is satisfied, two databases is updated accordingly.
 
