@@ -9,6 +9,6 @@ and implementation.
 
    choices
    arch
-   database/index
    uc-anal-design/index
+   database/index
    ux
