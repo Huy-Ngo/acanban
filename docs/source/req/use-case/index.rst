@@ -1,4 +1,4 @@
-Use-case model
+Use-Case Model
 ==============
 
 This section includes the list of use cases we expected to have in the system.
