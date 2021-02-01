@@ -12,8 +12,6 @@ usr -> form : // enters invited member's name()
 form -> ctl : // send form()
 ctl -> db_prj : // add new user's name to project database()
 ctl <-- db_prj : // return 
-ctl -> db_usr : // add project's id to new user's database()
-ctl <-- db_usr : // return
 form <-- ctl
 usr <-- form
 @enduml
