@@ -88,12 +88,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#objective">Objective</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#the-collaboration-platform">The Collaboration Platform</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-academic-integration">The Academic Integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-applicable-web-application">The Applicable Web Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#objectives">Objectives</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building-a-collaboration-platform">Building a Collaboration Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#developing-utilities-for-academic-management">Developing Utilities for Academic Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constructing-an-applicable-web-application">Constructing an Applicable Web Application</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#expected-outcomes">Expected Outcomes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#report-structure">Report Structure</a></li>
 </ul>
 </li>
@@ -221,63 +222,94 @@ to study within a short period.
 Therefore, we started this project to create from scratch
 an academic-oriented project management system.</p>
 </div>
-<div class="section" id="objective">
-<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this headline">¶</a></h2>
-<p>In this project, we aimed to develop a collaboration platform
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<p>In this project, the overall aim is to develop a collaboration platform
 for students and mentors.  The resulting system should be able to
 not only integrate well into their workflows and academic management tasks
 but also effectively perform on back-end servers often with limited resources
 and across a wide variety of end-user machines.</p>
-<div class="section" id="the-collaboration-platform">
-<span id="objcollab"></span><h3>The Collaboration Platform<a class="headerlink" href="#the-collaboration-platform" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="building-a-collaboration-platform">
+<span id="objcollab"></span><h3>Building a Collaboration Platform<a class="headerlink" href="#building-a-collaboration-platform" title="Permalink to this headline">¶</a></h3>
 <p>At the lowest level, discussion would be facilitated through comment threads,
 organized into logical tasks.  The tasks would be categorized by stages
 such as <em>to-do</em>, <em>doing</em> and <em>done</em>.  These stages would then be visualized
 as columns in a <a class="reference external" href="https://en.wikipedia.org/wiki/Kanban_board">Kanban board</a> to aid managing and prioritizing tasks.</p>
 </div>
-<div class="section" id="the-academic-integration">
-<h3>The Academic Integration<a class="headerlink" href="#the-academic-integration" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="developing-utilities-for-academic-management">
+<span id="objacademic"></span><h3>Developing Utilities for Academic Management<a class="headerlink" href="#developing-utilities-for-academic-management" title="Permalink to this headline">¶</a></h3>
 <p>In addition to discussion and job scheduling, the system-to-be would
 support academic tasks.  To mentors and committees, these are grading
 and giving feedback.  To academic assistants, these include (but not
 limited to) exporting transcripts and statistical reports, and tracking
 students’ overall progress to provide help if necessary.</p>
 </div>
-<div class="section" id="the-applicable-web-application">
-<span id="appapp"></span><h3>The Applicable Web Application<a class="headerlink" href="#the-applicable-web-application" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="constructing-an-applicable-web-application">
+<span id="appapp"></span><h3>Constructing an Applicable Web Application<a class="headerlink" href="#constructing-an-applicable-web-application" title="Permalink to this headline">¶</a></h3>
 <p>The system should be implemented as a web application for
 portability <a class="reference internal" href="#mikkonen2008" id="id2"><span>[mikkonen2008]</span></a>.  It should be easy to be adopted by users on
 different devices network connection quality, whilst being simple enough
 to be maintained by a few administrators to run on modest hardware.</p>
 </div>
 </div>
+<div class="section" id="expected-outcomes">
+<h2>Expected Outcomes<a class="headerlink" href="#expected-outcomes" title="Permalink to this headline">¶</a></h2>
+<p>From the beginning, it was foreseeable <a class="footnote-reference brackets" href="#foresee" id="id3">1</a> that a few students
+would not be able to complete a medium-sized system from requirement engineering
+to architecture, analysis and design as well as implementation, by working
+part-time in three months.  Rather, we anticipated to finish the following:</p>
+<ol class="arabic simple">
+<li><p>Requirements clarification</p></li>
+<li><p>Concrete system architecture</p></li>
+<li><p>Initial system design for both functional objectives
+(<a class="reference internal" href="#objcollab"><span class="std std-ref">Building a Collaboration Platform</span></a> and <a class="reference internal" href="#objacademic"><span class="std std-ref">Developing Utilities for Academic Management</span></a>)</p></li>
+<li><p>Implementation of a subset of the use cases, focusing on <a class="reference internal" href="#objcollab"><span class="std std-ref">Building a Collaboration Platform</span></a>,
+while satisfying non-functional requirements to be ready for real-world usage</p></li>
+</ol>
+</div>
 <div class="section" id="report-structure">
 <h2>Report Structure<a class="headerlink" href="#report-structure" title="Permalink to this headline">¶</a></h2>
-<p>The report contains following sections:</p>
+<p>The report contains following chapters:</p>
 <ol class="arabic simple">
 <li><p><strong>Introduction</strong>: Introduce the motivation and background of the problem
-and some related works.</p></li>
-<li><p><strong>Objective</strong>: Further define the objective and scope of the project.</p></li>
-<li><p><strong>Requirements</strong>: List all important use cases with their specifications.</p></li>
-<li><p><strong>Methodology</strong>: Steps we made to develop the system:
-technical choices, analysis, design, and implementation.</p></li>
-<li><p><strong>Results and Discussion</strong>: The result and what we learned from this project.</p></li>
-<li><p><strong>Conclusion and Future Work</strong>: Our conclusion after the project
-and work that can be done to improve the system.</p></li>
+and some related works, and afterwards, define the objective
+and scope of the project.</p></li>
+<li><p><strong>Requirements</strong>: Specify use cases as well as non-functional requirements.</p></li>
+<li><p><strong>Methodology</strong>: Illustrate the development steps, from technical choices
+to architecture and system analysis and design.</p></li>
+<li><p><strong>Results and Discussion</strong>: Show what we did in this project
+and what we learned from it.</p></li>
+<li><p><strong>Conclusion and Future Work</strong>: Summarize the findings
+and suggest the work that can be done to improve the system.</p></li>
 </ol>
+<dl class="footnote brackets">
+<dt class="label" id="foresee"><span class="brackets"><a class="fn-backref" href="#id3">1</a></span></dt>
+<dd><p>While we were overly ambitious and optimistic,
+our supervisor was more realistic and taken Hofstadter’s Law into account:</p>
+<blockquote>
+<div><p>It always takes longer than you expect,
+even when you take into account Hofstadter’s Law. <a class="reference internal" href="#hofstadter" id="id4"><span>[hofstadter]</span></a></p>
+</div></blockquote>
+</dd>
+</dl>
 <dl class="citation">
 <dt class="label" id="willeke"><span class="brackets"><a class="fn-backref" href="#id1">willeke</a></span></dt>
 <dd><p>Marian H.H. Willeke,
 “Agile in Academics: Applying Agile to Instructional Design”.
-<em>2011 Agile Conference</em>, p. 246-251, Salt Lake City, UT, 2011.
+<em>2011 Agile Conference</em>, p. 246–251, Salt Lake City, UT, 2011.
 <a class="reference external" href="https://doi.org/10.1109/AGILE.2011.17">doi: 10.1109/AGILE.2011.17</a>.</p>
 </dd>
 <dt class="label" id="mikkonen2008"><span class="brackets"><a class="fn-backref" href="#id2">mikkonen2008</a></span></dt>
 <dd><p>Tommi Mikkonen and Antero Taivalsaari.
 “Web Applications—Spaghetti Code for the 21st Century”.
 <em>2008 Sixth International Conference on Software Engineering Research,
-Management and Applications</em>, p. 319–328, Prague, 2008.
+Management and Applications</em>, p.|~| 319–328, Prague, 2008.
 <a class="reference external" href="https://doi.org/10.1109/SERA.2008.16">doi: 10.1109/SERA.2008.16</a>.</p>
+</dd>
+<dt class="label" id="hofstadter"><span class="brackets"><a class="fn-backref" href="#id4">hofstadter</a></span></dt>
+<dd><p>Douglas Hofstadter.
+<em>Gödel, Escher, Bach: An Eternal Golden Braid</em>.
+20th anniversary ed., 1999, p. 152.  ISBN 0-465-02656-7.</p>
 </dd>
 </dl>
 </div>
