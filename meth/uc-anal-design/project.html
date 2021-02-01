@@ -295,20 +295,18 @@ the member list of members. Two fields are being called is <code class="docutils
 classified as <code class="docutils literal notranslate"><span class="pre">supervisors</span></code> and <code class="docutils literal notranslate"><span class="pre">students</span></code> is shown in a form.</p>
 <div class="figure align-default" id="p-member-list">
 <p class="plantuml">
-<img src="../../_images/plantuml-36d9fddad014d9b17f4f7c5317d353fefaa062ec.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-84099bcb1b765e0ce7d8b5a8a428fefec89b45f6.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
 actor &quot;:User&quot; as usr
-boundary &quot;:Invite Member Form&quot; as form
 control &quot;:Project Controller&quot; as ctl
 entity &quot;:Project&quot; as db_prj
 
 usr -&gt; ctl : // select member tab()
 ctl -&gt; db_prj : // list member in the project()
 ctl &lt;-- db_prj : // return
-form &lt;-- ctl : // list member
-usr &lt;-- form : // show list member in the project
+usr &lt;-- ctl : // show list member in the project
 &#64;enduml"/></p>
 <p class="caption"><span class="caption-number">Figure 15 </span><span class="caption-text">Analysis sequence diagram
 for the member listing process</span><a class="headerlink" href="#p-member-list" title="Permalink to this image">¶</a></p>
@@ -354,7 +352,7 @@ usr &lt;-- form
 <p>If added user is already in the project</p>
 <div class="figure align-default" id="p-member-add-exist-name">
 <p class="plantuml">
-<img src="../../_images/plantuml-8dd5cf209f17d9029040ddac5ddcd0c1300092c5.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-b5d66583caa40ba7b9a445111bad76453d1f9fb8.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
@@ -362,7 +360,6 @@ actor &quot;:User&quot; as usr
 boundary &quot;:Invite Member Form&quot; as form
 control &quot;:Project Controller&quot; as ctl
 entity &quot;:Project&quot; as db_prj
-entity &quot;:User&quot; as db_usr
 
 usr -&gt; form : // enters invited member's name()
 form -&gt; ctl : // send form()
@@ -377,20 +374,19 @@ when user is existed in project.</span><a class="headerlink" href="#p-member-add
 <p>If added user is an assistant</p>
 <div class="figure align-default" id="p-member-add-assistant">
 <p class="plantuml">
-<img src="../../_images/plantuml-ecdd7febf2f2c911b84ede8c4b4d07a97ad7642e.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-fb6e2c53bf268857191599089bd0c6b62a667733.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
 actor &quot;:User&quot; as usr
 boundary &quot;:Invite Member Form&quot; as form
 control &quot;:Project Controller&quot; as ctl
-entity &quot;:Project&quot; as db_prj
 entity &quot;:User&quot; as db_usr
 
 usr -&gt; form : // enters invited member's name()
 form -&gt; ctl : // send form()
-ctl -&gt; db_prj : // add new user's name to project database()
-ctl &lt;-- db_prj : // new user is an assistant
+ctl -&gt; db_usr : // check new user's role()
+ctl &lt;-- db_usr : // new user is an assistant
 form &lt;-- ctl
 usr &lt;-- form : inform that added user is an assistant
 &#64;enduml"/></p>
@@ -400,20 +396,19 @@ when user is an assistant.</span><a class="headerlink" href="#p-member-add-assis
 <p>If the name is not in <code class="docutils literal notranslate"><span class="pre">users</span></code> database</p>
 <div class="figure align-default" id="p-member-add-not-registered">
 <p class="plantuml">
-<img src="../../_images/plantuml-69e9e3492946d498be553b1b8fe488b89286a3ee.svg" alt="&#64;startuml
+<img src="../../_images/plantuml-224c88bd6addb3049dc20c3b96f61b2a1d41f26b.svg" alt="&#64;startuml
 hide footbox
 autoactivate on
 skinparam sequenceParticipant underline
 actor &quot;:User&quot; as usr
 boundary &quot;:Invite Member Form&quot; as form
 control &quot;:Project Controller&quot; as ctl
-entity &quot;:Project&quot; as db_prj
 entity &quot;:User&quot; as db_usr
 
 usr -&gt; form : // enters invited member's name()
 form -&gt; ctl : // send form()
-ctl -&gt; db_prj : // add new user's name to project database()
-ctl &lt;-- db_prj : // new user is not in database
+ctl -&gt; db_usr : // check new user's name in user database()
+ctl &lt;-- db_usr : // new user is not in database
 form &lt;-- ctl
 usr &lt;-- form : inform that added user has not registered
 &#64;enduml"/></p>
