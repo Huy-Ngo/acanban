@@ -1,0 +1,26 @@
+@startwbs
+* Acanban
+** Collaboration platform
+*** Projects
+**** Create projects
+**** Add members
+*** Tasks
+**** Create tasks
+**** Assign tasks
+**** Complete tasks
+**** Discuss
+** Academic integration
+*** Submitting reports
+*** Evaluation
+**** Evaluate project result
+**** Evaluate reports
+**** Evaluate presentation
+*** Statistics
+**** Collect evaluation
+**** Export students' final results
+** Other web nonfunctionalities
+*** Authentication
+**** Register
+**** Login
+*** Search
+@endwbs
