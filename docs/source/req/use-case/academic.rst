@@ -4,6 +4,8 @@ Academic Evaluation
 This section aims to describe basic activities relating to the evaluation.
 In order to build the academic integration, we let supervisors do evaluation.
 In addition, academic assistant could also track student progress.
+Overall, the use cases defined here are the functional requirements
+for :ref:`objacademic`.
 
 .. uml::
 
