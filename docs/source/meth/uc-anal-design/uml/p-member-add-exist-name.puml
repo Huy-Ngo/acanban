@@ -6,7 +6,6 @@ actor ":User" as usr
 boundary ":Invite Member Form" as form
 control ":Project Controller" as ctl
 entity ":Project" as db_prj
-entity ":User" as db_usr
 
 usr -> form : // enters invited member's name()
 form -> ctl : // send form()
