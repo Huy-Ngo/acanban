@@ -1,6 +1,10 @@
 Technical Choices
 =================
 
+Before starting to work on the project, we had to decide on the technology
+we would use for constructing this system.  In this section, we will introduce
+the tools we used for development in this project and justify those choices.
+
 Concurrency
 -----------
 

@@ -184,12 +184,12 @@
             
   <div class="section" id="security">
 <h1>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h1>
+<p>Some designs that address security concerns – authentication, authorization,
+encryption, preventing attacks – are described in this part.</p>
 <div class="section" id="authentication">
 <h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
 <p>In order to protect the data from unauthorized users, we must first verify
 their identity, i.e., authenticate the users.</p>
-<div class="section" id="register">
-<h3>Register<a class="headerlink" href="#register" title="Permalink to this headline">¶</a></h3>
 <p>To register for an account, the user should fill a form
 with personal information:</p>
 <ul class="simple">
@@ -321,10 +321,7 @@ have to suffer th consequence.</p>
 <p>Alternatively, the administrator can remove the register endpoint
 and generate the accounts for each user.</p>
 <p>However, we did not implement either of these schemes.</p>
-</div>
-<div class="section" id="log-in">
-<h3>Log In<a class="headerlink" href="#log-in" title="Permalink to this headline">¶</a></h3>
-<p>The user can log in to the site in the login endpoint.
+<p>After that, the user can log in to the site in the login endpoint.
 After submitting the form with their username and password,
 they should be logged in.</p>
 <div class="figure align-default" id="log-basic">
@@ -404,7 +401,6 @@ form &lt;-- ctl: // inform about wrong password()
 <p class="caption"><span class="caption-number">Figure 11 </span><span class="caption-text">Analysis sequence diagram
 for the alternative flow of login
 where the</span><a class="headerlink" href="#log-wrong-path" title="Permalink to this image">¶</a></p>
-</div>
 </div>
 </div>
 <div class="section" id="authorization">
