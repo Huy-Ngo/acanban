@@ -39,7 +39,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Results and Discussion" href="../result.html" />
-    <link rel="prev" title="Artifact Upload" href="uc-anal-design/file.html" /> 
+    <link rel="prev" title="Data Tables" href="database/tables/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,8 +90,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Methodology</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="choices.html">Technical Choices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arch.html">System Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="database/index.html">Database Design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="uc-anal-design/index.html">Use-Case Analysis and Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database/index.html">Database Design</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">User Interface and User Experience</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#navigation">Navigation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#graphical-user-interface">Graphical User Interface</a></li>
@@ -185,7 +185,7 @@ as well as being easy to adopt by the end-users.</p>
 be well-structured.  Furthermore, it is important to avoid having deadends,
 which negatively impact the traversability.  With these principles im mind,
 we then designed the navigation graph.  For every user, the following
-auxiliary endpoints are available, as illustrated in <a class="reference internal" href="#auxnav"><span class="std std-numref">Figure 25</span></a>.</p>
+auxiliary endpoints are available, as illustrated in <a class="reference internal" href="#auxnav"><span class="std std-numref">Figure 26</span></a>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">/register</span></code>: Registration form</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/login</span></code>: Login form</p></li>
@@ -213,10 +213,10 @@ user --&gt; project
 root --&gt; project
 root --&gt; user
 projects --&gt; user"/></p>
-<p class="caption"><span class="caption-number">Figure 25 </span><span class="caption-text">Auxiliary endpoints</span><a class="headerlink" href="#auxnav" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Figure 26 </span><span class="caption-text">Auxiliary endpoints</span><a class="headerlink" href="#auxnav" title="Permalink to this image">¶</a></p>
 </div>
 <p>Each project’s page is divided into several tabs, namely <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">edit</span></code>,
-<code class="docutils literal notranslate"><span class="pre">members</span></code>, <code class="docutils literal notranslate"><span class="pre">tasks</span></code>, <code class="docutils literal notranslate"><span class="pre">report</span></code> and <code class="docutils literal notranslate"><span class="pre">slides</span></code>, as shown in <a class="reference internal" href="#pnav"><span class="std std-numref">Figure 26</span></a>.</p>
+<code class="docutils literal notranslate"><span class="pre">members</span></code>, <code class="docutils literal notranslate"><span class="pre">tasks</span></code>, <code class="docutils literal notranslate"><span class="pre">report</span></code> and <code class="docutils literal notranslate"><span class="pre">slides</span></code>, as shown in <a class="reference internal" href="#pnav"><span class="std std-numref">Figure 27</span></a>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">/p/&lt;uuid&gt;/info</span></code> (GET): Project’s basic information</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/p/&lt;uuid&gt;/edit</span></code> (GET and POST): Form for updating
@@ -256,13 +256,13 @@ report --&gt; &quot;/p/&lt;uuid&gt;/report/eval&quot;
 slides --&gt; &quot;/p/&lt;uuid&gt;/slides/upload&quot;
 slides --&gt; ipfs
 slides --&gt; &quot;/p/&lt;uuid&gt;/slides/eval&quot;"/></p>
-<p class="caption"><span class="caption-number">Figure 26 </span><span class="caption-text">Project’s endpoints</span><a class="headerlink" href="#pnav" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Figure 27 </span><span class="caption-text">Project’s endpoints</span><a class="headerlink" href="#pnav" title="Permalink to this image">¶</a></p>
 </div>
 <p>Project’s tabs are mutually interlinked but for brevity they are not connected
 in the figure.  Additionally, POST-only endpoints redirects back to referrer
 upon success.</p>
 <p>Due to complexity, task-related endpoints are documented
-separately in <a class="reference internal" href="#tnav"><span class="std std-numref">Figure 27</span></a>, which consists of the ones listed below.
+separately in <a class="reference internal" href="#tnav"><span class="std std-numref">Figure 28</span></a>, which consists of the ones listed below.
 Pages in <code class="docutils literal notranslate"><span class="pre">/p/&lt;uuid&gt;/tasks</span></code>, including the Kanban board,
 exclusively serves <a class="reference internal" href="../intro.html#objcollab"><span class="std std-ref">Building a Collaboration Platform</span></a>.</p>
 <ul class="simple">
@@ -279,7 +279,7 @@ task --&gt; &quot;/p/&lt;uuid&gt;/tasks/&lt;index&gt;/comment&quot;
 task --&gt; &quot;/p/&lt;uuid&gt;/tasks/&lt;index&gt;/upload&quot;
 task --&gt; &quot;/ipfs/&lt;cid&gt;&quot;
 tasks --&gt; &quot;/p/&lt;uuid&gt;/tasks/eval&quot;"/></p>
-<p class="caption"><span class="caption-number">Figure 27 </span><span class="caption-text">Task endpoints</span><a class="headerlink" href="#tnav" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Figure 28 </span><span class="caption-text">Task endpoints</span><a class="headerlink" href="#tnav" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="graphical-user-interface">
@@ -308,7 +308,7 @@ for visually impaired people.</p>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="../result.html" class="btn btn-neutral float-right" title="Results and Discussion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="uc-anal-design/file.html" class="btn btn-neutral float-left" title="Artifact Upload" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="database/tables/index.html" class="btn btn-neutral float-left" title="Data Tables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

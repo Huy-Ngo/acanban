@@ -90,7 +90,6 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Methodology</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../choices.html">Technical Choices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../arch.html">System Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../database/index.html">Database Design</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Use-Case Analysis and Design</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="security.html">Security</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Project Management</a><ul>
@@ -104,6 +103,7 @@
 <li class="toctree-l3"><a class="reference internal" href="file.html">Artifact Upload</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../database/index.html">Database Design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ux.html">User Interface and User Experience</a></li>
 </ul>
 </li>
@@ -195,7 +195,7 @@ in this context, namely sequence diagrams and collaboration diagrams.</p>
 <div class="section" id="create-project">
 <h2>Create Project<a class="headerlink" href="#create-project" title="Permalink to this headline">¶</a></h2>
 <p>The design for the use case <a class="reference internal" href="../../req/use-case/collab.html#project-create"><span class="std std-ref">Create Project</span></a>
-is described in <a class="reference internal" href="#p-create"><span class="std std-numref">Figure 16</span></a>.</p>
+is described in <a class="reference internal" href="#p-create"><span class="std std-numref">Figure 12</span></a>.</p>
 <div class="figure align-default" id="p-create">
 <p class="plantuml">
 <img src="../../_images/plantuml-6de9f8d9c677e6c7da94f713bd981004b42cef25.svg" alt="&#64;startuml
@@ -222,13 +222,13 @@ description and members
 stop
 &#64;enduml
 "/></p>
-<p class="caption"><span class="caption-number">Figure 16 </span><span class="caption-text">Activity diagram illustrating project creation</span><a class="headerlink" href="#p-create" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Figure 12 </span><span class="caption-text">Activity diagram illustrating project creation</span><a class="headerlink" href="#p-create" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="show-project-information">
 <h2>Show Project Information<a class="headerlink" href="#show-project-information" title="Permalink to this headline">¶</a></h2>
 <p>The design for the use case <a class="reference internal" href="../../req/use-case/collab.html#project-info"><span class="std std-ref">Show Project Information</span></a>
-is described in <a class="reference internal" href="#p-info"><span class="std std-numref">Figure 17</span></a>.</p>
+is described in <a class="reference internal" href="#p-info"><span class="std std-numref">Figure 13</span></a>.</p>
 <div class="figure align-default" id="p-info">
 <p class="plantuml">
 <img src="../../_images/plantuml-4e34ccc84ee16b80938783781ffff5b70d145f78.svg" alt="&#64;startuml
@@ -248,13 +248,13 @@ endif
 stop
 &#64;enduml
 "/></p>
-<p class="caption"><span class="caption-number">Figure 17 </span><span class="caption-text">Activity diagram illustrating showing project’s basic information</span><a class="headerlink" href="#p-info" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Figure 13 </span><span class="caption-text">Activity diagram illustrating showing project’s basic information</span><a class="headerlink" href="#p-info" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="edit-project-information">
 <h2>Edit Project Information<a class="headerlink" href="#edit-project-information" title="Permalink to this headline">¶</a></h2>
 <p>The design for the use case <a class="reference internal" href="../../req/use-case/collab.html#project-edit"><span class="std std-ref">Edit Project Information</span></a>
-is described in <a class="reference internal" href="#p-edit"><span class="std std-numref">Figure 18</span></a>.</p>
+is described in <a class="reference internal" href="#p-edit"><span class="std std-numref">Figure 14</span></a>.</p>
 <div class="figure align-default" id="p-edit">
 <p class="plantuml">
 <img src="../../_images/plantuml-60c4b9457377bf00ce5280ffce490185fd6cd156.svg" alt="&#64;startuml
@@ -282,7 +282,7 @@ description in database;
 stop
 &#64;enduml
 "/></p>
-<p class="caption"><span class="caption-number">Figure 18 </span><span class="caption-text">Activity diagram illustrating updating project’s basic information</span><a class="headerlink" href="#p-edit" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Figure 14 </span><span class="caption-text">Activity diagram illustrating updating project’s basic information</span><a class="headerlink" href="#p-edit" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="list-member">
@@ -310,7 +310,7 @@ ctl &lt;-- db_prj : // return
 form &lt;-- ctl : // list member
 usr &lt;-- form : // show list member in the project
 &#64;enduml"/></p>
-<p class="caption"><span class="caption-number">Figure 19 </span><span class="caption-text">Analysis sequence diagram
+<p class="caption"><span class="caption-number">Figure 15 </span><span class="caption-text">Analysis sequence diagram
 for the member listing process</span><a class="headerlink" href="#p-member-list" title="Permalink to this image">¶</a></p>
 </div>
 </div>
@@ -349,7 +349,7 @@ ctl &lt;-- db_usr : // return
 form &lt;-- ctl
 usr &lt;-- form
 &#64;enduml"/></p>
-<p class="caption"><span class="caption-number">Figure 20 </span><span class="caption-text">Analysis sequence diagram for successfully invite member.</span><a class="headerlink" href="#p-member-add-success" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Figure 16 </span><span class="caption-text">Analysis sequence diagram for successfully invite member.</span><a class="headerlink" href="#p-member-add-success" title="Permalink to this image">¶</a></p>
 </div>
 <p>If added user is already in the project</p>
 <div class="figure align-default" id="p-member-add-exist-name">
@@ -371,7 +371,7 @@ ctl &lt;-- db_prj : // added user is already in the project
 form &lt;-- ctl
 usr &lt;-- form : inform that added user is already in the project
 &#64;enduml"/></p>
-<p class="caption"><span class="caption-number">Figure 21 </span><span class="caption-text">Analysis sequence diagram for adding member
+<p class="caption"><span class="caption-number">Figure 17 </span><span class="caption-text">Analysis sequence diagram for adding member
 when user is existed in project.</span><a class="headerlink" href="#p-member-add-exist-name" title="Permalink to this image">¶</a></p>
 </div>
 <p>If added user is an assistant</p>
@@ -394,7 +394,7 @@ ctl &lt;-- db_prj : // new user is an assistant
 form &lt;-- ctl
 usr &lt;-- form : inform that added user is an assistant
 &#64;enduml"/></p>
-<p class="caption"><span class="caption-number">Figure 22 </span><span class="caption-text">Analysis sequence diagram for adding member
+<p class="caption"><span class="caption-number">Figure 18 </span><span class="caption-text">Analysis sequence diagram for adding member
 when user is an assistant.</span><a class="headerlink" href="#p-member-add-assistant" title="Permalink to this image">¶</a></p>
 </div>
 <p>If the name is not in <code class="docutils literal notranslate"><span class="pre">users</span></code> database</p>
@@ -417,7 +417,7 @@ ctl &lt;-- db_prj : // new user is not in database
 form &lt;-- ctl
 usr &lt;-- form : inform that added user has not registered
 &#64;enduml"/></p>
-<p class="caption"><span class="caption-number">Figure 23 </span><span class="caption-text">Analysis sequence diagram for adding non-registered user.</span><a class="headerlink" href="#p-member-add-not-registered" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Figure 19 </span><span class="caption-text">Analysis sequence diagram for adding non-registered user.</span><a class="headerlink" href="#p-member-add-not-registered" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>

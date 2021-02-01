@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>System Requirements &mdash; Acanban  documentation</title>
+  <title>Functional Decomposition &mdash; Acanban  documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Types of Users" href="users.html" />
-    <link rel="prev" title="Introduction" href="../intro.html" /> 
+    <link rel="next" title="Use-case model" href="use-case/index.html" />
+    <link rel="prev" title="Types of Users" href="users.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,9 +86,13 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">System Requirements</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Requirements</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="users.html">Types of Users</a></li>
-<li class="toctree-l2"><a class="reference internal" href="break-down.html">Functional Decomposition</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Functional Decomposition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building-a-collaboration-platform">Building a Collaboration Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#academic-integration">Academic Integration</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="use-case/index.html">Use-case model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="suppl-spec.html">Supplementary Specification</a></li>
 </ul>
@@ -147,13 +151,15 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>System Requirements</li>
+          <li><a href="index.html">System Requirements</a> &raquo;</li>
+        
+      <li>Functional Decomposition</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/req/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/req/break-down.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -166,37 +172,67 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="system-requirements">
-<h1>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h1>
-<p>In this section, from the objective and context, we examined
-user categories and their behavior.  After that, we analyzed the expected system
-to see which features therewill be.  From there, we derived a list of
-use cases for the system.  Finally, we add some supplementary specifications
-for describing nonfunctional requirements.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="users.html">Types of Users</a></li>
-<li class="toctree-l1"><a class="reference internal" href="break-down.html">Functional Decomposition</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="break-down.html#building-a-collaboration-platform">Building a Collaboration Platform</a></li>
-<li class="toctree-l2"><a class="reference internal" href="break-down.html#academic-integration">Academic Integration</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="use-case/index.html">Use-case model</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="use-case/collab.html">Project Collaboration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case/academic.html">Academic Evaluation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-case/other.html">Other Use-Cases</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="suppl-spec.html">Supplementary Specification</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html#usability">Usability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html#reliability">Reliability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html#performance">Performance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html#supportability">Supportability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html#security">Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="suppl-spec.html#legal-constraints">Legal Constraints</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="functional-decomposition">
+<h1>Functional Decomposition<a class="headerlink" href="#functional-decomposition" title="Permalink to this headline">¶</a></h1>
+<p>From the project objectives, we applied divide-and-conquer strategy:
+decomposed each expected functionality and thereby outlined the use cases
+we need to implement.</p>
+<p>The work breakdown structure (WBS) diagram in <a class="reference internal" href="#wbs"><span class="std std-numref">Figure 1</span></a>
+summarizes the decomposition we made.</p>
+<div class="figure align-default" id="wbs">
+<p class="plantuml">
+<img src="../_images/plantuml-20b4077ecff8d8e61003450cab4671d8f6f13d2d.svg" alt="&#64;startwbs
+* Acanban
+** Collaboration platform
+*** Projects
+**** Create projects
+**** Add members
+*** Tasks
+**** Create tasks
+**** Assign tasks
+**** Complete tasks
+**** Discuss
+** Academic integration
+*** Submitting reports
+*** Evaluation
+**** Evaluate project result
+**** Evaluate reports
+**** Evaluate presentation
+*** Statistics
+**** Collect evaluation
+**** Export students' final results
+** Other web nonfunctionalities
+*** Authentication
+**** Register
+**** Login
+*** Search
+&#64;endwbs
+"/></p>
+<p class="caption"><span class="caption-number">Figure 1 </span><span class="caption-text">The features the system was expected to have.</span><a class="headerlink" href="#wbs" title="Permalink to this image">¶</a></p>
+</div>
+<p>In the following two sections, we will justify this breakdown.</p>
+<div class="section" id="building-a-collaboration-platform">
+<h2>Building a Collaboration Platform<a class="headerlink" href="#building-a-collaboration-platform" title="Permalink to this headline">¶</a></h2>
+<p>For the users to collaborate, they should be able to create projects and tasks.
+They should be also able to edit them in case they make some mistakes or they
+need to update.</p>
+<p>Each task should be assigned to some members.  After it is done, the member
+should be able to complete it.  As they do task, they may need to discuss the problem.</p>
+</div>
+<div class="section" id="academic-integration">
+<h2>Academic Integration<a class="headerlink" href="#academic-integration" title="Permalink to this headline">¶</a></h2>
+<p>Group projects are evaluated according to three criteria:</p>
+<ol class="arabic simple">
+<li><p>The project outcome</p></li>
+<li><p>The written reports</p></li>
+<li><p>The presentation, also called oral defense</p></li>
+</ol>
+<p>The first one is evaluated by the supervisor; the latter two are evaluated
+by the judge.</p>
+<p>The system should therefore allow students to upload their reports,
+and supervisors and judges to evaluate them.</p>
+<p>After the evaluation is made, the result is aggregated by each faculty’s
+academic assistants, who then export the results or make statistical reports.</p>
 </div>
 </div>
 
@@ -206,8 +242,8 @@ for describing nonfunctional requirements.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="users.html" class="btn btn-neutral float-right" title="Types of Users" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="use-case/index.html" class="btn btn-neutral float-right" title="Use-case model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="users.html" class="btn btn-neutral float-left" title="Types of Users" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

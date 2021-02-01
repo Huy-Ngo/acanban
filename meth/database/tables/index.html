@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Use-Case Analysis and Design" href="../../uc-anal-design/index.html" />
+    <link rel="next" title="User Interface and User Experience" href="../../ux.html" />
     <link rel="prev" title="File" href="../entities/file.html" /> 
 </head>
 
@@ -90,12 +90,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Methodology</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../choices.html">Technical Choices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../arch.html">System Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../uc-anal-design/index.html">Use-Case Analysis and Design</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html">Database Design</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../entities/index.html">Entity Set</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Data Tables</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../uc-anal-design/index.html">Use-Case Analysis and Design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ux.html">User Interface and User Experience</a></li>
 </ul>
 </li>
@@ -182,10 +182,10 @@ we derive three data tables: <code class="docutils literal notranslate"><span cl
 <p>The <code class="docutils literal notranslate"><span class="pre">User</span></code> entity set is mapped to <code class="docutils literal notranslate"><span class="pre">users</span></code> table.
 Likewise, <code class="docutils literal notranslate"><span class="pre">File</span></code> is mapped to <code class="docutils literal notranslate"><span class="pre">files</span></code> table.</p>
 <div class="figure align-default" id="id6" style="width: 100%">
-<img alt="../../../_images/student.svg" src="../../../_images/student.svg" /><p class="caption"><span class="caption-number">Figure 5 </span><span class="caption-text">An example database row for student. <a class="footnote-reference brackets" href="#id5" id="id1">1</a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<img alt="../../../_images/student.svg" src="../../../_images/student.svg" /><p class="caption"><span class="caption-number">Figure 22 </span><span class="caption-text">An example database row for student. <a class="footnote-reference brackets" href="#id5" id="id1">1</a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id7" style="width: 100%">
-<img alt="../../../_images/file.svg" src="../../../_images/file.svg" /><p class="caption"><span class="caption-number">Figure 6 </span><span class="caption-text">The structure of database table <code class="docutils literal notranslate"><span class="pre">file</span></code>. <a class="footnote-reference brackets" href="#id5" id="id2">1</a></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<img alt="../../../_images/file.svg" src="../../../_images/file.svg" /><p class="caption"><span class="caption-number">Figure 23 </span><span class="caption-text">The structure of database table <code class="docutils literal notranslate"><span class="pre">file</span></code>. <a class="footnote-reference brackets" href="#id5" id="id2">1</a></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 <p>However, most other entities are stored within a single table <code class="docutils literal notranslate"><span class="pre">projects</span></code>,
 forming a typical tree-like structure of document-oriented database.
@@ -202,13 +202,13 @@ where two or more supervisors co-supervise a project.</p></li>
 for the ease of querying projects a certain user participates in.</p></li>
 </ul>
 <div class="figure align-default" id="id8" style="width: 100%">
-<img alt="../../../_images/project.svg" src="../../../_images/project.svg" /><p class="caption"><span class="caption-number">Figure 7 </span><span class="caption-text">The structure of database table <code class="docutils literal notranslate"><span class="pre">projects</span></code>. <a class="footnote-reference brackets" href="#id5" id="id3">1</a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<img alt="../../../_images/project.svg" src="../../../_images/project.svg" /><p class="caption"><span class="caption-number">Figure 24 </span><span class="caption-text">The structure of database table <code class="docutils literal notranslate"><span class="pre">projects</span></code>. <a class="footnote-reference brackets" href="#id5" id="id3">1</a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
 </div>
 <p>Within each task is a discussion thread with a forest structure of <code class="docutils literal notranslate"><span class="pre">Comment</span></code>
 entities.  There are several root comments within the discussions.
 Each comment can contain some child comments.</p>
 <div class="figure align-default" id="id9" style="width: 100%">
-<img alt="../../../_images/discussion.svg" src="../../../_images/discussion.svg" /><p class="caption"><span class="caption-number">Figure 8 </span><span class="caption-text">The forest structure of <code class="docutils literal notranslate"><span class="pre">discussion</span></code> field. <a class="footnote-reference brackets" href="#id5" id="id4">1</a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+<img alt="../../../_images/discussion.svg" src="../../../_images/discussion.svg" /><p class="caption"><span class="caption-number">Figure 25 </span><span class="caption-text">The forest structure of <code class="docutils literal notranslate"><span class="pre">discussion</span></code> field. <a class="footnote-reference brackets" href="#id5" id="id4">1</a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </div>
 <dl class="footnote brackets">
 <dt class="label" id="id5"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>,<a href="#id4">4</a>)</span></dt>
@@ -224,7 +224,7 @@ Source text used can be found at <a class="reference external" href="https://git
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../../uc-anal-design/index.html" class="btn btn-neutral float-right" title="Use-Case Analysis and Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../ux.html" class="btn btn-neutral float-right" title="User Interface and User Experience" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../entities/file.html" class="btn btn-neutral float-left" title="File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
