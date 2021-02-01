@@ -1,7 +1,7 @@
 Functional Decomposition
 ========================
 
-From the project objective, we applied divide-and-conquer strategy:
+From the project objectives, we applied divide-and-conquer strategy:
 decomposed each expected functionality and thereby outlined the use cases
 we need to implement.
 
