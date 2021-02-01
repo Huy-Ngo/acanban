@@ -1,4 +1,4 @@
-Database design
+Database Design
 ===============
 
 To design the database, we first analyze which entities need to be represented.
