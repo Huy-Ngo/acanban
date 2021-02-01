@@ -1,8 +1,8 @@
 Security
 ========
 
-Some designs that address security concerns -- authentication, authorization,
-encryption, preventing attacks -- are described in this part.
+Some designs that address security concerns---authentication, authorization,
+encryption, preventing attacks---are described in this part.
 
 Authentication
 --------------
