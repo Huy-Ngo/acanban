@@ -2,7 +2,9 @@ Other Use-Cases
 ===============
 
 As for most web applications, this system is required to perform basic tasks
-such as authentication and searching.
+such as authentication and searching.  In other words, those defined here
+are the bridges between the non-functional requirements (of :ref:`appapp`)
+and the use cases previously declared.
 
 .. uml::
 

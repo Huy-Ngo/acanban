@@ -2,8 +2,8 @@ Project Collaboration
 =====================
 
 This section aims to describe basic activities relating to the project.
-In order to build the collaboration platform, we let users do basic CRUD
-on project, along with the help of tasks and discussion.
+For :ref:`objcollab`, we let users perform basic create-read-update-delete
+on projects, along with the help of tasks and discussion.
 
 .. uml::
 
