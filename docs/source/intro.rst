@@ -46,7 +46,8 @@ are targeting software development projects,
 The application of Kanban board and Gantt chart
 as project management tools can benefit any other fields.
 In fact, using Kanban board in other fields is also known
-to improve productivity by saving time and aid internal communication. |~| [willeke]_
+to improve productivity by saving time
+and aid internal communication |~| [willeke]_.
 
 As effective and popular as existing project management systems are,
 they do not support academic evaluation, which is one of our main motivations.
@@ -96,6 +97,11 @@ portability |~| [mikkonen2008]_.  It should be easy to be adopted by users on
 different devices network connection quality, whilst being simple enough
 to be maintained by a few administrators to run on modest hardware.
 
+Last but not least, for long-term maintainability and ethical concerns,
+such as protecting of digital freedom and promoting independence
+and cooperation in educational institutions, the system should be made
+available under a free software license |~| [libredu]_.
+
 Expected Outcomes
 -----------------
 
@@ -141,7 +147,7 @@ The report contains following chapters:
    our supervisor was more realistic and taken Hofstadter's Law into account:
 
       It always takes longer than you expect,
-      even when you take into account Hofstadter's Law. |~| [hofstadter]_
+      even when you take into account Hofstadter's Law |~| [hofstadter]_.
 
 .. [willeke] Marian H.H. Willeke,
    "Agile in Academics: Applying Agile to Instructional Design".
@@ -150,8 +156,12 @@ The report contains following chapters:
 .. [mikkonen2008] Tommi Mikkonen and Antero Taivalsaari.
    "Web Applications---Spaghetti Code for the 21st Century".
    *2008 Sixth International Conference on Software Engineering Research,
-   Management and Applications*, p.|~| 319--328, Prague, 2008.
+   Management and Applications*, p. |~| 319--328, Prague, 2008.
    :doi:`10.1109/SERA.2008.16`.
+.. [libredu] Richard Stallman.
+   "Why Schools Should Exclusively Use Free Software".
+   *Free Software and Education*.  GNU Project.  Retrieved 2021-02-01.
+   https://www.gnu.org/education/edu-schools.html
 .. [hofstadter] Douglas Hofstadter.
    *Gödel, Escher, Bach: An Eternal Golden Braid*.
    20th anniversary ed., 1999, p. |~| 152.  ISBN 0-465-02656-7.
