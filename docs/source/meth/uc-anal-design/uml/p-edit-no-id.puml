@@ -1,0 +1,15 @@
+@startuml
+hide footbox
+autoactivate on
+skinparam sequenceParticipant underline
+actor ":User" as usr
+control ":Project Controller" as ctl
+entity ":quart_auth" as quart
+
+usr -> ctl : // request editing project()
+ctl -> quart : // check authentication()
+ctl <-- quart : // authenticated
+ctl -> db_prj : // check project id is in project database()
+ctl <-- db_prj : // project id is not in project database
+usr <-- ctl : // inform that project id is not in project database
+@enduml

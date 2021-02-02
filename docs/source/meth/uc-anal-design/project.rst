@@ -67,35 +67,68 @@ If ``quart_auth`` returns user is not authenticated,
 controller should inform accordingly.
 
 .. uml:: uml/p-info-not-auth.puml
-   :caption: Analysis sequence diagram for successfully show
-             project information.
+   :caption: Analysis sequence diagram for showing project information
+             when user is not authenticated.
    :name: p-info-not-auth
 
 If project id is not in the database, controller must show the error
 
 .. uml:: uml/p-info-no-id.puml
-   :caption: Analysis sequence diagram for successfully show
-             project information.
+   :caption: Analysis sequence diagram for showing project information
+             when project id does not exist.
    :name: p-info-no-id
 
 If user is not in the project, controller must show the error
 
 .. uml:: uml/p-info-not-member.puml
-   :caption: Analysis sequence diagram for successfully show
-             project information.
+   :caption: Analysis sequence diagram for showing project information
+             when user is not a project's member.
    :name: p-info-not-member
 
 Edit Project Information
 ------------------------
 
-The design for the use case :ref:`project edit`
-is described in :numref:`p-edit`, where the system takes the updated
-project information from the user and synchronizes the database accordingly.
+The function allow editing project information.
 
-.. uml:: uml/p-edit.puml
+The implementation involves only ``project`` database table,
+where ``id``, ``students`` and ``supervisors`` indexes are visited
+
+When user navigate to edit tab, the project controller checks whether or not
+the person is authenticated.  After that, it checks if the current user
+is a member of project, and if the project id is existed in database table.
+If all conditions are satisfied, controller shows the form for user to fill in.
+When user fills the form, controller updates the ``project`` table with
+the extracted data
+
+.. uml:: uml/p-edit-success.puml
    :scale: 80%
-   :caption: Activity diagram illustrating updating project's basic information
-   :name: p-edit
+   :caption: Analysis sequence diagram for successfully edit
+             project information.
+   :name: p-edit-success
+
+If user is not authenticated
+
+.. uml:: uml/p-edit-not-auth.puml
+   :scale: 80%
+   :caption: Analysis sequence diagram for editing project with
+             un-authenticated user.
+   :name: p-edit-not-auth
+
+If project not exists in ``projects`` database table
+
+.. uml:: uml/p-edit-no-id.puml
+   :scale: 80%
+   :caption: Analysis sequence diagram for editing projects
+             when project id does not exist.
+   :name: p-edit-success
+
+If user is not a member in the project
+
+.. uml:: uml/p-edit-not-member.puml
+   :scale: 80%
+   :caption: Analysis sequence diagram for editing projects
+             when user is not a member of the project.
+   :name: p-edit-not-member
 
 List member
 -----------
