@@ -12,5 +12,5 @@ form -> ctl : // send form()
 ctl -> db_prj : // add new user's name to project database()
 ctl <-- db_prj : // added user is already in the project
 form <-- ctl
-usr <-- form : inform that added user is already in the project
+usr <-- form : // inform that added user is already in the project
 @enduml

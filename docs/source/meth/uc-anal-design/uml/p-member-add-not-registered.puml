@@ -12,5 +12,5 @@ form -> ctl : // send form()
 ctl -> db_usr : // check new user's name in user database()
 ctl <-- db_usr : // new user is not in database
 form <-- ctl
-usr <-- form : inform that added user has not registered
+usr <-- form : // inform that added user has not registered
 @enduml

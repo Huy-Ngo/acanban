@@ -12,5 +12,5 @@ form -> ctl : // send form()
 ctl -> db_usr : // check new user's role()
 ctl <-- db_usr : // new user is an assistant
 form <-- ctl
-usr <-- form : inform that added user is an assistant
+usr <-- form : // inform that added user is an assistant
 @enduml
