@@ -26,7 +26,6 @@ from quart import (Blueprint, ResponseReturnValue,
 from quart.exceptions import NotFound, RequestTimeout
 from quart_auth import current_user
 from rethinkdb import r
-from rethinkdb.errors import ReqlNonExistenceError
 from trio import TooSlowError, fail_after
 
 __all__ = ['add', 'blueprint']
@@ -94,12 +93,9 @@ async def proxy_gateway(path: str) -> ResponseReturnValue:
         cid = ensure_cidv1(path.split('/', 1)[0])
     except ValueError:
         raise NotFound
-    query = r.table('files').get_all(cid, index='cid')[0].pluck()
+    count = r.table('files').get_all(cid, index='cid').count()
     async with current_app.db_pool.connection() as connection:
-        try:
-            await query.run(connection)
-        except ReqlNonExistenceError:
-            return fallback()
+        if not await count.run(connection): return fallback()
 
     client = current_app.ipfs_gateway
     proxied_request = client.build_request(
