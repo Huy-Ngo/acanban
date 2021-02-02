@@ -5,22 +5,44 @@ In this section, we present the system design for project management use cases.
 Task management use cases, while indeed are part of project management,
 are discussed in the next.
 
-Since Quart, the framework we employ, is not strictly object-orientated
-and the design involves a lot of short-circuiting, it is represented
-via activity diagram instead of the traditional UML diagrams often used
-in this context, namely sequence diagrams and collaboration diagrams.
-
 Create Project
 --------------
 
-The design for the use case :ref:`project create`
-is described in :numref:`p-create`, where the system takes the initial values
-from the user to construct a new project and insert it into the database.
+The function allow creating projects.
 
-.. uml:: uml/p-create.puml
+The implementation involves two database tables:
+
+- ``users`` database table, where ``role`` index is checked.
+- ``projects`` database table, where new document is created.
+
+When user requests to create project, the project controller checks
+with ``quart_auth`` whether the person is authenticated.  The controller then
+checks in ``users`` database that if the current user is not assistant.
+When both conditions are satisfied, controller returns a form for user to
+create project. After user fills in the form, the controller requests updating
+``project`` database accordingly.
+
+.. uml:: uml/p-create-success.puml
    :scale: 80%
-   :caption: Activity diagram illustrating project creation
-   :name: p-create
+   :caption: Activity diagram illustrating the successful project creation
+   :name: p-create-success
+
+If user is not authenticated, controller should inform that user
+has not logged in.
+
+.. uml:: uml/p-create-not-auth.puml
+   :scale: 80%
+   :caption: Analysis sequence diagram for create project by 
+             non-authenticated user.
+   :name: p-create-not-auth
+
+If user is an assistant, controller should inform that user are not allowed
+to create projects.
+
+.. uml:: uml/p-create-assistant.puml
+   :scale: 80%
+   :caption: Analysis sequence diagram for create project by assistant.
+   :name: p-create-assistant
 
 Show Project Information
 ------------------------
