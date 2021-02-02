@@ -3,6 +3,7 @@ Supplementary Specification
 
 Besides the functionalities specified in the Use-Case model,
 following are more specifications for non-functional requirements.
+Together, these are concrete realization of requisites for :ref:`appapp`.
 
 Usability
 ---------
