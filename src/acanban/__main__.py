@@ -19,7 +19,6 @@
 
 from hypercorn.middleware import HTTPToHTTPSRedirectMiddleware
 from hypercorn.trio import serve
-from hypercorn.typing import ASGIFramework
 from trio import run
 
 from . import app as acanban
@@ -30,8 +29,10 @@ if __name__ == '__main__':
     domain = acanban_config().get('domain')
     acanban.db_config = rethinkdb_config()
     acanban.ipfs_config = ipfs_config()
+    # FIXME: type annotations in quart < 0.14
+    # and latest hypercorn start to diverge.
     if domain is None:
-        app: ASGIFramework = acanban
+        app = acanban  # type: ignore
     else:
-        app = HTTPToHTTPSRedirectMiddleware(acanban, domain)
+        app = HTTPToHTTPSRedirectMiddleware(acanban, domain)  # type: ignore
     run(serve, app, hypercorn_config())
