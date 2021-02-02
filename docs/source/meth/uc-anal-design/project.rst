@@ -47,14 +47,43 @@ to create projects.
 Show Project Information
 ------------------------
 
-The design for the use case :ref:`project info`
-is described in :numref:`p-info`, where the system reply
-to a specified project identifier with its basic information,
-retrieved from the database.
+The function allow showing project information.
 
-.. uml:: uml/p-info.puml
-   :caption: Activity diagram illustrating showing project's basic information
-   :name: p-info
+The implementation involves only ``project`` database table,
+where ``id``, ``students`` and ``supervisors`` indexes are visited
+
+When user requests to create project, the project controller checks
+with ``quart_auth`` whether the person is authenticated.  The controller then
+checks in ``project`` database that if the current user is a member of project,
+and if the project id is existed in database table.
+When three conditions are satisfied, controller show the project information.
+
+.. uml:: uml/p-info-success.puml
+   :caption: Analysis sequence diagram for successfully show
+             project information.
+   :name: p-info-success
+
+If ``quart_auth`` returns user is not authenticated, 
+controller should inform accordingly.
+
+.. uml:: uml/p-info-not-auth.puml
+   :caption: Analysis sequence diagram for successfully show
+             project information.
+   :name: p-info-not-auth
+
+If project id is not in the database, controller must show the error
+
+.. uml:: uml/p-info-no-id.puml
+   :caption: Analysis sequence diagram for successfully show
+             project information.
+   :name: p-info-no-id
+
+If user is not in the project, controller must show the error
+
+.. uml:: uml/p-info-not-member.puml
+   :caption: Analysis sequence diagram for successfully show
+             project information.
+   :name: p-info-not-member
 
 Edit Project Information
 ------------------------

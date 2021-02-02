@@ -1,0 +1,13 @@
+@startuml
+hide footbox
+autoactivate on
+skinparam sequenceParticipant underline
+actor ":User" as usr
+control ":Project Controller" as ctl
+entity ":quart_auth" as quart
+
+usr -> ctl : // select info tab()
+ctl -> quart : // check authentication()
+ctl <-- quart : // un-authenticated
+usr <-- ctl : // inform that user is un-authenticated
+@enduml
