@@ -120,7 +120,7 @@ If project not exists in ``projects`` database table
    :scale: 80%
    :caption: Analysis sequence diagram for editing projects
              when project id does not exist.
-   :name: p-edit-success
+   :name: p-edit-no-id
 
 If user is not a member in the project
 
