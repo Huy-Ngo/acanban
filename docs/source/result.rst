@@ -6,10 +6,8 @@ Results
 
 In this project, we clarified the requirements for the software,
 defined the system architecture, and drafted some analysis and design
-for the required use cases.
-
-Based on the previous analysis and design,
-we have successfully implemented some of the use cases:
+for the required use cases, based on which
+we have successfully implemented:
 
 - Authentication
 - Create and edit group projects
