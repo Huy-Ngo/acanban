@@ -1,0 +1,61 @@
+{# Task discussion page
+ # Copyright (C) 2021  Nguyễn Gia Phong
+ #
+ # This file is part of Acanban.
+ #
+ # Acanban is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU Affero General Public License as published
+ # by the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+ #
+ # Acanban is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU Affero General Public License for more div.
+ #
+ # You should have received a copy of the GNU Affero General Public License
+ # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
+ #}
+
+{% macro render_comment(comment, istask=false) -%}
+<div> <!-- forms are selected as adjacent to checkboxes to toggle -->
+  {{ comment.creator|userlink|safe }}
+  &bull;
+  {{ comment.created_on|naturaltime|safe }}
+  &bull;
+  {% set id = comment.created_on.timestamp() %}
+  <label for=toggle-{{ id }} class=reply-label>reply</label>
+  <input type=checkbox class=reply-toggle id=toggle-{{ id }}><br>
+  {{ comment.description if istask else comment.content }}<br>
+  <form action={{ route }}/reply/{{ id }} method=POST>
+    <textarea name=comment id=comment required></textarea>
+    <button>Save reply</button>
+  </form>
+</div>
+{%- endmacro %}
+
+{% extends 'base.html' %}
+{% block title %}{{ task.name }}{% endblock %}
+
+{% block content %}
+
+<div class=col-wide>
+  <p><b>Project:</b> <a href=/p/{{ project.id }}>{{ project.name }}</a><br>
+     <b>Assignee:</b> {{ task.assigned_to|userlink|safe }}</br>
+     <b>Deadline:</b> {{ task.deadline|naturaltime|safe }}</br>
+     <!-- TODO: use human readable format -->
+     <b>Status:</b> {{ task.status }}</p>
+
+  {{ render_comment(task, istask=true) }}
+  <div class=replies>
+    {%- for comment in task.replies recursive %}
+    {{ render_comment(comment) }}
+    {%- if comment.replies -%}
+    <div class=replies>
+      {{ loop(comment.replies) }}
+    </div>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+</div>
+{% endblock%}

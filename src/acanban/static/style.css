@@ -175,6 +175,19 @@ dd:last-of-type {
     box-shadow: 0 .5rem 1rem 0 rgba( 31, 38, 135, 0.37 );
     border-radius: 1rem;
 }
+.replies {
+    border-left: .2rem solid var(--color-bg-alt);
+    margin-left: 1rem;
+    padding-left: 1rem;
+}
+.reply-label { color: var(--color-link) }
+.reply-label:hover {
+    color: var(--color-hover);
+    cursor: pointer;
+}
+.reply-toggle { display: none }
+.reply-toggle ~ form { display: none }
+.reply-toggle:checked ~ form { display: block }
 
 /* tabs */
 #tabs {
