@@ -37,6 +37,7 @@ from .auth import Authenticator, blueprint as auth
 from .config import IPFS_DEFAULT, RETHINKDB_DEFAULT
 from .ipfs import blueprint as ipfs
 from .project import PREVIEW_FIELDS, blueprint as project
+from .task import blueprint as task
 from .user import blueprint as user
 
 __all__ = ['app']
@@ -77,6 +78,7 @@ app.register_blueprint(auth)
 app.register_blueprint(ipfs)
 app.register_blueprint(user)
 app.register_blueprint(project)
+app.register_blueprint(task)
 app.add_template_filter(naturalsize)
 
 
