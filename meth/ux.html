@@ -185,7 +185,7 @@ as well as being easy to adopt by the end-users.</p>
 be well-structured.  Furthermore, it is important to avoid having deadends,
 which negatively impact the traversability.  With these principles im mind,
 we then designed the navigation graph.  For every user, the following
-auxiliary endpoints are available, as illustrated in <a class="reference internal" href="#auxnav"><span class="std std-numref">Figure 26</span></a>.</p>
+auxiliary endpoints are available, as illustrated in <a class="reference internal" href="#auxnav"><span class="std std-numref">Figure 34</span></a>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">/register</span></code>: Registration form</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/login</span></code>: Login form</p></li>
@@ -213,10 +213,10 @@ user --&gt; project
 root --&gt; project
 root --&gt; user
 projects --&gt; user"/></p>
-<p class="caption"><span class="caption-number">Figure 26 </span><span class="caption-text">Auxiliary endpoints</span><a class="headerlink" href="#auxnav" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Figure 34 </span><span class="caption-text">Auxiliary endpoints</span><a class="headerlink" href="#auxnav" title="Permalink to this image">¶</a></p>
 </div>
 <p>Each project’s page is divided into several tabs, namely <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">edit</span></code>,
-<code class="docutils literal notranslate"><span class="pre">members</span></code>, <code class="docutils literal notranslate"><span class="pre">tasks</span></code>, <code class="docutils literal notranslate"><span class="pre">report</span></code> and <code class="docutils literal notranslate"><span class="pre">slides</span></code>, as shown in <a class="reference internal" href="#pnav"><span class="std std-numref">Figure 27</span></a>.</p>
+<code class="docutils literal notranslate"><span class="pre">members</span></code>, <code class="docutils literal notranslate"><span class="pre">tasks</span></code>, <code class="docutils literal notranslate"><span class="pre">report</span></code> and <code class="docutils literal notranslate"><span class="pre">slides</span></code>, as shown in <a class="reference internal" href="#pnav"><span class="std std-numref">Figure 35</span></a>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">/p/&lt;uuid&gt;/info</span></code> (GET): Project’s basic information</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/p/&lt;uuid&gt;/edit</span></code> (GET and POST): Form for updating
@@ -256,13 +256,13 @@ report --&gt; &quot;/p/&lt;uuid&gt;/report/eval&quot;
 slides --&gt; &quot;/p/&lt;uuid&gt;/slides/upload&quot;
 slides --&gt; ipfs
 slides --&gt; &quot;/p/&lt;uuid&gt;/slides/eval&quot;"/></p>
-<p class="caption"><span class="caption-number">Figure 27 </span><span class="caption-text">Project’s endpoints</span><a class="headerlink" href="#pnav" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Figure 35 </span><span class="caption-text">Project’s endpoints</span><a class="headerlink" href="#pnav" title="Permalink to this image">¶</a></p>
 </div>
 <p>Project’s tabs are mutually interlinked but for brevity they are not connected
 in the figure.  Additionally, POST-only endpoints redirects back to referrer
 upon success.</p>
 <p>Due to complexity, task-related endpoints are documented
-separately in <a class="reference internal" href="#tnav"><span class="std std-numref">Figure 28</span></a>, which consists of the ones listed below.
+separately in <a class="reference internal" href="#tnav"><span class="std std-numref">Figure 36</span></a>, which consists of the ones listed below.
 Pages in <code class="docutils literal notranslate"><span class="pre">/p/&lt;uuid&gt;/tasks</span></code>, including the Kanban board,
 exclusively serves <a class="reference internal" href="../intro.html#objcollab"><span class="std std-ref">Building a Collaboration Platform</span></a>.</p>
 <ul class="simple">
@@ -279,7 +279,7 @@ task --&gt; &quot;/p/&lt;uuid&gt;/tasks/&lt;index&gt;/comment&quot;
 task --&gt; &quot;/p/&lt;uuid&gt;/tasks/&lt;index&gt;/upload&quot;
 task --&gt; &quot;/ipfs/&lt;cid&gt;&quot;
 tasks --&gt; &quot;/p/&lt;uuid&gt;/tasks/eval&quot;"/></p>
-<p class="caption"><span class="caption-number">Figure 28 </span><span class="caption-text">Task endpoints</span><a class="headerlink" href="#tnav" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Figure 36 </span><span class="caption-text">Task endpoints</span><a class="headerlink" href="#tnav" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="graphical-user-interface">
