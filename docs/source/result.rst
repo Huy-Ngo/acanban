@@ -27,7 +27,8 @@ Discussion
 
 We have achieved almost all our goals, as proven by our results above.
 Unfortunately, due to some difficulties that will be explained below,
-we failed to design and implement important collaboration-related use cases.
+we failed to design and implement important collaboration-related use cases
+as well as academic integration use cases.
 We will discuss our flaws and difficulties in this section.
 
 System's flaws
