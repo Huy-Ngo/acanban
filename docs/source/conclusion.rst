@@ -17,8 +17,10 @@ tasks of this project as well as in future software development.
 
 The resulted system runs as a web service, allowing clients to run on
 any platforms without installation.
-Thanks to the simplistic user interface, it is easy to use.
-The web pages can load with extremely low latency thanks to minimal assets.
+The web pages can load with extremely low latency thanks to minimal assets:
+Our home page is only 21.8KB, and it only takes less than 0.1 seconds to load.
+
+Thanks to the simplistic user interface, it is accessible and easy to use.
 
 Future Work
 -----------
