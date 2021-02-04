@@ -8,6 +8,13 @@ We accomplished two out of our three main objectives:
 developing an accessible website and create a collaborative platform.
 However, there are rooms for improvement in the implementation.
 
+Through rigorous :ref:`proc`, we were able to not only maintain
+tight collaboration and desirable work quality, but also have better control
+over regressions and gain confidence in rolling out new changes,
+and improve productivity and performance throughout the three-month period.
+We wish to continue ameliorating the process when working on the remaining
+tasks of this project as well as in future software development.
+
 Future Work
 -----------
 

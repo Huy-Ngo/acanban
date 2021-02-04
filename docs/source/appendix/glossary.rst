@@ -1,9 +1,6 @@
 Glossary
 ========
 
-Following are some terms and abbreviations
-that are used throughout this report:
-
 .. glossary::
 
    Asynchronous Server Gateway Interface (ASGI)
@@ -15,6 +12,11 @@ that are used throughout this report:
       WSGI succeeded in allowing much more freedom and innovation
       in the Python web space, and ASGI’s goal is to continue this onward
       into the land of asynchronous Python.
+
+   Branch coverage
+
+      A coverage criteria where each control structure's branch
+      has been executed by the test suite.
 
    Cluster
 

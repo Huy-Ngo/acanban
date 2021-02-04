@@ -12,6 +12,12 @@
 % Number \subsection
 \setcounter{secnumdepth}{3}
 
+% Ignore hardcoded footnote numbering
+\makeatletter
+\def\FNH@footnoteenv@i[#1]{\FNH@footnoteenv}
+\def\FNH@footnotetextenv@i[#1]{\FNH@footnotetextenv}
+\makeatother
+
 % Headers and footers
 \fancypagestyle{normal}{
   \fancyhf{}
