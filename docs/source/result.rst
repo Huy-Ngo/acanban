@@ -17,6 +17,8 @@ we have successfully implemented:
 
 All of these use cases have been implemented in a simplistic manner,
 which satisfied our goal of accessibility from all devices.
+The web pages can load with extremely low latency thanks to minimal assets:
+Our home page is only 21.8KB, and it only takes less than 0.1 seconds to load.
 
 The current implemented source code is published on GitHub [1]_
 under `Affero General Public License`_.

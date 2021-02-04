@@ -3,6 +3,15 @@ Glossary
 
 .. glossary::
 
+   Accessibility
+
+      Accessibility_ means that the technology is developed so that people
+      with disabilities can use them.  It also benefits people without
+      disabilities, such as people using devices with small screens
+      or using slow Internet connection.
+
+      In this document, *accessibility* usually refers to the latter sense.
+
    Asynchronous Server Gateway Interface (ASGI)
 
       ASGI_ is a spiritual successor to :pep:`WSGI <3333>`,
@@ -84,6 +93,7 @@ Glossary
       A person, normally a lecturer, that supervises, supports, and evaluate
       one or several project groups.
 
+.. _Accessibility: https://www.w3.org/WAI/fundamentals/accessibility-intro/#what
 .. _ASGI: https://asgi.readthedocs.io
 .. _IPFS: https://ipfs.io
 .. [#http] :rfc:`2616#section-1`

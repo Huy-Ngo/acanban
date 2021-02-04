@@ -15,6 +15,11 @@ and improve productivity and performance throughout the three-month period.
 We wish to continue ameliorating the process when working on the remaining
 tasks of this project as well as in future software development.
 
+The resulted system runs as a web service, allowing clients to run on
+any platforms without installation.
+
+Thanks to the simplistic user interface, it is accessible and easy to use.
+
 Future Work
 -----------
 
