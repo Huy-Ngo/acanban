@@ -10,7 +10,7 @@ Glossary
       disabilities, such as people using devices with small screens
       or using slow Internet connection.
 
-      Our system is accessible more in the latter sense.
+      In this document, *accessibility* usually refers to the latter sense.
 
    Asynchronous Server Gateway Interface (ASGI)
 
