@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Development Process &mdash; Acanban  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Results and Discussion" href="../result.html" />
+    <link rel="prev" title="User Interface and User Experience" href="ux.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Acanban
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../req/index.html">System Requirements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Methodology</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="choices.html">Technical Choices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arch.html">System Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uc-anal-design/index.html">Use-Case Analysis and Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database/index.html">Database Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ux.html">User Interface and User Experience</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Development Process</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#collaboration-model">Collaboration Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quality-assurance">Quality Assurance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../result.html">Results and Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conclusion.html">Conclusion and Future Work</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/index.html">Appendix</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Acanban</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Methodology</a> &raquo;</li>
+        
+      <li>Development Process</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/meth/process.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="development-process">
+<span id="proc"></span><h1>Development Process<a class="headerlink" href="#development-process" title="Permalink to this headline">¶</a></h1>
+<p>From requirement, analysis and design documents to implementation
+were version controlled through <a class="reference external" href="https://git-scm.com">git</a>.  For achieving better productivity
+and quality, we attempted to define a rigorous yet flexible workflow,
+detailed in the following subsections.</p>
+<div class="section" id="collaboration-model">
+<h2>Collaboration Model<a class="headerlink" href="#collaboration-model" title="Permalink to this headline">¶</a></h2>
+<p>The development mostly took place on <a class="reference external" href="https://github.com/Huy-Ngo/acanban">GitHub</a>, except for realtime communication
+which occured either on a <a class="reference external" href="https://matrix.org">Matrix</a> chat room or in the physical world.</p>
+<p>At the high level, the works were split into multiple subprojects <a class="footnote-reference brackets" href="#ghproj" id="id1">1</a>,
+where each project contained multiple self-contained tasks,
+which were to be resolved by patches separated by logical changes <a class="reference internal" href="#sep" id="id2"><span>[sep]</span></a>.
+Projects are visually presented as Kanban boards including at the minimum
+of three columns: <em>To do</em>, <em>In progress</em> and <em>Done</em>.</p>
+<p>In the time dimension, we divided the development period into multiple
+short iterations, whose length varied based on our schedule <a class="footnote-reference brackets" href="#vary" id="id3">2</a>.
+At the beginning of every iteration, we selected tasks from the <em>To do</em>
+column to <em>In progress</em>.  In addition to inital planning, tasks were also added
+to <em>To do</em> as we discovered new issues during discussions or development,
+and were democratically and appropriately assigned to the group members.</p>
+<p>At a lower level, each task was resolved via a self-contained patch.
+This means implementation patches must be accompanied by the tests
+coverring the change.  How patches were checked (including executing
+automated tests) are detailed in the next subsection.</p>
+<p>At the end of an iteration, we publish a (pre-)release to <a class="reference external" href="https://pypi.org/project/acanban">PyPI</a>
+and deploy it to a test deployment server <a class="footnote-reference brackets" href="#vm" id="id4">3</a>
+kindly provided by <a class="reference external" href="https://ictlab.usth.edu.vn">USTH ICTLab</a>.</p>
+</div>
+<div class="section" id="quality-assurance">
+<h2>Quality Assurance<a class="headerlink" href="#quality-assurance" title="Permalink to this headline">¶</a></h2>
+<p>In order to ensure the correctness of the implementation, we tried to take
+quality assurance as seriously as we can.  To begin with, a git branch
+was chosen to be the <code class="docutils literal notranslate"><span class="pre">main</span></code> one for patches to base on.  It was protected
+from being pushed directly onto without the reviewing process, which comprised
+of automated checks and peer reviews.</p>
+<p>From the beginning, continuous integration (CI) was set up for both
+the implementation and this report itself <a class="footnote-reference brackets" href="#ci" id="id5">4</a>.  For the paper, it simply
+tried to compile the original source written in reStructuredText into <a class="reference external" href="https://www.iso.org/standard/75839.html">PDF</a>
+for the ease of viewing for the peer reviewers.  The software, however,
+were subjected to the following assertions:</p>
+<ul class="simple">
+<li><p>Style checker (<a class="reference external" href="https://flake8.pycqa.org">flake8</a> and <a class="reference external" href="https://pycqa.github.io/isort">isort</a>), which statically analysed
+the Python source files for errors and inconsistencies</p></li>
+<li><p>Type checker (<a class="reference external" href="https://mypy.readthedocs.io">mypy</a>), which examined the Python <a class="reference external" href="https://docs.python.org/3/library/ast.html">AST</a>
+for static typing issues to detect common bugs</p></li>
+<li><p>Testing and coverage, which automatically ran the tests
+and report the test coverage</p></li>
+</ul>
+<p>We actively worked to enforce 100% <a class="reference internal" href="../appendix/glossary.html#term-Branch-coverage"><span class="xref std std-term">branch coverage</span></a>,
+most of which are covered by unit tests, which helped discover mistakes
+as well as regressions in later modifications.  Integration testing, however,
+could often be tedious <a class="reference internal" href="#intest" id="id6"><span>[intest]</span></a>, and thus we chose to not imposing it.
+In compensation, we examined the test deployment at the end of iterations
+for bugs not having been caught by the test suite.</p>
+<p>At the same time, patches were reviewed manually by at least one other
+team member.  This is not only for maintaining quality standards but also
+to make the team more well aware of changes happening to the shared code base.
+Once approval was granted and automated checks were passing,
+the patch was rebase on top of the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch.
+Continuous integration was then run again, for continuous integration.</p>
+<dl class="footnote brackets">
+<dt class="label" id="ghproj"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://github.com/Huy-Ngo/acanban/projects">https://github.com/Huy-Ngo/acanban/projects</a></p>
+</dd>
+<dt class="label" id="vary"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>Unfortunate for us, the group project took place
+during the examination season, and thus our time pool shrunk
+on weeks with higher density of exams for other courses.</p>
+</dd>
+<dt class="label" id="vm"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd><p><a class="reference external" href="https://acanban.ga">https://acanban.ga</a></p>
+</dd>
+<dt class="label" id="ci"><span class="brackets"><a class="fn-backref" href="#id5">4</a></span></dt>
+<dd><p><a class="reference external" href="https://builds.sr.ht/~huyngo/acanban">https://builds.sr.ht/~huyngo/acanban</a></p>
+</dd>
+</dl>
+<dl class="citation">
+<dt class="label" id="sep"><span class="brackets"><a class="fn-backref" href="#id2">sep</a></span></dt>
+<dd><p>The kernel development community.
+<em>Submitting patches: the essential guide to getting your code
+into the kernel</em>.  The Linux Kernel documentation.  Retrieved 2021-02-04.
+<a class="reference external" href="https://www.kernel.org/doc/html/latest/process/submitting-patches.html#separate-your-changes">https://www.kernel.org/doc/html/latest/process/submitting-patches.html#separate-your-changes</a></p>
+</dd>
+<dt class="label" id="intest"><span class="brackets"><a class="fn-backref" href="#id6">intest</a></span></dt>
+<dd><p>Michael Steindl and Juergen Mottok.
+“Optimizing software integration by considering
+integration test complexity and test effort”.
+<em>Proceedings of the 10th International Workshop on Intelligent Solutions
+in Embedded Systems</em>, Klagenfurt, 2012, p. 63-68.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../result.html" class="btn btn-neutral float-right" title="Results and Discussion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ux.html" class="btn btn-neutral float-left" title="User Interface and User Experience" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020  Ngô Ngọc Đức Huy et al..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
