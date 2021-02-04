@@ -47,6 +47,8 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = []
 
 # Options for LaTeX
+latex_toplevel_sectioning = 'section'
+latex_docclass = {'manual': 'article'}
 latex_elements = {
     'papersize': 'a4paper', 'pointsize': '12pt',
     'babel': r'\usepackage[english,vietnamese]{babel}',
