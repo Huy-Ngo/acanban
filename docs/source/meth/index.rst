@@ -12,3 +12,4 @@ and implementation.
    uc-anal-design/index
    database/index
    ux
+   process
