@@ -55,6 +55,7 @@ latex_elements = {
     'fontpkg': r'\usepackage{lmodern}',
     'fncychap': '',  # disable fancy chapter heading
     'preamble': r'\usepackage{acanban}',
+    'extraclassoptions': 'manual',
     'extrapackages': r'\usepackage{booktabs}',  # for title-page
     'geometry': '',  # fallback to LaTeX default margins
     'maketitle': (pwd/'latex'/'title-page.tex').read_text(),
