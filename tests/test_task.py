@@ -38,3 +38,18 @@ async def test_get(username: Optional[str], status_code: int,
     client = await user(username)
     response = await client.get(BASE_ROUTE)
     assert response.status_code == status_code
+
+
+@parametrize(('username', 'comment', 'status_code'),
+             (param(None, 1609023842.0, Status.UNAUTHORIZED, id='guest'),
+              param('silasl', 1609023842.0, Status.FORBIDDEN, id='assistant'),
+              param('adaml', 1609023842.0, Status.FORBIDDEN, id='nonmember'),
+              param('ronanf', 1609023842.0, Status.FOUND, id='member'),
+              param('ronanf', 420.69, Status.NOT_FOUND, id='unknown comment')))
+async def test_reply(username: Optional[str], comment: float,
+                     status_code: int, user: ClientFactory) -> None:
+    """Test replying to a comment."""
+    client = await user(username)
+    response = await client.post(f'{BASE_ROUTE}/reply/{comment}',
+                                 form={'comment': 'Alright.'})
+    assert response.status_code == status_code
