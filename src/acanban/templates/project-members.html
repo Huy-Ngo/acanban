@@ -37,13 +37,13 @@
   <h3>Supervisors</h3>
   <ul>
     {% for supervisor in project.supervisors %}
-    <li><a href="/u/{{ supervisor }}">{{ supervisor }}</a></li>
+    <li>{{ supervisor|userlink|safe }}</li>
     {% endfor %}
   </ul>
   <h3>Students</h3>
   <ul>
     {% for student in project.students %}
-    <li><a href="/u/{{ student }}">{{ student }}</a></li>
+    <li>{{ student|userlink|safe }}</li>
     {% endfor %}
   </ul>
 </div>
