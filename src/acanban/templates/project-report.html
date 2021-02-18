@@ -53,7 +53,7 @@
     <dt>Size</dt>
     <dd>{{ file.size|naturalsize }}</dd>
     <dt>Uploader</dt>
-    <dd><a href=/u/{{ file.user }}>{{ file.user }}</a></dd>
+    <dd>{{ file.user|userlink|safe }}</dd>
     <dt>Revision</dt>
     <dd>{{ file.time|naturaltime|safe }}</dd>
   </dl>

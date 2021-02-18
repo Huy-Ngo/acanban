@@ -34,7 +34,7 @@ users = r.table('users')
 @blueprint.app_template_filter()
 def userlink(username: str) -> str:
     """Generate the link to the given user."""
-    return f'<a href=/u/{username}>{username}</a>'
+    return f'<b><a href=/u/{username}>{username}</a></b>'
 
 
 @blueprint.route('/<username>', methods=['GET'])
