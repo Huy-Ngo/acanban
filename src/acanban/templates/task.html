@@ -26,7 +26,9 @@
   {% set id = comment.created_on.timestamp() %}
   <label for=toggle-{{ id }} class=reply-label>reply</label>
   <input type=checkbox class=reply-toggle id=toggle-{{ id }}><br>
+  {% markdown %}
   {{ comment.description if istask else comment.content }}<br>
+  {% endmarkdown %}
   <form action={{ route }}/reply/{{ id }} method=POST>
     <textarea name=comment id=comment required></textarea>
     <button>Save reply</button>

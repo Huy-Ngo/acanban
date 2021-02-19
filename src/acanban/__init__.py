@@ -80,6 +80,7 @@ app.register_blueprint(user)
 app.register_blueprint(project)
 app.register_blueprint(task)
 app.add_template_filter(naturalsize)
+app.jinja_env.add_extension('jinja_markdown.MarkdownExtension')
 
 
 @app.template_filter('naturaltime')
