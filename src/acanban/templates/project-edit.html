@@ -28,6 +28,9 @@
     <label for=name>Project name</label>
     <input type=text name=name id=name
            value="{{ project.name }}" required/>
+    <label for=deadline>Deadline</label>
+    <input type=date name=deadline id=deadline
+           value="{{ project.deadline.strftime('%Y-%m-%d') }}" required>
     <label for=description>Description</label>
     <textarea name=description id=description>{{ project.description }}</textarea>
     <button>Save</button>
