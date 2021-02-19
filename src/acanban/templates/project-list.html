@@ -30,8 +30,8 @@
   {% for project in projects %}
   <div class=block>
     <h2><a href=/p/{{ project.id }}>{{ project.name }}</a></h2>
-    <p><b>Created on:</b> {{ project.created_on|naturaltime|safe }}</p>
-    <p><b>Deadline:</b> {{ project.deadline|naturaltime|safe }}</p>
+    <p><b>Created on:</b> {{ project.created_on.strftime('%Y-%m-%d') }}</p>
+    <p><b>Deadline:</b> {{ project.deadline.strftime('%Y-%m-%d') }}</p>
     <p><b>Supervisors:</b> {{ project.supervisors | map('userlink')
                               | join(', ') | safe }}</p>
     <p><b>Students:</b> {{ project.students | map('userlink')
