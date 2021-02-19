@@ -255,8 +255,8 @@
           "epoch_time": 1608397200,
           "timezone": "+07:00"
         },
-        "description": "Dolore numquam dolor velit dolore. Numquam non voluptatem eius magnam adipisci. Voluptatem labore etincidunt ipsum dolor neque ipsum adipisci. Aliquam porro velit numquam. Modi amet amet ut. Sit ut numquam sit quiquia. Adipisci magnam est modi. Quaerat numquam aliquam voluptatem voluptatem modi.",
-        "name": "Aliquam sed neque magnam.",
+        "description": "# Roadmap\n Blah blah blah\n\nWe should do these things:\n\n1. First thing\n2. Second thing\n3. Last thing\n\n#Workflow\n\n- Plan\n- Implement\n- Test",
+        "name": "Start with the project",
         "replies": [],
         "status": 1
       },
