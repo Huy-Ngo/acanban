@@ -73,14 +73,6 @@ img {
     display: block;
 }
 
-/* columns */
-.col-narrow, .col-wide {
-    padding: 0 1rem;
-    margin: auto;
-}
-.col-narrow { max-width: 25rem }
-.col-wide { max-width: 40rem }
-
 /* form */
 button, select, textarea,
 input[type=text], input[type=password], input[type=email], input[type=date] {
@@ -169,14 +161,37 @@ dd:last-of-type {
 }
 
 /* specialized containers */
-.block { 
-    margin: 1.5rem 0;
-    padding: 1rem;
-    box-shadow: 0 .5rem 1rem 0 rgba( 31, 38, 135, 0.37 );
-    border-radius: 1rem;
+.col-narrow, .col-wide {
+    padding: 0 1rem;
+    margin: auto;
 }
+.col-narrow {
+    max-width: 25rem;
+    min-width: 25rem;
+}
+.col-wide {
+    max-width: 40rem;
+    min-width: 40rem;
+}
+
+.block { 
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem 0 var(--color-bg-alt);
+}
+.kanban {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.kanban > div {
+    margin: unset;
+    text-align: center;
+}
+.kanban a { color: inherit }
 .replies {
-    border-left: .2rem solid var(--color-bg-alt);
+    border-left: 0.2rem solid var(--color-bg-alt);
     margin-left: 1rem;
     padding-left: 1rem;
 }

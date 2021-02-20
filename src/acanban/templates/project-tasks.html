@@ -1,0 +1,46 @@
+{# Project task listing tab, in Kanban style
+ # Copyright (C) 2021  Nguyễn Gia Phong
+ #
+ # This file is part of Acanban.
+ #
+ # Acanban is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU Affero General Public License as published
+ # by the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+ #
+ # Acanban is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU Affero General Public License for more details.
+ #
+ # You should have received a copy of the GNU Affero General Public License
+ # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
+ #}
+
+{% macro render_column(column, name, color) -%}
+<div class=col-narrow>
+  <h2>{{ name }}</h2>
+  {% for task in column %}
+  <div class='block {{ color }}'>
+    {% set route = '/p/' ~ project.id ~ '/tasks/' ~ task.index %}
+    <a href={{ route }}>{{ task.name }}</a><br>
+    <a href={{ route }}/dec>&emsp;&#x23ee;&emsp;</a>
+    &emsp;&bull;&emsp;
+    <a href={{ route }}/inc>&emsp;&#x23ed;&emsp;</a>
+  </div>
+  {% endfor %}
+</div>
+{%- endmacro %}
+
+{% extends 'project-tab.html' %}
+{% block tabbarlayout %}
+{{ tabbar('Tasks') }}
+{% endblock %}
+
+{% block tabcontent %}
+<div class=kanban>
+  {{ render_column(todo, 'To-do', 'error') }}
+  {{ render_column(doing, 'Doing', 'warning') }}
+  {{ render_column(done, 'Done', 'success') }}
+</div>
+{% endblock %}
