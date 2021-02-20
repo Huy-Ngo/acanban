@@ -109,8 +109,10 @@ async def edit(uuid: str) -> ResponseReturnValue:
         return await render_template('project-edit.html', project=project)
 
     await pluck(uuid)  # check project's existence and permission
-    updated = {key: value for key, value in (await request.form).items()
-               if key in INFO_FIELDS and value}
+    raw = await request.form
+    updated = dict(
+        name=raw['name'], description=raw['description'],
+        deadline=r.iso8601(raw['deadline'], default_timezone='+00:00'))
     async with current_app.db_pool.connection() as conn:
         await r.table('projects').get(uuid).update(updated).run(conn)
     return redirect(f'/p/{uuid}/info')

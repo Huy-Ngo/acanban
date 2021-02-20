@@ -19,7 +19,7 @@
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
-from datetime import datetime
+from datetime import datetime, timezone
 from secrets import token_urlsafe
 from typing import Any, AsyncIterator
 from urllib.parse import urlsplit
@@ -46,6 +46,11 @@ from .user import blueprint as user
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
 __version__ = '0.0.7'
+
+
+def utc(dt: datetime) -> datetime:
+    """Convert the datetime object to UTC with microsecond being 0."""
+    return dt.astimezone(timezone.utc).replace(microsecond=0, tzinfo=None)
 
 
 class Acanban(QuartTrio):
@@ -92,9 +97,10 @@ def as_markdown(text: str) -> str:
 
 
 @app.template_filter('naturaltime')
-def fuzzytime(time: datetime) -> str:
-    fuzzy = naturaltime(time.replace(tzinfo=None), when=datetime.utcnow())
-    return f"<span title='{time}'>{fuzzy}</span>"
+def fuzzytime(dt: datetime) -> str:
+    """Convert datetime into fuzzy time in HTML with precise hovertext."""
+    udt = utc(dt)
+    return f"<span title='{udt} UTC'>{naturaltime(udt)}</span>"
 
 
 @app.before_serving

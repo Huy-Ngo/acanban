@@ -24,8 +24,8 @@
 
 {% block tabcontent %}
 <div class=col-wide>
-  <p><b>Created on:</b> {{ project.created_on|naturaltime|safe }}</p>
-  <p><b>Deadline:</b> {{ project.deadline|naturaltime|safe }}</p>
+  <p><b>Created on:</b> {{ project.created_on.strftime('%Y-%m-%d') }}</p>
+  <p><b>Deadline:</b> {{ project.deadline.strftime('%Y-%m-%d') }}</p>
   <p><b>Description:</b> {{ project.description|as_markdown|safe }}</p>
 </div>
 {% endblock %}

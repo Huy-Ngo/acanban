@@ -34,6 +34,11 @@ from acanban.project import add_artifact_tab
 PROJECT = 'be7a04b8-650f-41dc-912b-10d225baff29'
 
 
+def random_string(length: int = 42) -> str:
+    """Return a random printable string of given length."""
+    return ''.join(choices(printable, k=42))
+
+
 @parametrize('tab', ('info', 'edit', 'members', 'tasks', 'report', 'slides'))
 async def test_nonexist(tab: str, user: ClientFactory) -> None:
     """Test accessing tabs on a nonexistent project."""
@@ -64,8 +69,8 @@ async def test_create_post(username: Optional[str], status_code: int,
                            user: ClientFactory) -> None:
     """Test project creation permission."""
     client = await user(username)
-    info = {'name': choices(printable, k=42), 'deadline': '2020-02-02',
-            'description': choices(printable, k=42)}
+    info = {'name': random_string(), 'deadline': '2020-02-02',
+            'description': random_string()}
     response = await client.post('/p/create', form=info)
     assert response.status_code == status_code
 
@@ -100,8 +105,8 @@ async def test_edit_post(username: Optional[str], status_code: int,
                          user: ClientFactory) -> None:
     """Test project edit permission."""
     client = await user(username)
-    info = {'name': choices(printable, k=42),
-            'description': choices(printable, k=42)}
+    info = {'name': random_string(), 'deadline': '2021-12-02',
+            'description': random_string()}
     response = await client.post(f'/p/{PROJECT}/edit', form=info)
     assert response.status_code == status_code
 
@@ -159,7 +164,7 @@ async def test_artifact_eval(username: Optional[str], status_code: int,
                              tab: str, user: ClientFactory) -> None:
     """Test report and presentation evaluation."""
     client = await user(username)
-    evaluation = {'grade': uniform(0, 20), 'comment': choices(printable, k=42)}
+    evaluation = {'grade': uniform(0, 20), 'comment': random_string()}
     response = await client.post(f'/p/{PROJECT}/report/eval', form=evaluation)
     assert response.status_code == status_code
 
