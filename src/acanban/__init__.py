@@ -24,8 +24,11 @@ from secrets import token_urlsafe
 from typing import Any, AsyncIterator
 from urllib.parse import urlsplit
 
+from bleach import clean, linkify
+from bleach_allowlist import markdown_attrs, markdown_tags
 from httpx import AsyncClient
 from humanize import naturalsize, naturaltime
+from markdown import markdown
 from quart import ResponseReturnValue, current_app, render_template
 from quart_auth import current_user
 from quart_trio import QuartTrio
@@ -85,6 +88,12 @@ app.register_blueprint(user)
 app.register_blueprint(project)
 app.register_blueprint(task)
 app.add_template_filter(naturalsize)
+
+
+@app.template_filter('markdown')
+def as_markdown(text: str) -> str:
+    html = clean(markdown(linkify(text)), markdown_tags, markdown_attrs)
+    return html
 
 
 @app.template_filter('naturaltime')
