@@ -73,7 +73,7 @@ async def list_projects() -> ResponseReturnValue:
 
 @blueprint.route('/<uuid>/')
 @login_required
-async def info_redirect(uuid: str) -> ResponseReturnValue:
+async def redirect_info(uuid: str) -> ResponseReturnValue:
     """Redirect to the project info page."""
     return redirect(f'/p/{uuid}/info')
 
@@ -94,7 +94,7 @@ async def pluck(uuid: str, fields: Sequence[str] = ()) -> Dict[str, Any]:
 
 @blueprint.route('/<uuid>/info')
 @login_required
-async def info(uuid: str) -> ResponseReturnValue:
+async def show_info(uuid: str) -> ResponseReturnValue:
     """Return the page containing the projects' basic infomation."""
     project = await pluck(uuid, INFO_FIELDS)
     return await render_template('project-info.html', project=project)
@@ -120,7 +120,7 @@ async def edit(uuid: str) -> ResponseReturnValue:
 
 @blueprint.route('/<uuid>/members')
 @login_required
-async def member_list(uuid: str) -> ResponseReturnValue:
+async def list_members(uuid: str) -> ResponseReturnValue:
     """Return the page listing the member of a project."""
     project = await pluck(uuid, MEMBERS_FIELDS)
     return await render_template('project-members.html', project=project)
@@ -128,7 +128,7 @@ async def member_list(uuid: str) -> ResponseReturnValue:
 
 @blueprint.route('/<uuid>/invite', methods=['POST'])
 @login_required
-async def member_invite(uuid: str) -> ResponseReturnValue:
+async def invite_member(uuid: str) -> ResponseReturnValue:
     """Add a member to the project."""
     username = (await request.form)['new-user']
     project = await pluck(uuid, MEMBERS_FIELDS)
@@ -153,8 +153,8 @@ async def member_invite(uuid: str) -> ResponseReturnValue:
     return redirect(request.referrer)
 
 
-async def artifact_view(tab: str, uuid: str) -> ResponseReturnValue:
-    """Return the tab with artifact upload and evaluation."""
+async def show_artifacts(tab: str, uuid: str) -> ResponseReturnValue:
+    """Return the tab with artifacts upload and evaluation."""
     await pluck(uuid)  # check project's existence and permission
     project = await pluck(uuid, ('id', 'name', tab))
     query = r.table('files').get_all(*project[tab]['revisions'])
@@ -166,7 +166,7 @@ async def artifact_view(tab: str, uuid: str) -> ResponseReturnValue:
     return await render_template(f'project-{tab}.html', **variables)
 
 
-async def artifact_upload(tab: str, uuid: str) -> ResponseReturnValue:
+async def upload_artifact(tab: str, uuid: str) -> ResponseReturnValue:
     """Handle file upload to the corresponding tab."""
     await pluck(uuid)  # check project's existence and permission
     if await current_user.role != 'student': raise Forbidden
@@ -177,7 +177,7 @@ async def artifact_upload(tab: str, uuid: str) -> ResponseReturnValue:
     return redirect(request.referrer)
 
 
-async def artifact_eval(tab: str, uuid: str) -> ResponseReturnValue:
+async def eval_artifact(tab: str, uuid: str) -> ResponseReturnValue:
     """Handle evaluation of the work in the corresponding tab."""
     await pluck(uuid)  # check project's existence and permission
     if await current_user.role == 'student': raise Forbidden
@@ -197,13 +197,13 @@ def add_artifact_tab(blueprint: Blueprint, tab: str) -> None:
         raise ValueError(f'tab is neither report nor slides: {tab}')
     blueprint.add_url_rule(
         f'/<uuid>/{tab}', methods=['GET'], endpoint=f'{tab}_view',
-        view_func=login_required(partial(artifact_view, tab)))
+        view_func=login_required(partial(show_artifacts, tab)))
     blueprint.add_url_rule(
         f'/<uuid>/{tab}/upload', methods=['POST'], endpoint=f'{tab}_upload',
-        view_func=login_required(partial(artifact_upload, tab)))
+        view_func=login_required(partial(upload_artifact, tab)))
     blueprint.add_url_rule(
         f'/<uuid>/{tab}/eval', methods=['POST'], endpoint=f'{tab}_eval',
-        view_func=login_required(partial(artifact_eval, tab)))
+        view_func=login_required(partial(eval_artifact, tab)))
 
 
 add_artifact_tab(blueprint, 'report')
