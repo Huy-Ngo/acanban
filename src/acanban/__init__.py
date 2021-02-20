@@ -24,7 +24,7 @@ from secrets import token_urlsafe
 from typing import Any, AsyncIterator
 from urllib.parse import urlsplit
 
-from bleach import clean
+from bleach import clean, linkify
 from bleach_allowlist import markdown_attrs, markdown_tags
 from httpx import AsyncClient
 from humanize import naturalsize, naturaltime
@@ -92,7 +92,7 @@ app.add_template_filter(naturalsize)
 
 @app.template_filter('markdown')
 def as_markdown(text: str) -> str:
-    html = clean(markdown(text), markdown_tags, markdown_attrs)
+    html = clean(markdown(linkify(text)), markdown_tags, markdown_attrs)
     return html
 
 
