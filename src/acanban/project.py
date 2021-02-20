@@ -19,8 +19,9 @@
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
 from functools import partial
+from itertools import tee
 from operator import itemgetter
-from typing import Any, Dict, Sequence
+from typing import Any, Dict, Sequence, Union
 
 from quart import (Blueprint, ResponseReturnValue, current_app,
                    redirect, render_template, request)
@@ -37,7 +38,9 @@ INFO_FIELDS = 'id', 'name', 'created_on', 'deadline', 'description'
 MEMBERS_FIELDS = 'id', 'name', 'supervisors', 'students'
 PREVIEW_FIELDS = ('id', 'name', 'created_on', 'deadline',
                   'supervisors', 'students', 'description')
+TASKS_FIELDS = 'id', 'name', {'tasks': ('name', 'created_on', 'status')}
 
+PluckKey = Union[str, Dict[str, Any]]
 blueprint = Blueprint('project', __name__, url_prefix='/p')
 
 
@@ -78,7 +81,7 @@ async def redirect_info(uuid: str) -> ResponseReturnValue:
     return redirect(f'/p/{uuid}/info')
 
 
-async def pluck(uuid: str, fields: Sequence[str] = ()) -> Dict[str, Any]:
+async def pluck(uuid: str, fields: Sequence[PluckKey] = ()) -> Dict[str, Any]:
     """Pluck the given fields from the project, with permission check."""
     async with current_app.db_pool.connection() as connection:
         try:
@@ -89,7 +92,8 @@ async def pluck(uuid: str, fields: Sequence[str] = ()) -> Dict[str, Any]:
 
     members = project['students'] + project['supervisors']
     if current_user.key not in members: raise Forbidden
-    return {key: value for key, value in project.items() if key in fields}
+    return {key: value for key, value in project.items()
+            if any(key == field or key in field for field in fields)}
 
 
 @blueprint.route('/<uuid>/info')
@@ -151,6 +155,20 @@ async def invite_member(uuid: str) -> ResponseReturnValue:
         await r.table('users').get(username).update(
             {'projects': r.row['projects'].append(uuid)}).run(conn)
     return redirect(request.referrer)
+
+
+@blueprint.route('/<uuid>/tasks')
+@login_required
+async def list_tasks(uuid: str) -> ResponseReturnValue:
+    """Return the page listing tasks in a Kanban board."""
+    project = await pluck(uuid, TASKS_FIELDS)
+    tasks = sorted(project['tasks'], key=itemgetter('created_on'))
+    columns = tee(enumerate(tasks), 3)
+    todo, doing, done = ([{'index': index, **task} for index, task in column
+                          if status == task['status']]
+                         for status, column in enumerate(columns))
+    return await render_template('project-tasks.html', project=project,
+                                 todo=todo, doing=doing, done=done)
 
 
 async def show_artifacts(tab: str, uuid: str) -> ResponseReturnValue:

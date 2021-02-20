@@ -80,7 +80,7 @@ async def test_create_post(username: Optional[str], status_code: int,
               param('silasl', Status.FORBIDDEN, id='assistant'),
               param('ronanf', Status.FORBIDDEN, id='nonmember'),
               param('adaml', Status.OK, id='member')))
-@parametrize('tab', ('info', 'members', 'edit', 'report', 'slides'))
+@parametrize('tab', ('info', 'members', 'edit', 'tasks', 'report', 'slides'))
 async def test_get(username: Optional[str], status_code: int,
                    tab: str, user: ClientFactory) -> None:
     """Test project tabs access permission."""
