@@ -25,7 +25,7 @@ from typing import Any, AsyncIterator
 from urllib.parse import urlsplit
 
 from bleach import clean
-from bleach_whitelist import markdown_attrs, markdown_tags
+from bleach_allowlist import markdown_attrs, markdown_tags
 from httpx import AsyncClient
 from humanize import naturalsize, naturaltime
 from markdown import markdown
