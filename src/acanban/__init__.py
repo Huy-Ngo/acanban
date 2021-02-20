@@ -24,8 +24,11 @@ from secrets import token_urlsafe
 from typing import Any, AsyncIterator
 from urllib.parse import urlsplit
 
+from bleach import clean
+from bleach_whitelist import markdown_tags, markdown_attrs
 from httpx import AsyncClient
 from humanize import naturalsize, naturaltime
+from markdown import markdown
 from quart import ResponseReturnValue, current_app, render_template
 from quart_auth import current_user
 from quart_trio import QuartTrio
@@ -80,7 +83,12 @@ app.register_blueprint(user)
 app.register_blueprint(project)
 app.register_blueprint(task)
 app.add_template_filter(naturalsize)
-app.jinja_env.add_extension('jinja_markdown.MarkdownExtension')
+
+
+@app.template_filter('as_markdown')
+def as_markdown(text):
+    html = clean(markdown(text), markdown_tags, markdown_attrs)
+    return html
 
 
 @app.template_filter('naturaltime')
