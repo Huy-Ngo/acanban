@@ -90,7 +90,7 @@ app.register_blueprint(task)
 app.add_template_filter(naturalsize)
 
 
-@app.template_filter('as_markdown')
+@app.template_filter('markdown')
 def as_markdown(text: str) -> str:
     html = clean(markdown(text), markdown_tags, markdown_attrs)
     return html
