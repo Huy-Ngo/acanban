@@ -30,8 +30,8 @@ from .project import pluck as pluck_project
 
 __all__ = ['blueprint']
 
-BASE_ROUTE = '/p/<uuid>/tasks/<int:index>'
-blueprint = Blueprint('task', __name__)
+blueprint = Blueprint('task', __name__,
+                      url_prefix='/p/<uuid>/tasks/<int:index>')
 
 
 def task_query(project_id: str, index: int) -> RqlQuery:
@@ -40,7 +40,7 @@ def task_query(project_id: str, index: int) -> RqlQuery:
     return project['tasks'].order_by('created_on')[index]
 
 
-@blueprint.route(BASE_ROUTE)
+@blueprint.route('/')
 @login_required
 async def display(uuid: str, index: int) -> ResponseReturnValue:
     """Display task discussion."""
@@ -51,6 +51,32 @@ async def display(uuid: str, index: int) -> ResponseReturnValue:
                                  route=f'/p/{uuid}/tasks/{index}')
 
 
+@blueprint.route('/dec')
+@login_required
+async def move_backward(uuid: str, index: int) -> ResponseReturnValue:
+    """Move the task to the previous column."""
+    await pluck_project(uuid)  # check authority
+    async with current_app.db_pool.connection() as conn:
+        task = await task_query(uuid, index).run(conn)
+        updated = {'tasks': r.row['tasks'].order_by('created_on').change_at(
+            index, {**task, 'status': max(0, task['status']-1)})}
+        await r.table('projects').get(uuid).update(updated).run(conn)
+    return redirect(request.referrer)
+
+
+@blueprint.route('/inc')
+@login_required
+async def move_forward(uuid: str, index: int) -> ResponseReturnValue:
+    """Move the task to the next column."""
+    await pluck_project(uuid)  # check authority
+    async with current_app.db_pool.connection() as conn:
+        task = await task_query(uuid, index).run(conn)
+        updated = {'tasks': r.row['tasks'].order_by('created_on').change_at(
+            index, {**task, 'status': min(2, task['status']+1)})}
+        await r.table('projects').get(uuid).update(updated).run(conn)
+    return redirect(request.referrer)
+
+
 def flatten_replies(comment: Dict[str, Any]) -> Iterator[Dict[str, Any]]:
     """Recursively walk through the nested replies."""
     yield comment
@@ -59,7 +85,7 @@ def flatten_replies(comment: Dict[str, Any]) -> Iterator[Dict[str, Any]]:
         yield from flatten_replies(reply)
 
 
-@blueprint.route(f'{BASE_ROUTE}/reply/<float:parent>', methods=['POST'])
+@blueprint.route('/reply/<float:parent>', methods=['POST'])
 @login_required
 async def save_reply(uuid: str, index: int,
                      parent: float) -> ResponseReturnValue:

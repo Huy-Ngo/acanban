@@ -36,7 +36,21 @@ async def test_get(username: Optional[str], status_code: int,
                    user: ClientFactory) -> None:
     """Test task access permission."""
     client = await user(username)
-    response = await client.get(BASE_ROUTE)
+    response = await client.get(f'{BASE_ROUTE}/')
+    assert response.status_code == status_code
+
+
+@parametrize(('username', 'status_code'),
+             (param(None, Status.UNAUTHORIZED, id='guest'),
+              param('silasl', Status.FORBIDDEN, id='assistant'),
+              param('adaml', Status.FORBIDDEN, id='nonmember'),
+              param('ronanf', Status.FOUND, id='member')))
+@parametrize('direction', ('dec', 'inc'))
+async def test_move(username: Optional[str], status_code: int,
+                    user: ClientFactory, direction: str) -> None:
+    """Test moving task across columns."""
+    client = await user(username)
+    response = await client.get(f'{BASE_ROUTE}/{direction}')
     assert response.status_code == status_code
 
 
