@@ -46,7 +46,7 @@ blueprint = Blueprint('project', __name__, url_prefix='/p')
 
 @blueprint.route('/create', methods=['GET', 'POST'])
 @login_required
-async def create_projects() -> ResponseReturnValue:
+async def create() -> ResponseReturnValue:
     role = await current_user.role
     if role == 'assistant':
         raise Forbidden

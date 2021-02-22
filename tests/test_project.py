@@ -19,11 +19,10 @@
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
 from http import HTTPStatus as Status
-from random import choices, uniform
-from string import printable
+from random import uniform
 from typing import Optional
 
-from conftest import ClientFactory, parametrize
+from conftest import ClientFactory, parametrize, random_string
 from pytest import param, raises
 from quart import Blueprint
 
@@ -32,11 +31,6 @@ from acanban.project import add_artifact_tab
 # Some members: adaml (student), oliviak (supervisor)
 # Some nonmembers: ronanf (supervisor), silasl (assistant)
 PROJECT = 'be7a04b8-650f-41dc-912b-10d225baff29'
-
-
-def random_string(length: int = 42) -> str:
-    """Return a random printable string of given length."""
-    return ''.join(choices(printable, k=42))
 
 
 @parametrize('tab', ('info', 'edit', 'members', 'tasks', 'report', 'slides'))
