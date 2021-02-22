@@ -41,7 +41,7 @@
 <div class=col-narrow>
   <a href=/p/{{ project.id }}/tasks/create><button>Create new task</button></a>
 </div>
-<div class=kanban>
+<div class='columns kanban'>
   {{ render_column(todo, 'To-do', 'error') }}
   {{ render_column(doing, 'Doing', 'warning') }}
   {{ render_column(done, 'Done', 'success') }}

@@ -34,28 +34,53 @@
 </div>
 {%- endmacro %}
 
-{% extends 'base.html' %}
-{% block title %}{{ task.name }}{% endblock %}
+{% extends 'project-tab.html' %}
+{% block tabbarlayout %}{{ tabbar('Tasks') }}{% endblock %}
 
-{% block content %}
+{% block tabcontent %}
+<div class=columns>
+  <form action=/p/{{ project.id }}/tasks/{{ task.index }}/edit method=POST
+        class=col-narrow>
+    <label for=name>Name</label>
+    <input type=text name=name id=name value='{{ task.name }}' required>
+    <label for=assignee>Assignee</label>
+    <select name=assignee id=assignee>
+      {%- for student in project.students %}
+      {%- if student == task.assigned_to %}
+      <option value={{ student }} selected>{{ student }}</option>
+      {%- else %}
+      <option value={{ student }}>{{ student }}</option>
+      {%- endif %}
+      {%- endfor %}
+    </select>
+    <label for=deadline>Deadline</label>
+    <input type=date name=deadline id=deadline
+           value={{ task.deadline.strftime('%Y-%m-%d') }} required>
+    <label for=status>Status</label>
+    <select name=status id=status>
+      {%- for status in ('todo', 'doing', 'done') %}
+      {%- if loop.index0 == task.status %}
+      <option value={{ loop.index0 }} selected>{{ status }}</option>
+      {%- else %}
+      <option value={{ loop.index0 }}>{{ status }}</option>
+      {%- endif %}
+      {%- endfor %}
+    </select>
+    <button>Save</button>
+  </form>
 
-<div class=col-wide>
-  <p><b>Project:</b> <a href=/p/{{ project.id }}>{{ project.name }}</a><br>
-     <b>Assignee:</b> {{ task.assigned_to|userlink|safe }}</br>
-     <b>Deadline:</b> {{ task.deadline|naturaltime|safe }}</br>
-     <!-- TODO: use human readable format -->
-     <b>Status:</b> {{ task.status }}</p>
-
-  {{ render_comment(task, istask=true) }}
-  <div class=replies>
-    {%- for comment in task.replies recursive %}
-    {{ render_comment(comment) }}
-    {%- if comment.replies -%}
+  <div class=col-wide>
+    {{ render_comment(task, istask=true) }}
     <div class=replies>
-      {{ loop(comment.replies) }}
+      {%- for comment in task.replies recursive %}
+      {{ render_comment(comment) }}
+      {%- if comment.replies -%}
+      <div class=replies>
+        {{ loop(comment.replies) }}
+      </div>
+      {%- endif %}
+      {%- endfor %}
     </div>
-    {%- endif %}
-    {%- endfor %}
   </div>
 </div>
 {% endblock%}
