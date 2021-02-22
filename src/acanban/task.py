@@ -21,7 +21,7 @@ from typing import Any, Dict, Iterator
 
 from quart import (Blueprint, ResponseReturnValue, current_app,
                    redirect, render_template, request)
-from quart.exceptions import NotFound
+from quart.exceptions import BadRequest, NotFound
 from quart_auth import current_user, login_required
 from rethinkdb import r
 from rethinkdb.ast import RqlQuery
@@ -30,8 +30,27 @@ from .project import pluck as pluck_project
 
 __all__ = ['blueprint']
 
-blueprint = Blueprint('task', __name__,
-                      url_prefix='/p/<uuid>/tasks/<int:index>')
+blueprint = Blueprint('task', __name__, url_prefix='/p/<uuid>/tasks')
+
+
+@blueprint.route('/create', methods=['GET', 'POST'])
+@login_required
+async def create(uuid: str) -> ResponseReturnValue:
+    project = await pluck_project(uuid, ('id', 'name', 'students'))
+    if request.method == 'GET':
+        return await render_template('task-create.html', project=project)
+    task = await request.form
+    # Should be 422 instead of 400 here, but the former is less popular.
+    if task['assignee'] not in project['students']: raise BadRequest
+
+    tasks = r.row['tasks'].append(dict(
+        name=task['name'], description=task['description'],
+        creator=current_user.key, assigned_to=task['assignee'],
+        status=0, replies=[], created_on=r.now(),
+        deadline=r.iso8601(task['deadline'], default_timezone='+00:00')))
+    async with current_app.db_pool.connection() as conn:
+        await r.table('projects').update({'tasks': tasks}).run(conn)
+    return redirect(f'/p/{uuid}/tasks')
 
 
 def task_query(project_id: str, index: int) -> RqlQuery:
@@ -40,7 +59,7 @@ def task_query(project_id: str, index: int) -> RqlQuery:
     return project['tasks'].order_by('created_on')[index]
 
 
-@blueprint.route('/')
+@blueprint.route('/<int:index>/')
 @login_required
 async def display(uuid: str, index: int) -> ResponseReturnValue:
     """Display task discussion."""
@@ -51,7 +70,7 @@ async def display(uuid: str, index: int) -> ResponseReturnValue:
                                  route=f'/p/{uuid}/tasks/{index}')
 
 
-@blueprint.route('/dec')
+@blueprint.route('/<int:index>/dec')
 @login_required
 async def move_backward(uuid: str, index: int) -> ResponseReturnValue:
     """Move the task to the previous column."""
@@ -64,7 +83,7 @@ async def move_backward(uuid: str, index: int) -> ResponseReturnValue:
     return redirect(request.referrer)
 
 
-@blueprint.route('/inc')
+@blueprint.route('/<int:index>/inc')
 @login_required
 async def move_forward(uuid: str, index: int) -> ResponseReturnValue:
     """Move the task to the next column."""
@@ -85,7 +104,7 @@ def flatten_replies(comment: Dict[str, Any]) -> Iterator[Dict[str, Any]]:
         yield from flatten_replies(reply)
 
 
-@blueprint.route('/reply/<float:parent>', methods=['POST'])
+@blueprint.route('/<int:index>/reply/<float:parent>', methods=['POST'])
 @login_required
 async def save_reply(uuid: str, index: int,
                      parent: float) -> ResponseReturnValue:

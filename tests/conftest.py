@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Acanban.  If not, see <https://www.gnu.org/licenses/>.
 
+from random import choices
+from string import printable
 from typing import AsyncIterator, Awaitable, Callable, Optional
 
 from pytest import fixture, mark
@@ -25,6 +27,11 @@ from acanban import Acanban, app
 
 ClientFactory = Callable[[Optional[str]], Awaitable[QuartClient]]
 parametrize = mark.parametrize
+
+
+def random_string(length: int = 42) -> str:
+    """Return a random printable string of given length."""
+    return ''.join(choices(printable, k=42))
 
 
 @fixture(name='app')
