@@ -61,11 +61,41 @@ async def test_create_post(username: Optional[str], assignee: str,
               param('silasl', Status.FORBIDDEN, id='assistant'),
               param('adaml', Status.FORBIDDEN, id='nonmember'),
               param('ronanf', Status.OK, id='member')))
-async def test_get(username: Optional[str], status_code: int,
-                   user: ClientFactory) -> None:
+async def test_display(username: Optional[str], status_code: int,
+                       user: ClientFactory) -> None:
     """Test task access permission."""
     client = await user(username)
     response = await client.get(f'{BASE_ROUTE}/0/')
+    assert response.status_code == status_code
+
+
+@parametrize(('username', 'status_code'),
+             (param(None, Status.UNAUTHORIZED, id='guest'),
+              param('silasl', Status.FORBIDDEN, id='assistant'),
+              param('adaml', Status.FORBIDDEN, id='nonmember'),
+              param('ronanf', Status.FOUND, id='success')))
+async def test_edit_auth(username: Optional[str], status_code: int,
+                         user: ClientFactory) -> None:
+    """Test authorization for updating task metadata."""
+    client = await user(username)
+    response = await client.post(f'{BASE_ROUTE}/0/edit', form=dict(
+        name=random_string(), assignee='evelynd',
+        deadline='2038-01-19', status=1))
+    assert response.status_code == status_code
+
+
+@parametrize(('assignee', 'status', 'status_code'),
+             (param('nonexist', -1, Status.BAD_REQUEST, id='bad both'),
+              param('evelynd', 9, Status.BAD_REQUEST, id='bad status'),
+              param('nonexist', 1, Status.BAD_REQUEST, id='bad assignee'),
+              param('evelynd', 1, Status.FOUND, id='good')))
+async def test_edit_select(assignee: str, status: int,
+                           status_code: int, user: ClientFactory) -> None:
+    """Test validity of selected metadata from edit form."""
+    client = await user('ronanf')
+    response = await client.post(f'{BASE_ROUTE}/0/edit', form=dict(
+        name=random_string(), assignee=assignee,
+        deadline='2038-01-19', status=status))
     assert response.status_code == status_code
 
 

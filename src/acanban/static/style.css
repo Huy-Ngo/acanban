@@ -173,6 +173,12 @@ dd:last-of-type {
     max-width: 40rem;
     min-width: 40rem;
 }
+.columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.columns > .col-narrow, .columns > .col-wide { margin: unset }
 
 .block { 
     margin: 1rem 0;
@@ -180,15 +186,7 @@ dd:last-of-type {
     border-radius: 1rem;
     box-shadow: 0 0 1rem 0 var(--color-bg-alt);
 }
-.kanban {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.kanban > div {
-    margin: unset;
-    text-align: center;
-}
+.kanban > div { text-align: center }
 .kanban a { color: inherit }
 .replies {
     border-left: 0.2rem solid var(--color-bg-alt);
@@ -207,6 +205,7 @@ dd:last-of-type {
 /* tabs */
 #tabs {
     border-bottom: 0.2rem solid var(--color-bg-alt);
+    margin-bottom: 1rem;
     text-align: center;
 }
 .tab {

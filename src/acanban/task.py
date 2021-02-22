@@ -49,7 +49,7 @@ async def create(uuid: str) -> ResponseReturnValue:
         status=0, replies=[], created_on=r.now(),
         deadline=r.iso8601(task['deadline'], default_timezone='+00:00')))
     async with current_app.db_pool.connection() as conn:
-        await r.table('projects').update({'tasks': tasks}).run(conn)
+        await r.table('projects').get(uuid).update({'tasks': tasks}).run(conn)
     return redirect(f'/p/{uuid}/tasks')
 
 
@@ -63,11 +63,40 @@ def task_query(project_id: str, index: int) -> RqlQuery:
 @login_required
 async def display(uuid: str, index: int) -> ResponseReturnValue:
     """Display task discussion."""
-    project = await pluck_project(uuid, ('id', 'name'))
+    project = await pluck_project(uuid, ('id', 'name', 'students'))
     async with current_app.db_pool.connection() as conn:
-        task = await task_query(uuid, index).run(conn)
+        task = {'index': index, **await task_query(uuid, index).run(conn)}
     return await render_template('task.html', project=project, task=task,
                                  route=f'/p/{uuid}/tasks/{index}')
+
+
+@blueprint.route('/<int:index>/edit', methods=['POST'])
+@login_required
+async def update(uuid: str, index: int) -> ResponseReturnValue:
+    """Handle task metadata edit."""
+    project = await pluck_project(uuid, ('students', 'tasks'))
+    tasks = project['tasks']
+    tasks.sort(key=itemgetter('created_on'))
+    task = tasks[index]
+
+    new = await request.form
+    task['name'] = new['name']
+    if new['assignee'] in project['students']:
+        task['assigned_to'] = new['assignee']
+    else:
+        raise BadRequest
+    task['deadline'] = r.iso8601(new['deadline'], default_timezone='+00:00')
+    if new['status'] in ('0', '1', '2'):
+        task['status'] = int(new['status'])
+    else:
+        raise BadRequest
+
+    # FIXME: RethinkDB is by design lock-free so this may override
+    # simultaneous updates in another session.  In our use-case,
+    # it is unlikely enough to be ignored though.
+    async with current_app.db_pool.connection() as conn:
+        await r.table('projects').get(uuid).update({'tasks': tasks}).run(conn)
+    return redirect(request.referrer)
 
 
 @blueprint.route('/<int:index>/dec')
@@ -121,7 +150,7 @@ async def save_reply(uuid: str, index: int,
     else:
         raise NotFound
 
-    # FIXME: RethinkDB is by design lock-free so this may overwrite
+    # FIXME: RethinkDB is by design lock-free so this may override
     # simultaneous updates in another session.  In our use-case,
     # it is unlikely enough to be ignored though.
     async with current_app.db_pool.connection() as conn:
