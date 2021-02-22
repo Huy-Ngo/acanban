@@ -12,7 +12,7 @@ requires = ['appdirs', 'bleach', 'bleach_allowlist', 'httpx', 'humanize',
             'quart-trio-twice', 'rethinkdb >=2.4.8']
 description-file = 'README.md'
 classifiers = [
-    'Development Status :: 2 - Pre-Alpha',
+    'Development Status :: 3 - Alpha',
     'Environment :: Web Environment',
     'Framework :: Trio',
     'Intended Audience :: Education',

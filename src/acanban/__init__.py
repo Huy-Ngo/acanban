@@ -19,8 +19,9 @@
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone as tz
 from secrets import token_urlsafe
+from time import timezone
 from typing import Any, AsyncIterator
 from urllib.parse import urlsplit
 
@@ -45,12 +46,10 @@ from .user import blueprint as user
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
-__version__ = '0.0.7'
+__version__ = '0.1.0'
 
-
-def utc(dt: datetime) -> datetime:
-    """Convert the datetime object to UTC with microsecond being 0."""
-    return dt.astimezone(timezone.utc).replace(microsecond=0, tzinfo=None)
+# Nope, the negative operator is not a typo, see also tzset(3posix).
+TZ = tz(timedelta(seconds=-timezone))
 
 
 class Acanban(QuartTrio):
@@ -99,8 +98,10 @@ def as_markdown(text: str) -> str:
 @app.template_filter('naturaltime')
 def fuzzytime(dt: datetime) -> str:
     """Convert datetime into fuzzy time in HTML with precise hovertext."""
-    udt = utc(dt)
-    return f"<span title='{udt} UTC'>{naturaltime(udt)}</span>"
+    rounded = dt.replace(microsecond=0)
+    fuzzy = naturaltime(rounded.replace(tzinfo=None), when=datetime.utcnow())
+    exact = rounded.astimezone(TZ)
+    return f"<span title='{exact}'>{fuzzy}</span>"
 
 
 @app.before_serving
