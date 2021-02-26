@@ -91,7 +91,7 @@ app.add_template_filter(naturalsize)
 
 @app.template_filter('markdown')
 def as_markdown(text: str) -> str:
-    html = clean(markdown(linkify(text)), markdown_tags, markdown_attrs)
+    html = clean(linkify(markdown(text)), markdown_tags, markdown_attrs)
     return html
 
 
