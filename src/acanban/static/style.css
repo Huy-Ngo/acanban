@@ -162,17 +162,12 @@ dd:last-of-type {
 
 /* specialized containers */
 .col-narrow, .col-wide {
-    padding: 0 1rem;
     margin: auto;
+    padding: 0 1rem;
+    width: calc(100% - 2rem);
 }
-.col-narrow {
-    max-width: 25rem;
-    min-width: 25rem;
-}
-.col-wide {
-    max-width: 40rem;
-    min-width: 40rem;
-}
+.col-narrow { max-width: 25rem }
+.col-wide { max-width: 40rem }
 .columns {
     display: flex;
     flex-wrap: wrap;
