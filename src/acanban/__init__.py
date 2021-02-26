@@ -46,7 +46,7 @@ from .user import blueprint as user
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 # Nope, the negative operator is not a typo, see also tzset(3posix).
 TZ = tz(timedelta(seconds=-timezone))
@@ -87,6 +87,7 @@ app.register_blueprint(user)
 app.register_blueprint(project)
 app.register_blueprint(task)
 app.add_template_filter(naturalsize)
+app.add_template_global(lambda: __version__, 'version')
 
 
 @app.template_filter('markdown')
