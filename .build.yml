@@ -15,10 +15,19 @@ tasks:
       sudo go-ipfs/install.sh
       rm -r go-ipfs*
       ipfs init
-  - test: |
+  - ci: |
       ipfs daemon &
       rethinkdb --no-http-admin &
       python3 -m pip install tox
-      python3 -m tox -c acanban -e py
+      python3 -m tox -c acanban
+  - cd: |
+      cd acanban
+      if [[ $(git tag --points-at HEAD) ]]
+      then
+        python3 -m pip install flit
+        python3 -m flit publish
+      fi
 environment:
   PIP_PROGRESS_BAR: 'off'
+secrets:
+  - ee526a22-d848-4a9d-bb22-3b680b2bcc5a
