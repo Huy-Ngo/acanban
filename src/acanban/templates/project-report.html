@@ -27,6 +27,7 @@
   <h2>Report evaluation</h2>
   {% if report.revisions %}
     {% if for_student %}
+    <div>Grade: {{ report.grade }}</div>
     <div>
       {{ report.comment | markdown | safe }}
     </div>

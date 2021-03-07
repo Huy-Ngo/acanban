@@ -27,6 +27,7 @@
   <h2>Presentation evaluation</h2>
   {% if slides.revisions %}
     {% if for_student %}
+    <div>Grade: {{ report.grade }}</div>
     <div>
       {{ slides.comment | markdown | safe }}
     </div>
