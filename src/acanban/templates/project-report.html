@@ -25,19 +25,25 @@
 {% block tabcontent %}
 <div class=col-wide>
   <h2>Report evaluation</h2>
-  {% if for_student %}
-  <div>
-    {{ report.comment | markdown | safe }}
-  </div>
+  {% if report.revisions %}
+    {% if for_student %}
+    <div>
+      {{ report.comment | markdown | safe }}
+    </div>
+    {% else %}
+    <form action=/p/{{ project.id }}/report/eval method=POST>
+      <label for=grade>Grade</label>
+      <input type=text name=grade id=grade value={{ report.grade }}>
+      <label for=comment>Comment</label>
+      <textarea name=comment id=comment>{{ report.comment }}</textarea>
+      {% if not for_student %}<button>Save evaluation</button>{% endif %}
+    </form>
+    {% endif %}
   {% else %}
-  <form action=/p/{{ project.id }}/report/eval method=POST>
-    <label for=grade>Grade</label>
-    <input type=text name=grade id=grade value={{ report.grade }}>
-    <label for=comment>Comment</label>
-    <textarea {% if for_student %}readonly{% endif %}
-              name=comment id=comment>{{ report.comment }}</textarea>
-    {% if not for_student %}<button>Save evaluation</button>{% endif %}
-  </form>
+  <div>
+    {% if for_student %}You {% else %}The students {% endif %} haven't uploaded
+    the report yet.
+  </div>
   {% endif %}
 
   <h2>Report revisions</h2>
