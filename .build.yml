@@ -2,6 +2,7 @@ image: debian/buster
 arch: amd64
 packages:
   - python3-pip
+  - python3-venv
   - rethinkdb
   - wget
 repositories:
@@ -21,11 +22,12 @@ tasks:
       python3 -m pip install tox
       python3 -m tox -c acanban
   - cd: |
-      cd acanban
-      if [[ $(git tag --points-at HEAD) ]]
+      if [[ $(git -C acanban tag --points-at HEAD) ]]
       then
-        python3 -m pip install flit
-        python3 -m flit publish
+        python3 -m pip install --upgrade pip
+        python3 -m pip install build twine
+        python3 -m build --sdist --wheel acanban
+        python3 -m twine upload acanban/dist/*
       fi
 environment:
   PIP_PROGRESS_BAR: 'off'
