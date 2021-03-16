@@ -46,7 +46,7 @@ from .user import blueprint as user
 
 __all__ = ['app']
 __doc__ = 'Academic Kanban'
-__version__ = '0.1.2.post0'
+__version__ = '0.1.3'
 
 # Nope, the negative operator is not a typo, see also tzset(3posix).
 TZ = tz(timedelta(seconds=-timezone))

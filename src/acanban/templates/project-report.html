@@ -27,9 +27,9 @@
   <h2>Report evaluation</h2>
   {% if report.revisions %}
     {% if for_student %}
-    <div>Grade: {{ report.grade }}</div>
+    <p><b>Grade:</b> {{ report.grade if report.grade else 'TBD' }}</p>
     <div>
-      {{ report.comment | markdown | safe }}
+      {{ report.comment | markdown | safe if report.comment }}
     </div>
     {% else %}
     <form action=/p/{{ project.id }}/report/eval method=POST>
