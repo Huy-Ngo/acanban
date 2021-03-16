@@ -27,9 +27,9 @@
   <h2>Presentation evaluation</h2>
   {% if slides.revisions %}
     {% if for_student %}
-    <div>Grade: {{ report.grade }}</div>
+    <p><b>Grade:</b> {{ slides.grade if slides.grade else 'TBD' }}</p>
     <div>
-      {{ slides.comment | markdown | safe }}
+      {{ slides.comment | markdown | safe if slides.comment }}
     </div>
     {% else %}
     <form action=/p/{{ project.id }}/slides/eval method=POST>
